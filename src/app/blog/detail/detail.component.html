@@ -1,0 +1,163 @@
+<!-- =========================
+  BLOG HERO
+========================= -->
+<div class="wrapper">
+  <div class="page-header page-header-small" style="background-image: url('./assets/img/blurred-image-1.jpg')">
+    <div class="content-center text-center">
+      <div class="row">
+        <div class="col-md-8 ml-auto mr-auto">
+          <h2 class="title font-kn">บทความความรู้เรื่องบ้าน</h2>
+          <div class="section-space"></div>
+          <p class="description lead">
+            บทความโดยทีมงาน Twentysix.House
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =========================
+  BLOG CONTENT
+========================= -->
+<div class="main" *ngIf="getBlogsById">
+
+  <div class="section section-white">
+    <div class="container">
+
+      <!-- TITLE -->
+      <div class="row">
+        <div class="col-md-9 ml-auto mr-auto text-center">
+          <h1 class="blogs-title text-secondary font-kn">
+            {{ getBlogsById.title }}
+          </h1>
+          <h2 class="description subTitle font-kn mb-5">
+            {{ getBlogsById.subTitle }}
+          </h2>
+        </div>
+      </div>
+
+      <!-- FEATURE IMAGE -->
+      <div class="row mb-4">
+        <div class="col-md-8 ml-auto mr-auto text-center">
+          <img class="img img-raised" style="width: 100%" [src]="getBlogsById.pictureUrl"
+            [alt]="getBlogsById.title + ' | บทความความรู้เรื่องบ้าน โดย Twentysix.House'" loading="lazy" />
+        </div>
+      </div>
+
+      <!-- META -->
+      <div class="row mb-5">
+        <div class="col-md-8 ml-auto mr-auto">
+          <div class="article-meta d-flex align-items-center">
+            <img class="img-circle img-no-padding img-responsive mr-2" src="assets/img/logo.jpg"
+              alt="Twentysix.House" />
+            <span class="author">Twentysix.House</span>
+            <span class="mx-2">|</span>
+            <time [attr.datetime]="getBlogsById.date">
+              {{ getBlogsById.date | date:'longDate' }}
+            </time>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- ARTICLE BODY -->
+      <div class="row">
+        <div class="col-md-8 ml-auto mr-auto">
+          <article class="article-content" itemprop="articleBody">
+            <quill-view-html [content]="getBlogsById.content" theme="snow"></quill-view-html>
+          </article>
+        </div>
+      </div>
+
+
+      <!-- TAGS -->
+      <div class="row mt-4">
+        <div class="col-md-8 ml-auto mr-auto">
+          <h5 class="font-kn text-muted">แท็กบทความ</h5>
+          <span class="badge badge-primary mr-2 mb-2 pl-3 pr-3" *ngFor="let tag of getBlogsById.tags"
+            [attr.aria-label]="'แท็ก ' + tag">
+            {{ tag }}
+          </span>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+  <!-- =========================
+    RELATED BLOGS
+  ========================= -->
+  <div class="section section-light">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-8 ml-auto mr-auto text-center">
+          <h2 class="title text-primary font-kn">
+            บทความที่เกี่ยวข้อง
+          </h2>
+          <div class="separator separator-primary"></div>
+          <p class="description lead">
+            บทความอื่น ๆ ที่เกี่ยวข้องกับการสร้างบ้าน
+            การออกแบบบ้าน และงานก่อสร้าง
+          </p>
+        </div>
+      </div>
+
+      <div class="row mt-5">
+
+        <div class="col-md-4 mb-4" *ngFor="let blog of getBlogs; trackBy: trackById">
+          <article class="card card-blog" itemscope itemtype="https://schema.org/BlogPosting">
+
+            <div class="card-image">
+              <img class="img" [src]="blog.pictureUrl" [alt]="blog.title + ' | บทความโดย Twentysix.House'"
+                itemprop="image" />
+            </div>
+
+            <div class="card-body">
+
+              <meta itemprop="author" content="Twentysix.House">
+              <meta itemprop="publisher" content="Twentysix.House">
+
+              <h6 class="card-category text-primary" itemprop="articleSection">
+                {{ blog.blogCategory.blogCategoryName }}
+              </h6>
+
+              <h3 class="card-title" itemprop="headline">
+                <a [routerLink]="['/blogs/detail', blog._id.$oid]" itemprop="url"
+                  [attr.aria-label]="'อ่านบทความ ' + blog.title">
+                  {{ blog.title }}
+                </a>
+              </h3>
+
+              <p class="card-description" itemprop="description">
+                {{ blog.subTitle }}
+              </p>
+
+              <hr />
+
+              <div class="card-footer">
+
+                <div class="author">
+                  <img class="avatar img-raised" src="assets/img/logo.jpg" alt="Twentysix.House">
+                  <span class="text-secondary">TWENTYSIX.HOUSE</span>
+                </div>
+
+                <time class="stats" [attr.datetime]="blog.date" itemprop="datePublished">
+                  {{ blog.date | date:'longDate' }}
+                </time>
+
+              </div>
+            </div>
+
+          </article>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

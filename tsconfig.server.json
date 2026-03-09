@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/server",
+    "target": "ES2022",
+    "useDefineForClassFields": false,
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "types": ["node"],
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
+  },
+  "files": [
+    "src/main.server.ts"
+  ],
+  "angularCompilerOptions": {
+    "entryModule": "src/app/app.module.server#AppServerModule"
+  }
+}

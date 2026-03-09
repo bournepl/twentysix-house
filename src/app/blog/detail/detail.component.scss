@@ -1,0 +1,42 @@
+.card-title,
+.card-description {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  /* จำกัด 2 บรรทัด */
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  /* เพิ่ม ... เมื่อข้อความถูกตัด */
+  white-space: normal;
+  /* ทำให้ขึ้นบรรทัดใหม่ได้ */
+}
+
+.img-circle {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #ddd;
+}
+
+
+
+@media (max-width: 768px) {
+
+  .card-title,
+  .card-description {
+    -webkit-line-clamp: 3;
+  }
+}
+
+.lead {
+  font-size: 35px !important;
+}
+
+.subTitle {
+  font-size: 20px !important;
+}
+
+.blogs-title {
+  font-size: 30px !important;
+}

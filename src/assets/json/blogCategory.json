@@ -1,0 +1,16 @@
+[{
+  "_id": {
+    "$oid": "683570e4c9e09972e8cfa0f7"
+  },
+  "blogCategoryName": "ออกแบบบ้าน",
+  "description": "",
+  "_class": "com.back.atlas.models.BlogCategory"
+},
+{
+  "_id": {
+    "$oid": "68357347c9e09972e8cfa0f9"
+  },
+  "blogCategoryName": "โครงสร้าง",
+  "description": "",
+  "_class": "com.back.atlas.models.BlogCategory"
+}]

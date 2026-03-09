@@ -1,0 +1,361 @@
+.card {
+  border: 0;
+  border-radius: $border-radius-small;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1);
+  -moz-transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  -o-transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  cursor: pointer;
+
+  .card-header {
+
+    background-color: $primary-color;
+
+  }
+
+  .card-image {
+    position: relative;
+
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 300px;
+    }
+  }
+
+  .card-footer {
+    padding: 0;
+    margin-top: 15px;
+    background-color: transparent;
+    border: 0;
+
+    div {
+      display: inline-block;
+    }
+  }
+
+  &[data-background-color="orange"] {
+    background-color: $primary-color;
+  }
+
+  &[data-background-color="red"] {
+    background-color: $danger-color;
+  }
+
+  &[data-background-color="yellow"] {
+    background-color: $warning-color;
+  }
+
+  &[data-background-color="blue"] {
+    background-color: $info-color;
+  }
+
+  &[data-background-color="green"] {
+    background-color: $success-color;
+
+  }
+}
+
+.card:hover {
+  -webkit-transform: translate(0, -8px);
+  -moz-transform: translate(0, -8px);
+  -ms-transform: translate(0, -8px);
+  -o-transform: translate(0, -8px);
+  transform: translate(0, -8px);
+  box-shadow: 0 40px 40px rgba(0, 0, 0, 0.2);
+}
+
+.card-primary {
+  background-color: $primary-color;
+  border: 1px solid $secondary-color !important;
+  text-align: center;
+
+  i {
+    font-size: 50px;
+    text-align: center;
+    color: $secondary-color;
+  }
+
+  .card-title {
+    color: $secondary-color;
+  }
+}
+
+.card-secondary {
+  background-color: transparent;
+  border: 1px solid $secondary-color !important;
+  text-align: center;
+
+  i {
+    font-size: 50px;
+    text-align: center;
+    color: $secondary-color;
+  }
+
+  .card-title {
+    color: $secondary-color;
+  }
+}
+
+label {
+  font-size: $font-size-small;
+  margin-bottom: 5px;
+  color: $dark-gray;
+}
+
+.card-signup {
+  max-width: 350px;
+  margin: 0 auto;
+
+  .header {
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 30px 0;
+  }
+
+  .text-divider {
+    margin-top: 30px;
+    margin-bottom: 0px;
+    text-align: center;
+  }
+
+  .card-body {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    min-height: auto;
+  }
+
+  .checkbox {
+    margin-top: 20px;
+
+    label {
+      margin-left: 17px;
+    }
+
+    .checkbox-material {
+      padding-right: 12px;
+    }
+  }
+
+  .social-line {
+    margin-top: 20px;
+    text-align: center;
+
+    .btn.btn-icon,
+    .btn.btn-icon .btn-icon -mini {
+      margin-left: 5px;
+      margin-right: 5px;
+      box-shadow: 0px 5px 50px 0px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .footer {
+    margin-bottom: 10px;
+    margin-top: 24px;
+  }
+}
+
+
+
+.card-plain {
+  background: transparent;
+  box-shadow: none;
+
+  .card-body {
+    padding-right: 0px;
+    padding-left: 0px;
+
+  }
+
+  .header {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .content {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .card-title {
+    color: $secondary-color;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    /* number of lines to show */
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .card-description {
+    font-size: 28px;
+  }
+
+  .card-category {
+    font-size: 16px;
+  }
+
+  .author {
+    display: inline-block;
+
+    .avatar {
+      width: 30px;
+      height: 30px;
+      overflow: hidden;
+      border-radius: 50%;
+      margin-right: 10px;
+
+    }
+
+
+  }
+
+  .stats.stats-right {
+    float: right;
+    line-height: 30px;
+    color: #9a9a9a;
+    font-size: 12px;
+  }
+
+
+  .author span {
+    color: #9a9a9a;
+  }
+}
+
+.card-product {
+  .price-container {
+    margin-top: 9px;
+  }
+
+  .card-image {
+    width: 100%;
+    margin: 0 auto;
+
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 240px;
+    }
+
+  }
+
+  .card-title {
+    color: $secondary-color;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    /* number of lines to show */
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .card-description {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    /* number of lines to show */
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .btn {
+    margin: 0;
+  }
+}
+
+.card-blog {
+
+  .card-image {
+    position: relative;
+
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 230px;
+      // border-top-left-radius: 18px;
+      // border-top-right-radius: 18px;
+    }
+  }
+
+  .card-category {
+    font-family: $sans-serif-family;
+  }
+
+  .card-title {
+    font-size: 30px;
+    color: $secondary-color;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    /* number of lines to show */
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .card-description {
+    font-size: 25px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    /* number of lines to show */
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .author {
+    display: inline-block;
+
+
+    .avatar {
+      width: 30px;
+      height: 30px;
+      overflow: hidden;
+      border-radius: 50%;
+      margin-right: 10px;
+
+    }
+
+
+  }
+
+  .stats {
+    float: right;
+    line-height: 30px;
+    color: #5e5e5e;
+    font-size: 22px;
+  }
+
+
+  .author span {
+    color: #9a9a9a;
+  }
+}
+
+
+.card-cart {
+  .card-title {
+    color: $secondary-color;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    /* number of lines to show */
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .card-description {
+    font-size: 12px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    /* number of lines to show */
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+}

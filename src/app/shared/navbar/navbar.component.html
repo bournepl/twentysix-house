@@ -1,0 +1,111 @@
+<nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="500" role="navigation"
+  aria-label="เมนูหลัก">
+  <div class="container">
+
+    <div class="navbar-translate">
+      <a class="navbar-brand" [routerLink]="'/'" placement="bottom"
+        aria-label="บริษัทรับสร้างบ้านในจังหวัดอุดรธานี Twentysix.House">
+
+        <img class="img-logo img-round mr-2" src="./assets/img/logobg.png"
+          alt="โลโก้บริษัทรับสร้างบ้านอุดรธานี Twentysix.House" />
+
+        <span style="font-size: 15px;" class="font-le">
+          Twentysix<span class="font-kn" style="font-size: 25px;">.</span>house
+        </span>
+      </a>
+      <button class="navbar-toggler" type="button" aria-label="เปิดเมนู" (click)="sidebarToggle()">
+        <span class="navbar-toggler-bar bar1"></span>
+        <span class="navbar-toggler-bar bar2"></span>
+        <span class="navbar-toggler-bar bar3"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" data-color="primary" id="navbarToggler">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/'" routerLinkActive="active"
+            [attr.aria-current]="isCurrentRoute('/') ? 'page' : null">
+
+            <p>หน้าแรก</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-keyword" [routerLink]="'/รับสร้างบ้าน-อุดรธานี'" routerLinkActive="active"
+            [attr.aria-current]="isCurrentRoute('/รับสร้างบ้าน-อุดรธานี') ? 'page' : null">
+
+            <p> รับสร้างบ้านอุดรธานี</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/services'" routerLinkActive="active"
+            [attr.aria-current]="isCurrentRoute('/services') ? 'page' : null">
+
+            <p>บริการของเรา</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/collections'" routerLinkActive="active"
+            [attr.aria-current]="isCurrentRoute('/collections') ? 'page' : null">
+
+            <p>ผลงานของเรา</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/blogs'" routerLinkActive="active"
+            [attr.aria-current]="isCurrentRoute('/blogs') ? 'page' : null">
+
+            <p>บทความ</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn btn-secondary btn-sm m-0" [routerLink]="'/contact'"
+            [attr.aria-current]="isCurrentRoute('/contact') ? 'page' : null">
+
+            <p class="text-bold">ติดต่อเรา</p>
+          </a>
+        </li>
+
+      </ul>
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item">
+          <a class="nav-link  " title="Contact us on Line" data-placement="bottom" href="https://lin.ee/jzuOAtF"
+            aria-label="Line" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-line"></i>
+            <p class="d-lg-none d-xl-none">Line</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" title="Like us on Facebook" data-placement="bottom" aria-label="Facebook"
+            href="https://www.facebook.com/share/19APWzVgu7/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-facebook-square"></i>
+            <p class="d-lg-none d-xl-none">Facebook</p>
+          </a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" title="Follow us on Instagram" data-placement="bottom" aria-label="Instagram"
+            href="https://www.instagram.com/26twentysix.house?igsh=YXFmMWt3bGhlaHpm" target="_blank"
+            rel="noopener noreferrer">
+            <i class="fab fa-instagram"></i>
+            <p class="d-lg-none d-xl-none">Instagram</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" title="Follow us on Tiktok" data-placement="bottom" aria-label="Tiktok"
+            href="https://www.tiktok.com/@twentysix.house?_t=ZS-8vm31ijyhPc&_r=1" target="_blank"
+            rel="noopener noreferrer">
+            <i class="fab fa-tiktok"></i>
+            <p class="d-lg-none d-xl-none">Tiktok</p>
+          </a>
+        </li>-->
+        <li class="nav-item">
+          <a class="nav-link" title="Call Me" data-placement="bottom" href="tel:0994708877" target="_blank"
+            rel="noopener noreferrer" aria-label="Call">
+            <i class="fas fa-phone-alt"></i>
+            <p class="d-lg-none d-xl-none">Tel</p>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

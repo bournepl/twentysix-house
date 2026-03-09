@@ -1,0 +1,94 @@
+<div class="wrapper">
+
+  <!-- HERO -->
+  <div class="page-header page-header-small" style="background-image: url('assets/img/blurred-image-1.jpg')">
+    <div class="content-center text-center">
+      <h1 class="title font-kn">บทความและสาระเรื่องบ้าน</h1>
+      <div class="section-space mb-3"></div>
+      <p class="description lead">
+        รวมบทความความรู้เกี่ยวกับการสร้างบ้าน
+        การออกแบบบ้าน และขั้นตอนการก่อสร้าง
+        โดยทีมงาน <strong>Twentysix.House</strong>
+      </p>
+    </div>
+  </div>
+  <div class="section-breadcrumb">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+
+          <li class="breadcrumb-item">
+            <a routerLink="/">หน้าแรก</a>
+          </li>
+
+          <li class="breadcrumb-item active" aria-current="page">
+            บทความ
+          </li>
+
+        </ol>
+      </nav>
+    </div>
+  </div>
+  <div class="main">
+
+
+    <!-- BLOG LIST -->
+    <section class="section" aria-labelledby="blogs-title">
+      <div class="container">
+
+        <div class="row">
+          <div class="col-md-4 mb-4" *ngFor="let blog of blogs; trackBy: trackById">
+
+            <article class="card card-blog" itemscope itemtype="https://schema.org/BlogPosting">
+
+              <div class="card-image">
+                <img class="img" [src]="blog.pictureUrl" [alt]="blog.title + ' | บทความโดย Twentysix.House'"
+                  itemprop="image" />
+              </div>
+
+              <div class="card-body">
+
+                <meta itemprop="author" content="Twentysix.House">
+                <meta itemprop="publisher" content="Twentysix.House">
+
+                <h6 class="card-category text-primary" itemprop="articleSection">
+                  {{ blog.blogCategory.blogCategoryName }}
+                </h6>
+
+                <h3 class="card-title" itemprop="headline">
+                  <a [routerLink]="['/blogs/detail', blog._id.$oid]" itemprop="url"
+                    [attr.aria-label]="'อ่านบทความ ' + blog.title">
+                    {{ blog.title }}
+                  </a>
+                </h3>
+
+                <p class="card-description" itemprop="description">
+                  {{ blog.subTitle }}
+                </p>
+
+                <hr />
+
+                <div class="card-footer">
+
+                  <div class="author">
+                    <img class="avatar img-raised" src="assets/img/logo.jpg" alt="Twentysix.House">
+                    <span class="text-secondary">TWENTYSIX.HOUSE</span>
+                  </div>
+
+                  <time class="stats" [attr.datetime]="blog.date" itemprop="datePublished">
+                    {{ blog.date | date:'longDate' }}
+                  </time>
+
+                </div>
+              </div>
+
+            </article>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+</div>

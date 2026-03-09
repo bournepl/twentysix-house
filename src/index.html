@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="th">
+
+<head>
+  <meta charset="utf-8">
+
+  <!-- Fallback title only -->
+  <title>Twentysix.House</title>
+
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#ffffff">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/img/logobg.png">
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+</head>
+
+<body class="sidebar-collapse">
+  <app-root></app-root>
+
+  <!-- Google Maps Loader (ok to stay here) -->
+  <script>
+    (g => {
+      var h, a, k, p = "The Google Maps JavaScript API",
+        c = "google", l = "importLibrary", q = "__ib__", m = document, b = window;
+      b = b[c] || (b[c] = {});
+      var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams,
+        u = () => h || (h = new Promise(async (f, n) => {
+          await (a = m.createElement("script"));
+          e.set("libraries", [...r] + "");
+          for (k in g)
+            e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]);
+          e.set("callback", c + ".maps." + q);
+          a.src = `https://maps.${c}apis.com/maps/api/js?` + e;
+          d[q] = f;
+          a.onerror = () => h = n(Error(p + " could not load."));
+          m.head.append(a);
+        }));
+      d[l] ? console.warn(p + " only loads once.") : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n))
+    })({
+      key: "AIzaSyDvHV8V0bMPVfTgLTjW9MxqkqqBwKE6jNY",
+      v: "weekly"
+    });
+  </script>
+</body>
+
+</html>

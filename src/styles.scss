@@ -1,0 +1,97 @@
+/* You can add global styles to this file, and also import other style files */
+/* Importing Bootstrap SCSS file. */
+$custom-file-text: (
+);
+@import 'bootstrap/scss/bootstrap';
+
+@font-face {
+  font-family: 'Priyati Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Priyati Regular'), url('assets/fonts/Priyati-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Le Jour Serif';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Le Jour Serif'), url('assets/fonts/LeJourSerif-OVZMo.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Rumpi Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Rumpi Regular'), url('assets/fonts/Rumpi-RplEM.woff') format('woff');
+}
+
+.font-kn {
+  font-family: 'Kanit', sans-serif !important;
+}
+
+.font-pr {
+  font-family: 'Priyati Regular';
+}
+
+.font-le {
+  font-family: 'Le Jour Serif';
+}
+
+.font-rp {
+  font-family: 'Rumpi Regular';
+}
+
+::-webkit-scrollbar {
+  width: .45rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #936420;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html,
+body {
+  height: 100%;
+
+}
+
+.editor {
+  width: 100% !important;
+
+}
+
+.ql-container {
+  font-family: 'Priyati Regular' !important;
+}
+
+.quill-content .ql-editor {
+  padding: 0 !important;
+  overflow: hidden;
+  font-family: 'Priyati Regular' !important;
+}
+
+.ql-editor .ql-size-large {
+  font-size: 1.5em;
+}
+
+.ql-editor h2 {
+  font-family: 'Priyati Regular' !important;
+  font-size: 40px;
+}
+
+.ql-editor p {
+  margin-bottom: 0px;
+
+}
+
+
+.map-container {
+  height: 350px !important;
+  width: 100% !important;
+  border-radius: 5px;
+}
