@@ -10,7 +10,9 @@ import { routes } from './src/app/app-routing.module';
 export function app(): express.Express {
   const server = express();
   const serverDistFolder = dirname(fileURLToPath(import.meta.url));
-  const browserDistFolder = resolve(serverDistFolder, '../browser');
+  const distFolder = resolve(serverDistFolder, '..');
+  const browserDistFolder = resolve(distFolder, 'browser');
+
   const indexHtml = join(browserDistFolder, 'index.html');
 
   const commonEngine = new CommonEngine();
