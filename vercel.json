@@ -1,15 +1,13 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "dist/twentysix-house/server/server.mjs",
-      "use": "@vercel/node"
+  "functions": {
+    "dist/twentysix-house/server/server.mjs": {
+      "runtime": "@vercel/node"
     }
-  ],
+  },
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/dist/twentysix-house/server/server.mjs"
+      "dest": "dist/twentysix-house/server/server.mjs"
     }
   ]
 }
