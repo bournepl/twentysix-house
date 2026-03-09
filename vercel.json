@@ -1,14 +1,8 @@
 {
-  "version": 2,
-  "functions": {
-    "dist/twentysix-house/server/server.mjs": {
-      "runtime": "@vercel/node@3.0.0"
-    }
-  },
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/dist/twentysix-house/server/server.mjs"
+      "dest": "dist/twentysix-house/server/server.mjs"
     }
   ]
 }
