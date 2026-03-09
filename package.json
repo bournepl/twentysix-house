@@ -3,12 +3,10 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node dist/twentysix-house/server/server.mjs",
-    "build": "ng build && ng run twentysix-house:server",
+    "build": "ng build",
     "build:ssr": "ng build && ng run twentysix-house:server",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "serve:ssr": "node dist/twentysix-house/server/server.mjs"
+    "start": "node dist/twentysix-house/server/server.mjs",
+    "dev": "npm run build:ssr && npm run start"
   },
   "private": true,
   "dependencies": {
