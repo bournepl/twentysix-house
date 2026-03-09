@@ -20,7 +20,7 @@ export function app(): express.Express {
   server.set('views', browserDistFolder);
 
   // serve static files
-  server.use(express.static(browserDistFolder, {
+  server.use('/browser', express.static(browserDistFolder, {
     maxAge: '1y'
   }));
 
