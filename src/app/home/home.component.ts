@@ -153,8 +153,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       "@id": "https://twentysix.house/#localbusiness",
       "name": "Twentysix Development Co., Ltd.",
       "url": "https://twentysix.house",
-      "logo": "https://twentysix.house/assets/img/head.png",
-      "image": "https://twentysix.house/assets/img/head.png",
+      "logo": "https://firebasestorage.googleapis.com/v0/b/tewntysix-house.appspot.com/o/head.webp?alt=media&token=b53fc010-7a3c-49e3-8039-1cfed666e1ec",
+      "image": "https://firebasestorage.googleapis.com/v0/b/tewntysix-house.appspot.com/o/head.webp?alt=media&token=b53fc010-7a3c-49e3-8039-1cfed666e1ec",
       "telephone": "+66994708877",
       "address": {
         "@type": "PostalAddress",

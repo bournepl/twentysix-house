@@ -15,7 +15,7 @@ const routes: Routes = [
         {
           name: 'description',
           content:
-            'Twentysix.House บริษัทรับสร้างบ้านในจังหวัดอุดรธานี รับออกแบบและก่อสร้างบ้านครบวงจร ประสบการณ์กว่า 10 ปี มีผลงานสร้างบ้านจริงมากกว่า 20 หลัง'
+            'Twentysix.House บริษัทรับสร้างบ้านในจังหวัดอุดรธานี รับออกแบบและก่อสร้างบ้านครบวงจร โดยทีมงานมืออาชีพ ประสบการณ์กว่า 10 ปี มีผลงานสร้างบ้านจริงมากกว่า 20 หลัง'
         },
         {
           property: 'og:title',
@@ -32,7 +32,7 @@ const routes: Routes = [
         },
         {
           property: 'og:image',
-          content: 'https://twentysix.house/assets/img/head.png'
+          content: 'https://firebasestorage.googleapis.com/v0/b/tewntysix-house.appspot.com/o/head.webp?alt=media&token=b53fc010-7a3c-49e3-8039-1cfed666e1ec'
         }
       ]
     },
@@ -66,7 +66,7 @@ const routes: Routes = [
         },
         {
           property: 'og:image',
-          content: 'https://twentysix.house/assets/img/head.png'
+          content: 'https://firebasestorage.googleapis.com/v0/b/tewntysix-house.appspot.com/o/head.webp?alt=media&token=b53fc010-7a3c-49e3-8039-1cfed666e1ec'
         }
       ]
     },
@@ -102,6 +102,10 @@ const routes: Routes = [
         {
           property: 'og:url',
           content: 'https://twentysix.house/about'
+        },
+        {
+          property: 'og:image',
+          content: 'https://firebasestorage.googleapis.com/v0/b/tewntysix-house.appspot.com/o/head.webp?alt=media&token=b53fc010-7a3c-49e3-8039-1cfed666e1ec'
         }
       ]
     },
@@ -135,6 +139,10 @@ const routes: Routes = [
         {
           property: 'og:url',
           content: 'https://twentysix.house/services'
+        },
+        {
+          property: 'og:image',
+          content: 'https://firebasestorage.googleapis.com/v0/b/tewntysix-house.appspot.com/o/head.webp?alt=media&token=b53fc010-7a3c-49e3-8039-1cfed666e1ec'
         }
       ]
     },
@@ -168,6 +176,10 @@ const routes: Routes = [
         {
           property: 'og:url',
           content: 'https://twentysix.house/collections'
+        },
+        {
+          property: 'og:image',
+          content: 'https://firebasestorage.googleapis.com/v0/b/tewntysix-house.appspot.com/o/head.webp?alt=media&token=b53fc010-7a3c-49e3-8039-1cfed666e1ec'
         }
       ]
     },
@@ -203,6 +215,10 @@ const routes: Routes = [
         {
           property: 'og:url',
           content: 'https://twentysix.house/blogs'
+        },
+        {
+          property: 'og:image',
+          content: 'https://firebasestorage.googleapis.com/v0/b/tewntysix-house.appspot.com/o/head.webp?alt=media&token=b53fc010-7a3c-49e3-8039-1cfed666e1ec'
         }
       ]
     },
@@ -236,6 +252,10 @@ const routes: Routes = [
         {
           property: 'og:url',
           content: 'https://twentysix.house/contact'
+        },
+        {
+          property: 'og:image',
+          content: 'https://firebasestorage.googleapis.com/v0/b/tewntysix-house.appspot.com/o/head.webp?alt=media&token=b53fc010-7a3c-49e3-8039-1cfed666e1ec'
         }
       ]
     },
