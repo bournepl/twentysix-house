@@ -11,12 +11,10 @@ import { routes } from './src/app/app-routing.module';
 export function app(): express.Express {
   const server = express();
   const serverDistFolder = dirname(fileURLToPath(import.meta.url));
-  const distFolder = resolve(serverDistFolder, '..');
-  const browserDistFolder = resolve(distFolder, 'browser');
+  const browserDistFolder = resolve(serverDistFolder, '../browser');
+  const indexHtml = join(serverDistFolder, 'index.server.html');
 
-  const indexHtml = join(browserDistFolder, 'index.html');
-
-  server.use(express.static(distFolder, {
+  server.get('*.*', express.static(browserDistFolder, {
     maxAge: '1y'
   }));
 
