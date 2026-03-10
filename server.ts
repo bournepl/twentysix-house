@@ -11,8 +11,14 @@ import { routes } from './src/app/app-routing.module';
 export function app(): express.Express {
   const server = express();
   const serverDistFolder = dirname(fileURLToPath(import.meta.url));
-  const browserDistFolder = resolve(serverDistFolder, '../browser');
+  const distFolder = resolve(serverDistFolder, '..');
+  const browserDistFolder = resolve(distFolder, 'browser');
+
   const indexHtml = join(browserDistFolder, 'index.html');
+
+  server.use(express.static(distFolder, {
+    maxAge: '1y'
+  }));
 
   const commonEngine = new CommonEngine();
 
@@ -45,13 +51,6 @@ ${urls.map(url => `  <url><loc>${url}</loc></url>`).join('\n')}
     res.header('Content-Type', 'application/xml');
     res.send(sitemapXml);
   });
-
-  // Example Express Rest API endpoints
-  // server.get('/api/**', (req, res) => { });
-  // Serve static files from /browser
-  server.use(express.static(browserDistFolder, {
-    maxAge: '1y'
-  }));
 
   // All regular routes use the Angular engine
   server.get('*', (req, res, next) => {
