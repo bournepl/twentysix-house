@@ -1,15 +1,21 @@
 {
+  "builds": [
+    {
+      "src": "dist/twentysix-house/server/server.mjs",
+      "use": "@vercel/node"
+    }
+  ],
   "routes": [
     {
       "src": "/sitemap.xml",
-      "dest": "/dist/twentysix-house/server/server.mjs"
+      "dest": "dist/twentysix-house/server/server.mjs"
     },
     {
       "handle": "filesystem"
     },
     {
       "src": "/(.*)",
-      "dest": "/dist/twentysix-house/server/server.mjs"
+      "dest": "dist/twentysix-house/server/server.mjs"
     }
   ]
 }
