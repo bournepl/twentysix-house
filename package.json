@@ -4,9 +4,8 @@
   "scripts": {
     "ng": "ng",
     "build": "ng build",
-    "build:ssr": "ng build && ng run twentysix-house:server",
     "start": "node dist/twentysix-house/server/server.mjs",
-    "dev": "npm run build:ssr && npm run start"
+    "dev:ssr": "ng build && node dist/twentysix-house/server/server.mjs"
   },
   "private": true,
   "dependencies": {

@@ -1,14 +1,6 @@
 {
   "routes": [
     {
-      "src": "/assets/(.*)",
-      "dest": "/dist/twentysix-house/browser/assets/$1"
-    },
-    {
-      "src": "/(.*\\.(js|css|png|jpg|jpeg|svg|ico|webp|woff|woff2|ttf))",
-      "dest": "/dist/twentysix-house/browser/$1"
-    },
-    {
       "src": "/(.*)",
       "dest": "/dist/twentysix-house/server/server.mjs"
     }
