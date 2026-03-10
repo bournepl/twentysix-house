@@ -14,9 +14,6 @@ export function app(): express.Express {
   const browserDistFolder = resolve(serverDistFolder, '../browser');
   const indexHtml = join(serverDistFolder, 'index.server.html');
 
-  server.get('*.*', express.static(browserDistFolder, {
-    maxAge: '1y'
-  }));
 
   const commonEngine = new CommonEngine();
 
@@ -49,6 +46,11 @@ ${urls.map(url => `  <url><loc>${url}</loc></url>`).join('\n')}
     res.header('Content-Type', 'application/xml');
     res.send(sitemapXml);
   });
+
+  server.get('*.*', express.static(browserDistFolder, {
+    maxAge: '1y'
+  }));
+
 
   // All regular routes use the Angular engine
   server.get('*', (req, res, next) => {

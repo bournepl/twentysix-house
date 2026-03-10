@@ -1,6 +1,10 @@
 {
   "routes": [
     {
+      "src": "/sitemap.xml",
+      "dest": "/dist/twentysix-house/server/server.mjs"
+    },
+    {
       "handle": "filesystem"
     },
     {
