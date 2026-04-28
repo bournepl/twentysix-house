@@ -1,0 +1,34 @@
+<section class="about-section about-trust" aria-labelledby="about-trust-title">
+  <div class="container">
+    <header class="about-trust__header text-center" data-aos="fade-up">
+      <p class="section-kicker font-le">WHY CLIENTS TRUST US</p>
+      <h2 class="section-title font-kn" id="about-trust-title">ความไว้วางใจที่เราอยากให้เจ้าของบ้านรู้สึกได้ตั้งแต่เริ่มคุย</h2>
+      <p class="section-description font-kn about-trust__lead">
+        แทนที่จะบอกเพียงว่าเราทำอะไรได้บ้าง เราอยากให้เนื้อหาส่วนนี้สะท้อนว่า
+        เวลาทำงานร่วมกันแล้วเจ้าของบ้านจะรู้สึกอย่างไร และเพราะอะไรหลายครอบครัวจึงตัดสินใจคุยต่อกับเรา
+      </p>
+    </header>
+
+    <div class="about-trust__grid" role="list">
+      <article
+        class="about-trust__card"
+        *ngFor="let reason of reasons; let index = index"
+        role="listitem"
+        data-aos="fade-up"
+      >
+        <div class="about-trust__card-top">
+          <span class="about-trust__card-number font-le">0{{ index + 1 }}</span>
+          <span class="about-trust__card-icon" aria-hidden="true">
+            <i [class]="reason.icon"></i>
+          </span>
+        </div>
+
+        <div class="about-trust__card-body">
+          <p class="about-trust__card-kicker font-le">{{ reason.label }}</p>
+          <h3 class="about-trust__card-title font-kn">{{ reason.title }}</h3>
+          <p class="about-trust__card-copy font-kn">{{ reason.description }}</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,43 @@
+<section class="section home-faq" aria-labelledby="faq-title">
+  <div class="container">
+    <header class="faq-header text-center" data-aos="fade-up">
+      <p class="section-kicker font-le">{{ faqIntro.kicker }}</p>
+      <h2 class="title text-primary font-kn faq-title" id="faq-title">
+        {{ faqIntro.title }}
+      </h2>
+      <p class="description font-kn faq-lead">
+        {{ faqIntro.lead }}
+      </p>
+    </header>
+
+    <div class="faq-shell" data-aos="fade-up">
+      <div class="faq-list">
+        <article class="faq-item" [class.faq-item-open]="isOpen(index)" *ngFor="let faq of faqs; let index = index">
+          <button class="faq-trigger" type="button" (click)="toggleFaq(index)" [attr.aria-expanded]="isOpen(index)"
+            [attr.aria-controls]="'faq-panel-' + index">
+            <span class="faq-trigger-main">
+              <span class="faq-number font-le">{{ faq.number }}</span>
+              <span class="faq-question font-kn">{{ faq.question }}</span>
+            </span>
+            <span class="faq-icon font-le" aria-hidden="true">
+              {{ isOpen(index) ? '−' : '+' }}
+            </span>
+          </button>
+
+          <div class="faq-panel" [id]="'faq-panel-' + index" [class.faq-panel-open]="isOpen(index)">
+            <p class="faq-answer font-kn">{{ faq.answer }}</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="faq-footer text-center">
+        <p class="font-kn faq-footer-copy">
+          {{ faqIntro.note }}
+
+        </p>
+        <a class="btn btn-primary btn-round" routerLink="/contact">ดูช่องทางติดต่อทั้งหมด</a>
+      </div>
+
+    </div>
+  </div>
+</section>

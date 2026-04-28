@@ -1,0 +1,49 @@
+<section class="about-section about-workflow" aria-labelledby="about-workflow-title">
+  <div class="container">
+    <header class="about-workflow__header text-center" data-aos="fade-up">
+      <div class="col-lg-8 ml-auto mr-auto text-center">
+        <p class="section-kicker font-le">TEAM & WORKING STYLE</p>
+        <h2 class="section-title font-kn" id="about-workflow-title">ทีมงานและวิธีทำงานของเรา</h2>
+        <p class="section-description font-kn about-workflow__lead">
+          การดูแลงานออกแบบและก่อสร้างบ้านที่ดี ไม่ได้เกิดจากคนคนเดียว
+          แต่เกิดจากการทำงานร่วมกันอย่างเป็นระบบของทีมออกแบบ ทีมหน้างาน และผู้ดูแลโครงการ
+        </p>
+      </div>
+    </header>
+
+    <div class="row align-items-start about-workflow__main">
+      <div class="col-lg-4 mb-4 mb-lg-0 about-workflow__aside-col" data-aos="fade-right">
+        <aside class="about-workflow__aside">
+          <p class="about-workflow__aside-kicker font-le">ONE TEAM, ONE DIRECTION</p>
+          <h3 class="about-workflow__aside-title font-kn">
+            เราเชื่อว่างานรับสร้างบ้านที่ดี ต้องมีทีมที่สื่อสารกันชัดและเดินไปในทิศทางเดียวกัน
+          </h3>
+          <p class="about-workflow__aside-copy font-kn">
+            ตั้งแต่การคุยโจทย์ พัฒนาแบบ วางแผนงาน ไปจนถึงดูแลหน้างานจริง
+            ทุกขั้นตอนถูกเชื่อมกันเพื่อให้เจ้าของบ้านเห็นภาพรวมโครงการได้ชัดเจนและมั่นใจมากขึ้น
+          </p>
+
+          <div class="about-workflow__tag-list font-kn" aria-label="ทีมที่ทำงานร่วมกัน">
+            <span class="about-workflow__tag" *ngFor="let tag of collaborationTags">{{ tag }}</span>
+          </div>
+        </aside>
+      </div>
+
+      <div class="col-lg-8" data-aos="fade-left">
+        <div class="about-workflow__list" role="list">
+          <article class="about-workflow__card" *ngFor="let step of steps; let index = index" role="listitem" data-aos="fade-up">
+            <div class="about-workflow__marker">
+              <span class="about-workflow__index font-le">0{{ index + 1 }}</span>
+            </div>
+
+            <div class="about-workflow__body">
+              <p class="about-workflow__card-kicker font-le">{{ step.label }}</p>
+              <h3 class="about-workflow__title font-kn">{{ step.title }}</h3>
+              <p class="about-workflow__copy font-kn">{{ step.description }}</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

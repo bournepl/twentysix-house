@@ -1,163 +1,147 @@
-<!-- =========================
-  BLOG HERO
-========================= -->
-<div class="wrapper">
-  <div class="page-header page-header-small" style="background-image: url('./assets/img/blurred-image-1.jpg')">
-    <div class="content-center text-center">
-      <div class="row">
-        <div class="col-md-8 ml-auto mr-auto">
-          <h2 class="title font-kn">บทความความรู้เรื่องบ้าน</h2>
-          <div class="section-space"></div>
-          <p class="description lead">
-            บทความโดยทีมงาน Twentysix.House
-          </p>
+<ng-container *ngIf="getBlogsById as blog">
+  <div class="wrapper blog-detail">
+    <section class="page-header page-header-lg blog-detail-hero" aria-labelledby="blog-detail-title">
+      <div class="page-header-image" [style.background-image]="'url(' + blog.pictureUrl + ')'"></div>
 
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+      <div class="container">
+        <div class="blog-detail-hero__shell">
+          <div class="blog-detail-hero__content text-center">
+            <p class="blog-detail-hero__eyebrow font-le">ARTICLE DETAIL</p>
+            <h1 class="blog-detail-hero__title font-kn" id="blog-detail-title">{{ blog.title }}</h1>
 
-<!-- =========================
-  BLOG CONTENT
-========================= -->
-<div class="main" *ngIf="getBlogsById">
+            <nav class="blog-detail-hero__breadcrumbs" aria-label="breadcrumb">
+              <ol class="breadcrumb font-kn">
+                <li class="breadcrumb-item"><a routerLink="/">หน้าแรก</a></li>
+                <li class="breadcrumb-item"><a routerLink="/blogs">บทความ</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ blog.title }}</li>
+              </ol>
+            </nav>
 
-  <div class="section section-white">
-    <div class="container">
+            <p class="blog-detail-hero__lead font-kn">{{ blog.subTitle }}</p>
 
-      <!-- TITLE -->
-      <div class="row">
-        <div class="col-md-9 ml-auto mr-auto text-center">
-          <h1 class="blogs-title text-secondary font-kn">
-            {{ getBlogsById.title }}
-          </h1>
-          <h2 class="description subTitle font-kn mb-5">
-            {{ getBlogsById.subTitle }}
-          </h2>
-        </div>
-      </div>
+            <div class="blog-detail-hero__actions">
+              <a class="btn btn-primary btn-round" routerLink="/contact">ปรึกษาเรื่องบ้าน</a>
+              <a class="btn btn-secondary btn-round" routerLink="/blogs">กลับไปหน้าบทความ</a>
+            </div>
 
-      <!-- FEATURE IMAGE -->
-      <div class="row mb-4">
-        <div class="col-md-8 ml-auto mr-auto text-center">
-          <img class="img img-raised" style="width: 100%" [src]="getBlogsById.pictureUrl"
-            [alt]="getBlogsById.title + ' | บทความความรู้เรื่องบ้าน โดย Twentysix.House'" loading="lazy" />
-        </div>
-      </div>
-
-      <!-- META -->
-      <div class="row mb-5">
-        <div class="col-md-8 ml-auto mr-auto">
-          <div class="article-meta d-flex align-items-center">
-            <img class="img-circle img-no-padding img-responsive mr-2" src="assets/img/logo.jpg"
-              alt="Twentysix.House" />
-            <span class="author">Twentysix.House</span>
-            <span class="mx-2">|</span>
-            <time [attr.datetime]="getBlogsById.date">
-              {{ getBlogsById.date | date:'longDate' }}
-            </time>
+            <div class="blog-detail-hero__meta font-kn" aria-label="ข้อมูลบทความ">
+              <div class="blog-detail-hero__meta-item">
+                <span>หมวดหมู่</span>
+                <strong>{{ getCategoryName(blog) }}</strong>
+              </div>
+              <div class="blog-detail-hero__meta-item">
+                <span>วันที่เผยแพร่</span>
+                <strong>{{ blog.date | date:'longDate' }}</strong>
+              </div>
+              <div class="blog-detail-hero__meta-item">
+                <span>ผู้เขียน</span>
+                <strong>Twentysix House</strong>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+    </section>
 
+    <div class="main blog-detail-main">
+      <section class="blog-detail-content" aria-labelledby="blog-detail-content-title">
+        <div class="container">
+          <article class="blog-detail-article" itemscope itemtype="https://schema.org/BlogPosting">
+            <meta itemprop="headline" [attr.content]="blog.title">
+            <meta itemprop="description" [attr.content]="blog.subTitle">
+            <meta itemprop="author" content="Twentysix House">
+            <meta itemprop="publisher" content="Twentysix House">
 
+            <header class="blog-detail-article__header">
+              <p class="blog-detail-section__kicker font-le">ARTICLE GUIDE</p>
+              <h2 class="blog-detail-section__title font-kn" id="blog-detail-content-title">
+                {{ blog.title }}
+              </h2>
+            </header>
 
-      <!-- ARTICLE BODY -->
-      <div class="row">
-        <div class="col-md-8 ml-auto mr-auto">
-          <article class="article-content" itemprop="articleBody">
-            <quill-view-html [content]="getBlogsById.content" theme="snow"></quill-view-html>
-          </article>
-        </div>
-      </div>
+            <figure class="blog-detail-article__image">
+              <img [src]="blog.pictureUrl" [alt]="blog.title + ' | บทความโดย Twentysix House'" itemprop="image">
+            </figure>
 
-
-      <!-- TAGS -->
-      <div class="row mt-4">
-        <div class="col-md-8 ml-auto mr-auto">
-          <h5 class="font-kn text-muted">แท็กบทความ</h5>
-          <span class="badge badge-primary mr-2 mb-2 pl-3 pr-3" *ngFor="let tag of getBlogsById.tags"
-            [attr.aria-label]="'แท็ก ' + tag">
-            {{ tag }}
-          </span>
-        </div>
-      </div>
-
-
-    </div>
-  </div>
-
-  <!-- =========================
-    RELATED BLOGS
-  ========================= -->
-  <div class="section section-light">
-    <div class="container">
-
-      <div class="row">
-        <div class="col-md-8 ml-auto mr-auto text-center">
-          <h2 class="title text-primary font-kn">
-            บทความที่เกี่ยวข้อง
-          </h2>
-          <div class="separator separator-primary"></div>
-          <p class="description lead">
-            บทความอื่น ๆ ที่เกี่ยวข้องกับการสร้างบ้าน
-            การออกแบบบ้าน และงานก่อสร้าง
-          </p>
-        </div>
-      </div>
-
-      <div class="row mt-5">
-
-        <div class="col-md-4 mb-4" *ngFor="let blog of getBlogs; trackBy: trackById">
-          <article class="card card-blog" itemscope itemtype="https://schema.org/BlogPosting">
-
-            <div class="card-image">
-              <img class="img" [src]="blog.pictureUrl" [alt]="blog.title + ' | บทความโดย Twentysix.House'"
-                itemprop="image" />
+            <div class="blog-detail-article__meta font-kn">
+              <span>{{ getCategoryName(blog) }}</span>
+              <time [attr.datetime]="blog.date" itemprop="datePublished">
+                {{ blog.date | date:'longDate' }}
+              </time>
             </div>
 
-            <div class="card-body">
+            <div class="blog-detail-article__body font-kn" itemprop="articleBody">
+              <quill-view-html [content]="blog.content" theme="snow"></quill-view-html>
+            </div>
 
-              <meta itemprop="author" content="Twentysix.House">
-              <meta itemprop="publisher" content="Twentysix.House">
+            <footer class="blog-detail-article__tags font-kn" *ngIf="blog.tags?.length">
+              <span class="blog-detail-article__tags-label">หัวข้อที่เกี่ยวข้อง</span>
+              <span class="blog-detail-article__tag" *ngFor="let tag of blog.tags">{{ tag }}</span>
+            </footer>
+          </article>
+        </div>
+      </section>
 
-              <h6 class="card-category text-primary" itemprop="articleSection">
-                {{ blog.blogCategory.blogCategoryName }}
-              </h6>
+      <section class="blog-detail-related" *ngIf="getBlogs.length" aria-labelledby="blog-detail-related-title">
+        <div class="container">
+          <header class="blog-detail-section__header text-center">
+            <p class="blog-detail-section__kicker font-le">RELATED ARTICLES</p>
+            <h2 class="blog-detail-section__title font-kn" id="blog-detail-related-title">
+              บทความที่เกี่ยวข้องกับเรื่องนี้
+            </h2>
+          </header>
 
-              <h3 class="card-title" itemprop="headline">
-                <a [routerLink]="['/blogs/detail', blog._id.$oid]" itemprop="url"
-                  [attr.aria-label]="'อ่านบทความ ' + blog.title">
-                  {{ blog.title }}
+          <div class="blog-detail-related__grid">
+            <article class="blog-detail-related__card" *ngFor="let item of getBlogs; trackBy: trackById">
+              <a class="blog-detail-related__media" [routerLink]="getBlogUrl(item)">
+                <img [src]="item.pictureUrl" [alt]="item.title + ' | บทความโดย Twentysix House'" loading="lazy">
+              </a>
+
+              <div class="blog-detail-related__body">
+                <div class="blog-detail-related__meta font-kn">
+                  <span>{{ getCategoryName(item) }}</span>
+                  <time [attr.datetime]="item.date">{{ item.date | date:'longDate' }}</time>
+                </div>
+                <h3 class="font-kn">
+                  <a [routerLink]="getBlogUrl(item)">{{ item.title }}</a>
+                </h3>
+                <p class="blog-detail-related__excerpt font-kn">{{ item.subTitle }}</p>
+                <a class="blog-detail-related__link font-kn" [routerLink]="getBlogUrl(item)">
+                  อ่านต่อ <i class="now-ui-icons arrows-1_minimal-right" aria-hidden="true"></i>
                 </a>
-              </h3>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
 
-              <p class="card-description" itemprop="description">
-                {{ blog.subTitle }}
+      <section class="blog-detail-cta about-section" aria-labelledby="blog-detail-cta-title">
+        <div class="container">
+          <div class="blog-detail-cta__card">
+            <div class="blog-detail-cta__content text-center">
+              <p class="blog-detail-section__kicker font-le">NEXT STEP</p>
+              <h2 class="blog-detail-cta__title font-kn" id="blog-detail-cta-title">
+                อ่านแล้วอยากคุยเรื่องบ้านของคุณต่อ เราช่วยดูภาพรวมให้ได้
+              </h2>
+              <p class="blog-detail-cta__lead font-kn">
+                ส่งโจทย์ที่ดิน งบประมาณ หรือแบบบ้านที่ชอบมาให้ทีมงานดูเบื้องต้น
+                แล้วค่อยวางแนวทางให้เหมาะกับการอยู่อาศัยจริง
               </p>
 
-              <hr />
+              <div class="blog-detail-cta__links font-kn">
+                <a routerLink="/ourworks/house-designs">ดูแบบบ้าน</a>
+                <a routerLink="/ourworks/real-projects">ดูผลงานจริง</a>
+                <a routerLink="/services">ดูบริการรับสร้างบ้าน</a>
+              </div>
 
-              <div class="card-footer">
-
-                <div class="author">
-                  <img class="avatar img-raised" src="assets/img/logo.jpg" alt="Twentysix.House">
-                  <span class="text-secondary">TWENTYSIX.HOUSE</span>
-                </div>
-
-                <time class="stats" [attr.datetime]="blog.date" itemprop="datePublished">
-                  {{ blog.date | date:'longDate' }}
-                </time>
-
+              <div class="blog-detail-cta__actions">
+                <a class="btn btn-primary btn-round" routerLink="/contact">ปรึกษาโครงการ</a>
+                <a class="btn btn-secondary btn-round" routerLink="/ourworks">ดูผลงานของเรา</a>
               </div>
             </div>
-
-          </article>
+          </div>
         </div>
-
-      </div>
+      </section>
     </div>
   </div>
-
-</div>
+</ng-container>

@@ -1,0 +1,45 @@
+<section class="about-section about-facts" aria-labelledby="about-facts-title">
+  <div class="container">
+    <header class="about-facts__header text-center" data-aos="fade-up">
+      <p class="section-kicker font-le">COMPANY FACTS</p>
+      <h2 class="section-title font-kn" id="about-facts-title">ข้อมูลบริษัท</h2>
+      <p class="section-description font-kn about-facts__lead">
+        ข้อมูลพื้นฐานเหล่านี้ช่วยให้เจ้าของบ้านรู้จักตัวตนของบริษัทมากขึ้น
+        และมั่นใจได้ว่าสามารถติดต่อ พูดคุย และนัดหมายกับทีมงานได้จริง
+      </p>
+    </header>
+
+    <div class="row align-items-start about-facts__main">
+      <div class="col-lg-8 order-2 order-lg-1" data-aos="fade-right">
+        <div class="about-facts__grid" role="list">
+          <article class="about-facts__card" *ngFor="let fact of facts" role="listitem" data-aos="fade-up">
+            <div class="about-facts__card-top">
+              <p class="about-facts__label font-kn">{{ fact.label }}</p>
+            </div>
+            <h3 class="about-facts__value font-kn">{{ fact.value }}</h3>
+            <p class="about-facts__copy font-kn">{{ fact.description }}</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="col-lg-4 order-1 order-lg-2 mb-4 mb-lg-0 about-facts__aside-col" data-aos="fade-left">
+        <aside class="about-facts__aside">
+          <p class="about-facts__aside-kicker font-le">REAL COMPANY, REAL CONTACT</p>
+          <h3 class="about-facts__aside-title font-kn">
+            เราอยากให้ทุกคนที่เข้ามารู้จัก Twentysix House มั่นใจได้ว่าเป็นทีมที่ติดต่อได้จริงและทำงานอย่างเป็นระบบ
+          </h3>
+          <p class="about-facts__aside-copy font-kn">
+            สำหรับงานออกแบบและรับสร้างบ้าน ความชัดเจนของข้อมูลบริษัทคืออีกหนึ่งส่วนสำคัญที่ช่วยให้การเริ่มต้นพูดคุยเป็นเรื่องง่ายขึ้น
+          </p>
+
+          <div class="about-facts__point-list font-kn" aria-label="ข้อมูลที่สร้างความมั่นใจ">
+            <div class="about-facts__point" *ngFor="let point of quickPoints">
+              <span class="about-facts__point-dot" aria-hidden="true"></span>
+              <span>{{ point }}</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>

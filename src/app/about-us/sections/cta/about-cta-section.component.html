@@ -1,0 +1,26 @@
+<section class="about-section about-cta" aria-labelledby="about-cta-title">
+  <div class="container">
+    <div class="about-cta__card" data-aos="fade-up">
+      <div class="about-cta__glow" aria-hidden="true"></div>
+
+      <div class="about-cta__content text-center">
+        <p class="section-kicker font-le">NEXT STEP</p>
+        <h2 class="section-title font-kn" id="about-cta-title">
+          หากคุณกำลังมองหาบริษัทรับสร้างบ้านอุดรธานีที่ดูแลงานอย่างเป็นระบบ
+        </h2>
+        <p class="section-description font-kn about-cta__lead">
+          Twentysix House พร้อมพูดคุยแนวคิด อธิบายขั้นตอน และช่วยให้คุณเห็นภาพบ้านที่เหมาะกับการใช้ชีวิตจริงมากขึ้น
+        </p>
+
+        <div class="about-cta__highlights font-kn" aria-label="เหตุผลที่ควรเริ่มคุยกับทีมงาน">
+          <span class="about-cta__highlight" *ngFor="let item of highlights">{{ item }}</span>
+        </div>
+
+        <div class="about-cta__actions">
+          <a class="btn btn-primary btn-round" [routerLink]="'/contact'">ติดต่อทีมงาน</a>
+          <a class="btn btn-secondary btn-round" [routerLink]="'/services'">ดูบริการของเรา</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

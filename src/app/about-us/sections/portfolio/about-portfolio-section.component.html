@@ -1,0 +1,34 @@
+<section class="about-section about-portfolio" aria-labelledby="about-portfolio-title">
+  <div class="container">
+    <header class="about-portfolio__header text-center" data-aos="fade-up">
+      <p class="section-kicker font-le">PORTFOLIO TEASER</p>
+      <h2 class="section-title font-kn" id="about-portfolio-title">ผลงานที่สะท้อนแนวคิดของเรา</h2>
+      <p class="section-description font-kn about-portfolio__lead">
+        ตัวอย่างผลงานเหล่านี้สะท้อนวิธีคิดของ Twentysix House
+        ตั้งแต่งานออกแบบบ้านไปจนถึงงานก่อสร้างที่ให้ความสำคัญกับการอยู่อาศัยจริง
+      </p>
+    </header>
+
+    <div class="about-portfolio__actions" data-aos="fade-up">
+      <div class="about-portfolio__tag-list font-kn" aria-label="ประเภทผลงาน">
+        <span class="about-portfolio__tag" *ngFor="let tag of highlightTags">{{ tag }}</span>
+      </div>
+      <a class="btn btn-outline-primary btn-round about-portfolio__cta" [routerLink]="'/ourworks/real-projects'">ดูผลงานทั้งหมด</a>
+    </div>
+
+    <div class="about-portfolio__showcase" role="list">
+      <article class="about-portfolio__card" *ngFor="let item of items; let index = index" role="listitem"
+        data-aos="fade-up">
+        <div class="about-portfolio__media">
+          <img [src]="item.image" [alt]="item.title" loading="lazy" />
+          <div class="about-portfolio__media-overlay"></div>
+        </div>
+
+        <div class="about-portfolio__body">
+          <h3 class="about-portfolio__title font-kn">{{ item.title }}</h3>
+          <p class="about-portfolio__copy font-kn">{{ item.copy }}</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>

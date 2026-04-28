@@ -4,9 +4,10 @@ import { ListComponent } from './list/list.component';
 import { DetailComponent } from './detail/detail.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'list', pathMatch: 'prefix' },
-  { path: 'list', component: ListComponent },
+  { path: '', pathMatch: 'full', component: ListComponent },
+  { path: 'list', redirectTo: '/blogs', pathMatch: 'full' },
   { path: 'detail/:id', component: DetailComponent },
+  { path: ':slug', component: DetailComponent },
 ];
 
 @NgModule({

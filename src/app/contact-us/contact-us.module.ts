@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { ContactUsRoutingModule } from './contact-us-routing.module';
 import { ContactUsComponent } from './contact-us.component';
-import { GoogleMapsModule } from '@angular/google-maps';
 
 
 @NgModule({
@@ -12,7 +11,6 @@ import { GoogleMapsModule } from '@angular/google-maps';
   ],
   imports: [
     CommonModule,
-    GoogleMapsModule,
     ContactUsRoutingModule
   ]
 })

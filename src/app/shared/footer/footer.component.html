@@ -1,106 +1,57 @@
 <footer class="footer footer-big" role="contentinfo" itemscope itemtype="https://schema.org/LocalBusiness">
-
   <div class="container">
     <div class="row">
-
-      <!-- COMPANY INFO -->
       <div class="col-md-4 text-center col-12 ml-auto mr-auto">
-
-        <a [routerLink]="'/'" aria-label="บริษัทรับสร้างบ้านในจังหวัดอุดรธานี Twentysix.House">
-          <img class="img-logo mb-3" src="./assets/img/logobg.png" alt="โลโก้บริษัทรับสร้างบ้าน Twentysix.House"
+        <a [routerLink]="'/'" aria-label="บริษัทรับสร้างบ้าน Twentysix.House">
+          <img
+            class="img-logo mb-3"
+            src="./assets/img/logobg.png"
+            alt="โลโก้บริษัทรับสร้างบ้าน Twentysix.House"
             itemprop="logo" />
         </a>
 
         <p class="text-secondary card-description" itemprop="name">
-          บริษัท ทเวนตี้ซิกซ์ ดีเวลล็อปเมนท์ จำกัด
+          บริษัท ทเวนตี้ซิกซ์ ดีเวลลอปเมนท์ จำกัด
         </p>
 
-        <address class="text-secondary card-description" itemprop="address" itemscope
-          itemtype="https://schema.org/PostalAddress">
-
-          <span itemprop="streetAddress">
-            127/2 ถนนโพนพิสัย
-          </span><br>
-          <span itemprop="addressLocality">
-            อำเภอเมือง
-          </span>
-          <span itemprop="addressRegion">
-            จังหวัดอุดรธานี
-          </span>
-          <span itemprop="postalCode">
-            41000
-          </span>
-
+        <address class="text-secondary card-description" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+          <span itemprop="streetAddress">127/2 ถนนโพนพิสัย</span><br />
+          <span itemprop="addressLocality">อำเภอเมือง</span>
+          <span itemprop="addressRegion">จังหวัดอุดรธานี</span>
+          <span itemprop="postalCode">41000</span>
         </address>
 
         <p class="text-secondary card-description">
           โทร:
-          <a href="tel:0994708877" itemprop="telephone">
-            099-470-8877
-          </a>
+          <a href="tel:0994708877" itemprop="telephone">099-470-8877</a>
         </p>
-
       </div>
 
-      <!-- FOOTER LINKS -->
       <div class="col-md-8 col-12 ml-auto mr-auto">
-
         <div class="row">
-
-          <!-- ABOUT -->
           <div class="col-md-5 mb-4">
             <h6 class="t">ABOUT COMPANY</h6>
             <p class="text-secondary card-description">
-              บริษัทรับสร้างบ้านในจังหวัดอุดรธานี
-              ให้บริการออกแบบและก่อสร้างบ้านครบวงจร
+              บริษัทรับสร้างบ้านในจังหวัดอุดรธานี ให้บริการออกแบบและก่อสร้างบ้านครบวงจร
               ด้วยประสบการณ์มากกว่า 10 ปี
             </p>
           </div>
 
-          <!-- MENU -->
           <div class="col-md-3 mb-4">
             <h6 class="t">QUICK LINKS</h6>
             <div class="links">
-
-
               <ul class="uppercase-links stacked-links">
-
-                <li>
-                  <a [routerLink]="'/'">หน้าแรก</a>
+                <li *ngFor="let link of quickLinks">
+                  <a [routerLink]="link.path">{{ link.label }}</a>
                 </li>
-
-                <li>
-                  <a [routerLink]="'/รับสร้างบ้าน-อุดรธานี'">
-                    รับสร้างบ้านอุดรธานี
-                  </a>
-                </li>
-
-                <li>
-                  <a [routerLink]="'/services'">บริการของเรา</a>
-                </li>
-
-                <li>
-                  <a [routerLink]="'/projects'">ผลงานของเรา</a>
-                </li>
-
-                <li>
-                  <a [routerLink]="'/blogs'">บทความ</a>
-                </li>
-
-                <li>
-                  <a [routerLink]="'/contact'">ติดต่อเรา</a>
-                </li>
-
               </ul>
             </div>
           </div>
 
-          <!-- CONTACT -->
           <div class="col-md-4">
             <h6 class="t">CONTACT US</h6>
 
             <div class="social-area mt-3">
-
               <a class="btn btn-icon btn-round btn-secondary mr-1" aria-label="Line" href="https://lin.ee/jzuOAtF"
                 target="_blank" rel="noopener noreferrer">
                 <i class="fab fa-line"></i>
@@ -124,33 +75,27 @@
               <a class="btn btn-icon btn-round btn-secondary" aria-label="โทรศัพท์" href="tel:0994708877">
                 <i class="fas fa-phone-alt"></i>
               </a>
-
             </div>
           </div>
-
         </div>
 
         <hr />
 
-        <!-- COPYRIGHT -->
         <div class="copyright d-flex justify-content-between">
-
           <span class="text-secondary">
-            © 2025 Twentysix.House
+            &copy; {{ year }} Twentysix.House
           </span>
 
           <ul class="list-inline text-secondary mb-0">
             <li class="list-inline-item">
-              <a href="#" aria-disabled="true">Privacy Policy</a>
+              <span aria-disabled="true">Privacy Policy</span>
             </li>
             |
             <li class="list-inline-item">
-              <a href="#" aria-disabled="true">Terms of Use</a>
+              <span aria-disabled="true">Terms of Use</span>
             </li>
           </ul>
-
         </div>
-
       </div>
     </div>
   </div>

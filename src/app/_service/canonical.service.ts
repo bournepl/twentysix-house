@@ -1,5 +1,6 @@
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
-import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -7,28 +8,25 @@ import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 export class CanonicalService {
 
   constructor(
-    @Inject(DOCUMENT) private document: Document,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(DOCUMENT) private document: Document
   ) { }
 
   /**
    * ✅ Set canonical URL (absolute, clean, SEO-safe)
    */
   setCanonicalURL(path?: string): void {
-    if (!isPlatformBrowser(this.platformId)) {
-      return;
-    }
-
     const head = this.document.head;
-    const origin = this.document.location.origin;
+    const origin = this.document.location?.origin || environment.siteUrl;
 
     // 1️⃣ Normalize URL
     let canonicalUrl = origin;
 
     if (path) {
-      canonicalUrl += path.startsWith('/') ? path : `/${path}`;
+      canonicalUrl = /^https?:\/\//i.test(path)
+        ? path
+        : `${origin}${path.startsWith('/') ? path : `/${path}`}`;
     } else {
-      canonicalUrl += this.document.location.pathname;
+      canonicalUrl += this.document.location?.pathname || '/';
     }
 
     // 2️⃣ Remove query & hash
@@ -56,10 +54,6 @@ export class CanonicalService {
    * ❌ Remove canonical tag (rarely needed)
    */
   removeCanonicalTag(): void {
-    if (!isPlatformBrowser(this.platformId)) {
-      return;
-    }
-
     const link = this.document.querySelector("link[rel='canonical']");
     if (link) {
       link.remove();

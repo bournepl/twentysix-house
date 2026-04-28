@@ -5,6 +5,7 @@ import { BlogRoutingModule } from './blog-routing.module';
 import { ListComponent } from './list/list.component';
 import { DetailComponent } from './detail/detail.component';
 import { QuillModule } from 'ngx-quill';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { QuillModule } from 'ngx-quill';
   ],
   imports: [
     CommonModule,
+    NgxPaginationModule,
     QuillModule,
     BlogRoutingModule
   ]

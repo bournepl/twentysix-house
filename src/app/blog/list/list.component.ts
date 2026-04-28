@@ -1,17 +1,11 @@
-import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
-
-import { LoadingBarService } from '@ngx-loading-bar/core';
-import { Router, RouterModule } from '@angular/router';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID, Renderer2 } from '@angular/core';
+import Aos from 'aos';
+import Rellax from 'rellax';
 import { Blog } from '../../_model/blog';
-import { Meta, Title } from '@angular/platform-browser';
 import { BlogService } from '../../_service/blog.service';
-import { DOCUMENT } from '@angular/common';
-import { Renderer2, RendererFactory2 } from '@angular/core';
 import { JsonLdService } from '../../_service/json-ld.service';
-import { CanonicalService } from '../../_service/canonical.service';
-import { SeoService } from '../../_service/seo.service';
-
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-list',
@@ -19,77 +13,228 @@ import { SeoService } from '../../_service/seo.service';
   styleUrl: './list.component.scss'
 })
 export class ListComponent implements OnInit, OnDestroy {
+  readonly allCategory = 'ทั้งหมด';
+  readonly isBrowser: boolean;
+  readonly pageSize = 6;
+  readonly breadcrumbs = [
+    { label: 'หน้าแรก', path: '/' },
+    { label: 'บทความ' },
+  ];
+
+  readonly heroPoints = [
+    {
+      title: 'เริ่มวางแผนสร้างบ้านให้ชัดขึ้น',
+      description: 'รวมเรื่องที่เจ้าของบ้านควรรู้ก่อนคุยแบบ งบประมาณ และขั้นตอนก่อสร้าง',
+    },
+    {
+      title: 'อ่านจากมุมมองทีมทำงานจริง',
+      description: 'คัดเรื่องออกแบบบ้าน งานโครงสร้าง และการเลือกวัสดุที่เจอบ่อยในงานบ้านพักอาศัย',
+    },
+    {
+      title: 'ต่อยอดไปคุยโครงการได้ง่าย',
+      description: 'ใช้บทความเป็นจุดตั้งต้นในการถามทีมงานและเตรียมโจทย์บ้านของคุณ',
+    },
+  ];
+
+  readonly ctaPoints = [
+    'คุยโจทย์ที่ดินและงบประมาณ',
+    'ช่วยแนะนำแนวทางออกแบบบ้าน',
+    'ต่อยอดจากบทความไปสู่แผนงานจริง',
+  ];
 
   blogs: Blog[] = [];
-  isBrowser = false;
+  categories: string[] = [this.allCategory];
+  selectedCategory = this.allCategory;
+  page = 1;
+  private rellaxInstance?: any;
 
   constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
-    private title: Title,
-    private meta: Meta,
+    @Inject(PLATFORM_ID) private platformId: object,
     private blogService: BlogService,
-    private jsonLd: JsonLdService
+    private jsonLd: JsonLdService,
+    private renderer: Renderer2,
+    @Inject(DOCUMENT) private document: Document
   ) {
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
 
   ngOnInit(): void {
-
-    /* ===== META ===== */
-    this.title.setTitle('บทความความรู้เรื่องบ้าน | Twentysix.House');
-
-    this.meta.updateTag({
-      name: 'description',
-      content:
-        'บทความและสาระความรู้เรื่องการสร้างบ้าน ออกแบบบ้าน และการก่อสร้าง จากทีมงาน Twentysix.House บริษัทรับสร้างบ้านในอุดรธานี'
-    });
-
     this.loadBlogs();
+
+    if (!this.isBrowser) {
+      return;
+    }
+
+    this.renderer.addClass(this.document.body, 'blogs-page');
+    this.rellaxInstance = new Rellax('.rellax-header');
   }
 
   ngOnDestroy(): void {
     this.jsonLd.removeSchema('blog-list');
+    this.rellaxInstance?.destroy();
+    this.rellaxInstance = undefined;
+
+    if (this.isBrowser) {
+      this.renderer.removeClass(this.document.body, 'blogs-page');
+    }
   }
 
   loadBlogs(): void {
     this.blogService.getAll().subscribe((data: Blog[]) => {
-      this.blogs = data;
+      this.blogs = data
+        .filter((blog) => blog.status !== false)
+        .sort((a, b) => this.getBlogTime(b) - this.getBlogTime(a));
+      this.categories = [
+        this.allCategory,
+        ...Array.from(new Set(this.blogs.map((blog) => this.getCategoryName(blog)).filter(Boolean))),
+      ];
 
-      if (this.isBrowser) {
-        this.insertBlogListSchema();
-      }
+      this.insertBlogListSchema();
+      this.refreshAos();
     });
   }
 
-  trackById(index: number, blog: Blog): string {
-    return blog._id.$oid;
+  get filteredBlogs(): Blog[] {
+    if (this.selectedCategory === this.allCategory) {
+      return this.blogs;
+    }
+
+    return this.blogs.filter((blog) => this.getCategoryName(blog) === this.selectedCategory);
   }
 
-  /* ===== Schema: Blog + ItemList ===== */
-  private insertBlogListSchema() {
-    const schema = {
-      "@context": "https://schema.org",
-      "@type": "Blog",
-      "name": "บทความความรู้เรื่องบ้าน - Twentysix.House",
-      "publisher": {
-        "@type": "Organization",
-        "name": "Twentysix.House"
-      },
-      "blogPost": this.blogs.map((blog, index) => ({
-        "@type": "BlogPosting",
-        "headline": blog.title,
-        "description": blog.subTitle,
-        "image": blog.pictureUrl,
-        "datePublished": blog.date,
-        "author": {
-          "@type": "Organization",
-          "name": "Twentysix.House"
-        },
-        "url": `https://twentysix.house/blogs/detail/${blog._id.$oid}`,
-        "position": index + 1
-      }))
-    };
+  get featuredBlog(): Blog | undefined {
+    return this.filteredBlogs[0];
+  }
 
-    this.jsonLd.insertSchema('blog-list', schema);
+  get articleBlogs(): Blog[] {
+    return this.filteredBlogs;
+  }
+
+  selectCategory(category: string): void {
+    this.selectedCategory = category;
+    this.page = 1;
+    this.scrollToArticleCatalog();
+    this.refreshAos();
+  }
+
+  onPageChange(page: number): void {
+    this.page = page;
+    this.scrollToArticleCatalog();
+    this.refreshAos();
+  }
+
+  trackById(index: number, blog: Blog): string {
+    return blog._id?.$oid || blog.bId;
+  }
+
+  trackByCategory(index: number, category: string): string {
+    return category;
+  }
+
+  getBlogId(blog: Blog): string {
+    return this.blogService.getBlogId(blog);
+  }
+
+  getBlogSlug(blog: Blog): string {
+    return this.blogService.getBlogSlug(blog);
+  }
+
+  getCategoryName(blog: Blog): string {
+    return blog.blogCategory?.blogCategoryName || 'บทความ';
+  }
+
+  getBlogUrl(blog: Blog): string[] {
+    return ['/blogs', this.getBlogSlug(blog)];
+  }
+
+  private insertBlogListSchema(): void {
+    const url = `${environment.siteUrl}/blogs`;
+
+    this.jsonLd.insertSchema('blog-list', {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'CollectionPage',
+          '@id': `${url}#webpage`,
+          name: 'บทความสร้างบ้านและออกแบบบ้าน | Twentysix House',
+          description:
+            'รวมบทความสร้างบ้าน ออกแบบบ้าน งานโครงสร้าง และคำแนะนำสำหรับเจ้าของบ้านในอุดรธานีจาก Twentysix House',
+          url,
+          inLanguage: 'th-TH',
+          mainEntity: {
+            '@id': `${url}#itemlist`,
+          },
+        },
+        {
+          '@type': 'ItemList',
+          '@id': `${url}#itemlist`,
+          numberOfItems: this.blogs.length,
+          itemListElement: this.blogs.map((blog, index) => ({
+            '@type': 'ListItem',
+            position: index + 1,
+            url: `${url}/${this.getBlogSlug(blog)}`,
+            name: blog.title,
+            image: blog.pictureUrl,
+          })),
+        },
+        {
+          '@type': 'BreadcrumbList',
+          '@id': `${url}#breadcrumb`,
+          itemListElement: [
+            {
+              '@type': 'ListItem',
+              position: 1,
+              name: 'หน้าแรก',
+              item: `${environment.siteUrl}/`,
+            },
+            {
+              '@type': 'ListItem',
+              position: 2,
+              name: 'บทความ',
+              item: url,
+            },
+          ],
+        },
+      ],
+    });
+  }
+
+  private getBlogTime(blog: Blog): number {
+    const timestamp = Number((blog as Blog & { dateFormat?: string }).dateFormat);
+    if (!Number.isNaN(timestamp) && timestamp > 0) {
+      return timestamp;
+    }
+
+    return new Date(blog.date).getTime() || 0;
+  }
+
+  private refreshAos(): void {
+    if (!this.isBrowser) {
+      return;
+    }
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => Aos.refreshHard());
+    });
+  }
+
+  private scrollToArticleCatalog(): void {
+    if (!this.isBrowser) {
+      return;
+    }
+
+    requestAnimationFrame(() => {
+      const list = this.document.querySelector('.blogs-list') as HTMLElement | null;
+
+      if (!list) {
+        return;
+      }
+
+      const offset = 96;
+      window.scrollTo({
+        top: window.scrollY + list.getBoundingClientRect().top - offset,
+        behavior: 'smooth',
+      });
+    });
   }
 }

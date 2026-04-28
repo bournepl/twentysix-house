@@ -113,9 +113,11 @@
     padding-top: 0;
     padding-bottom: 0;
     line-height: $line-height-nav-link;
+    max-width: 100%;
 
     .img-logo {
       height: 40px;
+      max-width: 100%;
     }
   }
 
@@ -148,7 +150,7 @@
     background-color: $transparent-bg !important;
     box-shadow: none;
     color: $secondary-color;
-    padding-top: 20px;
+    padding-top: 15px;
 
     a {
       vertical-align: middle;
@@ -184,6 +186,14 @@
     .logo-container {
       border: 1px solid $default-color;
     }
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .navbar,
+  .navbar .container,
+  .navbar .navbar-translate {
+    max-width: 100%;
   }
 }
 

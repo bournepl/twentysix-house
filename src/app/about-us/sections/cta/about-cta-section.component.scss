@@ -1,0 +1,113 @@
+.about-section {
+  position: relative;
+  padding: 6rem 0;
+}
+
+.section-kicker {
+  margin-bottom: 0.95rem;
+  color: #b7893f;
+  letter-spacing: 0.12em;
+  font-size: 0.95rem;
+}
+
+.section-title {
+  margin-bottom: 1rem;
+  color: #10233b;
+  font-size: clamp(1.9rem, 3vw, 2.8rem);
+  line-height: 1.24;
+}
+
+.section-description {
+  color: #607286;
+  font-size: 1.03rem;
+  line-height: 1.88;
+}
+
+.about-cta {
+  background:
+    radial-gradient(circle at top left, rgba(204, 219, 236, 0.4), rgba(204, 219, 236, 0) 26%),
+    linear-gradient(180deg, #f9fbfd 0%, #f4f8fd 100%);
+}
+
+.about-cta__card {
+  position: relative;
+  overflow: hidden;
+  padding: 3.2rem 2rem;
+  border-radius: 2rem;
+  background: linear-gradient(135deg, rgba(13, 28, 47, 0.96), rgba(28, 44, 61, 0.9));
+  box-shadow: 0 28px 54px rgba(9, 20, 34, 0.2);
+}
+
+.about-cta__glow {
+  position: absolute;
+  inset: auto auto 0 0;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(214, 173, 103, 0.18) 0%, rgba(214, 173, 103, 0) 70%);
+  transform: translate(-18%, 28%);
+}
+
+.about-cta__content {
+  position: relative;
+  z-index: 1;
+}
+
+.about-cta__card .section-title,
+.about-cta__card .section-description {
+  color: #ffffff;
+}
+
+.about-cta__lead {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.about-cta__highlights {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.65rem;
+  margin-top: 1.3rem;
+}
+
+.about-cta__highlight {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.48rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid rgba(239, 244, 250, 0.14);
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(243, 247, 251, 0.94);
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
+.about-cta__actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+@media (max-width: 767.98px) {
+  .about-section {
+    padding: 4.5rem 0;
+  }
+
+  .section-description {
+    font-size: 1rem;
+    line-height: 1.82;
+  }
+
+  .about-cta__card {
+    padding: 2.6rem 1.25rem;
+    border-radius: 1.6rem;
+  }
+
+  .about-cta__actions .btn {
+    width: 100%;
+  }
+}

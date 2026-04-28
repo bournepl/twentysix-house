@@ -1,0 +1,68 @@
+﻿  <div class="section section-light" aria-labelledby="blogs-title">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 ml-auto mr-auto text-center">
+          <header class="text-center mb-5">
+            <h5 class="description" data-aos="fade-down">Blogs</h5>
+            <h2 class="title text-primary font-kn" data-aos="fade-down" id="blogs-title">เธเธ—เธเธงเธฒเธกเนเธฅเธฐเธชเธฒเธฃเธฐเน€เธฃเธทเนเธญเธเธเนเธฒเธ</h2>
+            <div class="separator separator-primary" data-aos="fade-down"></div>
+            <p class="description lead" data-aos="fade-down">
+              เธเธงเธฒเธกเธฃเธนเนเนเธฅเธฐเธเธฃเธฐเธชเธเธเธฒเธฃเธ“เนเธ”เนเธฒเธเธเธฒเธฃเธญเธญเธเนเธเธเนเธฅเธฐเธชเธฃเนเธฒเธเธเนเธฒเธ
+              เธเธฒเธเธ—เธตเธกเธเธฒเธ <strong>Twentysix.House</strong>
+            </p>
+          </header>
+        </div>
+      </div>
+      <div class="line-separator separator-primary"></div>
+
+      <div class="row">
+        <div class="col-md-4 mb-3" *ngFor="let getBlog of blogs; trackBy: trackById">
+          <article class="card card-blog" itemscope itemtype="https://schema.org/BlogPosting">
+
+            <div class="card-image">
+              <img class="img" [src]="getBlog.pictureUrl" [alt]="getBlog.title + ' | เธเธ—เธเธงเธฒเธกเนเธ”เธข Twentysix.House'"
+                itemprop="image" />
+            </div>
+
+            <div class="card-body">
+
+              <meta itemprop="author" content="Twentysix.House">
+              <meta itemprop="publisher" content="Twentysix.House">
+
+              <h6 class="card-category text-primary" itemprop="articleSection">
+                {{ getBlog.blogCategory.blogCategoryName }}
+              </h6>
+
+              <h3 class="card-title" itemprop="headline">
+                <a [routerLink]="getBlogUrl(getBlog)" itemprop="url"
+                  [attr.aria-label]="'เธญเนเธฒเธเธเธ—เธเธงเธฒเธก ' + getBlog.title">
+                  {{ getBlog.title }}
+                </a>
+              </h3>
+
+              <p class="card-description" itemprop="description">
+                {{ getBlog.subTitle }}
+              </p>
+
+              <hr />
+
+              <div class="card-footer">
+
+                <div class="author">
+                  <img class="avatar img-raised" src="assets/img/logo.jpg" alt="Twentysix.House">
+                  <span class="text-secondary">TWENTYSIX.HOUSE</span>
+                </div>
+
+                <time class="stats" [attr.datetime]="getBlog.date" itemprop="datePublished">
+                  {{ getBlog.date | date:'longDate' }}
+                </time>
+
+              </div>
+            </div>
+
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+

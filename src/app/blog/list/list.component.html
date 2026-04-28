@@ -1,94 +1,192 @@
 <div class="wrapper">
+  <section class="page-header page-header-lg blogs-hero" aria-labelledby="blogs-title">
+    <div class="page-header-image rellax-header" data-rellax-speed="-8"
+      style="background-image: url('assets/img/home/16127.webp');"></div>
 
-  <!-- HERO -->
-  <div class="page-header page-header-small" style="background-image: url('assets/img/blurred-image-1.jpg')">
-    <div class="content-center text-center">
-      <h1 class="title font-kn">บทความและสาระเรื่องบ้าน</h1>
-      <div class="section-space mb-3"></div>
-      <p class="description lead">
-        รวมบทความความรู้เกี่ยวกับการสร้างบ้าน
-        การออกแบบบ้าน และขั้นตอนการก่อสร้าง
-        โดยทีมงาน <strong>Twentysix.House</strong>
-      </p>
-    </div>
-  </div>
-  <div class="section-breadcrumb">
     <div class="container">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
+      <div class="blogs-hero__shell">
+        <div class="blogs-hero__content text-center" data-aos="fade-up">
+          <p class="blogs-hero__eyebrow font-le">BLOGS</p>
+          <h1 class="blogs-hero__title font-kn text-secondary" id="blogs-title">
+            บทความสร้างบ้านและออกแบบบ้าน
+          </h1>
 
-          <li class="breadcrumb-item">
-            <a routerLink="/">หน้าแรก</a>
-          </li>
+          <div class="blogs-hero__breadcrumbs">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item font-kn" *ngFor="let crumb of breadcrumbs; let isLast = last"
+                  [class.active]="isLast" [attr.aria-current]="isLast ? 'page' : null">
+                  <a *ngIf="crumb.path; else lastCrumb" [routerLink]="crumb.path">{{ crumb.label }}</a>
+                  <ng-template #lastCrumb>{{ crumb.label }}</ng-template>
+                </li>
+              </ol>
+            </nav>
+          </div>
 
-          <li class="breadcrumb-item active" aria-current="page">
-            บทความ
-          </li>
+          <p class="blogs-hero__lead font-kn">
+            รวมความรู้สำหรับคนที่กำลังวางแผนสร้างบ้านในอุดรธานี ตั้งแต่การเลือกแนวทางออกแบบ
+            การจัดพื้นที่ใช้งาน วัสดุ งานโครงสร้าง ไปจนถึงเรื่องที่ควรถามก่อนเริ่มโครงการจริง
+          </p>
 
-        </ol>
-      </nav>
-    </div>
-  </div>
-  <div class="main">
-
-
-    <!-- BLOG LIST -->
-    <section class="section" aria-labelledby="blogs-title">
-      <div class="container">
-
-        <div class="row">
-          <div class="col-md-4 mb-4" *ngFor="let blog of blogs; trackBy: trackById">
-
-            <article class="card card-blog" itemscope itemtype="https://schema.org/BlogPosting">
-
-              <div class="card-image">
-                <img class="img" [src]="blog.pictureUrl" [alt]="blog.title + ' | บทความโดย Twentysix.House'"
-                  itemprop="image" />
-              </div>
-
-              <div class="card-body">
-
-                <meta itemprop="author" content="Twentysix.House">
-                <meta itemprop="publisher" content="Twentysix.House">
-
-                <h6 class="card-category text-primary" itemprop="articleSection">
-                  {{ blog.blogCategory.blogCategoryName }}
-                </h6>
-
-                <h3 class="card-title" itemprop="headline">
-                  <a [routerLink]="['/blogs/detail', blog._id.$oid]" itemprop="url"
-                    [attr.aria-label]="'อ่านบทความ ' + blog.title">
-                    {{ blog.title }}
-                  </a>
-                </h3>
-
-                <p class="card-description" itemprop="description">
-                  {{ blog.subTitle }}
-                </p>
-
-                <hr />
-
-                <div class="card-footer">
-
-                  <div class="author">
-                    <img class="avatar img-raised" src="assets/img/logo.jpg" alt="Twentysix.House">
-                    <span class="text-secondary">TWENTYSIX.HOUSE</span>
-                  </div>
-
-                  <time class="stats" [attr.datetime]="blog.date" itemprop="datePublished">
-                    {{ blog.date | date:'longDate' }}
-                  </time>
-
-                </div>
-              </div>
-
-            </article>
-
+          <div class="blogs-hero__actions">
+            <a class="btn btn-primary btn-round" routerLink="/contact">ปรึกษาเรื่องบ้าน</a>
+            <a class="btn btn-secondary btn-round" routerLink="/services">ดูบริการของเรา</a>
           </div>
         </div>
 
+        <div class="blogs-hero__overview-list" data-aos="fade-up">
+          <article class="blogs-hero__overview-item" *ngFor="let item of heroPoints">
+            <h3 class="blogs-hero__overview-title font-kn">{{ item.title }}</h3>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="main blogs-main">
+    <!--    <section class="blogs-featured about-section" *ngIf="featuredBlog as featured"
+      aria-labelledby="blogs-featured-title">
+      <div class="container">
+        <div class="blogs-featured__header" data-aos="fade-up">
+          <div>
+            <p class="blogs-section__kicker font-le">FEATURED ARTICLE</p>
+            <h2 class="blogs-section__title font-kn" id="blogs-featured-title">
+              บทความแนะนำสำหรับเริ่มต้นวางแผนบ้าน
+            </h2>
+          </div>
+        </div>
+
+        <article class="blogs-featured__article" data-aos="fade-up" itemscope itemtype="https://schema.org/BlogPosting">
+          <a class="blogs-featured__media" [routerLink]="getBlogUrl(featured)"
+            [attr.aria-label]="'อ่านบทความ ' + featured.title">
+            <img [src]="featured.pictureUrl" [alt]="featured.title + ' โดย Twentysix House'" itemprop="image" />
+          </a>
+
+          <div class="blogs-featured__body">
+            <div class="blogs-featured__meta font-kn">
+              <span itemprop="articleSection">{{ getCategoryName(featured) }}</span>
+              <time [attr.datetime]="featured.date" itemprop="datePublished">
+                {{ featured.date | date:'longDate' }}
+              </time>
+            </div>
+
+            <h3 class="blogs-featured__title font-kn" itemprop="headline">
+              <a [routerLink]="getBlogUrl(featured)" itemprop="url">{{ featured.title }}</a>
+            </h3>
+
+            <p class="blogs-featured__description font-kn" itemprop="description">
+              {{ featured.subTitle }}
+            </p>
+
+            <div class="blogs-featured__tags font-kn" *ngIf="featured.tags?.length">
+              <span *ngFor="let tag of featured.tags">{{ tag }}</span>
+            </div>
+
+            <a class="btn btn-primary btn-round blogs-featured__link" [routerLink]="getBlogUrl(featured)">
+              อ่านบทความ
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>-->
+
+    <section class="blogs-list about-section" aria-labelledby="blogs-list-title">
+      <div class="container">
+        <div class="blogs-list__intro" data-aos="fade-up">
+          <header class="blogs-list__header">
+            <p class="blogs-section__kicker font-le">ARTICLE CATALOG</p>
+            <h2 class="blogs-section__title font-kn" id="blogs-list-title">
+              เลือกอ่านตามเรื่องที่คุณกำลังสนใจ
+            </h2>
+            <p class="blogs-list__lead font-kn">
+              บทความถูกจัดเป็นหมวดเพื่อช่วยให้เจ้าของบ้านหาข้อมูลได้เร็วขึ้น
+              และใช้เป็นพื้นฐานก่อนคุยรายละเอียดกับทีมออกแบบและก่อสร้าง
+            </p>
+          </header>
+
+          <aside class="blogs-list__summary font-kn" aria-label="สรุปจำนวนบทความ">
+            <span class="blogs-list__summary-label font-le">CURRENT VIEW</span>
+            <strong>{{ filteredBlogs.length }}</strong>
+            <span>บทความในหมวด {{ selectedCategory }}</span>
+          </aside>
+        </div>
+
+        <div class="blogs-list__toolbar" data-aos="fade-up">
+          <div class="blogs-list__filters" aria-label="หมวดบทความ">
+            <button class="btn btn-round blogs-list__filter" type="button"
+              *ngFor="let item of categories; trackBy: trackByCategory" [class.btn-primary]="item === selectedCategory"
+              [class.btn-outline-primary]="item !== selectedCategory" (click)="selectCategory(item)">
+              {{ item }}
+            </button>
+          </div>
+        </div>
+
+        <div class="blogs-list__grid">
+          <article class="blogs-list__card"
+            *ngFor="let blog of articleBlogs | paginate: { itemsPerPage: pageSize, currentPage: page }; trackBy: trackById"
+            data-aos="fade-up" itemscope itemtype="https://schema.org/BlogPosting">
+            <a class="blogs-list__media" [routerLink]="getBlogUrl(blog)" [attr.aria-label]="'อ่านบทความ ' + blog.title">
+              <img [src]="blog.pictureUrl" [alt]="blog.title + ' โดย Twentysix House'" loading="lazy"
+                itemprop="image" />
+            </a>
+
+            <div class="blogs-list__body">
+              <div class="blogs-list__meta font-kn">
+                <span itemprop="articleSection">{{ getCategoryName(blog) }}</span>
+                <time class="blogs-list__date" [attr.datetime]="blog.date" itemprop="datePublished">
+                  {{ blog.date | date:'longDate' }}
+                </time>
+              </div>
+
+              <h3 class="blogs-list__card-title font-kn" itemprop="headline">
+                <a [routerLink]="getBlogUrl(blog)" itemprop="url">{{ blog.title }}</a>
+              </h3>
+
+              <p class="blogs-list__description font-kn" itemprop="description">
+                {{ blog.subTitle }}
+              </p>
+
+              <a class="blogs-list__link font-kn" [routerLink]="getBlogUrl(blog)"
+                [attr.aria-label]="'อ่านบทความ ' + blog.title">
+                อ่านต่อ
+                <i class="now-ui-icons arrows-1_minimal-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </article>
+        </div>
+
+        <div class="blogs-list__pagination font-kn" *ngIf="articleBlogs.length > pageSize">
+          <pagination-controls previousLabel="ก่อนหน้า" nextLabel="ถัดไป" screenReaderPaginationLabel="แบ่งหน้าบทความ"
+            screenReaderPageLabel="หน้า" screenReaderCurrentLabel="หน้าปัจจุบัน" (pageChange)="onPageChange($event)">
+          </pagination-controls>
+        </div>
       </div>
     </section>
 
+    <section class="blogs-cta about-section" aria-labelledby="blogs-cta-title">
+      <div class="container">
+        <div class="blogs-cta__card" data-aos="fade-up">
+          <div class="blogs-cta__content text-center">
+            <p class="blogs-section__kicker font-le">NEXT STEP</p>
+            <h2 class="blogs-cta__title font-kn" id="blogs-cta-title">
+              อ่านแล้วอยากคุยเรื่องบ้านของคุณต่อ เราช่วยดูภาพรวมให้ได้
+            </h2>
+            <p class="blogs-cta__lead font-kn">
+              ส่งโจทย์ที่ดิน งบประมาณ หรือแบบบ้านที่ชอบมาให้ทีมดูเบื้องต้น
+              แล้วค่อยวางแนวทางให้เหมาะกับการอยู่อาศัยจริง
+            </p>
+
+            <div class="blogs-cta__highlights font-kn">
+              <span class="blogs-cta__highlight" *ngFor="let item of ctaPoints">{{ item }}</span>
+            </div>
+
+            <div class="blogs-cta__actions">
+              <a class="btn btn-primary btn-round" routerLink="/contact">ปรึกษาโครงการ</a>
+              <a class="btn btn-secondary btn-round" routerLink="/ourworks">ดูผลงานของเรา</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </div>

@@ -1,0 +1,13 @@
+<section class="home-trust-bar" aria-label="จุดเด่นของบริษัท">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 col-md-6 mb-3" *ngFor="let item of trustItems">
+        <article class="trust-card" data-aos="fade-up">
+          <p class="trust-value">{{ item.value }}</p>
+          <h2 class="trust-label">{{ item.label }}</h2>
+          <p class="trust-description">{{ item.description }}</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>

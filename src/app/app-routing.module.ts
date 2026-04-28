@@ -8,14 +8,15 @@ const routes: Routes = [
    ========================= */
   {
     path: '',
-    title: 'รับสร้างบ้านอุดรธานี | Twentysix.House บริษัทรับสร้างบ้านและออกแบบบ้าน',
+    title: 'รับสร้างบ้านอุดรธานี | บริษัทรับสร้างบ้านอุดรธานี Twentysix House',
     data: {
       sitemap: true,
+      canonical: '/',
       meta: [
         {
           name: 'description',
           content:
-            'รับสร้างบ้านอุดรธานี โดย Twentysix.House บริษัทรับสร้างบ้านและออกแบบบ้านครบวงจรในจังหวัดอุดรธานี ดูแลตั้งแต่ออกแบบ วางแผน และก่อสร้าง โดยทีมงานมืออาชีพ ประสบการณ์มากกว่า 10 ปี'
+            'Twentysix House บริษัทรับสร้างบ้านอุดรธานี ให้บริการออกแบบและก่อสร้างบ้านครบวงจร ดูแลงานตั้งแต่วางแนวคิด ออกแบบ วางแผนงบประมาณ ไปจนถึงก่อสร้างและส่งมอบบ้าน'
         },
         {
           name: 'keywords',
@@ -23,48 +24,22 @@ const routes: Routes = [
             'รับสร้างบ้านอุดรธานี, บริษัทรับสร้างบ้านอุดรธานี, ออกแบบบ้านอุดรธานี, สร้างบ้านอุดรธานี, ผู้รับเหมาสร้างบ้านอุดรธานี, Twentysix House'
         },
         {
+          name: 'robots',
+          content: 'index, follow'
+        },
+        {
           property: 'og:title',
-          content: 'รับสร้างบ้านอุดรธานี | Twentysix.House บริษัทรับสร้างบ้านและออกแบบบ้าน'
+          content: 'รับสร้างบ้านอุดรธานี | บริษัทรับสร้างบ้านอุดรธานี Twentysix House'
         },
         {
           property: 'og:description',
           content:
-            'บริษัทรับสร้างบ้านอุดรธานี รับออกแบบและก่อสร้างบ้านครบวงจร โดยทีมงานมืออาชีพ พร้อมดูแลทุกขั้นตอนของการสร้างบ้าน'
-        },
-        {
-          property: 'og:url',
-          content: 'https://twentysix.house/'
+            'บริษัทรับสร้างบ้านอุดรธานี รับออกแบบและก่อสร้างบ้านครบวงจร พร้อมผลงานจริง ขั้นตอนการทำงานชัดเจน และช่องทางปรึกษาทีมงานได้โดยตรง'
         },
         {
           property: 'og:image',
           content:
             'https://firebasestorage.googleapis.com/v0/b/tewntysix-house.appspot.com/o/head.webp?alt=media&token=b53fc010-7a3c-49e3-8039-1cfed666e1ec'
-        },
-        {
-          property: 'og:type',
-          content: 'website'
-        },
-        {
-          name: 'twitter:card',
-          content: 'summary_large_image'
-        },
-        {
-          name: 'twitter:title',
-          content: 'รับสร้างบ้านอุดรธานี | Twentysix.House'
-        },
-        {
-          name: 'twitter:description',
-          content:
-            'รับสร้างบ้านอุดรธานี ออกแบบและก่อสร้างบ้านครบวงจร โดยทีมงานมืออาชีพ'
-        },
-        {
-          name: 'twitter:image',
-          content:
-            'https://firebasestorage.googleapis.com/v0/b/tewntysix-house.appspot.com/o/head.webp?alt=media&token=b53fc010-7a3c-49e3-8039-1cfed666e1ec'
-        },
-        {
-          rel: 'canonical',
-          href: 'https://twentysix.house/'
         }
       ]
     },
@@ -74,66 +49,42 @@ const routes: Routes = [
 
   {
     path: 'รับสร้างบ้าน-อุดรธานี',
-    title: 'รับสร้างบ้านอุดรธานี | บริษัทรับสร้างบ้าน Twentysix.House',
-    data: {
-      sitemap: true,
-      meta: [
-        {
-          name: 'description',
-          content:
-            'รับสร้างบ้านอุดรธานี โดยบริษัท Twentysix.House รับออกแบบและก่อสร้างบ้านครบวงจร ประสบการณ์กว่า 10 ปี มีผลงานสร้างบ้านจริงในจังหวัดอุดรธานีและพื้นที่ใกล้เคียง'
-        },
-        {
-          property: 'og:title',
-          content: 'รับสร้างบ้านอุดรธานี | Twentysix.House'
-        },
-        {
-          property: 'og:description',
-          content:
-            'บริการรับสร้างบ้านในจังหวัดอุดรธานี ออกแบบพร้อมก่อสร้าง ดูแลทุกขั้นตอนโดยทีมงานมืออาชีพจาก Twentysix.House'
-        },
-        {
-          property: 'og:url',
-          content: 'https://twentysix.house/รับสร้างบ้าน-อุดรธานี'
-        },
-        {
-          property: 'og:image',
-          content: 'https://firebasestorage.googleapis.com/v0/b/tewntysix-house.appspot.com/o/head.webp?alt=media&token=b53fc010-7a3c-49e3-8039-1cfed666e1ec'
-        }
-      ]
-    },
-    loadChildren: () =>
-      import('./landing-udon/landing-udon.module')
-        .then(m => m.LandingUdonModule)
-  }
-  ,
+    redirectTo: '',
+    pathMatch: 'full',
+  },
 
   /* =========================
      ABOUT
   ========================= */
   {
     path: 'about',
-    title: 'เกี่ยวกับเรา | บริษัทรับสร้างบ้าน Twentysix.House อุดรธานี',
+    title: 'เกี่ยวกับเรา | บริษัทรับสร้างบ้านอุดรธานี Twentysix House',
     data: {
       sitemap: true,
+      canonical: '/about',
       meta: [
         {
           name: 'description',
           content:
-            'เกี่ยวกับบริษัท ทเวนตี้ซิกซ์ ดีเวลล็อปเมนท์ จำกัด บริษัทรับสร้างบ้านในจังหวัดอุดรธานี ที่ให้ความสำคัญกับคุณภาพ โครงสร้าง และความปลอดภัยในการอยู่อาศัย'
+            'เกี่ยวกับ Twentysix House บริษัทรับสร้างบ้านอุดรธานี ดูแลงานออกแบบและก่อสร้างบ้านอย่างเป็นระบบ พร้อมแนวคิดการทำงาน ข้อมูลบริษัท และมาตรฐานของทีม'
+        },
+        {
+          name: 'keywords',
+          content:
+            'เกี่ยวกับเรา Twentysix House, บริษัทรับสร้างบ้านอุดรธานี, ออกแบบและก่อสร้างบ้านอุดรธานี, ข้อมูลบริษัทรับสร้างบ้าน, ทีมรับสร้างบ้านอุดรธานี'
+        },
+        {
+          name: 'robots',
+          content: 'index, follow'
         },
         {
           property: 'og:title',
-          content: 'เกี่ยวกับเรา | Twentysix.House'
+          content: 'เกี่ยวกับเรา | บริษัทรับสร้างบ้านอุดรธานี Twentysix House'
         },
         {
           property: 'og:description',
           content:
-            'รู้จัก Twentysix.House บริษัทรับสร้างบ้านอุดรธานี ที่มีประสบการณ์มากกว่า 10 ปี พร้อมผลงานก่อสร้างบ้านจริง'
-        },
-        {
-          property: 'og:url',
-          content: 'https://twentysix.house/about'
+            'รู้จัก Twentysix House บริษัทรับสร้างบ้านอุดรธานี ผ่านแนวคิดการทำงาน วิธีดูแลลูกค้า ข้อมูลบริษัท และผลงานที่สะท้อนมาตรฐานการออกแบบและก่อสร้างบ้าน'
         },
         {
           property: 'og:image',
@@ -150,27 +101,33 @@ const routes: Routes = [
   ========================= */
   {
     path: 'services',
-    title: 'บริการรับสร้างบ้าน | ออกแบบและก่อสร้างบ้านครบวงจร',
+    title: 'บริการออกแบบและสร้างบ้านครบวงจร | บริษัทรับสร้างบ้านอุดรธานี Twentysix House',
     data: {
       sitemap: true,
+      canonical: '/services',
       meta: [
         {
           name: 'description',
           content:
-            'บริการรับสร้างบ้านครบวงจรในจังหวัดอุดรธานี ตั้งแต่ให้คำปรึกษา ออกแบบบ้าน สำรวจหน้างาน ก่อสร้าง ควบคุมคุณภาพ และรับประกันงานโครงสร้าง'
+            'รวมบริการออกแบบและสร้างบ้านครบวงจรของ Twentysix House ในอุดรธานี ตั้งแต่การคุยโจทย์ ออกแบบบ้าน วางแผนงบประมาณ ก่อสร้าง ควบคุมคุณภาพ ไปจนถึงการส่งมอบบ้าน'
+        },
+        {
+          name: 'keywords',
+          content:
+            'บริการรับสร้างบ้านอุดรธานี, ออกแบบและสร้างบ้านครบวงจร, ออกแบบบ้านอุดรธานี, ก่อสร้างบ้านอุดรธานี, บริษัทรับสร้างบ้านอุดรธานี, Twentysix House'
+        },
+        {
+          name: 'robots',
+          content: 'index, follow'
         },
         {
           property: 'og:title',
-          content: 'บริการรับสร้างบ้านครบวงจร | Twentysix.House'
+          content: 'บริการออกแบบและสร้างบ้านครบวงจร | บริษัทรับสร้างบ้านอุดรธานี Twentysix House'
         },
         {
           property: 'og:description',
           content:
-            'Twentysix.House ให้บริการออกแบบและรับสร้างบ้านครบวงจร ดูแลทุกขั้นตอนโดยทีมวิศวกรและสถาปนิก'
-        },
-        {
-          property: 'og:url',
-          content: 'https://twentysix.house/services'
+            'Twentysix House ดูแลงานตั้งแต่การให้คำปรึกษา ออกแบบ วางแผนงบประมาณ ก่อสร้าง ควบคุมคุณภาพ และส่งมอบบ้าน เพื่อให้เจ้าของบ้านเห็นภาพรวมของโครงการชัดขึ้นในทุกขั้นตอน'
         },
         {
           property: 'og:image',
@@ -187,27 +144,38 @@ const routes: Routes = [
   ========================= */
   {
     path: 'collections',
-    title: 'ผลงานรับสร้างบ้าน | ตัวอย่างบ้านจริงและงานออกแบบ',
+    redirectTo: 'ourworks',
+    pathMatch: 'full'
+  },
+  {
+    path: 'ourworks',
+    title: 'ผลงานรับสร้างบ้านอุดรธานี | บ้านจริงและแบบบ้าน Twentysix House',
     data: {
       sitemap: true,
+      canonical: '/ourworks',
       meta: [
         {
           name: 'description',
           content:
-            'ตัวอย่างผลงานรับสร้างบ้านและผลงานออกแบบบ้านของ Twentysix.House ในจังหวัดอุดรธานี แสดงแนวคิดการออกแบบและมาตรฐานงานก่อสร้าง'
+            'รวมผลงานรับสร้างบ้านอุดรธานี ทั้งบ้านที่สร้างจริงและแบบบ้านของ Twentysix House เพื่อช่วยให้เห็นคุณภาพงาน แนวคิดการออกแบบ และตัวอย่างก่อนเริ่มคุยโครงการ'
+        },
+        {
+          name: 'keywords',
+          content:
+            'ผลงานรับสร้างบ้าน, ผลงานบ้านจริง, ผลงานออกแบบบ้าน, แบบบ้านอุดรธานี, รับสร้างบ้านอุดรธานี, Twentysix House'
+        },
+        {
+          name: 'robots',
+          content: 'index, follow'
         },
         {
           property: 'og:title',
-          content: 'ผลงานรับสร้างบ้าน | Twentysix.House'
+          content: 'ผลงานรับสร้างบ้านอุดรธานี | บ้านจริงและแบบบ้าน Twentysix House'
         },
         {
           property: 'og:description',
           content:
-            'รวมผลงานรับสร้างบ้านและงานออกแบบบ้านโดย Twentysix.House บริษัทรับสร้างบ้านอุดรธานี'
-        },
-        {
-          property: 'og:url',
-          content: 'https://twentysix.house/collections'
+            'เลือกดูผลงานบ้านจริงและแบบบ้านของ Twentysix House อุดรธานี เพื่อเห็นคุณภาพงาน แนวคิดการออกแบบ และตัวอย่างบ้านที่นำไปคุยต่อได้'
         },
         {
           property: 'og:image',
@@ -216,8 +184,8 @@ const routes: Routes = [
       ]
     },
     loadChildren: () =>
-      import('./collections/collections.module').then(
-        (m) => m.CollectionsModule
+      import('./our-works/our-works.module').then(
+        (m) => m.OurWorksModule
       )
   },
 
@@ -226,27 +194,33 @@ const routes: Routes = [
   ========================= */
   {
     path: 'blogs',
-    title: 'บทความเรื่องบ้าน | ความรู้ด้านการสร้างบ้านและออกแบบบ้าน',
+    title: 'บทความสร้างบ้านและออกแบบบ้าน | รับสร้างบ้านอุดรธานี Twentysix House',
     data: {
       sitemap: true,
+      canonical: '/blogs',
       meta: [
         {
           name: 'description',
           content:
-            'บทความและสาระความรู้เกี่ยวกับการสร้างบ้าน การออกแบบบ้าน การเลือกวัสดุ และประสบการณ์จากทีมงาน Twentysix.House'
+            'รวมบทความสร้างบ้าน ออกแบบบ้าน งานโครงสร้าง และคำแนะนำสำหรับเจ้าของบ้านในอุดรธานี จากทีมรับออกแบบและก่อสร้างบ้าน Twentysix House'
+        },
+        {
+          name: 'keywords',
+          content:
+            'บทความสร้างบ้าน, ความรู้สร้างบ้าน, ออกแบบบ้านอุดรธานี, รับสร้างบ้านอุดรธานี, งานโครงสร้างบ้าน, Twentysix House'
+        },
+        {
+          name: 'robots',
+          content: 'index, follow'
         },
         {
           property: 'og:title',
-          content: 'บทความเรื่องบ้าน | Twentysix.House'
+          content: 'บทความสร้างบ้านและออกแบบบ้าน | Twentysix House'
         },
         {
           property: 'og:description',
           content:
-            'รวมบทความความรู้ด้านการสร้างบ้าน ออกแบบบ้าน และการอยู่อาศัย จากบริษัทรับสร้างบ้าน Twentysix.House'
-        },
-        {
-          property: 'og:url',
-          content: 'https://twentysix.house/blogs'
+            'รวมความรู้เรื่องสร้างบ้าน ออกแบบบ้าน วัสดุ และงานโครงสร้าง จากบริษัทรับสร้างบ้านอุดรธานี Twentysix House'
         },
         {
           property: 'og:image',
@@ -266,24 +240,30 @@ const routes: Routes = [
     title: 'ติดต่อบริษัทรับสร้างบ้านในอุดรธานี | Twentysix.House',
     data: {
       sitemap: true,
+      canonical: '/contact',
       meta: [
         {
           name: 'description',
           content:
-            'ติดต่อบริษัทรับสร้างบ้าน Twentysix.House จังหวัดอุดรธานี โทร 099-470-8877 ที่ตั้งบริษัท ถนนโพนพิสัย อำเภอเมือง'
+            'ติดต่อ Twentysix House บริษัทรับสร้างบ้านอุดรธานี โทร 099-470-8877 ปรึกษาออกแบบบ้าน วางงบประมาณ และนัดคุยโครงการกับทีมงานในพื้นที่'
+        },
+        {
+          name: 'keywords',
+          content:
+            'ติดต่อรับสร้างบ้านอุดรธานี, ปรึกษาสร้างบ้านอุดรธานี, บริษัทรับสร้างบ้านอุดรธานี, ออกแบบบ้านอุดรธานี, Twentysix House'
+        },
+        {
+          name: 'robots',
+          content: 'index, follow'
         },
         {
           property: 'og:title',
-          content: 'ติดต่อเรา | Twentysix.House'
+          content: 'ติดต่อบริษัทรับสร้างบ้านอุดรธานี | Twentysix House'
         },
         {
           property: 'og:description',
           content:
-            'ช่องทางติดต่อบริษัทรับสร้างบ้าน Twentysix.House อุดรธานี พร้อมแผนที่และข้อมูลบริษัท'
-        },
-        {
-          property: 'og:url',
-          content: 'https://twentysix.house/contact'
+            'โทร 099-470-8877 หรือคุยผ่าน Line เพื่อปรึกษาออกแบบบ้าน รับสร้างบ้าน และวางงบประมาณกับทีม Twentysix House จังหวัดอุดรธานี'
         },
         {
           property: 'og:image',
@@ -311,7 +291,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'top',
+      anchorScrolling: 'enabled',
+    })
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

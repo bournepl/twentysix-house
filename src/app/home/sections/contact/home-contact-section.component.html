@@ -1,0 +1,58 @@
+<section class="section home-contact" aria-labelledby="contact-title" itemscope
+  itemtype="https://schema.org/LocalBusiness">
+  <div class="container">
+    <header class="contact-header text-center" data-aos="fade-up">
+      <p class="section-kicker font-le">{{ contactIntro.kicker }}</p>
+      <h2 class="title font-kn contact-title" id="contact-title">{{ contactIntro.title }}</h2>
+      <p class="description font-kn contact-lead">
+        {{ contactIntro.lead }}
+      </p>
+    </header>
+
+    <div class="contact-shell" data-aos="fade-up">
+      <div class="contact-primary-card">
+        <p class="contact-brand font-le" itemprop="name">Twentysix Development Co., Ltd.</p>
+        <h3 class="font-kn contact-card-title">เริ่มต้นคุยเรื่องบ้านกับเราได้ฟรี</h3>
+        <p class="font-kn contact-card-copy">
+          นัดพูดคุย ปรึกษาแนวทาง หรือสอบถามข้อมูลเบื้องต้นเกี่ยวกับการออกแบบและก่อสร้างบ้านได้ทันที
+          เพื่อให้คุณเห็นภาพรวมของโครงการก่อนตัดสินใจ
+        </p>
+
+        <div class="contact-action-list">
+          <a *ngFor="let action of contactActions" class="btn btn-round"
+            [ngClass]="action.variant === 'primary' ? 'btn-primary' : 'btn-secondary'" [href]="action.href"
+            [attr.target]="action.target || null" [attr.rel]="action.rel || null">
+            {{ action.label }}
+          </a>
+        </div>
+
+        <div class="contact-social-list">
+          <a *ngFor="let social of socials" class="contact-social-link" [href]="social.href" target="_blank"
+            rel="noopener noreferrer" [attr.aria-label]="social.label" [attr.title]="social.label">
+            <i [class]="social.icon" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-details-card">
+        <div class="contact-info-list">
+          <article class="contact-info-item" *ngFor="let item of contactInfo"
+            [attr.itemprop]="item.label === 'โทรศัพท์' ? 'telephone' : item.label === 'อีเมล' ? 'email' : null">
+            <p class="contact-info-label font-kn">{{ item.label }}</p>
+            <a class="font-kn contact-info-value" [href]="item.href" [attr.target]="item.target || null"
+              [attr.rel]="item.rel || null">
+              {{ item.value }}
+            </a>
+          </article>
+        </div>
+
+        <a class="contact-map-card" href="https://maps.app.goo.gl/AgjTg2jRSc3iaYa46" target="_blank"
+          rel="noopener noreferrer" aria-label="แผนที่บริษัท Twentysix House">
+          <img class="contact-map-image" src="assets/img/map.webp"
+            alt="แผนที่บริษัทรับสร้างบ้าน Twentysix House จังหวัดอุดรธานี" loading="lazy" itemprop="image" />
+          <span class="contact-map-badge font-kn">เปิดดูแผนที่บริษัท</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -8,6 +8,7 @@ $sans-serif-family-le: 'Le Jour Serif' !default;
 
 $sans-serif-family-rp: 'Rumpi Regular' !default;
 
+
 $none: 0 !default;
 $border-thin: 1px !default;
 $border-thick: 2px !default;
@@ -67,9 +68,9 @@ $primary-color-opacity: rgba(#051626, .3) !default;
 $primary-color-alert: rgba($primary-color, .8) !default;
 
 
-$secondary-color: #a1752b !default;
+$secondary-color: #bf8b32 !default;
 $secondary-states-color: lighten($secondary-color, 6%) !default;
-$secondary-color-opacity: rgba(#a1752b, .3) !default;
+$secondary-color-opacity: rgba(#bf8b32, .3) !default;
 $secondary-color-alert: rgba($secondary-color, .8) !default;
 
 $success-color: #6bd098 !default;
@@ -125,8 +126,8 @@ $light-red: rgba($danger-color, .2);
 $padding-input-vertical: 11px !default;
 $padding-input-horizontal: 19px !default;
 
-$padding-btn-vertical: 11px !default;
-$padding-btn-horizontal: 22px !default;
+$padding-btn-vertical: 8px !default;
+$padding-btn-horizontal: 24px !default;
 
 $padding-base-vertical: .5rem !default;
 $padding-base-horizontal: .7rem !default;

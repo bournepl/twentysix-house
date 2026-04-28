@@ -1,0 +1,52 @@
+<section class="about-section about-message" aria-labelledby="about-message-title">
+  <div class="container">
+    <header class="about-message__header text-center" data-aos="fade-up">
+      <p class="section-kicker font-le">FOUNDER MESSAGE</p>
+      <h2 class="section-title font-kn" id="about-message-title">สารจากผู้บริหาร</h2>
+      <p class="section-description font-kn about-message__lead">
+        ในฐานะบริษัทรับสร้างบ้านอุดรธานี เราเชื่อว่าความไว้วางใจของเจ้าของบ้าน
+        ควรเริ่มตั้งแต่วันแรกที่ได้พูดคุยและวางแผนร่วมกัน
+      </p>
+    </header>
+
+    <div class="row align-items-stretch about-message__main">
+      <div class="col-lg-7 order-2 order-lg-1 about-message__content-col mb-4 mb-lg-0" data-aos="fade-right">
+        <article class="about-message__content-card">
+          <p class="about-message__content-kicker font-le">A MESSAGE OF RESPONSIBILITY</p>
+          <p class="about-message__intro font-kn">
+            สำหรับ Twentysix House งานออกแบบและก่อสร้างบ้านไม่ใช่เพียงการส่งมอบอาคารหนึ่งหลัง
+            แต่คือการดูแลพื้นที่ชีวิตระยะยาวของเจ้าของบ้าน เราจึงให้ความสำคัญทั้งคุณภาพงาน
+            การสื่อสารที่ชัดเจน และการตัดสินใจที่มั่นใจได้ในทุกช่วงของโครงการ
+          </p>
+
+          <div class="about-message__points" role="list" aria-label="แนวคิดจากผู้บริหาร">
+            <article class="about-message__point" *ngFor="let point of messagePoints; let index = index"
+              role="listitem">
+              <span class="about-message__point-index font-le">0{{ index + 1 }}</span>
+              <div>
+                <h3 class="about-message__point-title font-kn">{{ point.title }}</h3>
+                <p class="about-message__point-copy font-kn">{{ point.description }}</p>
+              </div>
+            </article>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-lg-5 order-1 order-lg-2 about-message__media-col" data-aos="fade-left">
+        <article class="about-message__manifesto">
+          <img class="about-message__manifesto-image" [src]="founder.portrait"
+            alt="อรรถชัย กอบเกื้อ ผู้บริหาร Twentysix House" loading="lazy" />
+          <div class="about-message__manifesto-overlay"></div>
+
+          <div class="about-message__manifesto-card">
+            <div class="about-message__person">
+              <h3 class="about-message__name font-kn">อรรถชัย กอบเกื้อ</h3>
+              <p class="about-message__role font-kn">กรรมการผู้จัดการ</p>
+              <p class="about-message__company font-kn">บริษัท ทเวนตี้ซิกซ์ ดีเวลล็อปเมนท์ จำกัด</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>

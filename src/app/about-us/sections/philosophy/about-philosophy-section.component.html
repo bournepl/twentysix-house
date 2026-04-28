@@ -1,0 +1,53 @@
+<section class="about-section about-philosophy" aria-labelledby="about-philosophy-title">
+  <div class="container">
+    <header class="about-philosophy__header text-center" data-aos="fade-up">
+      <p class="section-kicker font-le">BRAND PHILOSOPHY</p>
+      <h2 class="section-title font-kn" id="about-philosophy-title">
+        แนวคิดการออกแบบบ้านที่เราใช้กับทุกโปรเจกต์
+      </h2>
+      <p class="section-description font-kn about-philosophy__intro">
+        Twentysix House วางแนวคิดงานออกแบบบนการใช้ชีวิตจริงของเจ้าของบ้าน
+        เพื่อให้บ้านสวยอย่างมีเหตุผล ใช้งานได้จริง และอยู่สบายในระยะยาว
+      </p>
+    </header>
+
+    <div class="row align-items-start about-philosophy__main">
+      <div class="col-lg-5 mb-4 mb-lg-0 about-philosophy__media-col" data-aos="fade-right">
+        <article class="about-philosophy__manifesto">
+          <img
+            class="about-philosophy__manifesto-image"
+            src="assets/img/house3.webp"
+            alt="แนวคิดการออกแบบบ้านของ Twentysix House ในอุดรธานี"
+          />
+          <div class="about-philosophy__manifesto-overlay"></div>
+
+          <blockquote class="about-philosophy__manifesto-quote font-kn">
+            “บ้านที่ดี ควรตอบโจทย์การใช้ชีวิตจริง และอยู่กับเจ้าของบ้านได้อย่างยาวนาน”
+          </blockquote>
+        </article>
+      </div>
+
+      <div class="col-lg-7 about-philosophy__content-col" data-aos="fade-left">
+        <p class="about-philosophy__manifesto-kicker font-le">LIVING-FIRST DESIGN</p>
+        <p class="about-philosophy__manifesto-lead font-kn">
+          เราเริ่มจากคำถามว่า “บ้านหลังนี้ต้องรองรับชีวิตแบบไหน” ก่อนเรื่องสไตล์เสมอ
+          แล้วต่อยอดเป็นแบบบ้านที่เหมาะกับครอบครัวจริงทั้งวันนี้และในอนาคต
+        </p>
+
+        <div class="about-philosophy__tag-list font-kn" aria-label="หัวใจแนวคิดการออกแบบ">
+          <span class="about-philosophy__tag" *ngFor="let tag of focusTags">{{ tag }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-philosophy__principles" role="list">
+      <article class="about-philosophy__principle-card" *ngFor="let item of principles" role="listitem" data-aos="fade-up">
+        <span class="about-philosophy__principle-icon" aria-hidden="true">
+          <i [class]="item.icon"></i>
+        </span>
+        <h3 class="about-philosophy__principle-title font-kn">{{ item.title }}</h3>
+        <p class="about-philosophy__principle-copy font-kn">{{ item.description }}</p>
+      </article>
+    </div>
+  </div>
+</section>

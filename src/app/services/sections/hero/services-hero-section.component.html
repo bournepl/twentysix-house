@@ -1,0 +1,48 @@
+<section class="page-header page-header-lg services-hero" aria-labelledby="services-hero-title">
+  <div class="page-header-image rellax-header" data-rellax-speed="-10"
+    style="background-image: url('assets/img/Collection/collection5.webp');"></div>
+
+  <div class="container">
+    <div class="services-hero__shell">
+      <div class="services-hero__content text-center" data-aos="fade-up">
+        <p class="services-hero__eyebrow font-le">OUR SERVICES</p>
+        <h1 class="services-hero__title font-kn text-secondary" id="services-hero-title">
+          บริการออกแบบและสร้างบ้านครบวงจร
+          <span class="services-hero__title-sub">ที่ช่วยให้ภาพรวมของโครงการชัดขึ้นตั้งแต่ก่อนเริ่มงานจริง</span>
+        </h1>
+
+        <div class="services-hero__breadcrumbs">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item font-kn" *ngFor="let crumb of breadcrumbs; let isLast = last"
+                [class.active]="isLast" [attr.aria-current]="isLast ? 'page' : null">
+                <a *ngIf="crumb.path; else lastCrumb" [routerLink]="crumb.path">{{ crumb.label }}</a>
+                <ng-template #lastCrumb>{{ crumb.label }}</ng-template>
+              </li>
+            </ol>
+          </nav>
+        </div>
+
+        <p class="services-hero__lead font-kn">
+          Twentysix House ดูแลงานตั้งแต่การพูดคุย ออกแบบ วางแผนก่อสร้าง ควบคุมงาน
+          ไปจนถึงการส่งมอบบ้าน เพื่อให้เจ้าของบ้านเห็นภาพรวมของโครงการชัดขึ้นและตัดสินใจได้มั่นใจมากขึ้นในทุกขั้นตอน
+        </p>
+
+        <div class="services-hero__actions">
+          <a class="btn btn-primary btn-round" [routerLink]="'/contact'">ปรึกษาโครงการ</a>
+          <a class="btn btn-secondary btn-round" [routerLink]="'/ourworks/real-projects'">ดูผลงานจริง</a>
+        </div>
+      </div>
+
+      <div class="services-hero__overview-grid" data-aos="fade-up">
+        <article class="services-hero__overview-card" *ngFor="let item of overviewCards">
+          <span class="services-hero__overview-icon" aria-hidden="true">
+            <i [class]="item.icon"></i>
+          </span>
+          <h3 class="services-hero__overview-title font-kn">{{ item.title }}</h3>
+          <p class="services-hero__overview-description font-kn">{{ item.description }}</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>

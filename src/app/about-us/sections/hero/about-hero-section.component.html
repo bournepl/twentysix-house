@@ -1,0 +1,35 @@
+<section class="page-header page-header-lg about-hero" aria-labelledby="about-hero-title">
+  <div class="page-header-image rellax-header" data-rellax-speed="-10"
+    style="background-image: url('assets/img/Collection/collection3.webp');"></div>
+
+  <div class="container">
+    <div class="about-hero__shell">
+      <div class="about-hero__content text-center" data-aos="fade-up">
+        <p class="about-hero__eyebrow font-le">ABOUT TWENTYSIX HOUSE</p>
+        <h1 class="about-hero__title font-kn text-secondary" id="about-hero-title">เกี่ยวกับ Twentysix House</h1>
+
+        <div class="about-hero__breadcrumbs">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item font-kn" *ngFor="let crumb of breadcrumbs; let isLast = last"
+                [class.active]="isLast" [attr.aria-current]="isLast ? 'page' : null">
+                <a *ngIf="crumb.path; else lastCrumb" [routerLink]="crumb.path">{{ crumb.label }}</a>
+                <ng-template #lastCrumb>{{ crumb.label }}</ng-template>
+              </li>
+            </ol>
+          </nav>
+        </div>
+
+        <p class="about-hero__lead font-kn">
+          เราเชื่อว่าบ้านที่ดีควรเริ่มจากความเข้าใจการใช้ชีวิตจริงของเจ้าของบ้าน
+          และถูกส่งต่อเป็นงานออกแบบและก่อสร้างที่มีคุณภาพในทุกขั้นตอน
+        </p>
+
+        <div class="about-hero__actions">
+          <a class="btn btn-primary btn-round " [routerLink]="'/contact'">ติดต่อทีมงาน</a>
+          <a class="btn btn-secondary btn-round" [routerLink]="'/services'">ดูบริการของเรา</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

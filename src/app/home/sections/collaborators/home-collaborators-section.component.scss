@@ -1,0 +1,19 @@
+﻿.item-marquee {
+  height: 60px !important;
+  width: auto !important;
+}
+
+.img-coll {
+  width: 100% !important;
+  height: 100% !important;
+  cursor: pointer;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+@media (max-width: 768px) {
+  .img-coll {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}

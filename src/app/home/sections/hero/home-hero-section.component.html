@@ -1,0 +1,66 @@
+<section class="page-header page-header-lg home-hero" role="banner" aria-labelledby="home-hero-title">
+  <div class="page-header-image rellax-header" data-rellax-speed="-10"
+    style="background-image: url('assets/img/head3.webp');"></div>
+
+  <div class="container">
+    <div class="hero-shell">
+      <div class="hero-copy-column" data-aos="fade-up">
+        <p class="hero-eyebrow font-le">Twentysix House</p>
+
+        <div class="hero-pill-row font-kn " aria-label="คีย์เวิร์ดและบริการหลัก">
+          <span class="hero-pill" *ngFor="let pill of keywordPills">{{ pill }}</span>
+        </div>
+
+        <h1 class="title text-secondary hero-title font-kn" id="home-hero-title">
+          รับสร้างบ้านอุดรธานี
+          <span class="hero-title-sub">ออกแบบและก่อสร้างบ้านครบวงจร</span>
+        </h1>
+
+        <p class="hero-copy font-kn">
+          Twentysix House คือบริษัทรับสร้างบ้านอุดรธานีที่ดูแลงานตั้งแต่ออกแบบ วางแผนงบประมาณ
+          ไปจนถึงก่อสร้างและส่งมอบบ้าน เพื่อให้เจ้าของบ้านมั่นใจได้ทั้งเรื่องดีไซน์ คุณภาพงาน
+          และการดูแลระยะยาว
+        </p>
+
+        <ul class="hero-trust-list font-kn" aria-label="จุดเด่นหลักของบริการ">
+          <li class="hero-trust-item" *ngFor="let point of trustPoints">
+            <span class="hero-check" aria-hidden="true"></span>
+            <span>{{ point }}</span>
+          </li>
+        </ul>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary btn-round hero-primary-btn" routerLink="/contact">ปรึกษาฟรี</a>
+          <a class="btn btn-secondary btn-round hero-secondary-btn" routerLink="/ourworks/real-projects">ดูผลงานจริง</a>
+        </div>
+
+        <div class="hero-secondary-links font-kn">
+          <a routerLink="/about">รู้จักบริษัท</a>
+          <a routerLink="/services">ดูบริการทั้งหมด</a>
+        </div>
+      </div>
+
+      <aside class="hero-proof-panel" data-aos="fade-left" aria-label="ข้อมูลสรุปบริษัท">
+        <div class="hero-proof-card">
+          <p class="hero-proof-kicker font-le">Udon Thani Home Builder</p>
+          <h2 class="hero-proof-title font-kn">ทีมที่ช่วยให้คุณเริ่มเรื่องบ้านได้ชัดขึ้น</h2>
+
+          <div class="hero-proof-grid font-kn">
+            <article class="hero-proof-item" *ngFor="let item of proofItems">
+              <p class="hero-proof-value">{{ item.value }}</p>
+              <h3 class="hero-proof-label font-kn">{{ item.label }}</h3>
+              <p class="hero-proof-detail">{{ item.detail }}</p>
+            </article>
+          </div>
+
+          <div class="hero-proof-footer font-kn">
+            <p class="hero-proof-note">
+              ให้บริการในจังหวัดอุดรธานีและพื้นที่ใกล้เคียง พร้อมช่องทางติดต่อที่ชัดเจน
+            </p>
+            <a class="hero-inline-link" routerLink="/contact">พูดคุยกับทีมงาน</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>

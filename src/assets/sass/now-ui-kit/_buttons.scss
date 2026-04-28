@@ -1,9 +1,13 @@
 .btn,
 .navbar .navbar-nav>a.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
   border-width: $border-thick;
   font-weight: $font-weight-normal;
   font-size: 24px;
-  line-height: $line-height;
+  line-height: 1.15;
   margin: 10px 1px;
   border: none;
   border-radius: $border-radius-small;
@@ -102,12 +106,16 @@
   color: $secondary-color !important;
   font-weight: bold !important;
   text-transform: uppercase !important;
+  border: 1px solid $secondary-color !important;
   @include btn-styles($primary-color, $primary-states-color);
 
 }
 
 .btn-secondary {
   color: $primary-color !important;
+  font-weight: bold !important;
+  text-transform: uppercase !important;
+  border: 1px solid $primary-color !important;
   @include btn-styles($secondary-color, $secondary-states-color);
 }
 

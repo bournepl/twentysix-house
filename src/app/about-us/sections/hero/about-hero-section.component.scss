@@ -1,0 +1,126 @@
+.about-hero {
+  min-height: 100vh;
+  height: auto;
+  max-height: none;
+  overflow: visible;
+}
+
+.about-hero .container {
+  min-height: 100vh;
+  height: auto;
+}
+
+.about-hero .page-header-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(110deg, rgba(8, 12, 18, 0.68) 0%, rgba(8, 12, 18, 0.52) 42%, rgba(8, 12, 18, 0.24) 100%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.08) 14%, rgba(8, 12, 18, 0.16) 28%, rgba(8, 12, 18, 0.5) 100%);
+}
+
+.about-hero__shell {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 8rem 0 5rem;
+}
+
+.about-hero__content {
+  max-width: 960px;
+}
+
+.about-hero__eyebrow {
+  margin-bottom: 1rem;
+  color: #d2ab62;
+  font-size: 0.98rem;
+  letter-spacing: 0.16em;
+}
+
+.about-hero__title {
+  margin-bottom: 1rem;
+  color: #ffffff;
+  font-size: clamp(2.4rem, 4.7vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.05;
+}
+
+.about-hero__breadcrumbs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.35rem;
+}
+
+.about-hero__breadcrumbs .breadcrumb {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.1rem;
+  margin-bottom: 0;
+  padding: 0;
+  background: transparent;
+}
+
+.about-hero__breadcrumbs .breadcrumb-item,
+.about-hero__breadcrumbs .breadcrumb-item a {
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 0.92rem;
+}
+
+.about-hero__breadcrumbs .breadcrumb-item+.breadcrumb-item::before {
+  color: rgba(210, 171, 98, 0.7);
+}
+
+.about-hero__breadcrumbs .breadcrumb-item.active {
+  color: #d9b06a;
+}
+
+.about-hero__lead {
+  max-width: 860px;
+  margin: 0 auto;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(1.1rem, 1.9vw, 1.45rem);
+  line-height: 1.95;
+}
+
+.about-hero__actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+@media (max-width: 767.98px) {
+
+  .about-hero,
+  .about-hero .container,
+  .about-hero__shell {
+    min-height: 100vh;
+  }
+
+  .about-hero__shell {
+    padding: 7.5rem 0 4.5rem;
+  }
+
+  .about-hero__title {
+    font-size: 2.45rem;
+  }
+
+  .about-hero__lead {
+    font-size: 1.02rem;
+    line-height: 1.85;
+  }
+
+  .about-hero__breadcrumbs {
+    margin-bottom: 1.1rem;
+  }
+
+  .about-hero__actions {
+    gap: 0.75rem;
+  }
+}

@@ -1,5 +1,14 @@
 @media screen and (max-width: 991px) {
 
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  .wrapper {
+    overflow-x: hidden;
+  }
+
 
   .card-blog {
 
@@ -22,58 +31,10 @@
     left: 42%;
   }
 
-  .sidebar-collapse {
-    @include navbar-collapse();
-
-    &.menu-on-left {
-      .navbar-collapse {
-        right: auto;
-        left: 0;
-        @include transform-translate-x(-300px);
-      }
-    }
-
-    .nav-open & {
-      .navbar-collapse {
-        @include transform-translate-x(0px);
-      }
-
-      .wrapper {
-        @include transform-translate-x(-150px);
-      }
-
-      .navbar-translate {
-        @include transform-translate-x(-300px);
-      }
-
-      &.menu-on-left {
-        .navbar-collapse {
-          @include transform-translate-x(0px);
-        }
-
-        .navbar-translate {
-          @include transform-translate-x(300px);
-        }
-
-        .wrapper {
-          @include transform-translate-x(150px);
-        }
-
-        #bodyClick {
-          right: auto;
-          left: 300px;
-        }
-      }
-    }
-  }
-
-  .bootstrap-collapse {
-    .navbar .navbar-collapse {
-      background: none !important;
-    }
-
-    @include navbar-responsive();
-  }
+  // Mobile navigation is handled by the app navbar component.
+  // Keep the legacy Now UI off-canvas helpers disabled to avoid
+  // accidental conflicts with `.nav-open`, `.wrapper`, and
+  // `.navbar-translate` transforms.
 
   .profile-photo .profile-photo-small {
     margin-left: -2px;
@@ -131,83 +92,7 @@
 
 @media screen and (min-width: 992px) {
 
-  .burger-menu {
-    @include navbar-collapse();
-
-    .nav-open & .navbar-collapse {
-      @include transform-translate-x(0px);
-    }
-
-    .navbar-collapse {
-      display: block !important;
-
-      .navbar-nav {
-        margin-top: 10px;
-        height: 100%;
-        z-index: 2;
-        position: relative;
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -webkit-flex-direction: column;
-        -ms-flex-direction: column;
-        flex-direction: column;
-
-        .nav-item {
-          margin: 0;
-        }
-      }
-    }
-
-    &.menu-on-left .navbar-collapse {
-      right: auto;
-      left: 0;
-      @include transform-translate-x(-300px);
-    }
-
-    [class*="navbar-expand-"] {
-      .navbar-nav .dropdown-menu {
-        position: static;
-        float: none;
-      }
-
-      .navbar-toggler {
-        display: inline-block;
-      }
-    }
-
-    .section-navbars .navbar-collapse {
-      display: none !important;
-    }
-
-    .nav-open & {
-      &.menu-on-left .navbar .navbar-translate {
-        @include transform-translate-x(300px);
-      }
-
-      .navbar .navbar-translate {
-        @include transform-translate-x(-300px);
-      }
-
-      &.menu-on-left .navbar-collapse {
-        @include transform-translate-x(0px);
-      }
-
-      &.menu-on-left #bodyClick {
-        right: auto;
-        left: 300px;
-      }
-    }
-
-    &.menu-on-left .navbar-brand {
-      float: right;
-      margin-right: 0;
-      margin-left: 1rem;
-    }
-  }
+  // The project no longer uses the legacy `burger-menu` pattern.
 
   .navbar-nav {
     .nav-link {

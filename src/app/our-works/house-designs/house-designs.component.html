@@ -1,0 +1,148 @@
+<div class="wrapper">
+  <section class="page-header page-header-lg house-designs-hero" aria-labelledby="house-designs-title">
+    <div class="page-header-image rellax-header" data-rellax-speed="-8"
+      style="background-image: url('assets/img/Collection/collection12.webp');"></div>
+
+    <div class="container">
+      <div class="house-designs-hero__shell">
+        <div class="house-designs-hero__content text-center" data-aos="fade-up">
+          <p class="house-designs-hero__eyebrow font-le">HOUSE DESIGNS</p>
+          <h1 class="house-designs-hero__title font-kn text-secondary" id="house-designs-title">
+            แบบบ้านและแนวคิดการออกแบบ
+          </h1>
+
+          <div class="house-designs-hero__breadcrumbs">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item font-kn" *ngFor="let crumb of breadcrumbs; let isLast = last"
+                  [class.active]="isLast" [attr.aria-current]="isLast ? 'page' : null">
+                  <a *ngIf="crumb.path; else lastCrumb" [routerLink]="crumb.path">{{ crumb.label }}</a>
+                  <ng-template #lastCrumb>{{ crumb.label }}</ng-template>
+                </li>
+              </ol>
+            </nav>
+          </div>
+
+          <p class="house-designs-hero__lead font-kn">
+            รวมแบบบ้านของ Twentysix House สำหรับคนที่กำลังหาแนวทางเรื่องรูปทรง สัดส่วน แสง วัสดุ
+            และบรรยากาศของบ้าน เพื่อให้เห็นภาพที่ชอบก่อนเริ่มคุยรายละเอียดโครงการจริง
+          </p>
+
+          <div class="house-designs-hero__actions">
+            <a class="btn btn-primary btn-round" routerLink="/contact">ปรึกษาแบบบ้าน</a>
+            <a class="btn btn-secondary btn-round" routerLink="/ourworks/real-projects">ดูผลงานจริง</a>
+          </div>
+        </div>
+
+        <div class="house-designs-hero__overview-grid" data-aos="fade-up">
+          <article class="house-designs-hero__overview-card" *ngFor="let item of heroPoints">
+            <h3 class="house-designs-hero__overview-title font-kn">{{ item.title }}</h3>
+            <p class="house-designs-hero__overview-description font-kn">{{ item.description }}</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="main house-designs-main">
+    <section class="house-designs-list about-section" aria-labelledby="house-designs-list-title">
+      <div class="container">
+        <div class="house-designs-list__intro" data-aos="fade-up">
+          <header class="house-designs-list__header">
+            <p class="house-designs-list__kicker font-le">HOUSE DESIGN CATALOG</p>
+            <h2 class="house-designs-list__title font-kn" id="house-designs-list-title">
+              เลือกดูแบบบ้านตามรูปแบบและบรรยากาศที่คุณชอบ
+            </h2>
+            <p class="house-designs-list__lead font-kn">
+              รวมแบบบ้านที่ช่วยให้เห็นภาพรวมของหน้าตา ชุดสี และบรรยากาศของบ้านแต่ละแนวได้ชัดขึ้น
+              เพื่อใช้เป็นจุดเริ่มต้นก่อนคุยรายละเอียดกับทีมของเรา
+            </p>
+          </header>
+
+          <aside class="house-designs-list__summary font-kn" aria-label="สรุปจำนวนแบบบ้าน">
+            <span class="house-designs-list__summary-label font-le">CURRENT VIEW</span>
+            <strong>{{ filteredDesigns.length }}</strong>
+            <span>แบบบ้านในหมวด {{ selectedCategory }}</span>
+          </aside>
+        </div>
+
+        <div class="house-designs-list__toolbar" data-aos="fade-up">
+          <div class="house-designs-list__filters" aria-label="หมวดแบบบ้าน">
+            <button class="btn btn-round house-designs-list__filter" type="button" *ngFor="let item of categories"
+              [class.btn-primary]="item === selectedCategory" [class.btn-secondary]="item !== selectedCategory"
+              (click)="selectCategory(item)">
+              {{ item }}
+            </button>
+          </div>
+        </div>
+
+        <div class="house-designs-list__grid">
+          <article class="house-designs-list__card"
+            *ngFor="let item of filteredDesigns | paginate: { itemsPerPage: pageSize, currentPage: page }; trackBy: trackByDesign"
+            data-aos="fade-up">
+            <a class="house-designs-list__media" [routerLink]="[item.slug]"
+              [attr.aria-label]="'ดูรายละเอียดแบบบ้าน ' + item.title">
+              <img [src]="item.coverImage" [alt]="item.coverAlt" loading="lazy" />
+              <span class="house-designs-list__media-overlay"></span>
+              <span class="house-designs-list__badge font-kn">{{ item.category }}</span>
+            </a>
+
+            <div class="house-designs-list__body">
+              <div class="house-designs-list__headline">
+                <p class="house-designs-list__label font-le">{{ item.category }}</p>
+                <span class="house-designs-list__tone font-kn">{{ item.palette }}</span>
+              </div>
+
+              <h3 class="house-designs-list__card-title font-kn">{{ item.title }}</h3>
+              <p class="house-designs-list__card-description font-kn">{{ item.excerpt }}</p>
+
+              <div class="house-designs-list__concept font-kn">
+                <span class="house-designs-list__concept-label font-le">บรรยากาศของแบบบ้าน</span>
+                <p>{{ item.concept }}</p>
+              </div>
+
+
+
+              <a class="btn btn-primary btn-round house-designs-list__link" [routerLink]="[item.slug]">
+                ดูรายละเอียดแบบบ้าน
+              </a>
+            </div>
+          </article>
+        </div>
+
+        <div class="house-designs-list__pagination font-kn" *ngIf="filteredDesigns.length > pageSize">
+          <pagination-controls previousLabel="ก่อนหน้า" nextLabel="ถัดไป" screenReaderPaginationLabel="แบ่งหน้าแบบบ้าน"
+            screenReaderPageLabel="หน้า" screenReaderCurrentLabel="หน้าปัจจุบัน" (pageChange)="onPageChange($event)">
+          </pagination-controls>
+        </div>
+      </div>
+    </section>
+
+    <section class="house-designs-cta about-section" aria-labelledby="house-designs-cta-title">
+      <div class="container">
+        <div class="house-designs-cta__card" data-aos="fade-up">
+          <div class="house-designs-cta__glow" aria-hidden="true"></div>
+
+          <div class="house-designs-cta__content text-center">
+            <p class="house-designs-cta__kicker font-le">NEXT STEP</p>
+            <h2 class="house-designs-cta__title font-kn" id="house-designs-cta-title">
+              ถ้าเจอแบบที่ชอบแล้ว เราช่วยคุยต่อให้ชัดขึ้นได้
+            </h2>
+            <p class="house-designs-cta__lead font-kn">
+              ส่งแบบที่ชอบมาให้เรา แล้วค่อยคุยต่อเรื่องงบประมาณ การใช้งาน และแนวทางของบ้าน
+            </p>
+
+            <div class="house-designs-cta__highlights font-kn">
+              <span class="house-designs-cta__highlight" *ngFor="let item of ctaPoints">{{ item }}</span>
+            </div>
+
+            <div class="house-designs-cta__actions">
+              <a class="btn btn-primary btn-round" routerLink="/contact">ปรึกษาโครงการ</a>
+              <a class="btn btn-secondary btn-round" routerLink="/services">ดูบริการของเรา</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

@@ -1,0 +1,138 @@
+<div class="wrapper">
+  <section class="page-header page-header-lg ourworks-hero" aria-labelledby="ourworks-hero-title">
+    <div class="page-header-image rellax-header" data-rellax-speed="-6"
+      style="background-image: url('assets/img/Collection/collection18.webp');"></div>
+
+    <div class="container">
+      <div class="ourworks-hero__shell">
+        <div class="ourworks-hero__content text-center" data-aos="fade-up">
+          <p class="ourworks-hero__eyebrow font-le">OUR WORK</p>
+          <h1 class="ourworks-hero__title font-kn text-secondary" id="ourworks-hero-title">
+            ผลงานของเรา
+          </h1>
+
+          <div class="ourworks-hero__breadcrumbs">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item font-kn" *ngFor="let crumb of breadcrumbs; let isLast = last"
+                  [class.active]="isLast" [attr.aria-current]="isLast ? 'page' : null">
+                  <a *ngIf="crumb.path; else lastCrumb" [routerLink]="crumb.path">{{ crumb.label }}</a>
+                  <ng-template #lastCrumb>{{ crumb.label }}</ng-template>
+                </li>
+              </ol>
+            </nav>
+          </div>
+
+          <p class="ourworks-hero__lead font-kn">
+            รวมผลงานบ้านที่สร้างจริงและผลงานออกแบบบ้านของ Twentysix House
+            เพื่อให้คุณเห็นทั้งคุณภาพงาน แนวคิดการออกแบบ และตัวอย่างที่นำไปคุยต่อได้ง่ายขึ้น
+          </p>
+
+          <div class="ourworks-hero__actions">
+            <a class="btn btn-primary btn-round" routerLink="/ourworks/real-projects">ดูผลงานจริง</a>
+            <a class="btn btn-secondary btn-round" routerLink="/ourworks/house-designs">ดูแบบบ้าน</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="main ourworks-main">
+    <section class="ourworks-paths about-section" aria-labelledby="ourworks-paths-title">
+      <div class="container">
+        <header class="ourworks-section__header text-center" data-aos="fade-up">
+          <p class="ourworks-section__kicker font-le">WORK CATEGORIES</p>
+          <h2 class="ourworks-section__title font-kn" id="ourworks-paths-title">
+            เลือกดูผลงานในมุมที่ช่วยให้คุณเห็นภาพบ้านชัดที่สุด
+          </h2>
+          <p class="ourworks-section__description font-kn">
+            ถ้าอยากดูบ้านหลังสร้างเสร็จและคุณภาพงานจริง ให้เริ่มจากผลงานจริง
+            แต่ถ้ากำลังหาแนวทาง รูปแบบ หรือบรรยากาศของบ้าน ให้เริ่มจากผลงานออกแบบบ้าน
+          </p>
+        </header>
+
+        <div class="ourworks-paths__grid">
+          <a class="ourworks-paths__card" *ngFor="let item of paths" [routerLink]="item.link" data-aos="fade-up">
+            <div class="ourworks-paths__media">
+              <img [src]="item.image" [alt]="item.alt" loading="lazy" />
+              <div class="ourworks-paths__veil"></div>
+
+              <div class="ourworks-paths__body">
+                <p class="ourworks-paths__label font-le">{{ item.kicker }}</p>
+                <h3 class="ourworks-paths__title font-kn">{{ item.title }}</h3>
+                <span class="btn btn-primary btn-round ourworks-paths__cta">
+                  {{ item.buttonLabel }}
+                </span>
+
+                <div class="ourworks-paths__highlights font-kn" aria-label="จุดเด่นของหมวดผลงาน">
+                  <span class="ourworks-paths__highlight" *ngFor="let point of item.highlights">{{ point }}</span>
+                </div>
+
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="ourworks-guide" aria-labelledby="ourworks-guide-title">
+      <div class="container">
+        <header class="ourworks-section__header text-center" data-aos="fade-up">
+          <p class="ourworks-section__kicker font-le">BROWSE GUIDE</p>
+          <h2 class="ourworks-section__title font-kn" id="ourworks-guide-title">
+            เริ่มจากสิ่งที่คุณอยากเห็นก่อน แล้วค่อยคุยรายละเอียดต่อ
+          </h2>
+        </header>
+
+        <div class="ourworks-guide__grid">
+          <article class="ourworks-guide__card" *ngFor="let item of guideItems" data-aos="fade-up">
+            <div class="ourworks-guide__icon">
+              <i [class]="item.icon" aria-hidden="true"></i>
+            </div>
+            <h3 class="ourworks-guide__title font-kn">{{ item.title }}</h3>
+            <p class="ourworks-guide__description font-kn">{{ item.description }}</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="ourworks-trust" aria-labelledby="ourworks-trust-title">
+      <div class="container">
+        <div class="ourworks-trust__panel" data-aos="fade-up">
+          <p class="ourworks-trust__kicker font-le">BUILD WITH CLARITY</p>
+          <h2 class="ourworks-trust__title font-kn" id="ourworks-trust-title">
+            ดูตัวอย่างให้มั่นใจก่อนเริ่มคุยรายละเอียดโครงการ
+          </h2>
+
+          <div class="ourworks-trust__grid font-kn" aria-label="จุดเด่นของหน้าผลงานของเรา">
+            <div class="ourworks-trust__item" *ngFor="let item of trustItems">{{ item }}</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ourworks-cta about-section" aria-labelledby="ourworks-cta-title">
+      <div class="container">
+        <div class="ourworks-cta__card" data-aos="fade-up">
+          <p class="ourworks-cta__kicker font-le">START YOUR PROJECT</p>
+          <h2 class="ourworks-cta__title font-kn" id="ourworks-cta-title">
+            ถ้ามีผลงานที่ชอบ ส่งมาให้เราดูได้เลย
+          </h2>
+          <p class="ourworks-cta__description font-kn">
+            เราจะใช้ตัวอย่างนั้นเป็นจุดเริ่มต้นในการคุยเรื่องที่ดิน งบประมาณ พื้นที่ใช้งาน
+            และแนวทางออกแบบที่เหมาะกับการอยู่อาศัยของครอบครัวคุณ
+          </p>
+
+          <div class="ourworks-cta__highlights font-kn" aria-label="จุดเด่นของการเริ่มต้นคุยโครงการ">
+            <span class="ourworks-cta__highlight" *ngFor="let item of ctaHighlights">{{ item }}</span>
+          </div>
+
+          <div class="ourworks-cta__actions">
+            <a class="btn btn-primary btn-round" routerLink="/ourworks/real-projects">ดูผลงานจริง</a>
+            <a class="btn btn-secondary btn-round" routerLink="/contact">ปรึกษาโครงการ</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

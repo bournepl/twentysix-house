@@ -1,0 +1,216 @@
+<div class="wrapper" *ngIf="design as design; else houseDesignNotFound">
+  <section class="page-header page-header-lg house-design-detail-hero" aria-labelledby="house-design-detail-title">
+    <div class="page-header-image rellax-header" data-rellax-speed="-6"
+      [style.background-image]="'url(' + design.coverImage + ')'"></div>
+
+    <div class="container">
+      <div class="house-design-detail-hero__shell">
+        <div class="house-design-detail-hero__content text-center" data-aos="fade-up">
+          <p class="house-design-detail-hero__eyebrow font-le">HOUSE DESIGN DETAIL</p>
+          <h1 class="house-design-detail-hero__title font-kn" id="house-design-detail-title">
+            {{ design.title }}
+          </h1>
+
+          <div class="house-design-detail-hero__breadcrumbs">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item font-kn">
+                  <a routerLink="/">หน้าแรก</a>
+                </li>
+                <li class="breadcrumb-item font-kn">
+                  <a routerLink="/ourworks">ผลงานของเรา</a>
+                </li>
+                <li class="breadcrumb-item font-kn">
+                  <a routerLink="/ourworks/house-designs">แบบบ้าน</a>
+                </li>
+                <li class="breadcrumb-item active font-kn" aria-current="page">{{ design.category }}</li>
+              </ol>
+            </nav>
+          </div>
+
+          <p class="house-design-detail-hero__lead font-kn">{{ design.description }}</p>
+
+          <div class="house-design-detail-hero__actions">
+            <a class="btn btn-primary btn-round" routerLink="/contact">ปรึกษาแบบนี้</a>
+            <a class="btn btn-secondary btn-round" routerLink="/ourworks/house-designs">กลับไปดูแบบบ้าน</a>
+          </div>
+
+          <div class="house-design-detail-hero__meta font-kn" aria-label="ข้อมูลสรุปแบบบ้าน">
+            <div class="house-design-detail-hero__meta-item">
+              <span>รูปแบบบ้าน</span>
+              <strong>{{ design.category }}</strong>
+            </div>
+            <div class="house-design-detail-hero__meta-item">
+              <span>บรรยากาศโดยรวม</span>
+              <strong>{{ design.palette }}</strong>
+            </div>
+            <div class="house-design-detail-hero__meta-item">
+              <span>เหมาะกับ</span>
+              <strong>{{ design.whoItsFor }}</strong>
+            </div>
+            <div class="house-design-detail-hero__meta-item">
+              <span>ใช้คุยต่อเรื่อง</span>
+              <strong>รูปทรง วัสดุ แสง และบรรยากาศของบ้าน</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="main house-design-detail-main">
+    <section class="house-design-detail-overview about-section" aria-labelledby="house-design-overview-title">
+      <div class="container">
+        <div class="house-design-detail-overview__grid">
+          <div class="house-design-detail-overview__content" data-aos="fade-up">
+            <p class="house-design-detail-section__kicker font-le">DESIGN OVERVIEW</p>
+            <h2 class="house-design-detail-section__title font-kn" id="house-design-overview-title">
+              แนวคิดของแบบบ้านนี้
+            </h2>
+
+            <div class="house-design-detail-overview__body-card">
+              <p class="house-design-detail-overview__body-label font-le">DESIGN STORY</p>
+              <p class="house-design-detail-overview__description font-kn">{{ design.story }}</p>
+
+              <div class="house-design-detail-overview__highlights font-kn" aria-label="จุดเด่นของแบบบ้าน">
+                <span *ngFor="let item of design.highlights; trackBy: trackByText">{{ item }}</span>
+              </div>
+            </div>
+          </div>
+
+          <aside class="house-design-detail-overview__specs font-kn" data-aos="fade-up">
+            <p class="house-design-detail-overview__specs-label font-le">DESIGN DIRECTION</p>
+
+            <div class="house-design-detail-overview__spec">
+              <span>แนวคิดหลัก</span>
+              <strong>{{ design.concept }}</strong>
+            </div>
+            <div class="house-design-detail-overview__spec">
+              <span>ชุดสีและวัสดุ</span>
+              <strong>{{ design.palette }}</strong>
+            </div>
+            <div class="house-design-detail-overview__spec">
+              <span>เหมาะกับเจ้าของบ้าน</span>
+              <strong>{{ design.whoItsFor }}</strong>
+            </div>
+
+            <div class="house-design-detail-overview__tags" aria-label="คำค้นและรูปแบบที่เกี่ยวข้อง">
+              <span *ngFor="let tag of design.tags; trackBy: trackByText">{{ tag }}</span>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="house-design-detail-gallery" aria-labelledby="house-design-gallery-title">
+      <div class="container">
+        <header class="house-design-detail-section__header text-center" data-aos="fade-up">
+          <p class="house-design-detail-section__kicker font-le">DESIGN GALLERY</p>
+          <h2 class="house-design-detail-section__title font-kn" id="house-design-gallery-title">
+            ภาพบรรยากาศและมุมมองของแบบบ้าน
+          </h2>
+          <p class="house-design-detail-section__description font-kn">
+            ใช้ภาพชุดนี้เพื่อดูภาพรวมของรูปทรง สัดส่วน แสง วัสดุ และบรรยากาศก่อนนำไปคุยต่อเป็นบ้านของคุณ
+          </p>
+        </header>
+
+        <div class="house-design-detail-gallery__grid">
+          <button class="house-design-detail-gallery__item"
+            *ngFor="let image of design.gallery; let index = index; trackBy: trackByText"
+            [class.house-design-detail-gallery__item--feature]="index === 0" type="button"
+            [attr.aria-label]="'เปิดภาพแบบบ้าน ' + (index + 1)" (click)="openGalleryImage(image, index)"
+            data-aos="fade-up">
+            <img [src]="image" [alt]="design.title + ' ภาพที่ ' + (index + 1)" loading="lazy" />
+          </button>
+        </div>
+
+        <div class="house-design-detail-lightbox"
+          [class.house-design-detail-lightbox--closing]="isGalleryLightboxClosing" *ngIf="selectedGalleryImage"
+          role="dialog" aria-modal="true" aria-label="ตัวอย่างภาพแบบบ้าน" (click)="closeGalleryImage()">
+          <div class="house-design-detail-lightbox__panel" (click)="$event.stopPropagation()">
+            <button class="house-design-detail-lightbox__close" type="button" aria-label="ปิดตัวอย่างภาพ"
+              (click)="closeGalleryImage()"></button>
+            <img [src]="selectedGalleryImage" [alt]="design.title + ' ภาพที่ ' + (selectedGalleryIndex + 1)" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="house-design-detail-concept" aria-labelledby="house-design-concept-title">
+      <div class="container">
+        <div class="house-design-detail-concept__panel" data-aos="fade-up">
+          <p class="house-design-detail-section__kicker font-le">FROM REFERENCE TO HOME</p>
+          <h2 class="house-design-detail-concept__title font-kn" id="house-design-concept-title">
+            แบบบ้านนี้เป็นจุดเริ่มต้นในการคุย ไม่ใช่ข้อจำกัดของบ้านจริง
+          </h2>
+          <p class="house-design-detail-concept__description font-kn">
+            เราแยกหน้าแบบบ้านออกจากผลงานจริง เพื่อให้คุณดูบรรยากาศและแนวทางการออกแบบได้ชัดขึ้น
+            ก่อนค่อยปรับเรื่องพื้นที่ใช้สอย งบประมาณ ที่ดิน และรายละเอียดก่อสร้างให้เหมาะกับโครงการจริง
+          </p>
+
+          <div class="house-design-detail-concept__steps font-kn" aria-label="ขั้นตอนต่อยอดแบบบ้าน">
+            <span>เลือกบรรยากาศบ้านที่ชอบ</span>
+            <span>คุยโจทย์การใช้งาน</span>
+            <span>ปรับให้เหมาะกับที่ดินจริง</span>
+            <span>พัฒนาเป็นแบบเฉพาะของคุณ</span>
+          </div>
+
+          <div class="house-design-detail-concept__actions">
+            <a class="btn btn-primary btn-round" routerLink="/contact">ส่งแบบที่ชอบให้ทีมดู</a>
+            <a class="btn btn-secondary btn-round" routerLink="/ourworks/real-projects">เทียบกับผลงานจริง</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="house-design-detail-related about-section" *ngIf="relatedDesigns.length"
+      aria-labelledby="house-design-related-title">
+      <div class="container">
+        <header class="house-design-detail-section__header text-center" data-aos="fade-up">
+          <p class="house-design-detail-section__kicker font-le">RELATED DESIGNS</p>
+          <h2 class="house-design-detail-section__title font-kn" id="house-design-related-title">
+            แบบบ้านที่ช่วยให้เห็นทิศทางใกล้เคียงกัน
+          </h2>
+        </header>
+
+        <div class="house-design-detail-related__grid">
+          <a class="house-design-detail-related__card" *ngFor="let item of relatedDesigns; trackBy: trackByDesign"
+            [routerLink]="['/ourworks/house-designs', item.slug]" data-aos="fade-up">
+            <div class="house-design-detail-related__media">
+              <img [src]="item.coverImage" [alt]="item.coverAlt" loading="lazy" />
+              <span class="house-design-detail-related__badge font-kn">{{ item.category }}</span>
+            </div>
+            <div class="house-design-detail-related__body">
+              <p class="house-design-detail-related__meta font-kn">{{ item.palette }}</p>
+              <h3 class="font-kn">{{ item.title }}</h3>
+              <p class="house-design-detail-related__excerpt font-kn">{{ item.excerpt }}</p>
+              <div class="house-design-detail-related__facts font-kn">
+                <span *ngFor="let note of item.highlights | slice: 0 : 2">{{ note }}</span>
+              </div>
+              <span class="house-design-detail-related__link font-kn">
+                ดูรายละเอียดแบบบ้าน
+                <i class="now-ui-icons arrows-1_minimal-right" aria-hidden="true"></i>
+              </span>
+            </div>
+          </a>
+        </div>
+
+        <div class="house-design-detail-related__actions text-center">
+          <a class="btn btn-primary btn-round" routerLink="/ourworks/house-designs">
+            ดูแบบบ้านทั้งหมด
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<ng-template #houseDesignNotFound>
+  <section class="house-design-detail-empty">
+    <div class="container text-center">
+      <p class="font-le">HOUSE DESIGN NOT FOUND</p>
+      <h1 class="font-kn">ไม่พบแบบบ้านนี้</h1>
+      <a class="btn btn-primary btn-round" routerLink="/ourworks/house-designs">กลับไปหน้ารวมแบบบ้าน</a>
+    </div>
+  </section>
+</ng-template>

@@ -1,0 +1,198 @@
+<div class="wrapper" *ngIf="vm$ | async as vm">
+  <ng-container *ngIf="vm.project as project; else projectNotFound">
+    <section class="page-header page-header-lg real-project-detail-hero" aria-labelledby="real-project-detail-title">
+      <div class="page-header-image rellax-header" data-rellax-speed="-6"
+        [style.background-image]="'url(' + project.coverImage + ')'"></div>
+
+      <div class="container">
+        <div class="real-project-detail-hero__shell">
+          <div class="real-project-detail-hero__content text-center" data-aos="fade-up">
+            <p class="real-project-detail-hero__eyebrow font-le">PROJECT DETAIL</p>
+            <h1 class="real-project-detail-hero__title font-kn" id="real-project-detail-title">
+              {{ project.title }}
+            </h1>
+
+            <div class="real-project-detail-hero__breadcrumbs">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item font-kn">
+                    <a routerLink="/">หน้าแรก</a>
+                  </li>
+                  <li class="breadcrumb-item font-kn">
+                    <a routerLink="/ourworks">ผลงานของเรา</a>
+                  </li>
+                  <li class="breadcrumb-item font-kn">
+                    <a routerLink="/ourworks/real-projects">ผลงานจริง</a>
+                  </li>
+                  <li class="breadcrumb-item active font-kn" aria-current="page">{{ project.category }}</li>
+                </ol>
+              </nav>
+            </div>
+            <p class="real-project-detail-hero__lead font-kn">{{ project.excerpt }}</p>
+
+            <div class="real-project-detail-hero__actions">
+              <a class="btn btn-primary btn-round" routerLink="/contact">ปรึกษาโครงการ</a>
+              <a class="btn btn-secondary btn-round" routerLink="/ourworks/real-projects">กลับไปดูผลงานจริง</a>
+            </div>
+
+            <div class="real-project-detail-hero__meta font-kn" aria-label="ข้อมูลสรุปโครงการ">
+              <div class="real-project-detail-hero__meta-item">
+                <span>ประเภทบ้าน</span>
+                <strong>{{ project.category }}</strong>
+              </div>
+              <div class="real-project-detail-hero__meta-item">
+                <span>พื้นที่ใช้สอย</span>
+                <strong>{{ project.usableArea || project.scope }}</strong>
+              </div>
+              <div class="real-project-detail-hero__meta-item" *ngIf="project.bedrooms || project.bathrooms">
+                <span>พื้นที่ใช้งานหลัก</span>
+                <strong>{{ project.bedrooms || '-' }} ห้องนอน / {{ project.bathrooms || '-' }} ห้องน้ำ</strong>
+              </div>
+              <div class="real-project-detail-hero__meta-item">
+                <span>ที่ตั้งโครงการ</span>
+                <strong>{{ project.location }} / {{ project.year }}</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="main real-project-detail-main">
+      <section class="real-project-detail-overview about-section" aria-labelledby="real-project-overview-title">
+        <div class="container">
+          <div class="real-project-detail-overview__grid">
+            <div class="real-project-detail-overview__content" data-aos="fade-up">
+              <p class="real-project-detail-section__kicker font-le">PROJECT OVERVIEW</p>
+              <h2 class="real-project-detail-section__title font-kn" id="real-project-overview-title">
+                ภาพรวมของบ้านหลังนี้
+              </h2>
+              <div class="real-project-detail-overview__body-card">
+                <p class="real-project-detail-overview__body-label font-le">DESIGN STORY</p>
+                <p class="real-project-detail-overview__description font-kn">{{ project.description }}</p>
+
+                <div class="real-project-detail-overview__highlights font-kn">
+                  <span *ngFor="let item of project.highlights; trackBy: trackByText">{{ item }}</span>
+                </div>
+              </div>
+            </div>
+
+            <aside class="real-project-detail-overview__specs font-kn" data-aos="fade-up">
+              <p class="real-project-detail-overview__specs-label font-le">PROJECT INFO</p>
+              <div class="real-project-detail-overview__spec" *ngFor="let item of project.specs">
+                <span>{{ item.label }}</span>
+                <strong>{{ item.value }}</strong>
+              </div>
+              <div class="real-project-detail-overview__numbers" aria-label="ข้อมูลพื้นที่ใช้งานของบ้าน">
+                <div *ngIf="project.usableArea">
+                  <strong>{{ project.usableArea }}</strong>
+                  <span>พื้นที่ใช้สอย</span>
+                </div>
+                <div *ngIf="project.bedrooms">
+                  <strong>{{ project.bedrooms }}</strong>
+                  <span>ห้องนอน</span>
+                </div>
+                <div *ngIf="project.bathrooms">
+                  <strong>{{ project.bathrooms }}</strong>
+                  <span>ห้องน้ำ</span>
+                </div>
+                <div *ngIf="project.parking">
+                  <strong>{{ project.parking }}</strong>
+                  <span>ที่จอดรถ</span>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="real-project-detail-gallery" aria-labelledby="real-project-gallery-title">
+        <div class="container">
+          <header class="real-project-detail-section__header text-center" data-aos="fade-up">
+            <p class="real-project-detail-section__kicker font-le">PROJECT GALLERY</p>
+            <h2 class="real-project-detail-section__title font-kn" id="real-project-gallery-title">
+              ภาพตัวอย่างจากโครงการ
+            </h2>
+          </header>
+
+          <div class="real-project-detail-gallery__grid">
+            <button class="real-project-detail-gallery__item"
+              *ngFor="let image of project.gallery; let index = index; trackBy: trackByImage"
+              [class.real-project-detail-gallery__item--feature]="index === 0" type="button"
+              [attr.aria-label]="'เปิดภาพโครงการลำดับที่ ' + (index + 1)" (click)="openGalleryImage(image, index)"
+              data-aos="fade-up">
+              <img [src]="image" [alt]="project.title" loading="lazy" />
+              <ng-container *ngIf="false">
+                <span class="font-le">VIEW {{ index + 1 }}</span>
+                <strong class="font-kn">{{ index === 0 ? 'ภาพรวมโครงการ' : 'รายละเอียดมุมมองบ้าน' }}</strong>
+              </ng-container>
+            </button>
+          </div>
+
+          <div class="real-project-detail-lightbox"
+            [class.real-project-detail-lightbox--closing]="isGalleryLightboxClosing" *ngIf="selectedGalleryImage"
+            role="dialog" aria-modal="true" aria-label="ตัวอย่างภาพโครงการ" (click)="closeGalleryImage()">
+            <div class="real-project-detail-lightbox__panel" (click)="$event.stopPropagation()">
+              <button class="real-project-detail-lightbox__close" type="button" aria-label="ปิดตัวอย่างภาพ"
+                (click)="closeGalleryImage()"></button>
+              <img [src]="selectedGalleryImage" [alt]="project.title + ' ภาพที่ ' + (selectedGalleryIndex + 1)" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="real-project-detail-related about-section" *ngIf="vm.relatedProjects.length"
+        aria-labelledby="real-project-related-title">
+        <div class="container">
+          <header class="real-project-detail-section__header text-center" data-aos="fade-up">
+            <p class="real-project-detail-section__kicker font-le">RELATED PROJECTS</p>
+            <h2 class="real-project-detail-section__title font-kn" id="real-project-related-title">
+              ผลงานจริงที่อาจช่วยให้เห็นแนวทางใกล้เคียงกัน
+            </h2>
+          </header>
+
+          <div class="real-project-detail-related__grid">
+            <a class="real-project-detail-related__card"
+              *ngFor="let item of vm.relatedProjects; trackBy: trackByProject"
+              [routerLink]="['/ourworks/real-projects', item.slug]" data-aos="fade-up">
+              <div class="real-project-detail-related__media">
+                <img [src]="item.coverImage" [alt]="item.coverAlt" loading="lazy" />
+                <span class="real-project-detail-related__badge font-kn">{{ item.category }}</span>
+              </div>
+              <div class="real-project-detail-related__body">
+                <p class="real-project-detail-related__meta font-kn">{{ item.year }} / {{ item.location }}</p>
+                <h3 class="font-kn">{{ item.title }}</h3>
+                <p class="real-project-detail-related__excerpt font-kn">{{ item.excerpt }}</p>
+                <div class="real-project-detail-related__facts font-kn">
+                  <span *ngIf="item.usableArea">{{ item.usableArea }}</span>
+                  <span *ngIf="item.bedrooms">{{ item.bedrooms }} ห้องนอน</span>
+                  <span *ngIf="item.bathrooms">{{ item.bathrooms }} ห้องน้ำ</span>
+                </div>
+                <span class="real-project-detail-related__link font-kn">
+                  ดูรายละเอียดโครงการ
+                  <i class="now-ui-icons arrows-1_minimal-right" aria-hidden="true"></i>
+                </span>
+              </div>
+            </a>
+          </div>
+
+          <div class="real-project-detail-related__actions text-center">
+            <a class="btn btn-primary btn-round" routerLink="/ourworks/real-projects">
+              ดูผลงานทั้งหมด
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </ng-container>
+
+  <ng-template #projectNotFound>
+    <section class="real-project-detail-empty">
+      <div class="container text-center">
+        <p class="font-le">PROJECT NOT FOUND</p>
+        <h1 class="font-kn">ไม่พบผลงานนี้</h1>
+        <a class="btn btn-primary btn-round" routerLink="/ourworks/real-projects">กลับไปหน้าผลงานจริง</a>
+      </div>
+    </section>
+  </ng-template>
+</div>

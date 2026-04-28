@@ -46,7 +46,7 @@ $custom-file-text: (
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #936420;
+  background-color: #bf8b32;
   border-radius: 3px;
 }
 
@@ -58,6 +58,14 @@ html,
 body {
   height: 100%;
 
+}
+
+@media (max-width: 991.98px) {
+  [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
 
 .editor {

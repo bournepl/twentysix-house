@@ -1,0 +1,51 @@
+<section class="section home-why-choose" aria-labelledby="why-choose-title">
+  <div class="container">
+    <header class="why-choose-header text-center" data-aos="fade-up">
+      <p class="section-kicker font-le">Why Choose Us</p>
+      <h2 class="title text-primary font-kn why-choose-title" id="why-choose-title">
+        เหตุผลที่ทำให้หลายครอบครัวมั่นใจให้เราดูแลเรื่องบ้าน
+      </h2>
+      <p class="description font-kn why-choose-lead">
+        ถ้าคุณกำลังมองหาบริษัทรับสร้างบ้านอุดรธานี สิ่งที่สำคัญไม่ใช่แค่บ้านที่ดูสวย
+        แต่คือทีมที่ทำให้ทุกขั้นตอนชัดเจน ดูแลงานได้จริง และช่วยให้การตัดสินใจง่ายขึ้นตั้งแต่ต้น
+      </p>
+    </header>
+
+    <div class="row align-items-stretch why-choose-content">
+      <div class="col-lg-4 mb-5 mb-lg-0" data-aos="fade-right">
+        <aside class="why-choose-aside">
+          <p class="why-choose-aside-kicker font-le">Twentysix House</p>
+          <h3 class="font-kn why-choose-aside-title">
+            บ้านที่ดีควรเริ่มจากทีมที่ทำให้ภาพรวมของโครงการชัดตั้งแต่วันแรก
+          </h3>
+          <p class="font-kn why-choose-aside-copy">
+            เราเชื่อว่าความมั่นใจของเจ้าของบ้านเกิดจากการที่แต่ละขั้นตอนเชื่อมกันได้จริง
+            ทั้งการคุยความต้องการ การออกแบบ การวางแผน และการก่อสร้าง
+          </p>
+
+          <div class="why-choose-evidence font-kn" aria-label="แนวทางการทำงาน">
+            <div class="why-choose-evidence-item" *ngFor="let point of evidencePoints">
+              <span class="why-choose-evidence-dot"></span>
+              <span>{{ point }}</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="col-lg-8" data-aos="fade-left">
+        <div class="why-choose-list" role="list">
+          <article class="reason-row" *ngFor="let reason of reasons; let i = index" role="listitem" data-aos="fade-up">
+            <div class="reason-marker">
+              <span class="font-le reason-number">{{ reason.number }}</span>
+            </div>
+
+            <div class="reason-body" [class.reason-body-offset]="i % 2 === 1">
+              <h3 class="font-kn reason-title">{{ reason.title }}</h3>
+              <p class="font-kn reason-description">{{ reason.description }}</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

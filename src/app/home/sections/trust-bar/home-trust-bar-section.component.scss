@@ -1,0 +1,41 @@
+.home-trust-bar {
+  position: relative;
+  z-index: 3;
+  margin-top: -60px;
+  padding-bottom: 20px;
+}
+
+.trust-card {
+  height: 100%;
+  padding: 1.5rem;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.trust-value {
+  margin-bottom: 0.5rem;
+  color: #a1752b;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.trust-label {
+  margin-bottom: 0.5rem;
+  font-size: 1.15rem;
+}
+
+.trust-description {
+  margin: 0;
+  color: #6c757d;
+}
+
+@media (max-width: 991.98px) {
+  .home-trust-bar {
+    margin-top: 0;
+    padding-top: 2rem;
+  }
+}

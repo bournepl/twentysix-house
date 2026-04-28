@@ -1,0 +1,28 @@
+<section class="services-section services-portfolio" aria-labelledby="services-portfolio-title">
+  <div class="container">
+    <div class="services-portfolio__header text-center" data-aos="fade-up">
+      <p class="services-section__kicker font-le">RELATED PROJECTS</p>
+      <h2 class="services-section__title font-kn" id="services-portfolio-title">ตัวอย่างผลงานที่ช่วยอธิบายบริการของเรา
+      </h2>
+      <p class="services-portfolio__lead font-kn">
+        ผลงานจริงช่วยให้เห็นชัดขึ้นว่าบริการออกแบบและสร้างบ้านครบวงจรของเราเชื่อมโยงกับการใช้งานจริงอย่างไร
+      </p>
+    </div>
+
+    <div class="services-portfolio__grid">
+      <article class="services-portfolio__card" *ngFor="let item of projects; let index = index" data-aos="fade-up">
+        <div class="services-portfolio__image"
+          [style.background-image]="'linear-gradient(180deg, rgba(16, 32, 48, 0.08), rgba(16, 32, 48, 0.48)), url(' + item.image + ')'">
+        </div>
+        <div class="services-portfolio__body">
+          <h3 class="services-portfolio__title font-kn">{{ item.title }}</h3>
+          <p class="services-portfolio__description font-kn">{{ item.copy }}</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="services-portfolio__footer text-center" data-aos="fade-up">
+      <a class="btn btn-primary btn-round" routerLink="/ourworks/real-projects">ดูผลงานทั้งหมด</a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,61 @@
+<section class="section home-projects" aria-labelledby="project-title">
+  <div class="container">
+    <header class="projects-header text-center" data-aos="fade-up">
+      <p class="section-kicker font-le">Portfolio Preview</p>
+      <h2 class="title text-primary font-kn projects-title" id="project-title">
+        ผลงานจริงที่ช่วยให้เห็นภาพการออกแบบและคุณภาพงานของเราได้ชัดขึ้น
+      </h2>
+      <p class="description font-kn projects-lead">
+        สำหรับคนที่กำลังมองหาบริษัทรับสร้างบ้านอุดรธานี การได้เห็นผลงานจริงหลายมุมจะช่วยให้เข้าใจมากขึ้นว่า
+        Twentysix House คิดงานจากโจทย์แบบไหน และพาแต่ละโครงการไปสู่บ้านที่ใช้งานได้จริงอย่างไร
+      </p>
+    </header>
+
+    <div class="projects-list">
+      <article
+        class="projects-row"
+        [class.projects-row-reverse]="project.align === 'right'"
+        *ngFor="let project of projects; trackBy: trackByProject"
+        data-aos="fade-up">
+        <div class="projects-album-card">
+          <a
+            class="projects-main-media"
+            [routerLink]="['/ourworks/real-projects', project.slug]"
+            [attr.aria-label]="'ดูรายละเอียด ' + project.title">
+            <img
+              class="projects-main-image"
+              [src]="project.images[0].src"
+              [alt]="project.images[0].alt"
+              loading="lazy" />
+          </a>
+
+          <div class="projects-thumbnail-grid">
+            <figure class="projects-thumbnail-item" *ngFor="let image of project.thumbnailImages; trackBy: trackByImage">
+              <img class="projects-thumbnail-image" [src]="image.src" [alt]="image.alt" loading="lazy" />
+            </figure>
+          </div>
+        </div>
+
+        <div class="projects-copy-card">
+          <p class="projects-copy-label font-le">{{ project.label }}</p>
+          <p class="projects-copy-eyebrow font-kn">{{ project.eyebrow }}</p>
+          <h3 class="font-kn projects-copy-title">{{ project.title }}</h3>
+          <p class="font-kn projects-copy-description">{{ project.description }}</p>
+
+          <div class="projects-copy-highlights font-kn" aria-label="จุดเด่นของผลงาน">
+            <span class="projects-copy-highlight" *ngFor="let item of project.highlights; trackBy: trackByHighlight">{{ item }}</span>
+          </div>
+
+          <a class="projects-copy-link font-kn" [routerLink]="['/ourworks/real-projects', project.slug]">
+            ดูรายละเอียดโครงการ
+            <i class="now-ui-icons arrows-1_minimal-right" aria-hidden="true"></i>
+          </a>
+        </div>
+      </article>
+    </div>
+
+    <div class="projects-footer text-center" data-aos="fade-up">
+      <a class="btn btn-primary btn-round projects-cta" routerLink="/ourworks">ดูผลงานทั้งหมด</a>
+    </div>
+  </div>
+</section>

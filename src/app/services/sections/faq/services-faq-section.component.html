@@ -1,0 +1,43 @@
+<section class="services-section services-faq" aria-labelledby="services-faq-title">
+  <div class="container">
+    <header class="services-faq__header text-center" data-aos="fade-up">
+      <p class="services-section__kicker font-le">{{ faqIntro.kicker }}</p>
+      <h2 class="services-section__title font-kn services-faq__title-main" id="services-faq-title">
+        {{ faqIntro.title }}
+      </h2>
+      <p class="services-section__description font-kn services-faq__lead">
+        {{ faqIntro.lead }}
+      </p>
+    </header>
+
+    <div class="services-faq__shell" data-aos="fade-up">
+      <div class="services-faq__list">
+        <article class="services-faq__item" [class.services-faq__item-open]="isOpen(index)"
+          *ngFor="let item of faqs; let index = index">
+          <button class="services-faq__trigger" type="button" (click)="toggleFaq(index)"
+            [attr.aria-expanded]="isOpen(index)" [attr.aria-controls]="'services-faq-panel-' + index">
+            <span class="services-faq__trigger-main">
+              <span class="services-faq__number font-le">{{ item.number }}</span>
+              <span class="services-faq__question font-kn">{{ item.question }}</span>
+            </span>
+            <span class="services-faq__icon font-le" aria-hidden="true">
+              {{ isOpen(index) ? '−' : '+' }}
+            </span>
+          </button>
+
+          <div class="services-faq__panel" [id]="'services-faq-panel-' + index"
+            [class.services-faq__panel-open]="isOpen(index)">
+            <p class="services-faq__answer font-kn">{{ item.answer }}</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="services-faq__footer text-center">
+        <p class="font-kn services-faq__footer-copy">
+          {{ faqIntro.note }}
+        </p>
+        <a class="btn btn-primary btn-round" routerLink="/contact">ดูช่องทางติดต่อทั้งหมด</a>
+      </div>
+    </div>
+  </div>
+</section>

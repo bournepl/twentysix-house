@@ -1,19 +1,13 @@
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
-
-
-import { LoadingBarService } from '@ngx-loading-bar/core';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { Blog } from '../../_model/blog';
-import { QuillModule } from 'ngx-quill';
 import { Meta, Title } from '@angular/platform-browser';
-import { BlogService } from '../../_service/blog.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LoadingBarService } from '@ngx-loading-bar/core';
 import { Subscription } from 'rxjs';
-import { DOCUMENT } from '@angular/common';
-import { Renderer2, RendererFactory2 } from '@angular/core';
+import { Blog } from '../../_model/blog';
+import { BlogService } from '../../_service/blog.service';
 import { JsonLdService } from '../../_service/json-ld.service';
-import { CanonicalService } from '../../_service/canonical.service';
-import { SeoService } from '../../_service/seo.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-detail',
@@ -21,12 +15,11 @@ import { SeoService } from '../../_service/seo.service';
   styleUrl: './detail.component.scss'
 })
 export class DetailComponent implements OnInit, OnDestroy {
+  private routeSub?: Subscription;
 
-  private routeSub!: Subscription;
-
-  getBlogsById!: Blog;
+  getBlogsById?: Blog;
   getBlogs: Blog[] = [];
-  isBrowser = false;
+  readonly isBrowser: boolean;
 
   constructor(
     private loadingBar: LoadingBarService,
@@ -37,157 +30,253 @@ export class DetailComponent implements OnInit, OnDestroy {
     private meta: Meta,
     private jsonLdService: JsonLdService,
     @Inject(DOCUMENT) private document: Document,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(PLATFORM_ID) private platformId: object
   ) {
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
 
-  /* =====================
-     INIT
-  ===================== */
   ngOnInit(): void {
-    this.routeSub = this.route.params.subscribe(params => {
-      const id = params['id'];
+    this.routeSub = this.route.params.subscribe((params) => {
+      const id = params['slug'] || params['id'];
+
       if (!id) {
         this.router.navigate(['/blogs']);
         return;
       }
+
       this.loadBlog(id);
     });
   }
 
-  /* =====================
-     LOAD BLOG DETAIL
-  ===================== */
+  ngOnDestroy(): void {
+    this.routeSub?.unsubscribe();
+    this.jsonLdService.removeSchema('blog-detail');
+  }
+
   private loadBlog(id: string): void {
-    this.loadingBar.start();
+    if (this.isBrowser) {
+      this.loadingBar.start();
+    }
 
     this.blogService.getById(id).subscribe({
       next: (blog) => {
-        if (!blog) {
+        if (!blog || blog.status === false) {
           this.router.navigate(['/blogs']);
+          return;
+        }
+
+        if (this.isBrowser && this.shouldReplaceWithSlugUrl(id, blog)) {
+          this.completeLoading();
+          this.router.navigate(this.getBlogUrl(blog), { replaceUrl: true });
           return;
         }
 
         this.getBlogsById = blog;
         this.setMeta(blog);
-        this.insertSchemas(blog, id);
-        this.loadRelatedBlogs(blog._id.$oid);
-        this.loadingBar.complete();
+        this.insertSchemas(blog);
+        this.loadRelatedBlogs(blog);
+        this.completeLoading();
       },
       error: () => {
         this.router.navigate(['/blogs']);
-        this.loadingBar.complete();
+        this.completeLoading();
       }
     });
   }
 
-  /* =====================
-     RELATED BLOGS
-  ===================== */
-  private loadRelatedBlogs(currentId: string): void {
+  private loadRelatedBlogs(currentBlog: Blog): void {
+    const currentId = this.getBlogId(currentBlog);
+    const currentCategory = this.getCategoryName(currentBlog);
+
     this.blogService.getAll().subscribe({
       next: (blogs) => {
-        this.getBlogs = blogs
-          .filter(b => b._id.$oid !== currentId)
-          .slice(0, 3);
+        const activeBlogs = blogs
+          .filter((blog) => blog.status !== false && this.getBlogId(blog) !== currentId)
+          .sort((a, b) => this.getBlogTime(b) - this.getBlogTime(a));
+
+        const sameCategory = activeBlogs.filter((blog) => this.getCategoryName(blog) === currentCategory);
+        const otherCategory = activeBlogs.filter((blog) => this.getCategoryName(blog) !== currentCategory);
+
+        this.getBlogs = [...sameCategory, ...otherCategory].slice(0, 3);
       }
     });
   }
 
-  /* =====================
-     META TAGS
-  ===================== */
   private setMeta(blog: Blog): void {
-    const url = `https://twentysix.house/blogs/detail/${blog._id.$oid}`;
+    const url = this.getAbsoluteBlogUrl(blog);
+    const image = this.toAbsoluteAssetUrl(blog.pictureUrl || 'assets/img/head.webp');
+    const description = this.trimDescription(blog.subTitle || blog.title);
+    const keywords = [
+      blog.title,
+      this.getCategoryName(blog),
+      ...(blog.tags || []),
+      'รับสร้างบ้านอุดรธานี',
+      'สร้างบ้านอุดรธานี',
+      'ออกแบบบ้านอุดรธานี',
+      'Twentysix House'
+    ].filter(Boolean).join(', ');
 
-    this.title.setTitle(`${blog.title} | Twentysix.House`);
+    this.title.setTitle(`${blog.title} | บทความสร้างบ้าน Twentysix House`);
+    this.setCanonical(url);
 
-    this.meta.updateTag({ name: 'description', content: blog.subTitle });
-    this.meta.updateTag({ property: 'og:title', content: blog.title });
-    this.meta.updateTag({ property: 'og:description', content: blog.subTitle });
-    this.meta.updateTag({
-      property: 'og:image',
-      content: blog.pictureUrl || 'https://twentysix.house/assets/img/head.png'
-    });
+    this.meta.updateTag({ name: 'description', content: description });
+    this.meta.updateTag({ name: 'keywords', content: keywords });
+    this.meta.updateTag({ name: 'robots', content: 'index, follow, max-image-preview:large' });
+    this.meta.updateTag({ name: 'author', content: 'Twentysix House' });
+    this.meta.updateTag({ property: 'og:locale', content: 'th_TH' });
+    this.meta.updateTag({ property: 'og:site_name', content: 'Twentysix House' });
     this.meta.updateTag({ property: 'og:type', content: 'article' });
+    this.meta.updateTag({ property: 'og:title', content: blog.title });
+    this.meta.updateTag({ property: 'og:description', content: description });
+    this.meta.updateTag({ property: 'og:image', content: image });
     this.meta.updateTag({ property: 'og:url', content: url });
+    this.meta.updateTag({ property: 'article:published_time', content: this.getBlogDateIso(blog) });
+    this.meta.updateTag({ property: 'article:modified_time', content: this.getBlogDateIso(blog) });
+    this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
+    this.meta.updateTag({ name: 'twitter:title', content: blog.title });
+    this.meta.updateTag({ name: 'twitter:description', content: description });
+    this.meta.updateTag({ name: 'twitter:image', content: image });
   }
 
-  /* =====================
-     SCHEMA
-  ===================== */
-  private insertSchemas(blog: Blog, id: string): void {
-    if (!this.isBrowser) return;
+  private insertSchemas(blog: Blog): void {
+    const url = this.getAbsoluteBlogUrl(blog);
+    const image = this.toAbsoluteAssetUrl(blog.pictureUrl || 'assets/img/head.webp');
 
-    // clear old
-    this.jsonLdService.removeSchema('blog-posting');
-    this.jsonLdService.removeSchema('breadcrumb');
-
-    /* --- BlogPosting --- */
-    this.jsonLdService.insertSchema('blog-posting', {
-      "@context": "https://schema.org",
-      "@type": "BlogPosting",
-      "headline": blog.title,
-      "description": blog.subTitle,
-      "image": blog.pictureUrl,
-      "datePublished": blog.date,
-      "dateModified": blog.date,
-      "author": {
-        "@type": "Organization",
-        "name": "Twentysix.House"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "Twentysix.House",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://twentysix.house/assets/img/logobg.png"
-        }
-      },
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": `https://twentysix.house/blogs/detail/${id}`
-      }
-    });
-
-    /* --- Breadcrumb --- */
-    this.jsonLdService.insertSchema('breadcrumb', {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
+    this.jsonLdService.insertSchema('blog-detail', {
+      '@context': 'https://schema.org',
+      '@graph': [
         {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "หน้าแรก",
-          "item": "https://twentysix.house"
+          '@type': 'BlogPosting',
+          '@id': `${url}#article`,
+          headline: blog.title,
+          description: this.trimDescription(blog.subTitle || blog.title),
+          image: [image],
+          datePublished: this.getBlogDateIso(blog),
+          dateModified: this.getBlogDateIso(blog),
+          inLanguage: 'th-TH',
+          articleSection: this.getCategoryName(blog),
+          keywords: (blog.tags || []).join(', '),
+          author: {
+            '@type': 'Organization',
+            name: 'Twentysix House',
+            url: environment.siteUrl,
+          },
+          publisher: {
+            '@type': 'Organization',
+            name: 'Twentysix House',
+            logo: {
+              '@type': 'ImageObject',
+              url: `${environment.siteUrl}/assets/img/logobg.png`,
+            },
+          },
+          mainEntityOfPage: {
+            '@type': 'WebPage',
+            '@id': url,
+          },
         },
         {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "บทความ",
-          "item": "https://twentysix.house/blogs"
+          '@type': 'BreadcrumbList',
+          '@id': `${url}#breadcrumb`,
+          itemListElement: [
+            {
+              '@type': 'ListItem',
+              position: 1,
+              name: 'หน้าแรก',
+              item: `${environment.siteUrl}/`,
+            },
+            {
+              '@type': 'ListItem',
+              position: 2,
+              name: 'บทความ',
+              item: `${environment.siteUrl}/blogs`,
+            },
+            {
+              '@type': 'ListItem',
+              position: 3,
+              name: blog.title,
+              item: url,
+            },
+          ],
         },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": blog.title,
-          "item": `https://twentysix.house/blogs/detail/${id}`
-        }
-      ]
+      ],
     });
+  }
+
+  getBlogId(blog: Blog): string {
+    return this.blogService.getBlogId(blog);
+  }
+
+  getBlogSlug(blog: Blog): string {
+    return this.blogService.getBlogSlug(blog);
+  }
+
+  getCategoryName(blog: Blog): string {
+    return blog.blogCategory?.blogCategoryName || 'บทความ';
+  }
+
+  getBlogUrl(blog: Blog): string[] {
+    return ['/blogs', this.getBlogSlug(blog)];
+  }
+
+  getAbsoluteBlogUrl(blog: Blog): string {
+    return `${environment.siteUrl}/blogs/${this.getBlogSlug(blog)}`;
+  }
+
+  getBlogTime(blog: Blog): number {
+    const timestamp = Number(blog.dateFormat);
+
+    if (!Number.isNaN(timestamp) && timestamp > 0) {
+      return timestamp;
+    }
+
+    return new Date(blog.date).getTime() || 0;
   }
 
   trackById(index: number, blog: Blog): string {
-    return blog._id.$oid;
+    return blog._id?.$oid || blog.bId;
   }
 
-  /* =====================
-     DESTROY
-  ===================== */
-  ngOnDestroy(): void {
-    this.routeSub?.unsubscribe();
-    this.jsonLdService.removeSchema('blog-posting');
-    this.jsonLdService.removeSchema('breadcrumb');
+  private getBlogDateIso(blog: Blog): string {
+    const timestamp = this.getBlogTime(blog);
+
+    if (timestamp > 0) {
+      return new Date(timestamp).toISOString();
+    }
+
+    return new Date().toISOString();
+  }
+
+  private trimDescription(description: string): string {
+    return description.replace(/\s+/g, ' ').trim().slice(0, 155);
+  }
+
+  private toAbsoluteAssetUrl(path: string): string {
+    if (/^https?:\/\//i.test(path)) {
+      return path;
+    }
+
+    return `${environment.siteUrl}/${path.replace(/^\/+/, '')}`;
+  }
+
+  private setCanonical(url: string): void {
+    let link = this.document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+
+    if (!link) {
+      link = this.document.createElement('link');
+      link.setAttribute('rel', 'canonical');
+      this.document.head.appendChild(link);
+    }
+
+    link.setAttribute('href', url);
+  }
+
+  private shouldReplaceWithSlugUrl(routeValue: string, blog: Blog): boolean {
+    return this.route.snapshot.routeConfig?.path === 'detail/:id' || routeValue !== this.getBlogSlug(blog);
+  }
+
+  private completeLoading(): void {
+    if (this.isBrowser) {
+      this.loadingBar.complete();
+    }
   }
 }

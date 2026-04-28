@@ -1,0 +1,23 @@
+<section class="services-section services-snapshot" aria-labelledby="services-snapshot-title">
+  <div class="container">
+    <header class="services-section__header text-center" data-aos="fade-up">
+      <p class="services-section__kicker font-le">SERVICE OVERVIEW</p>
+      <h2 class="services-section__title font-kn" id="services-snapshot-title">
+        บริการหลักที่ดูแลตั้งแต่เริ่มวางแนวคิดจนถึงวันส่งมอบ</h2>
+      <p class="services-section__description font-kn">
+        Twentysix House ดูแลงานออกแบบและสร้างบ้านแบบครบวงจร
+        เพื่อให้เจ้าของบ้านเห็นภาพรวมของโครงการชัดขึ้นและตัดสินใจในแต่ละช่วงได้ง่ายขึ้น
+      </p>
+    </header>
+
+    <div class="services-snapshot__grid">
+      <article class="services-snapshot__card" *ngFor="let item of snapshots" data-aos="fade-up">
+        <span class="services-snapshot__icon" aria-hidden="true">
+          <i [class]="item.icon"></i>
+        </span>
+        <h3 class="services-snapshot__title font-kn">{{ item.title }}</h3>
+        <p class="services-snapshot__description font-kn">{{ item.description }}</p>
+      </article>
+    </div>
+  </div>
+</section>

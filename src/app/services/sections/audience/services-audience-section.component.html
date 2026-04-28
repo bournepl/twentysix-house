@@ -1,0 +1,36 @@
+<section class="services-section services-audience" aria-labelledby="services-audience-title">
+  <div class="container">
+    <div class="row align-items-start services-audience__main">
+      <div class="col-lg-4 mb-4 mb-lg-0" data-aos="fade-right">
+        <div class="services-audience__intro">
+          <p class="services-section__kicker font-le">WHO THIS SUITS</p>
+          <h2 class="services-section__title font-kn" id="services-audience-title">บริการนี้เหมาะกับเจ้าของบ้านที่มองหาความชัดเจนตั้งแต่ต้น</h2>
+          <p class="services-section__description font-kn">
+            หากคุณกำลังมองหาทีมที่ช่วยให้การออกแบบ วางแผนงบประมาณ และการก่อสร้างเชื่อมกันอย่างเป็นระบบ
+            บริการของเรามักเหมาะกับเจ้าของบ้านที่ต้องการทั้งความชัดเจนและการดูแลงานต่อเนื่อง
+          </p>
+
+          <div class="services-audience__tag-list font-kn" aria-label="ลักษณะของเจ้าของบ้านที่เหมาะกับบริการนี้">
+            <span class="services-audience__tag" *ngFor="let item of audienceTags">{{ item }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-8" data-aos="fade-left">
+        <div class="services-audience__list" role="list">
+          <article class="services-audience__item" *ngFor="let item of audiences" role="listitem" data-aos="fade-up">
+            <span class="services-audience__icon" aria-hidden="true">
+              <i [class]="item.icon"></i>
+            </span>
+
+            <div class="services-audience__body">
+              <p class="services-audience__eyebrow font-le">IDEAL FOR</p>
+              <h3 class="services-audience__title font-kn">{{ item.title }}</h3>
+              <p class="services-audience__description font-kn">{{ item.description }}</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

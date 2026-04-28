@@ -1,5 +1,5 @@
-import { Injectable, Inject, Renderer2, RendererFactory2, PLATFORM_ID } from '@angular/core';
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { Injectable, Inject, Renderer2, RendererFactory2 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
@@ -9,14 +9,12 @@ export class JsonLdService {
 
   constructor(
     private rendererFactory: RendererFactory2,
-    @Inject(DOCUMENT) private document: Document,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(DOCUMENT) private document: Document
   ) {
     this.renderer = rendererFactory.createRenderer(null, null);
   }
 
   insertSchema(id: string, schemaObject: object): void {
-    if (!isPlatformBrowser(this.platformId)) return;
     const scriptId = `json-ld-${id}`;
     const existing = this.document.getElementById(scriptId);
     if (existing) {

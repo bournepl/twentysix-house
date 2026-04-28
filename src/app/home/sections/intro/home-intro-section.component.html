@@ -1,0 +1,69 @@
+<section class="section home-intro" aria-labelledby="about-intro-title">
+  <div class="container">
+    <div class="row align-items-center intro-main-row">
+      <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right">
+        <p class="section-kicker font-le">How We Work</p>
+
+        <h2 class="title text-primary font-kn intro-title" id="about-intro-title">
+          แนวคิดการทำงานของ Twentysix House
+        </h2>
+
+        <p class="description intro-lead font-kn">
+          บ้านที่ดีไม่ควรเริ่มจากคำถามว่า <strong class="text-bold">“อยากได้แบบไหนที่ดูสวยที่สุด”</strong>
+          แต่ควรเริ่มจากคำถามว่า <strong
+            class="text-bold">“บ้านแบบไหนจะเหมาะกับการใช้ชีวิตของเจ้าของบ้านจริงที่สุด”</strong>
+        </p>
+
+        <p class="description font-kn intro-copy">
+          แนวทางนี้ทำให้ทุกขั้นตอนตั้งแต่การคุยโจทย์ วางผังการใช้งาน ไปจนถึงการตัดสินใจเรื่องวัสดุ
+          และรายละเอียดหน้างาน มีความชัดเจนมากขึ้น ลูกค้าจึงเห็นภาพรวมของบ้านได้ตั้งแต่ต้น
+          และตัดสินใจได้อย่างมั่นใจ
+        </p>
+
+        <div class="intro-highlight-list">
+          <article class="intro-highlight-card" *ngFor="let item of highlights" data-aos="fade-up">
+            <h3 class="font-kn intro-highlight-title">{{ item.title }}</h3>
+            <p class="font-kn intro-highlight-description">{{ item.description }}</p>
+          </article>
+        </div>
+
+        <div class="intro-actions">
+          <a class="btn btn-primary btn-round" routerLink="/about">Company Profile</a>
+          <a class="btn btn-outline-primary btn-round" routerLink="/contact">ปรึกษากับทีมงาน</a>
+        </div>
+      </div>
+
+      <div class="col-lg-6" data-aos="fade-left">
+        <div class="intro-visual">
+          <div class="intro-image-stack">
+            <figure class="intro-image-card intro-image-card-lg">
+              <img class="img img-raised intro-image" src="assets/img/house1.webp"
+                alt="ผลงานรับสร้างบ้านของ Twentysix House ในจังหวัดอุดรธานี" />
+            </figure>
+
+            <div class="intro-image-column">
+              <figure class="intro-image-card">
+                <img class="img img-raised intro-image" src="assets/img/house2.webp"
+                  alt="บ้านที่ออกแบบและก่อสร้างโดย Twentysix House" />
+              </figure>
+
+              <figure class="intro-image-card">
+                <img class="img img-raised intro-image" src="assets/img/house3.webp"
+                  alt="บ้านสไตล์โมเดิร์นโดย Twentysix House" />
+              </figure>
+            </div>
+          </div>
+
+          <aside class="intro-note-card" data-aos="zoom-in">
+            <p class="intro-note-kicker font-le">Twentysix House</p>
+            <h3 class="font-kn intro-note-title">เราเชื่อว่าบ้านที่ดีต้องอยู่ได้ดีในทุกวัน</h3>
+            <p class="font-kn intro-note-copy">
+              ความสวย ความสบาย และคุณภาพงานก่อสร้าง ควรเดินไปพร้อมกัน ไม่ใช่ต้องเลือกอย่างใดอย่างหนึ่ง
+            </p>
+            <a class="intro-note-link font-kn" routerLink="/about">รู้จักแนวคิดของเรา</a>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

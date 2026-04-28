@@ -1,0 +1,53 @@
+<section class="about-section about-overview" aria-labelledby="about-overview-title">
+  <div class="container">
+    <div class="row align-items-center about-overview__row">
+      <div class="col-lg-6 mb-5 mb-lg-0 about-overview__copy-column" data-aos="fade-right">
+        <p class="section-kicker font-le">COMPANY OVERVIEW</p>
+        <h2 class="section-title font-kn" id="about-overview-title">
+          บริษัทรับสร้างบ้านอุดรธานี ที่เน้นทั้งดีไซน์ คุณภาพ และความมั่นใจในทุกขั้นตอน
+        </h2>
+
+        <p class="section-description font-kn about-overview__lead">
+          Twentysix House คือ
+          <strong class="text-bold">บริษัทรับสร้างบ้านอุดรธานี</strong>
+          ที่ดูแลงาน <strong class="text-bold">ออกแบบบ้านอุดรธานี</strong> และงานก่อสร้างแบบครบวงจร
+          โดยให้ความสำคัญกับ <strong class="text-bold">“การใช้งานจริงของเจ้าของบ้าน”</strong>
+          ควบคู่กับมาตรฐานงานก่อสร้างที่ตรวจสอบได้จริง ตั้งแต่การคุยความต้องการ วางงบประมาณ พัฒนาแบบ
+          ไปจนถึงการควบคุมงานและส่งมอบบ้านพร้อมอยู่
+        </p>
+        <p class="section-description font-kn">
+          เราเชื่อว่าบ้านที่ดีควรเริ่มจากความเข้าใจอย่างละเอียด แล้วต่อยอดเป็นแผนงานที่ชัดเจน
+          เพื่อให้เจ้าของบ้านเห็นภาพรวมโครงการได้ตั้งแต่วันแรก สำหรับคนที่กำลังมองหา
+          <strong class="text-bold">ผู้รับเหมาสร้างบ้านอุดรธานี</strong> ที่สื่อสารตรงและทำงานเป็นระบบ
+          และตัดสินใจได้มั่นใจมากขึ้นในทุกช่วงสำคัญ
+        </p>
+
+        <div class="about-overview__highlights font-kn" aria-label="จุดเด่นของการทำงาน">
+          <span class="about-overview__highlight" *ngFor="let item of highlights">{{ item }}</span>
+        </div>
+
+        <div class="about-overview__actions">
+          <a class="btn btn-primary btn-round" [routerLink]="'/contact'">คุยกับทีมงาน</a>
+          <a class="btn btn-outline-primary btn-round" [routerLink]="'/services'">ดูบริการของเรา</a>
+        </div>
+      </div>
+
+      <div class="col-lg-6 about-overview__insight-column">
+        <div class="about-overview__cards">
+          <article class="about-overview__card" *ngFor="let point of points; let index = index" data-aos="fade-left">
+            <p class="about-overview__card-index font-le">0{{ index + 1 }}</p>
+            <h3 class="about-overview__card-title font-kn">{{ point.title }}</h3>
+            <p class="about-overview__card-copy font-kn">{{ point.description }}</p>
+          </article>
+        </div>
+
+        <aside class="about-overview__stats-panel" data-aos="fade-left">
+          <article class="about-overview__stat-item" *ngFor="let stat of stats">
+            <p class="about-overview__stat-value font-le">{{ stat.value }}</p>
+            <p class="about-overview__stat-label font-kn">{{ stat.label }}</p>
+          </article>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>

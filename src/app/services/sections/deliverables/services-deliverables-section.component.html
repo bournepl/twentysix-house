@@ -1,0 +1,32 @@
+<section class="services-section services-deliverables" aria-labelledby="services-deliverables-title">
+  <div class="container">
+    <div class="services-deliverables__intro text-center" data-aos="fade-up">
+      <p class="services-section__kicker font-le">WHAT YOU WILL RECEIVE</p>
+      <h2 class="services-section__title font-kn" id="services-deliverables-title">
+        สิ่งที่เจ้าของบ้านจะได้รับเพื่อใช้ตัดสินใจและเดินโครงการต่อได้ชัดขึ้น
+      </h2>
+      <p class="services-section__description font-kn">
+        งานบริการที่ดีไม่ควรจบแค่การอธิบายว่าทำอะไรบ้าง แต่ควรทำให้ลูกค้าเห็นชัดด้วยว่าจะได้รับข้อมูล
+        แบบบ้าน และกรอบการทำงานอะไรกลับไปในแต่ละช่วงของโครงการ
+      </p>
+
+      <div class="services-deliverables__assurance font-kn" aria-label="จุดเด่นของสิ่งที่ลูกค้าจะได้รับ">
+        <span class="services-deliverables__assurance-item" *ngFor="let item of assurancePoints">{{ item }}</span>
+      </div>
+    </div>
+
+    <div class="services-deliverables__grid" data-aos="fade-up">
+      <article class="services-deliverables__card" *ngFor="let item of deliverables" data-aos="fade-up">
+        <div class="services-deliverables__card-head">
+          <span class="services-deliverables__icon" aria-hidden="true">
+            <i [class]="item.icon"></i>
+          </span>
+          <p class="services-deliverables__label font-le">{{ item.label }}</p>
+        </div>
+
+        <h3 class="services-deliverables__title font-kn">{{ item.title }}</h3>
+        <p class="services-deliverables__description font-kn">{{ item.description }}</p>
+      </article>
+    </div>
+  </div>
+</section>

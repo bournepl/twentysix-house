@@ -1,0 +1,206 @@
+.about-section {
+  position: relative;
+  padding: 6rem 0;
+}
+
+.section-kicker {
+  margin-bottom: 0.95rem;
+  color: #b7893f;
+  letter-spacing: 0.12em;
+  font-size: 0.95rem;
+}
+
+.section-title {
+  margin-bottom: 1rem;
+  color: #10233b;
+  font-size: clamp(1.9rem, 3vw, 2.8rem);
+  line-height: 1.24;
+}
+
+.section-description {
+  color: #607286;
+  font-size: 1.03rem;
+  line-height: 1.88;
+}
+
+.about-workflow {
+  background:
+    radial-gradient(circle at 10% 10%, rgba(204, 219, 236, 0.4), rgba(204, 219, 236, 0) 30%),
+    linear-gradient(180deg, #f9fbfd 0%, #f4f8fd 100%);
+}
+
+.about-workflow__header {
+  max-width: 880px;
+  margin: 0 auto 2.7rem;
+}
+
+.about-workflow__lead {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.about-workflow__main {
+  --bs-gutter-x: 1.25rem;
+}
+
+.about-workflow__aside-col {
+  position: sticky;
+  top: 120px;
+}
+
+.about-workflow__aside {
+  padding: 1.55rem;
+  border-radius: 1.65rem;
+  background: linear-gradient(160deg, rgba(10, 26, 43, 0.98), rgba(21, 42, 66, 0.94));
+  box-shadow: 0 24px 54px rgba(10, 28, 47, 0.16);
+}
+
+.about-workflow__aside-kicker {
+  margin-bottom: 0.55rem;
+  color: #f0c982;
+  font-size: 0.82rem;
+  letter-spacing: 0.14em;
+}
+
+.about-workflow__aside-title {
+  margin-bottom: 0.85rem;
+  color: #ffffff;
+  font-size: 1.25rem;
+  line-height: 1.62;
+}
+
+.about-workflow__aside-copy {
+  margin-bottom: 1.1rem;
+  color: rgba(232, 240, 247, 0.8);
+  font-size: 0.97rem;
+  line-height: 1.82;
+}
+
+.about-workflow__tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.about-workflow__tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 0.92rem;
+  border-radius: 999px;
+  border: 1px solid rgba(233, 239, 246, 0.14);
+  background: rgba(255, 255, 255, 0.08);
+  color: #f2f6fb;
+  font-size: 0.9rem;
+}
+
+.about-workflow__list {
+  display: grid;
+  gap: 1rem;
+}
+
+.about-workflow__card {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.about-workflow__marker {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.about-workflow__marker::after {
+  content: '';
+  position: absolute;
+  left: calc(50% - 1px);
+  top: 58px;
+  bottom: -16px;
+  width: 2px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(183, 137, 63, 0.6), rgba(183, 137, 63, 0.16));
+}
+
+.about-workflow__card:last-child .about-workflow__marker::after {
+  display: none;
+}
+
+.about-workflow__index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  border: 1px solid rgba(161, 117, 43, 0.22);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(245, 237, 223, 0.96));
+  box-shadow: 0 14px 30px rgba(18, 32, 49, 0.08);
+  color: #a1752b;
+  font-size: 0.84rem;
+  letter-spacing: 0.12em;
+}
+
+.about-workflow__body {
+  padding: 1.35rem 1.4rem;
+  border-radius: 1.4rem;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(186, 196, 210, 0.22);
+  box-shadow: 0 16px 36px rgba(16, 35, 59, 0.06);
+}
+
+.about-workflow__card-kicker {
+  margin-bottom: 0.42rem;
+  color: #aa7f3b;
+  font-size: 0.74rem;
+  letter-spacing: 0.16em;
+}
+
+.about-workflow__title {
+  margin-bottom: 0.55rem;
+  color: #10233b;
+  font-size: 1.08rem;
+  line-height: 1.58;
+}
+
+.about-workflow__copy {
+  margin-bottom: 0;
+  color: #657789;
+  font-size: 0.96rem;
+  line-height: 1.78;
+}
+
+@media (max-width: 991.98px) {
+  .about-workflow__aside-col {
+    position: static;
+    top: auto;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .about-section {
+    padding: 4.5rem 0;
+  }
+
+  .section-description {
+    font-size: 1rem;
+    line-height: 1.82;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .about-workflow__card {
+    grid-template-columns: 58px minmax(0, 1fr);
+    gap: 0.75rem;
+  }
+
+  .about-workflow__index {
+    width: 48px;
+    height: 48px;
+    font-size: 0.78rem;
+  }
+
+  .about-workflow__body {
+    padding: 1.1rem 1rem;
+  }
+}

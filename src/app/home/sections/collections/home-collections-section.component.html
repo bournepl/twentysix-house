@@ -1,0 +1,51 @@
+<section class="section home-collections" aria-labelledby="collections-title">
+  <div class="container">
+    <header class="collections-header text-center" data-aos="fade-up">
+      <p class="section-kicker font-le">HOUSE DESIGNS</p>
+      <h2 class="title text-primary font-kn collections-title" id="collections-title">
+        ผลงานออกแบบที่ช่วยให้เห็นภาพของบ้านได้ชัดขึ้นก่อนต่อยอดเป็นแบบจริง
+      </h2>
+      <p class="description font-kn collections-lead">
+        เราเริ่มต้นด้วยชุดผลงานออกแบบ Pure House Design เพื่อให้เจ้าของบ้านเห็นอารมณ์ของบ้าน บรรยากาศ
+        และทิศทางการออกแบบได้ชัดขึ้นจากงานในชุดเดียวกัน ก่อนต่อยอดไปสู่งานออกแบบชุดถัด ๆ ไปในอนาคต
+      </p>
+    </header>
+
+    <div class="collections-board-list" data-aos="fade-up">
+      <article class="collections-board" *ngFor="let collection of collections" data-aos="zoom-in">
+        <figure class="collections-cover">
+          <img class="collections-cover-image" [src]="collection.coverImage" [alt]="collection.coverAlt" />
+          <div class="collections-cover-overlay"></div>
+          <div class="collections-cover-floating-note font-kn">{{ collection.coverCaption }}</div>
+
+          <figcaption class="collections-cover-copy">
+            <p class="collections-board-sequence font-le">{{ collection.sequence }}</p>
+            <h3 class="font-kn collections-board-name">{{ collection.name }}</h3>
+            <p class="font-kn collections-board-title">{{ collection.title }}</p>
+            <p class="font-kn collections-board-description">{{ collection.description }}</p>
+          </figcaption>
+        </figure>
+
+        <div class="collections-preview-grid">
+          <article class="collections-preview-card" *ngFor="let preview of collection.previews">
+            <img class="collections-preview-image" [src]="preview.image" [alt]="preview.alt" />
+            <div class="collections-preview-overlay"></div>
+            <div class="collections-preview-copy">
+              <p class="collections-preview-label font-le">{{ preview.label }}</p>
+              <p class="collections-preview-title font-kn">{{ preview.title }}</p>
+            </div>
+          </article>
+        </div>
+      </article>
+    </div>
+
+    <div class="collections-footer text-center" data-aos="fade-up">
+      <p class="font-kn collections-footer-copy">
+        หมวดผลงานออกแบบจะค่อย ๆ เพิ่มขึ้นต่อจากชุดแรกนี้ เพื่อช่วยให้การเลือกบรรยากาศและทิศทางการออกแบบง่ายขึ้น
+      </p>
+      <a class="btn btn-primary btn-round collections-cta" routerLink="/ourworks/house-designs">
+        ดูผลงานออกแบบทั้งหมด
+      </a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,49 @@
+<section class="section home-services" aria-labelledby="services-title">
+  <div class="container">
+    <div class="row align-items-start">
+      <div class="col-lg-5 mb-5 mb-lg-0" data-aos="fade-right">
+        <p class="section-kicker font-le">Our Services</p>
+        <h2 class="title text-primary font-kn services-title" id="services-title">
+          บริการของเรา ครอบคลุมตั้งแต่แนวคิดจนถึงวันส่งมอบ
+        </h2>
+
+        <p class="description services-lead font-kn">
+          หากคุณกำลังมองหาทีมสำหรับ <strong class="text-bold">ออกแบบบ้านอุดรธานี</strong>,
+          <strong class="text-bold">สร้างบ้านอุดรธานี</strong> หรือผู้รับเหมาที่ดูแลงานอย่างเป็นระบบ
+          นี่คือภาพรวมของบริการที่ Twentysix House ดูแลให้ได้ตั้งแต่ต้นจนจบ
+        </p>
+
+        <div class="services-keywords font-kn" aria-label="คีย์เวิร์ดบริการหลัก">
+          <span class="services-keyword" *ngFor="let keyword of serviceKeywords">{{ keyword }}</span>
+        </div>
+
+        <div class="services-copy-card" data-aos="fade-up">
+          <p class="services-copy-kicker font-le">One Stop Service</p>
+          <h3 class="font-kn services-copy-title">ช่วยให้เจ้าของบ้านเห็นภาพรวมได้ตั้งแต่ต้น</h3>
+          <p class="font-kn services-copy-description">
+            เราวางลำดับงานให้แต่ละขั้นเชื่อมต่อกันอย่างชัดเจน ตั้งแต่คุยความต้องการ วางแผน
+            ออกแบบ ไปจนถึงก่อสร้างและส่งมอบ เพื่อให้เจ้าของบ้านตัดสินใจง่ายขึ้นและมองเห็นทิศทางของโครงการได้ตั้งแต่เริ่ม
+          </p>
+
+          <a class="services-link font-kn" routerLink="/services">
+            ดูรายละเอียดบริการทั้งหมด
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-7" data-aos="fade-left">
+        <div class="services-grid">
+          <article class="service-card" *ngFor="let service of services" data-aos="fade-up">
+            <div class="service-icon-wrap">
+              <img class="img-service" [src]="service.image" [alt]="service.alt" />
+            </div>
+
+            <p class="service-eyebrow font-kn">{{ service.eyebrow }}</p>
+            <h3 class="font-kn service-title">{{ service.title }}</h3>
+            <p class="font-kn service-description">{{ service.description }}</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
