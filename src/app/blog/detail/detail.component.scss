@@ -264,6 +264,71 @@
   padding-left: 1.5rem;
 }
 
+.blog-detail-internal-links {
+  margin-top: 2rem;
+  padding: clamp(1.1rem, 2vw, 1.5rem);
+  border: 1px solid rgba(183, 137, 63, .18);
+  border-radius: 24px;
+  background:
+    linear-gradient(135deg, rgba(248, 245, 239, .96), rgba(255, 253, 248, .96));
+}
+
+.blog-detail-internal-links__kicker {
+  margin-bottom: .35rem;
+  color: #b7893f;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.blog-detail-internal-links__title {
+  margin: 0 0 1rem;
+  color: #102033;
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.blog-detail-internal-links__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .8rem;
+}
+
+.blog-detail-internal-links__item {
+  display: flex;
+  min-width: 0;
+  min-height: 100%;
+  padding: .9rem 1rem;
+  border: 1px solid rgba(16, 32, 51, .08);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, .82);
+  color: #102033;
+  text-decoration: none;
+  flex-direction: column;
+  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+.blog-detail-internal-links__item:hover {
+  border-color: rgba(183, 137, 63, .42);
+  box-shadow: 0 14px 30px rgba(12, 22, 34, .08);
+  color: #102033;
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+
+.blog-detail-internal-links__item span {
+  color: #9b6b21;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.blog-detail-internal-links__item small {
+  margin-top: .35rem;
+  color: #5d6773;
+  font-size: .92rem;
+  line-height: 1.65;
+}
+
 .blog-detail-article__tags {
   display: flex;
   flex-wrap: wrap;
@@ -398,11 +463,13 @@
   margin-top: auto;
   color: #9b6b21;
   font-weight: 700;
+  font-size: 16px;
   text-decoration: none;
 }
 
 .blog-detail-related__link i {
   font-size: .8rem;
+  color: #9b6b21;
 }
 
 .blog-detail-cta {
@@ -456,6 +523,7 @@
 }
 
 .blog-detail-cta__links a {
+  font-size: 24px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -465,6 +533,14 @@
   border-radius: 999px;
   background: rgba(255, 255, 255, .08);
   color: #f3d092;
+  text-decoration: none;
+}
+
+
+.blog-detail-cta__links a:hover {
+  border-color: rgba(227, 186, 114, .52);
+  background: rgba(255, 255, 255, .13);
+  color: #fff7e9;
   text-decoration: none;
 }
 
@@ -508,5 +584,9 @@
 
   .blog-detail-related__meta time {
     text-align: left;
+  }
+
+  .blog-detail-internal-links__grid {
+    grid-template-columns: 1fr;
   }
 }

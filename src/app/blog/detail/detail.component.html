@@ -2,13 +2,7 @@
   <div class="wrapper blog-detail">
     <section class="page-header page-header-lg blog-detail-hero" aria-labelledby="blog-detail-title">
       <div class="page-header-image">
-        <img
-          [src]="blog.pictureUrl"
-          alt=""
-          loading="eager"
-          fetchpriority="high"
-          decoding="async"
-          aria-hidden="true">
+        <img [src]="blog.pictureUrl" alt="" loading="eager" fetchpriority="high" decoding="async" aria-hidden="true">
       </div>
 
       <div class="container">
@@ -82,6 +76,18 @@
               <quill-view-html [content]="blog.content" theme="snow"></quill-view-html>
             </div>
 
+            <nav class="blog-detail-internal-links font-kn" aria-label="อ่านต่อในเว็บไซต์">
+              <p class="blog-detail-internal-links__kicker font-le">CONTINUE READING</p>
+              <h3 class="blog-detail-internal-links__title">อ่านต่อเรื่องที่เกี่ยวข้องกับการสร้างบ้าน</h3>
+              <div class="blog-detail-internal-links__grid">
+                <a class="blog-detail-internal-links__item"
+                  *ngFor="let link of internalLinks; trackBy: trackByInternalLink" [routerLink]="link.route">
+                  <span>{{ link.label }}</span>
+                  <small>{{ link.description }}</small>
+                </a>
+              </div>
+            </nav>
+
             <footer class="blog-detail-article__tags font-kn" *ngIf="blog.tags?.length">
               <span class="blog-detail-article__tags-label">หัวข้อที่เกี่ยวข้อง</span>
               <span class="blog-detail-article__tag" *ngFor="let tag of blog.tags">{{ tag }}</span>
@@ -115,7 +121,7 @@
                 </h3>
                 <p class="blog-detail-related__excerpt font-kn">{{ item.subTitle }}</p>
                 <a class="blog-detail-related__link font-kn" [routerLink]="getBlogUrl(item)">
-                  อ่านต่อ <i class="now-ui-icons arrows-1_minimal-right" aria-hidden="true"></i>
+                  อ่านบทความ {{ item.title }} <i class="now-ui-icons arrows-1_minimal-right" aria-hidden="true"></i>
                 </a>
               </div>
             </article>
@@ -136,15 +142,15 @@
                 แล้วค่อยวางแนวทางให้เหมาะกับการอยู่อาศัยจริง
               </p>
 
-              <div class="blog-detail-cta__links font-kn">
-                <a routerLink="/ourworks/house-designs">ดูแบบบ้าน</a>
-                <a routerLink="/ourworks/real-projects">ดูผลงานจริง</a>
-                <a routerLink="/services">ดูบริการรับสร้างบ้าน</a>
+              <div class="blog-detail-cta__links font-pr">
+                <a routerLink="/ourworks/house-designs">ดูแบบบ้านและแนวคิดการออกแบบ</a>
+                <a routerLink="/ourworks/real-projects">ดูผลงานสร้างบ้านจริง</a>
+                <a routerLink="/services">ดูบริการรับสร้างบ้านอุดรธานี</a>
               </div>
 
               <div class="blog-detail-cta__actions">
-                <a class="btn btn-primary btn-round" routerLink="/contact">ปรึกษาโครงการ</a>
-                <a class="btn btn-secondary btn-round" routerLink="/ourworks">ดูผลงานของเรา</a>
+                <a class="btn btn-primary btn-round" routerLink="/contact">ปรึกษาโครงการสร้างบ้าน</a>
+                <a class="btn btn-secondary btn-round" routerLink="/ourworks">ดูผลงานและแบบบ้านของเรา</a>
               </div>
             </div>
           </div>

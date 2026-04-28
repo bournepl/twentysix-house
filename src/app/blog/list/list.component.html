@@ -130,15 +130,17 @@
               แล้วค่อยวางแนวทางให้เหมาะกับการอยู่อาศัยจริง
             </p>
 
-            <div class="blogs-cta__highlights font-kn">
-              <span class="blogs-cta__highlight" *ngFor="let item of ctaPoints">{{ item }}</span>
+
+
+            <div class="blogs-cta__links font-pr">
+              <a *ngFor="let item of ctaLinks; trackBy: trackByCtaLink" [routerLink]="item.path">
+                {{ item.label }}
+              </a>
             </div>
 
             <div class="blogs-cta__actions">
-              <a class="btn btn-primary btn-round" routerLink="/contact">ปรึกษาโครงการ</a>
-              <a class="btn btn-secondary btn-round" routerLink="/ourworks">ดูผลงานของเรา</a>
-              <a class="btn btn-outline-primary btn-round" routerLink="/services">ดูบริการ</a>
-              <a class="btn btn-outline-primary btn-round" routerLink="/ourworks/real-projects">ดูผลงานจริง</a>
+              <a class="btn btn-primary btn-round" routerLink="/contact">ปรึกษาโครงการสร้างบ้าน</a>
+              <a class="btn btn-secondary btn-round" routerLink="/ourworks">ดูผลงานและแบบบ้านของเรา</a>
             </div>
           </div>
         </div>

@@ -36,10 +36,21 @@ export class ListComponent implements OnInit, OnDestroy {
     },
   ];
 
-  readonly ctaPoints = [
-    'คุยโจทย์ที่ดินและงบประมาณ',
-    'ช่วยแนะนำแนวทางออกแบบบ้าน',
-    'ต่อยอดจากบทความไปสู่แผนงานจริง',
+
+
+  readonly ctaLinks = [
+    {
+      label: 'ดูแบบบ้านและแนวคิดการออกแบบ',
+      path: '/ourworks/house-designs',
+    },
+    {
+      label: 'ดูผลงานสร้างบ้านจริง',
+      path: '/ourworks/real-projects',
+    },
+    {
+      label: 'ดูบริการรับสร้างบ้านอุดรธานี',
+      path: '/services',
+    },
   ];
 
   blogs: Blog[] = [];
@@ -129,6 +140,10 @@ export class ListComponent implements OnInit, OnDestroy {
 
   trackByCategory(index: number, category: string): string {
     return category;
+  }
+
+  trackByCtaLink(index: number, item: { path: string }): string {
+    return item.path;
   }
 
   getBlogId(blog: Blog): string {

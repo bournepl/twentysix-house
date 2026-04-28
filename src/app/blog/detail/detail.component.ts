@@ -9,6 +9,12 @@ import { JsonLdService } from '../../_service/json-ld.service';
 import { SeoService } from '../../_service/seo.service';
 import { environment } from '../../../environments/environment';
 
+interface ArticleInternalLink {
+  label: string;
+  description: string;
+  route: string[];
+}
+
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
@@ -19,6 +25,7 @@ export class DetailComponent implements OnInit, OnDestroy {
 
   getBlogsById?: Blog;
   getBlogs: Blog[] = [];
+  internalLinks: ArticleInternalLink[] = [];
   readonly isBrowser: boolean;
 
   constructor(
@@ -70,6 +77,7 @@ export class DetailComponent implements OnInit, OnDestroy {
         }
 
         this.getBlogsById = blog;
+        this.internalLinks = this.buildInternalLinks(blog);
         this.setMeta(blog);
         this.insertSchemas(blog);
         this.loadRelatedBlogs(blog);
@@ -208,6 +216,48 @@ export class DetailComponent implements OnInit, OnDestroy {
 
   getBlogUrl(blog: Blog): string[] {
     return ['/blogs', this.getBlogSlug(blog)];
+  }
+
+  trackByInternalLink(_: number, link: ArticleInternalLink): string {
+    return link.route.join('/');
+  }
+
+  private buildInternalLinks(blog: Blog): ArticleInternalLink[] {
+    const text = `${blog.title || ''} ${(blog.tags || []).join(' ')} ${this.getCategoryName(blog)}`;
+    const isStructureArticle = /เสาเข็ม|ฐานราก|คอนกรีต|โครงสร้าง/i.test(text);
+    const isDesignArticle = /แบบบ้าน|โมเดิร์น|คลาสสิก|ทรอปิคอล|ออกแบบ/i.test(text);
+
+    const links: ArticleInternalLink[] = [];
+
+    if (isDesignArticle) {
+      links.push({
+        label: 'ดูแบบบ้านและแนวคิดการออกแบบ',
+        description: 'เลือกดูแบบบ้านที่ช่วยให้เห็นฟังก์ชัน พื้นที่ใช้สอย และบรรยากาศบ้านก่อนเริ่มคุยโครงการ',
+        route: ['/ourworks/house-designs'],
+      });
+    }
+
+    if (isStructureArticle) {
+      links.push({
+        label: 'ดูบริการรับสร้างบ้านอุดรธานีครบวงจร',
+        description: 'ดูขั้นตอนการทำงานตั้งแต่คุยโจทย์ วางแผน ออกแบบ ไปจนถึงก่อสร้างและส่งมอบบ้าน',
+        route: ['/services'],
+      });
+    }
+
+    links.push({
+      label: 'ดูผลงานสร้างบ้านจริงในอุดรธานี',
+      description: 'เปรียบเทียบงานจริงหลายสไตล์ พร้อมพื้นที่ใช้สอย ฟังก์ชัน และรายละเอียดโครงการ',
+      route: ['/ourworks/real-projects'],
+    });
+
+    links.push({
+      label: 'ปรึกษาเรื่องบ้านกับ Twentysix House',
+      description: 'ส่งโจทย์ที่ดิน งบประมาณ หรือแบบบ้านที่ชอบ เพื่อให้ทีมช่วยดูแนวทางเริ่มต้น',
+      route: ['/contact'],
+    });
+
+    return links.slice(0, 4);
   }
 
   getAbsoluteBlogUrl(blog: Blog): string {
