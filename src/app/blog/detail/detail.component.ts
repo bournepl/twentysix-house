@@ -1,12 +1,12 @@
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { Subscription } from 'rxjs';
 import { Blog } from '../../_model/blog';
 import { BlogService } from '../../_service/blog.service';
 import { JsonLdService } from '../../_service/json-ld.service';
+import { SeoService } from '../../_service/seo.service';
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -26,10 +26,8 @@ export class DetailComponent implements OnInit, OnDestroy {
     private blogService: BlogService,
     private route: ActivatedRoute,
     private router: Router,
-    private title: Title,
-    private meta: Meta,
+    private seoService: SeoService,
     private jsonLdService: JsonLdService,
-    @Inject(DOCUMENT) private document: Document,
     @Inject(PLATFORM_ID) private platformId: object
   ) {
     this.isBrowser = isPlatformBrowser(this.platformId);
@@ -114,28 +112,22 @@ export class DetailComponent implements OnInit, OnDestroy {
       'สร้างบ้านอุดรธานี',
       'ออกแบบบ้านอุดรธานี',
       'Twentysix House'
-    ].filter(Boolean).join(', ');
+    ].filter(Boolean);
 
-    this.title.setTitle(`${blog.title} | บทความสร้างบ้าน Twentysix House`);
-    this.setCanonical(url);
-
-    this.meta.updateTag({ name: 'description', content: description });
-    this.meta.updateTag({ name: 'keywords', content: keywords });
-    this.meta.updateTag({ name: 'robots', content: 'index, follow, max-image-preview:large' });
-    this.meta.updateTag({ name: 'author', content: 'Twentysix House' });
-    this.meta.updateTag({ property: 'og:locale', content: 'th_TH' });
-    this.meta.updateTag({ property: 'og:site_name', content: 'Twentysix House' });
-    this.meta.updateTag({ property: 'og:type', content: 'article' });
-    this.meta.updateTag({ property: 'og:title', content: blog.title });
-    this.meta.updateTag({ property: 'og:description', content: description });
-    this.meta.updateTag({ property: 'og:image', content: image });
-    this.meta.updateTag({ property: 'og:url', content: url });
-    this.meta.updateTag({ property: 'article:published_time', content: this.getBlogDateIso(blog) });
-    this.meta.updateTag({ property: 'article:modified_time', content: this.getBlogDateIso(blog) });
-    this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
-    this.meta.updateTag({ name: 'twitter:title', content: blog.title });
-    this.meta.updateTag({ name: 'twitter:description', content: description });
-    this.meta.updateTag({ name: 'twitter:image', content: image });
+    this.seoService.updatePageSeo({
+      title: `${blog.title} | บทความสร้างบ้าน Twentysix House`,
+      description,
+      image,
+      url,
+      keywords,
+      robots: 'index, follow, max-image-preview:large',
+      ogType: 'article',
+      extraTags: [
+        { name: 'author', content: 'Twentysix House' },
+        { property: 'article:published_time', content: this.getBlogDateIso(blog) },
+        { property: 'article:modified_time', content: this.getBlogDateIso(blog) },
+      ],
+    });
   }
 
   private insertSchemas(blog: Blog): void {
@@ -181,7 +173,7 @@ export class DetailComponent implements OnInit, OnDestroy {
             {
               '@type': 'ListItem',
               position: 1,
-              name: 'หน้าแรก',
+              name: 'หน้าหลัก',
               item: `${environment.siteUrl}/`,
             },
             {
@@ -256,18 +248,6 @@ export class DetailComponent implements OnInit, OnDestroy {
     }
 
     return `${environment.siteUrl}/${path.replace(/^\/+/, '')}`;
-  }
-
-  private setCanonical(url: string): void {
-    let link = this.document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-
-    if (!link) {
-      link = this.document.createElement('link');
-      link.setAttribute('rel', 'canonical');
-      this.document.head.appendChild(link);
-    }
-
-    link.setAttribute('href', url);
   }
 
   private shouldReplaceWithSlugUrl(routeValue: string, blog: Blog): boolean {

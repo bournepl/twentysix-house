@@ -8,7 +8,7 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     component: HouseDesignsComponent,
-    title: 'แบบบ้านและแนวคิดออกแบบบ้าน | Twentysix House อุดรธานี',
+    title: 'แบบบ้านพร้อมแนวคิดการออกแบบ | Twentysix House',
     data: {
       sitemap: true,
       canonical: '/ourworks/house-designs',
@@ -16,30 +16,12 @@ const routes: Routes = [
         {
           name: 'description',
           content:
-            'รวมแบบบ้านและแนวคิดออกแบบบ้านของ Twentysix House อุดรธานี เพื่อช่วยให้เห็นทิศทางเรื่องรูปทรง สัดส่วน วัสดุ แสง และบรรยากาศของบ้านก่อนเริ่มคุยโครงการจริง',
+            'รวมแบบบ้านและแนวคิดการออกแบบจาก Twentysix House สำหรับเจ้าของบ้านที่หาไอเดียฟังก์ชัน พื้นที่ใช้สอย และสไตล์บ้าน',
         },
         {
           name: 'keywords',
           content:
-            'แบบบ้าน, แบบบ้านอุดรธานี, ผลงานออกแบบบ้าน, แนวคิดออกแบบบ้าน, แบบบ้านโมเดิร์น, แบบบ้านนอร์ดิก, รับสร้างบ้านอุดรธานี, Twentysix House',
-        },
-        {
-          name: 'robots',
-          content: 'index, follow',
-        },
-        {
-          property: 'og:title',
-          content: 'แบบบ้านและแนวคิดออกแบบบ้าน | Twentysix House อุดรธานี',
-        },
-        {
-          property: 'og:description',
-          content:
-            'ดูแบบบ้านของ Twentysix House อุดรธานี เพื่อหาแนวทางเรื่องรูปทรง สัดส่วน วัสดุ แสง และบรรยากาศของบ้านก่อนเริ่มพัฒนาเป็นโครงการจริง',
-        },
-        {
-          property: 'og:image',
-          content:
-            'https://firebasestorage.googleapis.com/v0/b/tewntysix-house.appspot.com/o/head.webp?alt=media&token=b53fc010-7a3c-49e3-8039-1cfed666e1ec',
+            'แบบบ้าน, แบบบ้านพร้อมสร้าง, ผลงานออกแบบบ้าน, ออกแบบบ้านอุดรธานี, แบบบ้านโมเดิร์น, แบบบ้านนอร์ดิก, รับสร้างบ้านอุดรธานี, Twentysix House',
         },
       ],
     },
@@ -53,19 +35,7 @@ const routes: Routes = [
       meta: [
         {
           name: 'description',
-          content: 'รายละเอียดแบบบ้าน แนวคิดการออกแบบ และบรรยากาศของบ้านจาก Twentysix House',
-        },
-        {
-          name: 'robots',
-          content: 'index, follow',
-        },
-        {
-          property: 'og:title',
-          content: 'รายละเอียดแบบบ้าน | Twentysix House',
-        },
-        {
-          property: 'og:description',
-          content: 'ดูแนวคิดของแบบบ้านและใช้เป็นจุดเริ่มต้นในการคุยโครงการกับทีม Twentysix House',
+          content: 'รายละเอียดแบบบ้านพร้อมแนวคิดการออกแบบ ฟังก์ชันใช้งาน และภาพรวมของแต่ละแบบจาก Twentysix House',
         },
       ],
     },

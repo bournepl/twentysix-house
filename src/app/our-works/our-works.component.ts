@@ -47,17 +47,20 @@ export class OurWorksComponent implements OnInit, OnDestroy {
     {
       icon: 'now-ui-icons business_bank',
       title: 'ดูบ้านจริงเพื่อเช็กคุณภาพ',
-      description: 'เหมาะกับการดูภาพรวมของบ้านหลังสร้างเสร็จ ทั้งรายละเอียดงาน บรรยากาศ และมาตรฐานการก่อสร้าง',
+      description:
+        'เหมาะกับการดูภาพรวมของบ้านหลังสร้างเสร็จ ทั้งรายละเอียดงาน บรรยากาศ และมาตรฐานการก่อสร้าง',
     },
     {
       icon: 'now-ui-icons design-2_ruler-pencil',
       title: 'ดูแบบบ้านเพื่อหาแนวทาง',
-      description: 'เหมาะกับการหาไอเดียเรื่องรูปแบบบ้าน การจัดพื้นที่ แสง และบรรยากาศที่อยากให้เกิดขึ้นในบ้านของคุณ',
+      description:
+        'เหมาะกับการหาไอเดียเรื่องรูปแบบบ้าน การจัดพื้นที่ แสง และบรรยากาศที่อยากให้เกิดขึ้นในบ้านของคุณ',
     },
     {
       icon: 'now-ui-icons ui-2_chat-round',
       title: 'เจอแบบที่ชอบแล้วคุยต่อได้',
-      description: 'ใช้ผลงานที่สนใจเป็นตัวอย่างในการคุยเรื่องที่ดิน งบประมาณ พื้นที่ใช้งาน และแนวทางออกแบบกับทีมของเราได้เลย',
+      description:
+        'ใช้ผลงานที่สนใจเป็นตัวอย่างในการคุยเรื่องที่ดิน งบประมาณ พื้นที่ใช้งาน และแนวทางออกแบบกับทีมของเราได้เลย',
     },
   ];
 
@@ -187,7 +190,7 @@ export class OurWorksComponent implements OnInit, OnDestroy {
       '@type': 'ItemList',
       '@id': `${environment.siteUrl}/ourworks#itemlist`,
       name: 'หมวดผลงานของเรา',
-      description: 'หมวดผลงานบ้านที่สร้างจริงและผลงานออกแบบบ้านของ Twentysix House',
+      description: 'หมวดผลงานบ้านที่สร้างจริงและแบบบ้านของ Twentysix House',
       itemListElement: [
         {
           '@type': 'ListItem',
@@ -198,7 +201,7 @@ export class OurWorksComponent implements OnInit, OnDestroy {
         {
           '@type': 'ListItem',
           position: 2,
-          name: 'ผลงานออกแบบบ้าน',
+          name: 'แบบบ้าน',
           url: `${environment.siteUrl}/ourworks/house-designs`,
         },
       ],
@@ -215,7 +218,7 @@ export class OurWorksComponent implements OnInit, OnDestroy {
         {
           '@type': 'ListItem',
           position: 1,
-          name: 'หน้าแรก',
+          name: 'หน้าหลัก',
           item: environment.siteUrl
         },
         {

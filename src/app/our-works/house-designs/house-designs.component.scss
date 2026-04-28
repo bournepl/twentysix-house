@@ -83,7 +83,7 @@
   font-size: 0.92rem;
 }
 
-.house-designs-hero__breadcrumbs .breadcrumb-item + .breadcrumb-item::before {
+.house-designs-hero__breadcrumbs .breadcrumb-item+.breadcrumb-item::before {
   color: rgba(210, 171, 98, 0.7);
 }
 
@@ -373,6 +373,7 @@
   margin-bottom: 1rem;
   color: #5d6974;
   line-height: 1.85;
+  font-size: 1.2rem;
 }
 
 .house-designs-list__concept {
@@ -401,6 +402,7 @@
   margin: 0;
   color: #334352;
   line-height: 1.7;
+  font-size: 1rem;
 }
 
 .house-designs-list__highlights {

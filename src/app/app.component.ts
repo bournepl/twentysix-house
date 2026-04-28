@@ -4,10 +4,8 @@ import { isPlatformBrowser } from '@angular/common';
 import { filter, Subscription } from 'rxjs';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import Aos from 'aos';
-import { Meta, Title } from '@angular/platform-browser';
-import { CanonicalService } from './_service/canonical.service';
 import { GtmService } from './_service/gtm.service';
-import { environment } from '../environments/environment';
+import { SeoService } from './_service/seo.service';
 
 @Component({
   selector: 'app-root',
@@ -17,32 +15,14 @@ import { environment } from '../environments/environment';
 export class AppComponent implements OnInit, OnDestroy {
   title = 'twentysix-house';
   private _router: Subscription;
-  private readonly managedMetaSelectors = [
-    'name="description"',
-    'name="keywords"',
-    'name="robots"',
-    'name="twitter:card"',
-    'name="twitter:title"',
-    'name="twitter:description"',
-    'name="twitter:image"',
-    'property="og:title"',
-    'property="og:description"',
-    'property="og:url"',
-    'property="og:image"',
-    'property="og:type"',
-    'property="og:site_name"',
-    'property="og:locale"',
-  ];
 
   @ViewChild(NavbarComponent) navbar: NavbarComponent;
 
   isLoggedIn = false;
 
   constructor(
-    private canonical: CanonicalService,
+    private seoService: SeoService,
     private gtm: GtmService,
-    private titleService: Title,
-    private metaService: Meta,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: object) {
@@ -51,72 +31,13 @@ export class AppComponent implements OnInit, OnDestroy {
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
       .subscribe((event) => {
         const route = this.getChild(this.activatedRoute);
-        this.applyRouteSeo(route, event.urlAfterRedirects);
+        this.seoService.applyRouteSeo(route, event.urlAfterRedirects);
       });
   }
 
   getChild(route: ActivatedRoute): ActivatedRoute {
     while (route.firstChild) route = route.firstChild;
     return route;
-  }
-
-  private applyRouteSeo(route: ActivatedRoute, currentUrl: string): void {
-    const pageTitle = route.snapshot.title;
-    const routeMeta = Array.isArray(route.snapshot.data['meta']) ? [...route.snapshot.data['meta']] : [];
-    const canonicalPath = route.snapshot.data['canonical'] || currentUrl;
-    const canonicalUrl = this.toAbsoluteUrl(canonicalPath);
-
-    if (pageTitle) {
-      this.titleService.setTitle(pageTitle);
-    }
-
-    const description = routeMeta.find((tag: any) => tag.name === 'description')?.content;
-    const ogImage = routeMeta.find((tag: any) => tag.property === 'og:image')?.content;
-
-    if (!routeMeta.some((tag: any) => tag.property === 'og:url')) {
-      routeMeta.push({ property: 'og:url', content: canonicalUrl });
-    }
-
-    if (!routeMeta.some((tag: any) => tag.property === 'og:type')) {
-      routeMeta.push({ property: 'og:type', content: 'website' });
-    }
-
-    if (!routeMeta.some((tag: any) => tag.property === 'og:site_name')) {
-      routeMeta.push({ property: 'og:site_name', content: 'Twentysix House' });
-    }
-
-    if (!routeMeta.some((tag: any) => tag.property === 'og:locale')) {
-      routeMeta.push({ property: 'og:locale', content: 'th_TH' });
-    }
-
-    if (!routeMeta.some((tag: any) => tag.name === 'twitter:card')) {
-      routeMeta.push({ name: 'twitter:card', content: 'summary_large_image' });
-    }
-
-    if (pageTitle && !routeMeta.some((tag: any) => tag.name === 'twitter:title')) {
-      routeMeta.push({ name: 'twitter:title', content: pageTitle });
-    }
-
-    if (description && !routeMeta.some((tag: any) => tag.name === 'twitter:description')) {
-      routeMeta.push({ name: 'twitter:description', content: description });
-    }
-
-    if (ogImage && !routeMeta.some((tag: any) => tag.name === 'twitter:image')) {
-      routeMeta.push({ name: 'twitter:image', content: ogImage });
-    }
-
-    this.managedMetaSelectors.forEach((selector) => this.metaService.removeTag(selector));
-    routeMeta.forEach((tag: any) => this.metaService.updateTag(tag));
-    this.canonical.setCanonicalURL(canonicalUrl);
-  }
-
-  private toAbsoluteUrl(pathOrUrl: string): string {
-    if (/^https?:\/\//i.test(pathOrUrl)) {
-      return pathOrUrl;
-    }
-
-    const normalizedPath = pathOrUrl.startsWith('/') ? pathOrUrl : `/${pathOrUrl}`;
-    return `${environment.siteUrl}${normalizedPath === '/' ? '' : normalizedPath}`;
   }
 
   ngOnInit() {

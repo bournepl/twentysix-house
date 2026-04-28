@@ -1,7 +1,15 @@
 <ng-container *ngIf="getBlogsById as blog">
   <div class="wrapper blog-detail">
     <section class="page-header page-header-lg blog-detail-hero" aria-labelledby="blog-detail-title">
-      <div class="page-header-image" [style.background-image]="'url(' + blog.pictureUrl + ')'"></div>
+      <div class="page-header-image">
+        <img
+          [src]="blog.pictureUrl"
+          alt=""
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+          aria-hidden="true">
+      </div>
 
       <div class="container">
         <div class="blog-detail-hero__shell">

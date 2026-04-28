@@ -8,7 +8,7 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     component: RealProjectsComponent,
-    title: 'ผลงานบ้านจริงอุดรธานี | ตัวอย่างบ้านที่สร้างโดย Twentysix House',
+    title: 'ผลงานสร้างบ้านจริงในอุดรธานี | Twentysix House',
     data: {
       sitemap: true,
       canonical: '/ourworks/real-projects',
@@ -16,62 +16,28 @@ const routes: Routes = [
         {
           name: 'description',
           content:
-            'รวมผลงานบ้านที่สร้างจริงโดย Twentysix House อุดรธานี เพื่อให้เห็นคุณภาพงานก่อสร้าง รายละเอียดของบ้าน และบรรยากาศการอยู่อาศัยจากโครงการจริง'
+            'รวมผลงานสร้างบ้านจริงของ Twentysix House ในอุดรธานี ทั้งบ้านพักอาศัย บ้านชั้นเดียว และโครงการที่ออกแบบตามโจทย์ลูกค้า',
         },
         {
           name: 'keywords',
           content:
-            'ผลงานจริง, ผลงานบ้านจริง, ตัวอย่างบ้านจริง, รับสร้างบ้านอุดรธานี, ผลงานก่อสร้างบ้าน, Twentysix House'
+            'ผลงานสร้างบ้านจริง, ผลงานก่อสร้างบ้านจริง, รับสร้างบ้านอุดรธานี, สร้างบ้านอุดรธานี, Twentysix House',
         },
-        {
-          name: 'robots',
-          content: 'index, follow'
-        },
-        {
-          property: 'og:title',
-          content: 'ผลงานบ้านจริงอุดรธานี | ตัวอย่างบ้านที่สร้างโดย Twentysix House'
-        },
-        {
-          property: 'og:description',
-          content:
-            'ดูตัวอย่างบ้านที่สร้างจริงโดย Twentysix House อุดรธานี เพื่อเห็นคุณภาพงานก่อสร้าง รายละเอียดของบ้าน และแนวทางการอยู่อาศัยจากโครงการจริง'
-        },
-        {
-          property: 'og:image',
-          content: 'https://firebasestorage.googleapis.com/v0/b/tewntysix-house.appspot.com/o/head.webp?alt=media&token=b53fc010-7a3c-49e3-8039-1cfed666e1ec'
-        }
       ]
     }
   },
   {
     path: ':slug',
     component: RealProjectDetailComponent,
-    title: 'รายละเอียดผลงานจริง | Twentysix House',
+    title: 'ผลงานสร้างบ้านจริง | Twentysix House',
     data: {
       sitemap: false,
       meta: [
         {
           name: 'description',
           content:
-            'รายละเอียดผลงานบ้านที่สร้างจริงโดย Twentysix House พร้อมภาพรวมโครงการ แนวคิดการออกแบบ และข้อมูลสำหรับใช้คุยต่อกับทีมงาน'
+            'รายละเอียดผลงานสร้างบ้านจริงจาก Twentysix House พร้อมภาพรวมการออกแบบ ฟังก์ชันใช้งาน และแนวคิดของแต่ละโครงการ',
         },
-        {
-          name: 'robots',
-          content: 'index, follow'
-        },
-        {
-          property: 'og:title',
-          content: 'รายละเอียดผลงานจริง | Twentysix House'
-        },
-        {
-          property: 'og:description',
-          content:
-            'ดูรายละเอียดผลงานบ้านที่สร้างจริงโดย Twentysix House พร้อมข้อมูลโครงการและแนวคิดการออกแบบ'
-        },
-        {
-          property: 'og:image',
-          content: 'https://firebasestorage.googleapis.com/v0/b/tewntysix-house.appspot.com/o/head.webp?alt=media&token=b53fc010-7a3c-49e3-8039-1cfed666e1ec'
-        }
       ]
     }
   },

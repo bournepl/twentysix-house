@@ -24,8 +24,8 @@
           </div>
 
           <p class="blogs-hero__lead font-kn">
-            รวมความรู้สำหรับคนที่กำลังวางแผนสร้างบ้านในอุดรธานี ตั้งแต่การเลือกแนวทางออกแบบ
-            การจัดพื้นที่ใช้งาน วัสดุ งานโครงสร้าง ไปจนถึงเรื่องที่ควรถามก่อนเริ่มโครงการจริง
+            รวมความรู้สำหรับคนที่กำลังวางแผนสร้างบ้านในอุดรธานี ตั้งแต่การเลือกแนวทางออกแบบ การจัดพื้นที่ใช้งาน
+            วัสดุ งานโครงสร้าง ไปจนถึงเรื่องที่ควรถามก่อนเริ่มโครงการจริง
           </p>
 
           <div class="blogs-hero__actions">
@@ -44,52 +44,6 @@
   </section>
 
   <div class="main blogs-main">
-    <!--    <section class="blogs-featured about-section" *ngIf="featuredBlog as featured"
-      aria-labelledby="blogs-featured-title">
-      <div class="container">
-        <div class="blogs-featured__header" data-aos="fade-up">
-          <div>
-            <p class="blogs-section__kicker font-le">FEATURED ARTICLE</p>
-            <h2 class="blogs-section__title font-kn" id="blogs-featured-title">
-              บทความแนะนำสำหรับเริ่มต้นวางแผนบ้าน
-            </h2>
-          </div>
-        </div>
-
-        <article class="blogs-featured__article" data-aos="fade-up" itemscope itemtype="https://schema.org/BlogPosting">
-          <a class="blogs-featured__media" [routerLink]="getBlogUrl(featured)"
-            [attr.aria-label]="'อ่านบทความ ' + featured.title">
-            <img [src]="featured.pictureUrl" [alt]="featured.title + ' โดย Twentysix House'" itemprop="image" />
-          </a>
-
-          <div class="blogs-featured__body">
-            <div class="blogs-featured__meta font-kn">
-              <span itemprop="articleSection">{{ getCategoryName(featured) }}</span>
-              <time [attr.datetime]="featured.date" itemprop="datePublished">
-                {{ featured.date | date:'longDate' }}
-              </time>
-            </div>
-
-            <h3 class="blogs-featured__title font-kn" itemprop="headline">
-              <a [routerLink]="getBlogUrl(featured)" itemprop="url">{{ featured.title }}</a>
-            </h3>
-
-            <p class="blogs-featured__description font-kn" itemprop="description">
-              {{ featured.subTitle }}
-            </p>
-
-            <div class="blogs-featured__tags font-kn" *ngIf="featured.tags?.length">
-              <span *ngFor="let tag of featured.tags">{{ tag }}</span>
-            </div>
-
-            <a class="btn btn-primary btn-round blogs-featured__link" [routerLink]="getBlogUrl(featured)">
-              อ่านบทความ
-            </a>
-          </div>
-        </article>
-      </div>
-    </section>-->
-
     <section class="blogs-list about-section" aria-labelledby="blogs-list-title">
       <div class="container">
         <div class="blogs-list__intro" data-aos="fade-up">
@@ -183,6 +137,8 @@
             <div class="blogs-cta__actions">
               <a class="btn btn-primary btn-round" routerLink="/contact">ปรึกษาโครงการ</a>
               <a class="btn btn-secondary btn-round" routerLink="/ourworks">ดูผลงานของเรา</a>
+              <a class="btn btn-outline-primary btn-round" routerLink="/services">ดูบริการ</a>
+              <a class="btn btn-outline-primary btn-round" routerLink="/ourworks/real-projects">ดูผลงานจริง</a>
             </div>
           </div>
         </div>

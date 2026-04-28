@@ -1,11 +1,10 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Component, HostListener, Inject, OnDestroy, PLATFORM_ID } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of, switchMap, map, tap } from 'rxjs';
-import { CanonicalService } from '../../../_service/canonical.service';
 import { JsonLdService } from '../../../_service/json-ld.service';
 import { RealProjectsService } from '../../../_service/real-projects.service';
+import { SeoService } from '../../../_service/seo.service';
 import { RealProject } from '../../../_model/real-project';
 import { environment } from '../../../../environments/environment';
 import Aos from 'aos';
@@ -54,9 +53,7 @@ export class RealProjectDetailComponent implements OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private realProjectsService: RealProjectsService,
-    private title: Title,
-    private meta: Meta,
-    private canonical: CanonicalService,
+    private seoService: SeoService,
     private jsonLdService: JsonLdService,
     @Inject(PLATFORM_ID) private platformId: object
   ) {}
@@ -127,22 +124,15 @@ export class RealProjectDetailComponent implements OnDestroy {
     const keywords = [...new Set([...project.categories, ...project.tags, 'Twentysix House'])].join(', ');
     const description = this.trimDescription(project.excerpt);
 
-    this.title.setTitle(title);
-    this.meta.updateTag({ name: 'description', content: description });
-    this.meta.updateTag({ name: 'keywords', content: keywords });
-    this.meta.updateTag({ name: 'robots', content: 'index, follow' });
-    this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
-    this.meta.updateTag({ property: 'og:title', content: title });
-    this.meta.updateTag({ property: 'og:description', content: description });
-    this.meta.updateTag({ property: 'og:image', content: imageUrl });
-    this.meta.updateTag({ property: 'og:url', content: url });
-    this.meta.updateTag({ property: 'og:type', content: 'article' });
-    this.meta.updateTag({ property: 'og:site_name', content: 'Twentysix House' });
-    this.meta.updateTag({ property: 'og:locale', content: 'th_TH' });
-    this.meta.updateTag({ name: 'twitter:title', content: title });
-    this.meta.updateTag({ name: 'twitter:description', content: description });
-    this.meta.updateTag({ name: 'twitter:image', content: imageUrl });
-    this.canonical.setCanonicalURL(url);
+    this.seoService.updatePageSeo({
+      title,
+      description,
+      image: imageUrl,
+      url,
+      keywords,
+      robots: 'index, follow',
+      ogType: 'article',
+    });
 
     this.jsonLdService.insertSchema('real-project-detail', {
       '@context': 'https://schema.org',
@@ -177,7 +167,7 @@ export class RealProjectDetailComponent implements OnDestroy {
             {
               '@type': 'ListItem',
               position: 1,
-              name: 'หน้าแรก',
+              name: 'หน้าหลัก',
               item: `${environment.siteUrl}/`,
             },
             {
@@ -209,19 +199,12 @@ export class RealProjectDetailComponent implements OnDestroy {
     const title = 'ไม่พบผลงานจริง | Twentysix House';
     const description = 'ไม่พบรายละเอียดผลงานจริงที่คุณต้องการ กรุณากลับไปเลือกดูผลงานจริงทั้งหมดของ Twentysix House';
 
-    this.title.setTitle(title);
-    this.meta.updateTag({ name: 'description', content: description });
-    this.meta.updateTag({ name: 'robots', content: 'noindex, follow' });
-    this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
-    this.meta.updateTag({ name: 'twitter:title', content: title });
-    this.meta.updateTag({ name: 'twitter:description', content: description });
-    this.meta.updateTag({ property: 'og:title', content: title });
-    this.meta.updateTag({ property: 'og:description', content: description });
-    this.meta.updateTag({ property: 'og:url', content: url });
-    this.meta.updateTag({ property: 'og:type', content: 'website' });
-    this.meta.updateTag({ property: 'og:site_name', content: 'Twentysix House' });
-    this.meta.updateTag({ property: 'og:locale', content: 'th_TH' });
-    this.canonical.setCanonicalURL(url);
+    this.seoService.updatePageSeo({
+      title,
+      description,
+      url,
+      robots: 'noindex, follow',
+    });
   }
 
   private toAbsoluteAssetUrl(pathOrUrl: string): string {

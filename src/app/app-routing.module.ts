@@ -8,7 +8,7 @@ const routes: Routes = [
    ========================= */
   {
     path: '',
-    title: 'รับสร้างบ้านอุดรธานี | บริษัทรับสร้างบ้านอุดรธานี Twentysix House',
+    title: 'รับสร้างบ้านอุดรธานี | Twentysix House',
     data: {
       sitemap: true,
       canonical: '/',
@@ -29,7 +29,7 @@ const routes: Routes = [
         },
         {
           property: 'og:title',
-          content: 'รับสร้างบ้านอุดรธานี | บริษัทรับสร้างบ้านอุดรธานี Twentysix House'
+          content: 'รับสร้างบ้านอุดรธานี | Twentysix House'
         },
         {
           property: 'og:description',

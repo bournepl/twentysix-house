@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { GoogleMapsModule } from '@angular/google-maps';
 import { NgxFastMarqueeModule } from 'ngx-fast-marquee';
 import { HomeHeroSectionComponent } from './sections/hero/home-hero-section.component';
 import { HomeIntroSectionComponent } from './sections/intro/home-intro-section.component';
@@ -37,7 +36,6 @@ import { HomeContactSectionComponent } from './sections/contact/home-contact-sec
     CommonModule,
     NgbModule,
     NgxFastMarqueeModule,
-    GoogleMapsModule,
     HomeRoutingModule,
   ]
 })

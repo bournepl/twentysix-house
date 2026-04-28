@@ -1,13 +1,12 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Component, HostListener, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { map, of, switchMap, tap } from 'rxjs';
 import Aos from 'aos';
 import { HouseDesign } from '../../../_model/house-design';
-import { CanonicalService } from '../../../_service/canonical.service';
 import { HouseDesignsService } from '../../../_service/house-designs.service';
 import { JsonLdService } from '../../../_service/json-ld.service';
+import { SeoService } from '../../../_service/seo.service';
 import { environment } from '../../../../environments/environment';
 
 interface HouseDesignDetailViewModel {
@@ -32,9 +31,7 @@ export class HouseDesignDetailComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private houseDesignsService: HouseDesignsService,
-    private title: Title,
-    private meta: Meta,
-    private canonical: CanonicalService,
+    private seoService: SeoService,
     private jsonLdService: JsonLdService,
     @Inject(PLATFORM_ID) private platformId: object
   ) {
@@ -123,21 +120,14 @@ export class HouseDesignDetailComponent implements OnInit, OnDestroy {
     const pageTitle = `${design.title} | แบบบ้าน Twentysix House`;
     const description = this.trimDescription(design.excerpt);
 
-    this.title.setTitle(pageTitle);
-    this.meta.updateTag({ name: 'description', content: description });
-    this.meta.updateTag({ property: 'og:title', content: pageTitle });
-    this.meta.updateTag({ property: 'og:description', content: description });
-    this.meta.updateTag({ property: 'og:image', content: this.toAbsoluteAssetUrl(design.coverImage) });
-    this.meta.updateTag({ property: 'og:type', content: 'article' });
-    this.meta.updateTag({ property: 'og:url', content: `${environment.siteUrl}${url}` });
-    this.meta.updateTag({ property: 'og:site_name', content: 'Twentysix House' });
-    this.meta.updateTag({ property: 'og:locale', content: 'th_TH' });
-    this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
-    this.meta.updateTag({ name: 'twitter:title', content: pageTitle });
-    this.meta.updateTag({ name: 'twitter:description', content: description });
-    this.meta.updateTag({ name: 'twitter:image', content: this.toAbsoluteAssetUrl(design.coverImage) });
-    this.meta.updateTag({ name: 'robots', content: 'index, follow' });
-    this.canonical.setCanonicalURL(url);
+    this.seoService.updatePageSeo({
+      title: pageTitle,
+      description,
+      image: this.toAbsoluteAssetUrl(design.coverImage),
+      url,
+      robots: 'index, follow',
+      ogType: 'article',
+    });
   }
 
   private setDesignJsonLd(design: HouseDesign): void {
@@ -172,7 +162,7 @@ export class HouseDesignDetailComponent implements OnInit, OnDestroy {
             {
               '@type': 'ListItem',
               position: 1,
-              name: 'หน้าแรก',
+              name: 'หน้าหลัก',
               item: `${environment.siteUrl}/`,
             },
             {
@@ -200,13 +190,12 @@ export class HouseDesignDetailComponent implements OnInit, OnDestroy {
   }
 
   private setNotFoundSeo(): void {
-    this.title.setTitle('ไม่พบแบบบ้าน | Twentysix House');
-    this.meta.updateTag({
-      name: 'description',
-      content: 'ไม่พบแบบบ้านที่คุณกำลังค้นหา กรุณากลับไปยังหน้ารวมแบบบ้านของ Twentysix House',
+    this.seoService.updatePageSeo({
+      title: 'ไม่พบแบบบ้าน | Twentysix House',
+      description: 'ไม่พบแบบบ้านที่คุณกำลังค้นหา กรุณากลับไปยังหน้ารวมแบบบ้านของ Twentysix House',
+      canonicalPath: '/ourworks/house-designs',
+      robots: 'noindex, follow',
     });
-    this.meta.updateTag({ name: 'robots', content: 'noindex, follow' });
-    this.canonical.setCanonicalURL('/ourworks/house-designs');
     this.jsonLdService.removeSchema('house-design-detail');
   }
 
