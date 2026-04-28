@@ -18,8 +18,8 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(7, 18, 30, .62), rgba(7, 18, 30, .86) 58%, rgba(7, 18, 30, .96)),
-    radial-gradient(circle at 18% 16%, rgba(210, 171, 98, .2), transparent 34%);
+    linear-gradient(110deg, rgba(8, 12, 18, 0.68) 0%, rgba(8, 12, 18, 0.52) 42%, rgba(8, 12, 18, 0.24) 100%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.08) 14%, rgba(8, 12, 18, 0.16) 28%, rgba(8, 12, 18, 0.5) 100%);
 }
 
 .contact-hero .container {
@@ -485,6 +485,7 @@
 }
 
 @media (max-width: 1199.98px) {
+
   .contact-channels__grid,
   .contact-trust__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -492,6 +493,7 @@
 }
 
 @media (max-width: 991.98px) {
+
   .contact-hero__meta,
   .contact-office__grid,
   .contact-prep__grid {

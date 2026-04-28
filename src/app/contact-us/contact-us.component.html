@@ -1,6 +1,6 @@
 <div class="wrapper contact-page">
   <section class="page-header page-header-lg contact-hero" aria-labelledby="contact-hero-title">
-    <div class="page-header-image" style="background-image: url('assets/img/home/16125.webp');"></div>
+    <div class="page-header-image" style="background-image: url('assets/img/house-design/collection1/10.jpg');"></div>
 
     <div class="container">
       <div class="contact-hero__shell">
@@ -62,7 +62,8 @@
         <div class="contact-channels__grid">
           <a class="contact-channels__card" *ngFor="let channel of contactChannels; trackBy: trackByLabel"
             [class.contact-channels__card--primary]="channel.primary" [href]="channel.href"
-            [attr.target]="channel.external ? '_blank' : null" [attr.rel]="channel.external ? 'noopener noreferrer' : null">
+            [attr.target]="channel.external ? '_blank' : null"
+            [attr.rel]="channel.external ? 'noopener noreferrer' : null">
             <span class="contact-channels__icon" aria-hidden="true">
               <i [class]="channel.icon"></i>
             </span>
@@ -85,7 +86,8 @@
               ข้อมูลบริษัทและที่ตั้งสำนักงาน
             </h2>
             <p class="contact-section__lead font-kn">
-              หากต้องการเข้ามาคุยรายละเอียดที่สำนักงาน สามารถโทรนัดหมายล่วงหน้าเพื่อให้ทีมงานเตรียมข้อมูลเบื้องต้นได้ครบถ้วน
+              หากต้องการเข้ามาคุยรายละเอียดที่สำนักงาน
+              สามารถโทรนัดหมายล่วงหน้าเพื่อให้ทีมงานเตรียมข้อมูลเบื้องต้นได้ครบถ้วน
             </p>
 
             <address class="contact-office__address font-kn" itemscope itemtype="https://schema.org/PostalAddress">
@@ -119,12 +121,14 @@
               เตรียมข้อมูลนิดเดียว คุยเรื่องบ้านได้ชัดขึ้น
             </h2>
             <p class="contact-section__lead font-kn">
-              ไม่จำเป็นต้องมีข้อมูลครบทุกข้อก่อนติดต่อ แต่หากมีข้อมูลเหล่านี้ ทีมงานจะช่วยประเมินแนวทางเบื้องต้นได้เร็วขึ้น
+              ไม่จำเป็นต้องมีข้อมูลครบทุกข้อก่อนติดต่อ แต่หากมีข้อมูลเหล่านี้
+              ทีมงานจะช่วยประเมินแนวทางเบื้องต้นได้เร็วขึ้น
             </p>
           </div>
 
           <div class="contact-prep__list font-kn">
-            <div class="contact-prep__item" *ngFor="let item of preparationItems; let index = index; trackBy: trackByLabel">
+            <div class="contact-prep__item"
+              *ngFor="let item of preparationItems; let index = index; trackBy: trackByLabel">
               <span>{{ index + 1 }}</span>
               <p>{{ item }}</p>
             </div>

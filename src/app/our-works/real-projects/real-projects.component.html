@@ -1,9 +1,7 @@
 <div class="wrapper">
   <section class="page-header page-header-lg real-projects-hero" aria-labelledby="real-projects-title">
-    <div
-      class="page-header-image rellax-header"
-      data-rellax-speed="-6"
-      style="background-image: url('assets/img/home/16127.webp');"></div>
+    <div class="page-header-image rellax-header" data-rellax-speed="-6"
+      style="background-image: url('assets/img/house-design/collection3/8.jpg');"></div>
 
     <div class="container">
       <div class="real-projects-hero__shell">
@@ -14,11 +12,8 @@
           <div class="real-projects-hero__breadcrumbs">
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li
-                  class="breadcrumb-item font-kn"
-                  *ngFor="let crumb of breadcrumbs; let isLast = last"
-                  [class.active]="isLast"
-                  [attr.aria-current]="isLast ? 'page' : null">
+                <li class="breadcrumb-item font-kn" *ngFor="let crumb of breadcrumbs; let isLast = last"
+                  [class.active]="isLast" [attr.aria-current]="isLast ? 'page' : null">
                   <a *ngIf="crumb.path; else lastCrumb" [routerLink]="crumb.path">{{ crumb.label }}</a>
                   <ng-template #lastCrumb>{{ crumb.label }}</ng-template>
                 </li>
@@ -71,12 +66,8 @@
 
         <div class="real-projects-list__toolbar" data-aos="fade-up">
           <div class="real-projects-list__filters" aria-label="หมวดผลงานจริง">
-            <button
-              class="btn btn-round real-projects-list__filter"
-              type="button"
-              *ngFor="let item of categories"
-              [class.btn-primary]="item === selectedCategory"
-              [class.btn-secondary]="item !== selectedCategory"
+            <button class="btn btn-round real-projects-list__filter" type="button" *ngFor="let item of categories"
+              [class.btn-primary]="item === selectedCategory" [class.btn-secondary]="item !== selectedCategory"
               (click)="selectCategory(item)">
               {{ item }}
             </button>
@@ -84,13 +75,10 @@
         </div>
 
         <div class="real-projects-list__grid">
-          <article
-            class="real-projects-list__card"
+          <article class="real-projects-list__card"
             *ngFor="let item of filteredProjects | paginate: { itemsPerPage: pageSize, currentPage: page }; trackBy: trackByProject"
             data-aos="fade-up">
-            <a
-              class="real-projects-list__media"
-              [routerLink]="[item.slug]"
+            <a class="real-projects-list__media" [routerLink]="[item.slug]"
               [attr.aria-label]="'ดูรายละเอียด ' + item.title">
               <img [src]="item.coverImage" [alt]="item.coverAlt" loading="lazy" />
               <span class="real-projects-list__media-overlay"></span>
@@ -121,13 +109,9 @@
         </div>
 
         <div class="real-projects-list__pagination font-kn" *ngIf="filteredProjects.length > pageSize">
-          <pagination-controls
-            previousLabel="ก่อนหน้า"
-            nextLabel="ถัดไป"
-            screenReaderPaginationLabel="แบ่งหน้าผลงานจริง"
-            screenReaderPageLabel="หน้า"
-            screenReaderCurrentLabel="หน้าปัจจุบัน"
-            (pageChange)="onPageChange($event)">
+          <pagination-controls previousLabel="ก่อนหน้า" nextLabel="ถัดไป"
+            screenReaderPaginationLabel="แบ่งหน้าผลงานจริง" screenReaderPageLabel="หน้า"
+            screenReaderCurrentLabel="หน้าปัจจุบัน" (pageChange)="onPageChange($event)">
           </pagination-controls>
         </div>
       </div>

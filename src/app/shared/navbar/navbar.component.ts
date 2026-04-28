@@ -32,7 +32,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     '/about',
     '/services',
     '/ourworks',
-    '/รับสร้างบ้าน-อุดรธานี',
+    '/blogs',
+    '/contact',
   ];
 
   readonly navLinks: NavbarLink[] = [

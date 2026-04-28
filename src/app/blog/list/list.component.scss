@@ -22,8 +22,8 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(7, 18, 30, .62), rgba(7, 18, 30, .86) 56%, rgba(7, 18, 30, .95)),
-    radial-gradient(circle at 18% 18%, rgba(210, 171, 98, .2), transparent 34%);
+    linear-gradient(110deg, rgba(8, 12, 18, 0.68) 0%, rgba(8, 12, 18, 0.52) 42%, rgba(8, 12, 18, 0.24) 100%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.08) 14%, rgba(8, 12, 18, 0.16) 28%, rgba(8, 12, 18, 0.5) 100%);
 }
 
 .blogs-hero__shell {
