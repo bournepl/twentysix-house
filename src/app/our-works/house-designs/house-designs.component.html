@@ -1,7 +1,7 @@
 <div class="wrapper">
   <section class="page-header page-header-lg house-designs-hero" aria-labelledby="house-designs-title">
-    <div class="page-header-image rellax-header" data-rellax-speed="-8"
-      style="background-image: url('assets/img/Collection/collection12.webp');"></div>
+    <div class="page-header-image rellax-header" data-rellax-speed="-6"
+      style="background-image: url('assets/img/house-design/collection1/1.jpg');"></div>
 
     <div class="container">
       <div class="house-designs-hero__shell">
@@ -47,61 +47,94 @@
   <div class="main house-designs-main">
     <section class="house-designs-list about-section" aria-labelledby="house-designs-list-title">
       <div class="container">
-        <div class="house-designs-list__intro" data-aos="fade-up">
+        <div class="house-designs-list__intro text-center" data-aos="fade-up">
           <header class="house-designs-list__header">
             <p class="house-designs-list__kicker font-le">HOUSE DESIGN CATALOG</p>
             <h2 class="house-designs-list__title font-kn" id="house-designs-list-title">
-              เลือกดูแบบบ้านตามรูปแบบและบรรยากาศที่คุณชอบ
+              เลือกแบบบ้านที่ตรงกับสไตล์ของคุณ
             </h2>
             <p class="house-designs-list__lead font-kn">
-              รวมแบบบ้านที่ช่วยให้เห็นภาพรวมของหน้าตา ชุดสี และบรรยากาศของบ้านแต่ละแนวได้ชัดขึ้น
-              เพื่อใช้เป็นจุดเริ่มต้นก่อนคุยรายละเอียดกับทีมของเรา
+              ดูพื้นที่ใช้สอย จำนวนห้อง และบรรยากาศของแต่ละแบบ เพื่อใช้เป็นจุดเริ่มต้นก่อนคุยรายละเอียดจริง
             </p>
           </header>
-
-          <aside class="house-designs-list__summary font-kn" aria-label="สรุปจำนวนแบบบ้าน">
-            <span class="house-designs-list__summary-label font-le">CURRENT VIEW</span>
-            <strong>{{ filteredDesigns.length }}</strong>
-            <span>แบบบ้านในหมวด {{ selectedCategory }}</span>
-          </aside>
         </div>
 
         <div class="house-designs-list__toolbar" data-aos="fade-up">
-          <div class="house-designs-list__filters" aria-label="หมวดแบบบ้าน">
-            <button class="btn btn-round house-designs-list__filter" type="button" *ngFor="let item of categories"
-              [class.btn-primary]="item === selectedCategory" [class.btn-secondary]="item !== selectedCategory"
-              (click)="selectCategory(item)">
-              {{ item }}
-            </button>
+          <div class="house-designs-list__search">
+            <label class="sr-only" for="house-design-search">ค้นหาแบบบ้าน</label>
+            <input id="house-design-search" class="house-designs-list__search-input font-kn" type="search"
+              [value]="searchTerm" (input)="onSearchInput($event)" placeholder="ค้นหาจากชื่อแบบบ้าน สไตล์ หรือจำนวนห้อง" />
+            <span class="house-designs-list__search-icon" aria-hidden="true">
+              <i class="now-ui-icons ui-1_zoom-bold"></i>
+            </span>
+          </div>
+
+          <div class="house-designs-list__filters font-kn" aria-label="ตัวกรองแบบบ้าน">
+            <label class="house-designs-list__filter">
+              <span>รูปแบบบ้าน</span>
+              <select [value]="selectedCategory" (change)="onCategoryChange($event)">
+                <option *ngFor="let item of categories" [value]="item">{{ item }}</option>
+              </select>
+            </label>
+
+            <label class="house-designs-list__filter">
+              <span>ห้องนอน</span>
+              <select [value]="selectedBedrooms" (change)="onBedroomsChange($event)">
+                <option *ngFor="let item of bedroomOptions" [value]="item">{{ item }}</option>
+              </select>
+            </label>
+
+            <label class="house-designs-list__filter">
+              <span>ห้องน้ำ</span>
+              <select [value]="selectedBathrooms" (change)="onBathroomsChange($event)">
+                <option *ngFor="let item of bathroomOptions" [value]="item">{{ item }}</option>
+              </select>
+            </label>
+
+            <label class="house-designs-list__filter">
+              <span>ที่จอดรถ</span>
+              <select [value]="selectedParking" (change)="onParkingChange($event)">
+                <option *ngFor="let item of parkingOptions" [value]="item">{{ item }}</option>
+              </select>
+            </label>
           </div>
         </div>
 
         <div class="house-designs-list__grid">
           <article class="house-designs-list__card"
-            *ngFor="let item of filteredDesigns | paginate: { itemsPerPage: pageSize, currentPage: page }; trackBy: trackByDesign"
+            *ngFor="let item of visibleDesigns; trackBy: trackByDesign"
             data-aos="fade-up">
             <a class="house-designs-list__media" [routerLink]="[item.slug]"
               [attr.aria-label]="'ดูรายละเอียดแบบบ้าน ' + item.title">
               <img [src]="item.coverImage" [alt]="item.coverAlt" loading="lazy" />
-              <span class="house-designs-list__media-overlay"></span>
-              <span class="house-designs-list__badge font-kn">{{ item.category }}</span>
             </a>
 
             <div class="house-designs-list__body">
               <div class="house-designs-list__headline">
-                <!-- <p class="house-designs-list__label font-le">{{ item.category }}</p>-->
-                <span class="house-designs-list__tone font-kn">{{ item.palette }}</span>
+                <span class="house-designs-list__category font-kn">{{ item.category }}</span>
               </div>
 
               <h3 class="house-designs-list__card-title font-kn">{{ item.title }}</h3>
               <p class="house-designs-list__card-description font-kn">{{ item.excerpt }}</p>
 
-              <div class="house-designs-list__concept font-kn">
-                <span class="house-designs-list__concept-label font-kn">บรรยากาศของแบบบ้าน</span>
-                <p>{{ item.concept }}</p>
+              <div class="house-designs-list__meta font-kn" aria-label="ข้อมูลพื้นฐานของแบบบ้าน">
+                <span *ngIf="item.usableArea">
+                  <i class="fas fa-ruler-combined" aria-hidden="true"></i>
+                  {{ item.usableArea }}
+                </span>
+                <span *ngIf="item.bedrooms">
+                  <i class="fas fa-bed" aria-hidden="true"></i>
+                  {{ item.bedrooms }} ห้องนอน
+                </span>
+                <span *ngIf="item.bathrooms">
+                  <i class="fas fa-bath" aria-hidden="true"></i>
+                  {{ item.bathrooms }} ห้องน้ำ
+                </span>
+                <span *ngIf="item.parking">
+                  <i class="fas fa-car" aria-hidden="true"></i>
+                  {{ item.parking }} ที่จอด
+                </span>
               </div>
-
-
 
               <a class="btn btn-primary btn-round house-designs-list__link" [routerLink]="[item.slug]">
                 ดูรายละเอียดแบบบ้าน
@@ -110,10 +143,15 @@
           </article>
         </div>
 
-        <div class="house-designs-list__pagination font-kn" *ngIf="filteredDesigns.length > pageSize">
-          <pagination-controls previousLabel="ก่อนหน้า" nextLabel="ถัดไป" screenReaderPaginationLabel="แบ่งหน้าแบบบ้าน"
-            screenReaderPageLabel="หน้า" screenReaderCurrentLabel="หน้าปัจจุบัน" (pageChange)="onPageChange($event)">
-          </pagination-controls>
+        <p class="house-designs-list__empty font-kn" *ngIf="filteredDesigns.length === 0">
+          ไม่พบแบบบ้านที่ตรงกับตัวกรอง ลองเปลี่ยนคำค้นหาหรือตัวกรองอีกครั้ง
+        </p>
+
+        <div class="house-designs-list__load-more text-center" *ngIf="hasMoreDesigns">
+          <button class="btn btn-outline-primary house-designs-list__more-btn" type="button"
+            (click)="loadMoreDesigns()">
+            ดูแบบบ้านเพิ่มเติม
+          </button>
         </div>
       </div>
     </section>
@@ -126,10 +164,10 @@
           <div class="house-designs-cta__content text-center">
             <p class="house-designs-cta__kicker font-le">NEXT STEP</p>
             <h2 class="house-designs-cta__title font-kn" id="house-designs-cta-title">
-              ถ้าเจอแบบที่ชอบแล้ว เราช่วยคุยต่อให้ชัดขึ้นได้
+              เจอแบบบ้านที่ชอบแล้ว อยากต่อยอดเป็นบ้านจริงไหม
             </h2>
             <p class="house-designs-cta__lead font-kn">
-              ส่งแบบที่ชอบมาให้เรา แล้วค่อยคุยต่อเรื่องงบประมาณ การใช้งาน และแนวทางของบ้าน
+              ส่งแบบบ้านที่สนใจมาให้ทีมดู เพื่อคุยต่อเรื่องที่ดิน งบประมาณ ฟังก์ชันใช้งาน และแนวทางออกแบบที่เหมาะกับครอบครัวของคุณ
             </p>
 
             <div class="house-designs-cta__highlights font-kn">
@@ -137,8 +175,9 @@
             </div>
 
             <div class="house-designs-cta__actions">
-              <a class="btn btn-primary btn-round" routerLink="/contact">ปรึกษาโครงการ</a>
-              <a class="btn btn-secondary btn-round" routerLink="/services">ดูบริการของเรา</a>
+              <a class="btn btn-secondary" routerLink="/contact">ปรึกษาโครงการ</a>
+              <a class="btn btn-outline-light house-designs-cta__outline" routerLink="/ourworks/real-projects">ดูผลงานจริง</a>
+              <a class="btn btn-outline-light house-designs-cta__outline" routerLink="/services">ดูบริการของเรา</a>
             </div>
           </div>
         </div>

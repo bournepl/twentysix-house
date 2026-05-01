@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: '', pathMatch: 'full' },
   /* =========================
       HOME
    ========================= */
@@ -16,7 +15,7 @@ const routes: Routes = [
         {
           name: 'description',
           content:
-            'Twentysix House บริษัทรับสร้างบ้านอุดรธานี ให้บริการออกแบบและก่อสร้างบ้านครบวงจร ดูแลงานตั้งแต่วางแนวคิด ออกแบบ วางแผนงบประมาณ ไปจนถึงก่อสร้างและส่งมอบบ้าน'
+            'Twentysix House บริษัทรับสร้างบ้านอุดรธานี ดูแลงานออกแบบ วางงบประมาณ ก่อสร้าง และส่งมอบบ้าน พร้อมผลงานจริงและทีมงานให้คำปรึกษา'
         },
         {
           name: 'keywords',
@@ -58,7 +57,7 @@ const routes: Routes = [
   ========================= */
   {
     path: 'about',
-    title: 'เกี่ยวกับเรา | บริษัทรับสร้างบ้านอุดรธานี Twentysix House',
+    title: 'เกี่ยวกับ Twentysix House | รับสร้างบ้านอุดรธานี',
     data: {
       sitemap: true,
       canonical: '/about',
@@ -66,7 +65,7 @@ const routes: Routes = [
         {
           name: 'description',
           content:
-            'เกี่ยวกับ Twentysix House บริษัทรับสร้างบ้านอุดรธานี ดูแลงานออกแบบและก่อสร้างบ้านอย่างเป็นระบบ พร้อมแนวคิดการทำงาน ข้อมูลบริษัท และมาตรฐานของทีม'
+            'รู้จัก Twentysix House บริษัทรับสร้างบ้านอุดรธานี ดูแลงานออกแบบ วางแผนงบประมาณ และก่อสร้างบ้านอย่างเป็นระบบ'
         },
         {
           name: 'keywords',
@@ -79,12 +78,12 @@ const routes: Routes = [
         },
         {
           property: 'og:title',
-          content: 'เกี่ยวกับเรา | บริษัทรับสร้างบ้านอุดรธานี Twentysix House'
+          content: 'เกี่ยวกับ Twentysix House | รับสร้างบ้านอุดรธานี'
         },
         {
           property: 'og:description',
           content:
-            'รู้จัก Twentysix House บริษัทรับสร้างบ้านอุดรธานี ผ่านแนวคิดการทำงาน วิธีดูแลลูกค้า ข้อมูลบริษัท และผลงานที่สะท้อนมาตรฐานการออกแบบและก่อสร้างบ้าน'
+            'รู้จัก Twentysix House ผ่านแนวคิดการทำงาน ข้อมูลบริษัท และวิธีดูแลงานออกแบบก่อสร้างบ้านในอุดรธานี'
         },
         {
           property: 'og:image',
@@ -101,7 +100,7 @@ const routes: Routes = [
   ========================= */
   {
     path: 'services',
-    title: 'บริการออกแบบและสร้างบ้านครบวงจร | บริษัทรับสร้างบ้านอุดรธานี Twentysix House',
+    title: 'บริการรับสร้างบ้านอุดรธานี | Twentysix House',
     data: {
       sitemap: true,
       canonical: '/services',
@@ -109,7 +108,7 @@ const routes: Routes = [
         {
           name: 'description',
           content:
-            'รวมบริการออกแบบและสร้างบ้านครบวงจรของ Twentysix House ในอุดรธานี ตั้งแต่การคุยโจทย์ ออกแบบบ้าน วางแผนงบประมาณ ก่อสร้าง ควบคุมคุณภาพ ไปจนถึงการส่งมอบบ้าน'
+            'บริการรับสร้างบ้านอุดรธานี ออกแบบบ้าน วางแผนงบประมาณ ก่อสร้าง ตกแต่งภายใน และดูแลหลังส่งมอบโดย Twentysix House'
         },
         {
           name: 'keywords',
@@ -122,12 +121,12 @@ const routes: Routes = [
         },
         {
           property: 'og:title',
-          content: 'บริการออกแบบและสร้างบ้านครบวงจร | บริษัทรับสร้างบ้านอุดรธานี Twentysix House'
+          content: 'บริการรับสร้างบ้านอุดรธานี | Twentysix House'
         },
         {
           property: 'og:description',
           content:
-            'Twentysix House ดูแลงานตั้งแต่การให้คำปรึกษา ออกแบบ วางแผนงบประมาณ ก่อสร้าง ควบคุมคุณภาพ และส่งมอบบ้าน เพื่อให้เจ้าของบ้านเห็นภาพรวมของโครงการชัดขึ้นในทุกขั้นตอน'
+            'ดูบริการออกแบบบ้าน วางแผนงบประมาณ รับเหมาก่อสร้าง ตกแต่งภายใน และบริการหลังการขายสำหรับบ้านในอุดรธานี'
         },
         {
           property: 'og:image',

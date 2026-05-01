@@ -1,6 +1,10 @@
 export interface HouseDesign {
   id: string;
   slug: string;
+  usableArea?: string;
+  bedrooms?: number;
+  bathrooms?: number;
+  parking?: number;
   category: string;
   categories: string[];
   title: string;

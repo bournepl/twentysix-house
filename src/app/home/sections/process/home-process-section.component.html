@@ -6,25 +6,18 @@
         ขั้นตอนการทำงานที่ช่วยให้เจ้าของบ้านเห็นภาพชัดตั้งแต่เริ่มต้น
       </h2>
       <p class="description font-kn process-lead">
-        การมีลำดับการทำงานที่ชัดเจนช่วยให้ลูกค้าเข้าใจภาพรวมของโครงการง่ายขึ้น
-        ตั้งแต่การเริ่มคุยความต้องการ ไปจนถึงวันส่งมอบบ้านจริง
+        เราจัดลำดับงานตั้งแต่คุยโจทย์ สำรวจพื้นที่ ออกแบบ วางงบประมาณ ก่อสร้าง ไปจนถึงส่งมอบบ้านจริง
       </p>
     </header>
 
-    <div class="process-intro-card" data-aos="fade-up">
-      <p class="process-intro-kicker font-le">Twentysix House</p>
-      <p class="font-kn process-intro-title">ทุกขั้นตอนถูกจัดให้เชื่อมต่อกัน เพื่อให้การตัดสินใจง่ายและโครงการเดินอย่างมั่นใจ</p>
-
-      <div class="process-highlight-list font-kn" aria-label="จุดเด่นของขั้นตอนการทำงาน">
-        <span class="process-highlight" *ngFor="let item of processHighlights">{{ item }}</span>
-      </div>
-    </div>
-
     <div class="process-grid" role="list">
       <article class="process-card" *ngFor="let step of steps" role="listitem" data-aos="fade-up">
-        <span class="font-le process-number">{{ step.number }}</span>
+        <div class="process-icon-wrap">
+          <span class="font-le process-number">{{ step.number }}</span>
+          <i [class]="step.icon" aria-hidden="true"></i>
+        </div>
+        <p class="font-le process-card-kicker">{{ step.kicker }}</p>
         <p class="font-kn process-card-title">{{ step.title }}</p>
-        <p class="font-kn process-card-description">{{ step.description }}</p>
       </article>
     </div>
   </div>

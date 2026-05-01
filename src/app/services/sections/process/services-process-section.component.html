@@ -3,52 +3,25 @@
     <header class="services-process__header text-center" data-aos="fade-up">
       <p class="services-section__kicker font-le">PROJECT JOURNEY</p>
       <h2 class="services-section__title font-kn" id="services-process-title">
-        ลำดับการทำงานที่ช่วยให้เจ้าของบ้านเห็นภาพโครงการชัดขึ้นในทุกช่วง
+        ขั้นตอนการทำงานที่ช่วยให้โครงการเดินชัดตั้งแต่ต้น
       </h2>
       <p class="services-section__description font-kn services-process__lead">
-        ตั้งแต่การเริ่มคุยโจทย์ พัฒนาแบบ วางแผนก่อสร้าง ไปจนถึงวันส่งมอบบ้าน
-        ทุกช่วงถูกจัดให้เชื่อมกันอย่างชัดเจนเพื่อให้การตัดสินใจง่ายขึ้นและโครงการเดินหน้าได้มั่นใจมากขึ้น
+        เราแบ่งงานเป็นช่วงที่เข้าใจง่าย ตั้งแต่คุยโจทย์ ออกแบบ วางแผนก่อสร้าง
+        ไปจนถึงตรวจรับและส่งมอบบ้าน
       </p>
     </header>
 
-    <div class="row align-items-stretch services-process__content">
-      <div class="col-lg-4 mb-5 mb-lg-0" data-aos="fade-right">
-        <aside class="services-process__aside">
-          <p class="services-process__aside-kicker font-le">TWENTYSIX HOUSE</p>
-          <h3 class="services-process__aside-title font-kn">
-            ทุกช่วงของโครงการถูกจัดให้เชื่อมกัน เพื่อให้เจ้าของบ้านตัดสินใจง่ายขึ้นตั้งแต่ก่อนเริ่มสร้าง
-          </h3>
-          <p class="services-process__aside-copy font-kn">
-            เราจัดลำดับงานให้เห็นภาพรวมตั้งแต่โจทย์ของบ้าน แบบที่พัฒนา งบประมาณ ไปจนถึงการก่อสร้างและการส่งมอบ
-            เพื่อให้แต่ละช่วงของโครงการเดินต่อกันอย่างมั่นใจมากขึ้น
-          </p>
-
-          <div class="services-process__evidence font-kn" aria-label="จุดเด่นของขั้นตอนการทำงาน">
-            <div class="services-process__evidence-item" *ngFor="let item of processHighlights">
-              <span class="services-process__evidence-dot"></span>
-              <span>{{ item }}</span>
-            </div>
-          </div>
-        </aside>
-      </div>
-
-      <div class="col-lg-8" data-aos="fade-left">
-        <div class="services-process__list" role="list">
-          <article class="services-process__row" *ngFor="let step of steps; let i = index" role="listitem" data-aos="fade-up">
-            <div class="services-process__marker">
-              <span class="services-process__number font-le">0{{ i + 1 }}</span>
-            </div>
-
-            <div class="services-process__body" [class.services-process__body-offset]="i % 2 === 1">
-              <span class="services-process__icon" aria-hidden="true">
-                <i [class]="step.icon"></i>
-              </span>
-              <h3 class="services-process__card-title font-kn">{{ step.title }}</h3>
-              <p class="services-process__card-description font-kn">{{ step.description }}</p>
-            </div>
-          </article>
+    <div class="services-process__timeline" role="list" data-aos="fade-up">
+      <article class="services-process__step" *ngFor="let step of steps; let i = index" role="listitem">
+        <div class="services-process__marker">
+          <span class="services-process__number font-le">0{{ i + 1 }}</span>
         </div>
-      </div>
+
+        <div class="services-process__body">
+          <h3 class="services-process__step-title font-kn">{{ step.title }}</h3>
+          <p class="services-process__step-description font-kn">{{ step.description }}</p>
+        </div>
+      </article>
     </div>
   </div>
 </section>

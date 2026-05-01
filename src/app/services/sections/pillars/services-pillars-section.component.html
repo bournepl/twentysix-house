@@ -3,37 +3,26 @@
     <header class="services-section__header text-center" data-aos="fade-up">
       <p class="services-section__kicker font-le">CORE SERVICES</p>
       <h2 class="services-section__title font-kn" id="services-pillars-title">
-        บริการหลักที่ดูแลตั้งแต่เริ่มวางแนวคิดจนถึงวันที่บ้านพร้อมอยู่
+        บริการของเรา ครอบคลุมตั้งแต่เริ่มคิดจนถึงหลังส่งมอบ
       </h2>
       <p class="services-section__description font-kn">
-        การออกแบบและสร้างบ้านที่ดีไม่ใช่แค่มีแบบสวยหรือก่อสร้างได้ตามแผน แต่ต้องทำให้ทุกช่วงของโครงการเชื่อมกัน
-        อย่างชัดเจนตั้งแต่การเริ่มคุยโจทย์ไปจนถึงวันส่งมอบ
+        เลือกคุยเฉพาะบริการที่ต้องการ หรือให้ทีมช่วยวางภาพรวมทั้งโครงการตั้งแต่การออกแบบ
+        วางแผนงบประมาณ ก่อสร้าง ไปจนถึงการดูแลหลังบ้านเสร็จ
       </p>
-    </header>
-
-    <div class="services-pillars__intro-card" data-aos="fade-up">
-      <p class="services-pillars__intro-kicker font-le">TWENTYSIX HOUSE</p>
-      <h3 class="services-pillars__intro-title font-kn">
-        เราดูแลบริการแบบครบวงจร เพื่อให้เจ้าของบ้านเห็นภาพรวมของโครงการง่ายขึ้นและตัดสินใจได้มั่นใจขึ้นในทุกช่วง
-      </h3>
 
       <div class="services-pillars__tag-list font-kn" aria-label="ขอบเขตบริการหลัก">
         <span class="services-pillars__tag" *ngFor="let item of serviceTags">{{ item }}</span>
       </div>
-    </div>
+    </header>
 
     <div class="services-pillars__grid">
       <article class="services-pillars__card" *ngFor="let item of pillars" data-aos="fade-up">
         <span class="services-pillars__icon" aria-hidden="true">
-          <i [class]="item.icon"></i>
+          <img class="services-pillars__icon-image" [src]="item.image" [alt]="item.alt" loading="lazy" />
         </span>
 
         <h3 class="services-pillars__title font-kn">{{ item.title }}</h3>
         <p class="services-pillars__description font-kn">{{ item.description }}</p>
-
-        <div class="services-pillars__points font-kn">
-          <span class="services-pillars__point" *ngFor="let point of item.points">{{ point }}</span>
-        </div>
       </article>
     </div>
   </div>

@@ -107,8 +107,8 @@ export class ServicesComponent implements OnInit, OnDestroy {
       '@type': 'WebPage',
       '@id': `${environment.siteUrl}/services#webpage`,
       url: `${environment.siteUrl}/services`,
-      name: 'บริการออกแบบและสร้างบ้านครบวงจร | บริษัทรับสร้างบ้านอุดรธานี Twentysix House',
-      description: 'รวมบริการออกแบบและสร้างบ้านครบวงจรของ Twentysix House ตั้งแต่การคุยโจทย์ ออกแบบ วางแผนงบประมาณ ก่อสร้าง ควบคุมคุณภาพ และส่งมอบบ้าน',
+      name: 'บริการรับสร้างบ้านอุดรธานี | Twentysix House',
+      description: 'บริการรับสร้างบ้านอุดรธานี ออกแบบบ้าน วางแผนงบประมาณ ก่อสร้าง ตกแต่งภายใน และดูแลหลังส่งมอบโดย Twentysix House',
       isPartOf: {
         '@id': `${environment.siteUrl}/#website`
       },
@@ -126,8 +126,8 @@ export class ServicesComponent implements OnInit, OnDestroy {
       '@context': 'https://schema.org',
       '@type': 'Service',
       '@id': `${environment.siteUrl}/services#service`,
-      name: 'บริการออกแบบและสร้างบ้านครบวงจร',
-      description: 'บริการออกแบบและก่อสร้างบ้านครบวงจรของ Twentysix House ในจังหวัดอุดรธานี ตั้งแต่การให้คำปรึกษา พัฒนาแบบบ้าน วางแผนงบประมาณ ก่อสร้าง ควบคุมคุณภาพ และส่งมอบบ้าน',
+      name: 'บริการรับสร้างบ้านอุดรธานี',
+      description: 'บริการออกแบบบ้าน วางแผนงบประมาณ รับเหมาก่อสร้าง ตกแต่งภายใน และดูแลหลังส่งมอบของ Twentysix House ในจังหวัดอุดรธานี',
       url: `${environment.siteUrl}/services`,
       provider: {
         '@id': `${environment.siteUrl}/#localbusiness`
@@ -143,8 +143,10 @@ export class ServicesComponent implements OnInit, OnDestroy {
       serviceType: [
         'รับสร้างบ้านอุดรธานี',
         'ออกแบบบ้านอุดรธานี',
-        'ก่อสร้างบ้านครบวงจร',
-        'ควบคุมงานก่อสร้างบ้าน'
+        'วางแผนงบประมาณสร้างบ้าน',
+        'รับเหมาก่อสร้างบ้าน',
+        'ตกแต่งภายใน',
+        'บริการหลังการขาย'
       ],
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
@@ -154,21 +156,21 @@ export class ServicesComponent implements OnInit, OnDestroy {
             '@type': 'Offer',
             itemOffered: {
               '@type': 'Service',
-              name: 'ให้คำปรึกษาและสรุปโจทย์ของโครงการ'
+              name: 'ปรึกษาเรื่องบ้านและวางแผนงบประมาณ'
             }
           },
           {
             '@type': 'Offer',
             itemOffered: {
               '@type': 'Service',
-              name: 'ออกแบบบ้านและวางแผนการใช้งาน'
+              name: 'ออกแบบบ้านและเขียนแบบ'
             }
           },
           {
             '@type': 'Offer',
             itemOffered: {
               '@type': 'Service',
-              name: 'ก่อสร้าง ควบคุมคุณภาพ และส่งมอบบ้าน'
+              name: 'รับเหมาก่อสร้างบ้านและดูแลหลังส่งมอบ'
             }
           }
         ]

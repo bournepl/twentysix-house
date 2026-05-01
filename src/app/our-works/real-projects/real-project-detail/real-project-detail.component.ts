@@ -117,12 +117,30 @@ export class RealProjectDetailComponent implements OnDestroy {
 
   private setProjectSeo(project: RealProject): void {
     const url = `${environment.siteUrl}/ourworks/real-projects/${project.slug}`;
-    const title = `${project.title} | ผลงานจริง Twentysix House`;
+    const localKeyword = project.location.includes('อุดร') ? 'รับสร้างบ้านอุดรธานี' : `รับสร้างบ้าน${project.location}`;
+    const title = `${project.title} | ${localKeyword}`;
 
     const imageUrl = this.toAbsoluteAssetUrl(project.coverImage);
     const galleryImages = project.gallery.map((image) => this.toAbsoluteAssetUrl(image));
-    const keywords = [...new Set([...project.categories, ...project.tags, 'Twentysix House'])].join(', ');
-    const description = this.trimDescription(project.excerpt);
+    const keywords = [
+      ...new Set([
+        localKeyword,
+        'รับสร้างบ้าน',
+        'รับเหมาก่อสร้างบ้าน',
+        'ผลงานสร้างบ้าน',
+        ...project.categories,
+        ...project.tags,
+        'Twentysix House',
+      ]),
+    ].join(', ');
+    const description = this.trimDescription([
+      project.title,
+      project.location,
+      project.usableArea ? `พื้นที่ใช้สอย ${project.usableArea}` : '',
+      project.bedrooms ? `${project.bedrooms} ห้องนอน` : '',
+      project.bathrooms ? `${project.bathrooms} ห้องน้ำ` : '',
+      'ผลงานบ้านสร้างเสร็จจริงโดย Twentysix House',
+    ].filter(Boolean).join(' '));
 
     this.seoService.updatePageSeo({
       title,
@@ -142,7 +160,7 @@ export class RealProjectDetailComponent implements OnDestroy {
           '@id': `${url}#project`,
           name: project.title,
           headline: project.title,
-          description: project.excerpt,
+          description,
           image: galleryImages,
           url,
           keywords,

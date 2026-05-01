@@ -1,6 +1,6 @@
 .about-section {
   position: relative;
-  padding: 6rem 0;
+  padding: 5rem 0;
 }
 
 .section-kicker {
@@ -13,14 +13,14 @@
 .section-title {
   margin-bottom: 1.25rem;
   color: #10233b;
-  font-size: clamp(2rem, 3vw, 3rem);
+  font-size: clamp(1.85rem, 2.7vw, 2.65rem);
   line-height: 1.22;
 }
 
 .section-description {
   color: #607286;
-  font-size: 1.06rem;
-  line-height: 1.9;
+  font-size: 1.02rem;
+  line-height: 1.82;
 }
 
 .about-overview {
@@ -68,47 +68,55 @@
   }
 }
 
-.about-overview__cards {
+.about-overview__directions {
   display: grid;
   gap: 1rem;
 }
 
-.about-overview__card {
+.about-overview__direction {
   position: relative;
-  padding: 1.65rem 1.6rem 1.55rem;
-  border-radius: 1.45rem;
-  border: 1px solid rgba(164, 176, 192, 0.3);
-  background: rgba(255, 255, 255, 0.88);
-  box-shadow: 0 18px 36px rgba(16, 35, 59, 0.06);
+  padding: 1.35rem 1.45rem;
+  border: 1px solid rgba(168, 182, 199, 0.32);
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 18px 42px rgba(16, 35, 59, 0.08);
 }
 
-.about-overview__card-index {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 98px;
-  height: 42px;
-  margin-bottom: 1.05rem;
-  padding: 0 1rem;
-  border: 1px solid rgba(161, 117, 43, 0.18);
-  border-radius: 999px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(245, 237, 223, 0.92));
+.about-overview__direction::before {
+  content: '';
+  position: absolute;
+  left: 0rem;
+  right: 0rem;
+  top: 0;
+  height: 3px;
+  background: linear-gradient(90deg, rgba(183, 137, 63, 0.92), rgba(183, 137, 63, 0.06));
+}
+
+.about-overview__direction:last-child {
+  padding-bottom: 1.35rem;
+}
+
+.about-overview__direction-label {
+  display: block;
+  margin-bottom: 0.55rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
   color: #8f6420;
-  font-size: 0.92rem;
+  font-size: 0.86rem;
   font-weight: 700;
   letter-spacing: 0.14em;
-  line-height: 1;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
+  line-height: 1.35;
 }
 
-.about-overview__card-title {
+.about-overview__direction-title {
   margin-bottom: 0.62rem;
   color: #10233b;
   font-size: 1.18rem;
   line-height: 1.45;
 }
 
-.about-overview__card-copy {
+.about-overview__direction-copy {
   margin-bottom: 0;
   color: #65768a;
   font-size: 1rem;
@@ -121,7 +129,7 @@
   gap: 0.65rem;
   margin-top: 1rem;
   padding: 0.8rem;
-  border-radius: 1.3rem;
+  border-radius: 0;
   border: 1px solid rgba(168, 182, 199, 0.35);
   background: linear-gradient(120deg, rgba(10, 31, 54, 0.94), rgba(27, 54, 82, 0.94));
 }
@@ -129,7 +137,7 @@
 .about-overview__stat-item {
   min-height: 100%;
   padding: 1rem 0.9rem;
-  border-radius: 1rem;
+  border-radius: 0;
   background: rgba(255, 255, 255, 0.08);
   text-align: center;
 }
@@ -160,7 +168,7 @@
 
 @media (max-width: 767.98px) {
   .about-section {
-    padding: 4.5rem 0;
+    padding: 3.8rem 0;
   }
 
   .section-title {
@@ -179,7 +187,7 @@
     }
   }
 
-  .about-overview__card {
-    padding: 1.35rem 1.2rem;
+  .about-overview__direction {
+    padding: 1.2rem 1.1rem;
   }
 }

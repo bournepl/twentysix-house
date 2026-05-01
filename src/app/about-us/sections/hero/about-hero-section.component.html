@@ -6,7 +6,10 @@
     <div class="about-hero__shell">
       <div class="about-hero__content text-center" data-aos="fade-up">
         <p class="about-hero__eyebrow font-le">ABOUT TWENTYSIX HOUSE</p>
-        <h1 class="about-hero__title font-kn text-secondary" id="about-hero-title">เกี่ยวกับ Twentysix House</h1>
+        <h1 class="about-hero__title font-kn text-secondary" id="about-hero-title">
+          รู้จัก Twentysix House
+          <span>บริษัทรับสร้างบ้านอุดรธานี</span>
+        </h1>
 
         <div class="about-hero__breadcrumbs">
           <nav aria-label="breadcrumb">
@@ -21,12 +24,15 @@
         </div>
 
         <p class="about-hero__lead font-kn">
-          เราเชื่อว่าบ้านที่ดีควรเริ่มจากความเข้าใจการใช้ชีวิตจริงของเจ้าของบ้าน
-          และถูกส่งต่อเป็นงานออกแบบและก่อสร้างที่มีคุณภาพในทุกขั้นตอน
+          ทีมออกแบบและก่อสร้างบ้านที่ดูแลตั้งแต่การฟังโจทย์ วางแผนงบประมาณ ไปจนถึงส่งมอบบ้านที่ใช้งานได้จริงในระยะยาว
         </p>
 
+        <div class="about-hero__trust-list font-kn" aria-label="ข้อมูลสำคัญของ Twentysix House">
+          <span class="about-hero__trust-item" *ngFor="let point of trustPoints">{{ point }}</span>
+        </div>
+
         <div class="about-hero__actions">
-          <a class="btn btn-primary btn-round " [routerLink]="'/contact'">ติดต่อทีมงาน</a>
+          <a class="btn btn-primary btn-round" [routerLink]="'/contact'">ติดต่อทีมงาน</a>
           <a class="btn btn-secondary btn-round" [routerLink]="'/services'">ดูบริการของเรา</a>
         </div>
       </div>

@@ -1,13 +1,15 @@
 <div class="wrapper">
   <section class="page-header page-header-lg real-projects-hero" aria-labelledby="real-projects-title">
     <div class="page-header-image rellax-header" data-rellax-speed="-6"
-      style="background-image: url('assets/img/house-design/collection3/8.jpg');"></div>
+      style="background-image: url('assets/img/real-project/house9/1.jpg');"></div>
 
     <div class="container">
       <div class="real-projects-hero__shell">
         <div class="real-projects-hero__content text-center" data-aos="fade-up">
           <p class="real-projects-hero__eyebrow font-le">REAL PROJECTS</p>
-          <h1 class="real-projects-hero__title font-kn text-secondary" id="real-projects-title">ผลงานจริง</h1>
+          <h1 class="real-projects-hero__title font-kn text-secondary" id="real-projects-title">
+            ผลงานรับสร้างบ้านจริงในอุดรธานี
+          </h1>
 
           <div class="real-projects-hero__breadcrumbs">
             <nav aria-label="breadcrumb">
@@ -22,21 +24,18 @@
           </div>
 
           <p class="real-projects-hero__lead font-kn">
-            รวมบ้านที่สร้างเสร็จจริง เพื่อให้เห็นคุณภาพงานก่อสร้าง รายละเอียดของบ้าน
-            และบรรยากาศการอยู่อาศัยจากโครงการที่เราดูแลจริง
+            รวมบ้านที่สร้างเสร็จจริงจากทีม Twentysix House เพื่อดูคุณภาพงาน รายละเอียดบ้าน
+            และบรรยากาศหลังส่งมอบจริง
           </p>
 
-          <div class="real-projects-hero__actions">
-            <a class="btn btn-primary btn-round" routerLink="/contact">ปรึกษาโครงการ</a>
-            <a class="btn btn-secondary btn-round" routerLink="/ourworks/house-designs">ดูแบบบ้าน</a>
+          <div class="real-projects-hero__trust-list font-kn" aria-label="สิ่งที่ดูได้จากผลงานจริง">
+            <span class="real-projects-hero__trust-item" *ngFor="let item of heroTrustItems">{{ item }}</span>
           </div>
-        </div>
 
-        <div class="real-projects-hero__overview-grid" data-aos="fade-up">
-          <article class="real-projects-hero__overview-card" *ngFor="let item of heroPoints">
-            <h3 class="real-projects-hero__overview-title font-kn">{{ item.title }}</h3>
-            <p class="real-projects-hero__overview-description font-kn">{{ item.description }}</p>
-          </article>
+          <div class="real-projects-hero__actions">
+            <a class="btn btn-primary" routerLink="/contact">ปรึกษาโครงการ</a>
+            <a class="btn btn-secondary" routerLink="/ourworks/house-designs">ดูแบบบ้าน</a>
+          </div>
         </div>
       </div>
     </div>
@@ -45,74 +44,116 @@
   <div class="main real-projects-main">
     <section class="real-projects-list about-section" aria-labelledby="real-projects-list-title">
       <div class="container">
-        <div class="real-projects-list__intro" data-aos="fade-up">
+        <div class="real-projects-list__intro text-center" data-aos="fade-up">
           <header class="real-projects-list__header">
             <p class="real-projects-list__kicker font-le">REAL PROJECT CATALOG</p>
             <h2 class="real-projects-list__title font-kn" id="real-projects-list-title">
-              เลือกดูบ้านที่สร้างจริงจากประเภทและรายละเอียดที่คุณสนใจ
+              เลือกดูบ้านที่สร้างเสร็จจริง
             </h2>
             <p class="real-projects-list__lead font-kn">
-              แต่ละโครงการถูกจัดเก็บเป็นข้อมูลแยกชิ้น เพื่อให้ดูภาพรวม ประเภทบ้าน
-              และรายละเอียดที่ช่วยให้ตัดสินใจคุยต่อได้ง่ายขึ้น
+              ดูผลงานจริงพร้อมพื้นที่ใช้สอย จำนวนห้อง ทำเล และรายละเอียดสำคัญของแต่ละหลัง
             </p>
           </header>
-
-          <aside class="real-projects-list__summary font-kn" aria-label="สรุปจำนวนผลงานจริง">
-            <span class="real-projects-list__summary-label font-le">CURRENT VIEW</span>
-            <strong>{{ filteredProjects.length }}</strong>
-            <span>โครงการในหมวด {{ selectedCategory }}</span>
-          </aside>
         </div>
 
         <div class="real-projects-list__toolbar" data-aos="fade-up">
-          <div class="real-projects-list__filters" aria-label="หมวดผลงานจริง">
-            <button class="btn btn-round real-projects-list__filter" type="button" *ngFor="let item of categories"
-              [class.btn-primary]="item === selectedCategory" [class.btn-secondary]="item !== selectedCategory"
-              (click)="selectCategory(item)">
-              {{ item }}
-            </button>
+          <div class="real-projects-list__search">
+            <label class="sr-only" for="real-project-search">ค้นหาผลงานจริง</label>
+            <input id="real-project-search" class="real-projects-list__search-input font-kn" type="search"
+              [value]="searchTerm" (input)="onSearchInput($event)" placeholder="ค้นหาจากทำเล สไตล์บ้าน หรือจำนวนห้อง" />
+            <span class="real-projects-list__search-icon" aria-hidden="true">
+              <i class="now-ui-icons ui-1_zoom-bold"></i>
+            </span>
+          </div>
+
+          <div class="real-projects-list__filters font-kn" aria-label="ตัวกรองผลงานจริง">
+            <label class="real-projects-list__filter">
+              <span>รูปแบบบ้าน</span>
+              <select [value]="selectedCategory" (change)="onCategoryChange($event)">
+                <option *ngFor="let item of categories" [value]="item">{{ item }}</option>
+              </select>
+            </label>
+
+            <label class="real-projects-list__filter">
+              <span>ห้องน้ำ</span>
+              <select [value]="selectedBathrooms" (change)="onBathroomsChange($event)">
+                <option *ngFor="let item of bathroomOptions" [value]="item">{{ item }}</option>
+              </select>
+            </label>
+
+            <label class="real-projects-list__filter">
+              <span>ห้องนอน</span>
+              <select [value]="selectedBedrooms" (change)="onBedroomsChange($event)">
+                <option *ngFor="let item of bedroomOptions" [value]="item">{{ item }}</option>
+              </select>
+            </label>
+
+            <label class="real-projects-list__filter">
+              <span>ที่จอดรถ</span>
+              <select [value]="selectedParking" (change)="onParkingChange($event)">
+                <option *ngFor="let item of parkingOptions" [value]="item">{{ item }}</option>
+              </select>
+            </label>
           </div>
         </div>
 
         <div class="real-projects-list__grid">
-          <article class="real-projects-list__card"
-            *ngFor="let item of filteredProjects | paginate: { itemsPerPage: pageSize, currentPage: page }; trackBy: trackByProject"
+          <article class="real-projects-list__card" *ngFor="let item of visibleProjects; trackBy: trackByProject"
             data-aos="fade-up">
             <a class="real-projects-list__media" [routerLink]="[item.slug]"
               [attr.aria-label]="'ดูรายละเอียด ' + item.title">
               <img [src]="item.coverImage" [alt]="item.coverAlt" loading="lazy" />
-              <span class="real-projects-list__media-overlay"></span>
-              <span class="real-projects-list__badge font-kn">{{ item.category }}</span>
             </a>
 
             <div class="real-projects-list__body">
-              <p class="real-projects-list__label font-kn">{{ item.year }} / {{ item.location }}</p>
+              <div class="real-projects-list__meta-row font-kn">
+                <span class="real-projects-list__category">{{ item.category }}</span>
+                <span class="real-projects-list__place">{{ item.location }} | {{ item.year }}</span>
+              </div>
+
               <h3 class="real-projects-list__card-title font-kn">{{ item.title }}</h3>
               <p class="real-projects-list__card-description font-kn">{{ item.excerpt }}</p>
 
               <div class="real-projects-list__meta font-kn">
-                <span *ngIf="item.usableArea">{{ item.usableArea }}</span>
-                <span *ngIf="item.bedrooms">{{ item.bedrooms }} ห้องนอน</span>
-                <span *ngIf="item.bathrooms">{{ item.bathrooms }} ห้องน้ำ</span>
-                <span *ngIf="item.parking">{{ item.parking }} ที่จอดรถ</span>
+                <span *ngIf="item.usableArea">
+                  <i class="fas fa-ruler-combined" aria-hidden="true"></i>
+                  {{ item.usableArea }}
+                </span>
+                <span *ngIf="item.bedrooms">
+                  <i class="fas fa-bed" aria-hidden="true"></i>
+                  {{ item.bedrooms }} ห้องนอน
+                </span>
+                <span *ngIf="item.bathrooms">
+                  <i class="fas fa-bath" aria-hidden="true"></i>
+                  {{ item.bathrooms }} ห้องน้ำ
+                </span>
+                <span *ngIf="item.parking">
+                  <i class="fas fa-car" aria-hidden="true"></i>
+                  {{ item.parking }} ที่จอด
+                </span>
               </div>
 
               <div class="real-projects-list__highlights font-kn">
                 <span *ngFor="let highlight of item.highlights | slice: 0 : 2">{{ highlight }}</span>
               </div>
 
-              <a class="btn btn-primary btn-round real-projects-list__link" [routerLink]="[item.slug]">
+              <a class="real-projects-list__link font-kn" [routerLink]="[item.slug]">
                 ดูรายละเอียดโครงการ
+                <i class="now-ui-icons arrows-1_minimal-right" aria-hidden="true"></i>
               </a>
             </div>
           </article>
         </div>
 
-        <div class="real-projects-list__pagination font-kn" *ngIf="filteredProjects.length > pageSize">
-          <pagination-controls previousLabel="ก่อนหน้า" nextLabel="ถัดไป"
-            screenReaderPaginationLabel="แบ่งหน้าผลงานจริง" screenReaderPageLabel="หน้า"
-            screenReaderCurrentLabel="หน้าปัจจุบัน" (pageChange)="onPageChange($event)">
-          </pagination-controls>
+        <p class="real-projects-list__empty font-kn" *ngIf="filteredProjects.length === 0">
+          ไม่พบผลงานที่ตรงกับตัวกรอง ลองเปลี่ยนคำค้นหาหรือตัวกรองอีกครั้ง
+        </p>
+
+        <div class="real-projects-list__load-more text-center" *ngIf="hasMoreProjects">
+          <button class="btn btn-outline-primary real-projects-list__more-btn" type="button"
+            (click)="loadMoreProjects()">
+            ดูบ้านเพิ่มเติม
+          </button>
         </div>
       </div>
     </section>
@@ -125,11 +166,11 @@
           <div class="real-projects-cta__content text-center">
             <p class="real-projects-cta__kicker font-le">NEXT STEP</p>
             <h2 class="real-projects-cta__title font-kn" id="real-projects-cta-title">
-              ถ้าดูผลงานจริงแล้ว และเริ่มเห็นภาพบ้านของคุณชัดขึ้น
+              เจอบ้านที่ใกล้กับสิ่งที่ต้องการแล้วหรือยัง
             </h2>
             <p class="real-projects-cta__lead font-kn">
-              Twentysix House พร้อมช่วยคุยต่อจากผลงานที่คุณสนใจ ไล่ตั้งแต่การออกแบบ วางงบประมาณ
-              ไปจนถึงขั้นตอนก่อสร้างที่เหมาะกับการใช้งานจริงของครอบครัว
+              ส่งผลงานที่สนใจมาให้ทีมดู เพื่อคุยต่อเรื่องที่ดิน งบประมาณ แบบบ้าน
+              และขั้นตอนก่อสร้างที่เหมาะกับครอบครัวของคุณ
             </p>
 
             <div class="real-projects-cta__highlights font-kn" aria-label="เหตุผลที่ควรเริ่มคุยต่อจากผลงานจริง">
@@ -137,8 +178,9 @@
             </div>
 
             <div class="real-projects-cta__actions">
-              <a class="btn btn-primary btn-round" routerLink="/contact">ปรึกษาโครงการ</a>
-              <a class="btn btn-secondary btn-round" routerLink="/services">ดูบริการของเรา</a>
+              <a class="btn btn-secondary" routerLink="/contact">ปรึกษาโครงการ</a>
+              <a class="btn btn-outline-light real-projects-cta__outline" routerLink="/ourworks/house-designs">ดูแบบบ้าน</a>
+              <a class="btn btn-outline-light real-projects-cta__outline" routerLink="/services">ดูบริการของเรา</a>
             </div>
           </div>
         </div>

@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.insertLocalBusinessJsonLd();
     this.insertWebsiteJsonLd();
+    this.insertFaqJsonLd();
 
     if (!this.isBrowser) return;
 
@@ -37,6 +38,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     this.jsonLdService.removeSchema('local-business');
     this.jsonLdService.removeSchema('website');
+    this.jsonLdService.removeSchema('home-faq');
     this.rellaxInstance?.destroy();
     this.rellaxInstance = undefined;
 
@@ -96,5 +98,53 @@ export class HomeComponent implements OnInit, OnDestroy {
     };
 
     this.jsonLdService.insertSchema('website', jsonLd);
+  }
+
+  private insertFaqJsonLd(): void {
+    const jsonLd = {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      '@id': `${environment.siteUrl}/#home-faq`,
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'อยากสร้างบ้านในอุดรธานี ควรเริ่มจากงบประมาณเท่าไร',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'งบประมาณขึ้นอยู่กับขนาดบ้าน รูปแบบ วัสดุ และรายละเอียดของงาน แนะนำให้เริ่มจากกรอบงบประมาณที่ตั้งไว้ ที่ดิน และจำนวนห้องที่ต้องการ เพื่อให้ทีมงานช่วยวางแนวทางแบบและขอบเขตงานได้เหมาะสม',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'ยังไม่มีแบบบ้าน สามารถเริ่มคุยก่อนได้ไหม',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'สามารถเริ่มคุยได้ เราจะช่วยดูโจทย์การใช้ชีวิต ขนาดครอบครัว ที่ดิน งบประมาณ และสไตล์ที่ชอบ ก่อนพัฒนาเป็นแนวทางออกแบบหรือแบบก่อสร้างที่ใช้ต่อได้จริง',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Twentysix House รับงานออกแบบและก่อสร้างครบวงจรไหม',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'เราดูแลงานตั้งแต่ให้คำปรึกษา ออกแบบบ้าน เขียนแบบ วางแผนงบประมาณ รับเหมาก่อสร้าง ตกแต่งภายใน และบริการหลังการขาย โดยสามารถคุยขอบเขตงานให้เหมาะกับแต่ละโครงการได้',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'ให้บริการเฉพาะอุดรธานีหรือรับพื้นที่ใกล้เคียงด้วย',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'พื้นที่หลักคือจังหวัดอุดรธานี และสามารถปรึกษาโครงการในพื้นที่ใกล้เคียงได้ ทีมงานจะช่วยประเมินความเหมาะสมของหน้างาน ระยะทาง และรูปแบบการดูแลโครงการก่อนเริ่มงาน',
+          },
+        },
+      ],
+    };
+
+    this.jsonLdService.insertSchema('home-faq', jsonLd);
   }
 }

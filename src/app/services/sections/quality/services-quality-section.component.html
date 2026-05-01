@@ -2,34 +2,24 @@
   <div class="container">
     <header class="services-quality__header text-center" data-aos="fade-up">
       <p class="services-section__kicker font-le">QUALITY & WARRANTY</p>
-      <h2 class="services-section__title font-kn" id="services-quality-title">ความมั่นใจเรื่องคุณภาพงานและการรับประกัน</h2>
+      <h2 class="services-section__title font-kn" id="services-quality-title">คุณภาพงานที่ตรวจเช็กได้ก่อนส่งมอบ</h2>
       <p class="services-section__description font-kn services-quality__lead">
-        บ้านที่ดีไม่ใช่แค่สวยในวันส่งมอบ แต่ต้องมาพร้อมมาตรฐานของงาน ความเรียบร้อยก่อนเข้าอยู่
-        และข้อมูลที่ช่วยให้เจ้าของบ้านมั่นใจต่อได้หลังเริ่มใช้งานจริง
+        เราให้ความสำคัญกับรายละเอียดหน้างาน ความเรียบร้อยก่อนเข้าอยู่
+        และข้อมูลที่ช่วยให้เจ้าของบ้านดูแลบ้านต่อได้อย่างมั่นใจ
       </p>
     </header>
 
-    <div class="services-quality__assurance" data-aos="fade-up">
-      <div class="services-quality__assurance-copy">
-        <p class="services-quality__assurance-kicker font-le">BUILD WITH CONFIDENCE</p>
-        <h3 class="services-quality__assurance-title font-kn">
-          เราดูแลทั้งคุณภาพของงาน ความพร้อมก่อนส่งมอบ และข้อมูลสำคัญหลังเข้าอยู่
-        </h3>
-
-        <div class="services-quality__trust-list font-kn" aria-label="จุดที่ช่วยสร้างความมั่นใจ">
-          <span class="services-quality__trust-item" *ngFor="let point of trustPoints">{{ point }}</span>
-        </div>
-      </div>
+    <div class="services-quality__trust-list font-kn" aria-label="จุดที่ช่วยสร้างความมั่นใจ" data-aos="fade-up">
+      <span class="services-quality__trust-item" *ngFor="let point of trustPoints">{{ point }}</span>
     </div>
 
-    <div class="services-quality__grid">
-      <article class="services-quality__card" *ngFor="let item of qualityPoints" data-aos="fade-up">
+    <div class="services-quality__grid" role="list">
+      <article class="services-quality__card" *ngFor="let item of qualityPoints" role="listitem" data-aos="fade-up">
         <span class="services-quality__icon" aria-hidden="true">
           <i [class]="item.icon"></i>
         </span>
-        <p class="services-quality__label font-le">{{ item.label }}</p>
-        <h3 class="services-quality__title font-kn">{{ item.title }}</h3>
-        <p class="services-quality__description font-kn">{{ item.description }}</p>
+        <h3 class="services-quality__item-title font-kn">{{ item.title }}</h3>
+        <p class="services-quality__item-description font-kn">{{ item.description }}</p>
       </article>
     </div>
   </div>

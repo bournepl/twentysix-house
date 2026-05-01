@@ -5,52 +5,42 @@
 
     <div class="container">
       <div class="house-design-detail-hero__shell">
-        <div class="house-design-detail-hero__content text-center" data-aos="fade-up">
-          <p class="house-design-detail-hero__eyebrow font-le">HOUSE DESIGN DETAIL</p>
-          <h1 class="house-design-detail-hero__title font-kn" id="house-design-detail-title">
-            {{ design.title }}
-          </h1>
+        <div class="house-design-detail-hero__showcase" data-aos="fade-up">
+          <div class="house-design-detail-hero__info">
+            <div class="house-design-detail-hero__summary">
+              <p class="house-design-detail-hero__eyebrow font-le">HOUSE DESIGN</p>
+              <h1 class="house-design-detail-hero__title font-kn" id="house-design-detail-title">
+                {{ design.title }}
+              </h1>
+              <p class="house-design-detail-hero__location font-kn">{{ design.category }}</p>
 
-          <div class="house-design-detail-hero__breadcrumbs">
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item font-kn">
-                  <a routerLink="/">หน้าแรก</a>
-                </li>
-                <li class="breadcrumb-item font-kn">
-                  <a routerLink="/ourworks">ผลงานของเรา</a>
-                </li>
-                <li class="breadcrumb-item font-kn">
-                  <a routerLink="/ourworks/house-designs">แบบบ้าน</a>
-                </li>
-                <li class="breadcrumb-item active font-kn" aria-current="page">{{ design.category }}</li>
-              </ol>
-            </nav>
-          </div>
-
-          <p class="house-design-detail-hero__lead font-kn">{{ design.description }}</p>
-
-          <div class="house-design-detail-hero__actions">
-            <a class="btn btn-primary btn-round" routerLink="/contact">ปรึกษาแบบนี้</a>
-            <a class="btn btn-secondary btn-round" routerLink="/ourworks/house-designs">กลับไปดูแบบบ้าน</a>
-          </div>
-
-          <div class="house-design-detail-hero__meta font-kn" aria-label="ข้อมูลสรุปแบบบ้าน">
-            <div class="house-design-detail-hero__meta-item">
-              <span>รูปแบบบ้าน</span>
-              <strong>{{ design.category }}</strong>
+              <div class="house-design-detail-hero__actions">
+                <a class="btn btn-primary" routerLink="/contact">ปรึกษาแบบนี้</a>
+                <a class="btn btn-secondary" routerLink="/ourworks/house-designs">ดูแบบบ้านเพิ่มเติม</a>
+              </div>
             </div>
-            <div class="house-design-detail-hero__meta-item">
-              <span>บรรยากาศโดยรวม</span>
-              <strong>{{ design.palette }}</strong>
-            </div>
-            <div class="house-design-detail-hero__meta-item">
-              <span>เหมาะกับ</span>
-              <strong>{{ design.whoItsFor }}</strong>
-            </div>
-            <div class="house-design-detail-hero__meta-item">
-              <span>ใช้คุยต่อเรื่อง</span>
-              <strong>รูปทรง วัสดุ แสง และบรรยากาศของบ้าน</strong>
+
+            <div class="house-design-detail-hero__stats font-kn" aria-label="ข้อมูลสรุปแบบบ้าน">
+              <div class="house-design-detail-hero__stat">
+                <i class="fas fa-bed" aria-hidden="true"></i>
+                <strong>{{ design.bedrooms || '-' }}</strong>
+                <span>ห้องนอน</span>
+              </div>
+              <div class="house-design-detail-hero__stat">
+                <i class="fas fa-bath" aria-hidden="true"></i>
+                <strong>{{ design.bathrooms || '-' }}</strong>
+                <span>ห้องน้ำ</span>
+              </div>
+              <div class="house-design-detail-hero__stat">
+                <i class="fas fa-car" aria-hidden="true"></i>
+                <strong>{{ design.parking || '-' }}</strong>
+                <span>ที่จอดรถ</span>
+              </div>
+              <div class="house-design-detail-hero__stat">
+                <i class="fas fa-ruler-combined" aria-hidden="true"></i>
+                <strong>{{ design.usableArea || '-' }}</strong>
+                <span>พื้นที่ใช้สอย</span>
+              </div>
             </div>
           </div>
         </div>
@@ -62,42 +52,65 @@
     <section class="house-design-detail-overview about-section" aria-labelledby="house-design-overview-title">
       <div class="container">
         <div class="house-design-detail-overview__grid">
-          <div class="house-design-detail-overview__content" data-aos="fade-up">
-            <p class="house-design-detail-section__kicker font-le">DESIGN OVERVIEW</p>
-            <h2 class="house-design-detail-section__title font-kn" id="house-design-overview-title">
-              แนวคิดของแบบบ้านนี้
-            </h2>
+          <div class="house-design-detail-overview__visual" data-aos="fade-up">
+            <button class="house-design-detail-overview__cover" type="button"
+              (click)="openGalleryImage(design.coverImage, 0)" [attr.aria-label]="'เปิดภาพหลักของ ' + design.title">
+              <img [src]="design.coverImage" [alt]="design.coverAlt || design.title" loading="lazy" />
+            </button>
 
-            <div class="house-design-detail-overview__body-card">
-              <p class="house-design-detail-overview__body-label font-le">DESIGN STORY</p>
-              <p class="house-design-detail-overview__description font-kn">{{ design.story }}</p>
+            <div class="house-design-detail-overview__info-card font-kn">
+              <p class="house-design-detail-section__kicker font-le">DESIGN INFO</p>
+              <h2 class="house-design-detail-overview__heading font-kn" id="house-design-overview-title">
+                ข้อมูลแบบบ้าน
+              </h2>
+              <dl class="house-design-detail-overview__info-list">
+                <div>
+                  <dt>ชื่อแบบบ้าน</dt>
+                  <dd>{{ design.title }}</dd>
+                </div>
+                <div>
+                  <dt>รูปแบบบ้าน</dt>
+                  <dd>{{ design.category }}</dd>
+                </div>
 
-              <div class="house-design-detail-overview__highlights font-kn" aria-label="จุดเด่นของแบบบ้าน">
-                <span *ngFor="let item of design.highlights; trackBy: trackByText">{{ item }}</span>
-              </div>
+              </dl>
             </div>
           </div>
 
-          <aside class="house-design-detail-overview__specs font-kn" data-aos="fade-up">
-            <p class="house-design-detail-overview__specs-label font-le">DESIGN DIRECTION</p>
+          <div class="house-design-detail-overview__content" data-aos="fade-up">
+            <p class="house-design-detail-section__kicker font-le">DESIGN OVERVIEW</p>
+            <h2 class="house-design-detail-overview__heading font-kn">{{ design.title }}</h2>
+            <p class="house-design-detail-overview__description font-kn">{{ design.story }}</p>
 
-            <div class="house-design-detail-overview__spec">
-              <span>แนวคิดหลัก</span>
-              <strong>{{ design.concept }}</strong>
-            </div>
-            <div class="house-design-detail-overview__spec">
-              <span>ชุดสีและวัสดุ</span>
-              <strong>{{ design.palette }}</strong>
-            </div>
-            <div class="house-design-detail-overview__spec">
-              <span>เหมาะกับเจ้าของบ้าน</span>
-              <strong>{{ design.whoItsFor }}</strong>
+            <div class="house-design-detail-overview__summary font-kn" aria-label="ข้อมูลสรุปแบบบ้าน">
+              <span>
+                <i class="fas fa-ruler-combined" aria-hidden="true"></i>
+                {{ design.usableArea || '-' }}
+              </span>
+              <span>
+                <i class="fas fa-bed" aria-hidden="true"></i>
+                {{ design.bedrooms || '-' }} ห้องนอน
+              </span>
+              <span>
+                <i class="fas fa-bath" aria-hidden="true"></i>
+                {{ design.bathrooms || '-' }} ห้องน้ำ
+              </span>
+              <span>
+                <i class="fas fa-car" aria-hidden="true"></i>
+                {{ design.parking || '-' }} ที่จอด
+              </span>
             </div>
 
-            <div class="house-design-detail-overview__tags" aria-label="คำค้นและรูปแบบที่เกี่ยวข้อง">
-              <span *ngFor="let tag of design.tags; trackBy: trackByText">{{ tag }}</span>
-            </div>
-          </aside>
+            <ul class="house-design-detail-overview__highlights font-kn">
+              <li *ngFor="let item of design.highlights; trackBy: trackByText">
+                <span>{{ item }}</span>
+              </li>
+            </ul>
+
+            <a class="btn btn-outline-primary house-design-detail-overview__cta mb-0" routerLink="/contact">
+              ปรึกษาแบบบ้านนี้
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -136,32 +149,6 @@
       </div>
     </section>
 
-    <section class="house-design-detail-concept" aria-labelledby="house-design-concept-title">
-      <div class="container">
-        <div class="house-design-detail-concept__panel" data-aos="fade-up">
-          <p class="house-design-detail-section__kicker font-le">FROM REFERENCE TO HOME</p>
-          <h2 class="house-design-detail-concept__title font-kn" id="house-design-concept-title">
-            แบบบ้านนี้เป็นจุดเริ่มต้นในการคุย ไม่ใช่ข้อจำกัดของบ้านจริง
-          </h2>
-          <p class="house-design-detail-concept__description font-kn">
-            เราแยกหน้าแบบบ้านออกจากผลงานจริง เพื่อให้คุณดูบรรยากาศและแนวทางการออกแบบได้ชัดขึ้น
-            ก่อนค่อยปรับเรื่องพื้นที่ใช้สอย งบประมาณ ที่ดิน และรายละเอียดก่อสร้างให้เหมาะกับโครงการจริง
-          </p>
-
-          <div class="house-design-detail-concept__steps font-kn" aria-label="ขั้นตอนต่อยอดแบบบ้าน">
-            <span>เลือกบรรยากาศบ้านที่ชอบ</span>
-            <span>คุยโจทย์การใช้งาน</span>
-            <span>ปรับให้เหมาะกับที่ดินจริง</span>
-            <span>พัฒนาเป็นแบบเฉพาะของคุณ</span>
-          </div>
-
-          <div class="house-design-detail-concept__actions">
-            <a class="btn btn-primary btn-round" routerLink="/contact">ส่งแบบที่ชอบให้ทีมดู</a>
-            <a class="btn btn-secondary btn-round" routerLink="/ourworks/real-projects">เทียบกับผลงานจริง</a>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <section class="house-design-detail-related about-section" *ngIf="relatedDesigns.length"
       aria-labelledby="house-design-related-title">
@@ -169,7 +156,7 @@
         <header class="house-design-detail-section__header text-center" data-aos="fade-up">
           <p class="house-design-detail-section__kicker font-le">RELATED DESIGNS</p>
           <h2 class="house-design-detail-section__title font-kn" id="house-design-related-title">
-            แบบบ้านที่ช่วยให้เห็นทิศทางใกล้เคียงกัน
+            แบบบ้านที่ใกล้เคียงกัน
           </h2>
         </header>
 
@@ -178,14 +165,31 @@
             [routerLink]="['/ourworks/house-designs', item.slug]" data-aos="fade-up">
             <div class="house-design-detail-related__media">
               <img [src]="item.coverImage" [alt]="item.coverAlt" loading="lazy" />
-              <span class="house-design-detail-related__badge font-kn">{{ item.category }}</span>
+
             </div>
             <div class="house-design-detail-related__body">
-              <p class="house-design-detail-related__meta font-kn">{{ item.palette }}</p>
+              <div class="house-designs-list__headline">
+                <span class="house-designs-list__category font-kn">{{ item.category }}</span>
+              </div>
               <h3 class="font-kn">{{ item.title }}</h3>
               <p class="house-design-detail-related__excerpt font-kn">{{ item.excerpt }}</p>
               <div class="house-design-detail-related__facts font-kn">
-                <span *ngFor="let note of item.highlights | slice: 0 : 2">{{ note }}</span>
+                <span *ngIf="item.usableArea">
+                  <i class="fas fa-ruler-combined" aria-hidden="true"></i>
+                  {{ item.usableArea }}
+                </span>
+                <span *ngIf="item.bedrooms">
+                  <i class="fas fa-bed" aria-hidden="true"></i>
+                  {{ item.bedrooms }} ห้องนอน
+                </span>
+                <span *ngIf="item.bathrooms">
+                  <i class="fas fa-bath" aria-hidden="true"></i>
+                  {{ item.bathrooms }} ห้องน้ำ
+                </span>
+                <span *ngIf="item.parking">
+                  <i class="fas fa-car" aria-hidden="true"></i>
+                  {{ item.parking }} ที่จอด
+                </span>
               </div>
               <span class="house-design-detail-related__link font-kn">
                 ดูรายละเอียดแบบบ้าน

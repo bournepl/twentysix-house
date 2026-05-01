@@ -100,8 +100,8 @@ export class AboutUsComponent implements OnInit, OnDestroy {
       '@type': 'AboutPage',
       '@id': `${environment.siteUrl}/about#webpage`,
       url: `${environment.siteUrl}/about`,
-      name: 'เกี่ยวกับเรา | บริษัทรับสร้างบ้านอุดรธานี Twentysix House',
-      description: 'รู้จัก Twentysix House บริษัทรับสร้างบ้านอุดรธานี ที่ดูแลงานออกแบบและก่อสร้างบ้านอย่างเป็นระบบ พร้อมแนวคิดการทำงานและข้อมูลบริษัทที่ตรวจสอบได้',
+      name: 'เกี่ยวกับ Twentysix House | รับสร้างบ้านอุดรธานี',
+      description: 'รู้จัก Twentysix House บริษัทรับสร้างบ้านอุดรธานี ที่ดูแลงานออกแบบ วางแผนงบประมาณ และก่อสร้างบ้านอย่างเป็นระบบ',
       isPartOf: {
         '@id': `${environment.siteUrl}/#website`
       },

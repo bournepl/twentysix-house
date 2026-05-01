@@ -10,7 +10,7 @@
   line-height: 1.15;
   margin: 10px 1px;
   border: none;
-  border-radius: $border-radius-small;
+  border-radius: 0px !important;
   padding: $padding-btn-vertical $padding-btn-horizontal;
   cursor: pointer;
 
@@ -100,6 +100,15 @@
 
 }
 
+.btn-outline-secondary {
+  color: $secondary-color !important;
+  font-weight: bold !important;
+  border: 1px solid $secondary-color !important;
+
+  @include btn-styles($primary-color, $primary-color);
+
+}
+
 // Apply the mixin to the buttons
 // .btn-default { @include btn-styles($default-color, $default-states-color); }
 .btn-primary {
@@ -151,7 +160,7 @@
 
 .btn-round {
   border-width: $border-thin;
-  border-radius: $btn-round-radius !important;
+  border-radius: 0px !important;
   padding: $padding-btn-vertical $padding-round-horizontal;
 
   &.btn-simple {

@@ -7,15 +7,19 @@ interface ProjectGalleryImage {
   alt: string;
 }
 
+interface ProjectSummaryItem {
+  icon: string;
+  value: string;
+}
+
 interface ProjectShowcaseView {
-  label: string;
-  eyebrow: string;
   title: string;
   description: string;
-  highlights: string[];
-  align: 'left' | 'right';
-  images: ProjectGalleryImage[];
-  thumbnailImages: ProjectGalleryImage[];
+  category: string;
+  location: string;
+  year: string;
+  image: ProjectGalleryImage;
+  summary: ProjectSummaryItem[];
   slug: string;
 }
 
@@ -33,9 +37,9 @@ export class HomeProjectsSectionComponent implements OnInit {
   ngOnInit(): void {
     this.realProjectsService.getProjects().subscribe((projects) => {
       this.projects = this.previewProjectPositions
-        .map((position) => ({ position, project: projects[position - 1] }))
-        .filter((item): item is { position: number; project: RealProject } => Boolean(item.project))
-        .map((item, index) => this.toProjectShowcase(item.project, item.position, index));
+        .map((position) => projects[position - 1])
+        .filter((project): project is RealProject => Boolean(project))
+        .map((project) => this.toProjectShowcase(project));
     });
   }
 
@@ -43,35 +47,44 @@ export class HomeProjectsSectionComponent implements OnInit {
     return project.slug;
   }
 
-  trackByImage(_: number, image: ProjectGalleryImage): string {
-    return image.src;
+  trackBySummary(_: number, item: ProjectSummaryItem): string {
+    return `${item.icon}-${item.value}`;
   }
 
-  trackByHighlight(_: number, highlight: string): string {
-    return highlight;
-  }
-
-  private toProjectShowcase(project: RealProject, position: number, index: number): ProjectShowcaseView {
-    const gallery = [
-      project.coverImage,
-      ...project.gallery.filter((image) => image !== project.coverImage),
-    ].slice(0, 4);
-
-    const images = gallery.map((image, imageIndex) => ({
-      src: image,
-      alt: imageIndex === 0 ? project.coverAlt : `${project.title} ภาพตัวอย่างที่ ${imageIndex + 1}`,
-    }));
-
+  private toProjectShowcase(project: RealProject): ProjectShowcaseView {
     return {
-      label: `Project ${String(position).padStart(2, '0')}`,
-      eyebrow: `${project.category} | ${project.location}`,
       title: project.title,
       description: project.excerpt,
-      highlights: project.highlights.slice(0, 3),
-      align: index % 2 === 0 ? 'left' : 'right',
-      images,
-      thumbnailImages: images.slice(1, 4),
+      category: project.category,
+      location: project.location,
+      year: project.year,
+      image: {
+        src: project.coverImage,
+        alt: project.coverAlt,
+      },
+      summary: [
+        {
+          icon: 'fas fa-ruler-combined',
+          value: project.usableArea || '-',
+        },
+        {
+          icon: 'fas fa-bed',
+          value: this.formatCount(project.bedrooms, 'ห้องนอน'),
+        },
+        {
+          icon: 'fas fa-bath',
+          value: this.formatCount(project.bathrooms, 'ห้องน้ำ'),
+        },
+        {
+          icon: 'fas fa-car',
+          value: this.formatCount(project.parking, 'ที่จอด'),
+        },
+      ],
       slug: project.slug,
     };
+  }
+
+  private formatCount(value: number | undefined, label: string): string {
+    return value ? `${value} ${label}` : '-';
   }
 }

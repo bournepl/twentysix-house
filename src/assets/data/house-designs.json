@@ -2,6 +2,10 @@
   {
     "id": "yu-plearn",
     "slug": "yu-plearn-nature-connected-home",
+    "usableArea": "280 ตร.ม.",
+    "bedrooms": 4,
+    "bathrooms": 4,
+    "parking": 2,
     "category": "บ้านสองชั้น",
     "categories": [
       "บ้านสองชั้น",
@@ -49,6 +53,10 @@
   {
     "id": "yu-yen",
     "slug": "yu-yen-compact-single-storey-home",
+    "usableArea": "95 ตร.ม.",
+    "bedrooms": 2,
+    "bathrooms": 2,
+    "parking": 1,
     "category": "บ้านชั้นเดียว",
     "categories": [
       "บ้านชั้นเดียว",
@@ -91,6 +99,10 @@
   {
     "id": "yu-sabai",
     "slug": "yu-sabai-modern-character-home",
+    "usableArea": "170 ตร.ม.",
+    "bedrooms": 3,
+    "bathrooms": 3,
+    "parking": 2,
     "category": "บ้านสองชั้น",
     "categories": [
       "บ้านสองชั้น",
@@ -138,6 +150,10 @@
   {
     "id": "yu-sook",
     "slug": "yu-sook-private-open-plan-family-home",
+    "usableArea": "240 ตร.ม.",
+    "bedrooms": 4,
+    "bathrooms": 4,
+    "parking": 2,
     "category": "บ้านสองชั้น",
     "categories": [
       "บ้านสองชั้น",

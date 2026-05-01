@@ -118,7 +118,8 @@ export class HouseDesignDetailComponent implements OnInit, OnDestroy {
   private setSeo(design: HouseDesign): void {
     const url = `/ourworks/house-designs/${design.slug}`;
     const pageTitle = `${design.title} | แบบบ้าน Twentysix House`;
-    const description = this.trimDescription(design.excerpt);
+    const specSummary = this.getDesignSpecSummary(design);
+    const description = this.trimDescription(`${design.excerpt} ${specSummary}`);
 
     this.seoService.updatePageSeo({
       title: pageTitle,
@@ -132,7 +133,18 @@ export class HouseDesignDetailComponent implements OnInit, OnDestroy {
 
   private setDesignJsonLd(design: HouseDesign): void {
     const url = `${environment.siteUrl}/ourworks/house-designs/${design.slug}`;
-    const keywords = [...new Set([...design.categories, ...design.tags, 'แบบบ้าน', 'Twentysix House'])].join(', ');
+    const keywords = [
+      ...new Set([
+        ...design.categories,
+        ...design.tags,
+        'แบบบ้าน',
+        design.usableArea,
+        design.bedrooms ? `${design.bedrooms} ห้องนอน` : undefined,
+        design.bathrooms ? `${design.bathrooms} ห้องน้ำ` : undefined,
+        design.parking ? `${design.parking} ที่จอดรถ` : undefined,
+        'Twentysix House',
+      ].filter(Boolean) as string[]),
+    ].join(', ');
 
     this.jsonLdService.insertSchema('house-design-detail', {
       '@context': 'https://schema.org',
@@ -146,6 +158,7 @@ export class HouseDesignDetailComponent implements OnInit, OnDestroy {
           image: design.gallery.map((image) => this.toAbsoluteAssetUrl(image)),
           url,
           keywords,
+          additionalProperty: this.getDesignAdditionalProperties(design),
           creator: {
             '@id': `${environment.siteUrl}/#localbusiness`,
           },
@@ -209,5 +222,25 @@ export class HouseDesignDetailComponent implements OnInit, OnDestroy {
 
   private trimDescription(description: string): string {
     return description.replace(/\s+/g, ' ').trim().slice(0, 155);
+  }
+
+  private getDesignSpecSummary(design: HouseDesign): string {
+    const specs = [
+      design.usableArea ? `พื้นที่ใช้สอย ${design.usableArea}` : undefined,
+      design.bedrooms ? `${design.bedrooms} ห้องนอน` : undefined,
+      design.bathrooms ? `${design.bathrooms} ห้องน้ำ` : undefined,
+      design.parking ? `${design.parking} ที่จอดรถ` : undefined,
+    ].filter(Boolean);
+
+    return specs.length ? specs.join(' ') : '';
+  }
+
+  private getDesignAdditionalProperties(design: HouseDesign): Array<{ '@type': string; name: string; value: string | number }> {
+    return [
+      design.usableArea ? { '@type': 'PropertyValue', name: 'พื้นที่ใช้สอย', value: design.usableArea } : undefined,
+      design.bedrooms ? { '@type': 'PropertyValue', name: 'ห้องนอน', value: design.bedrooms } : undefined,
+      design.bathrooms ? { '@type': 'PropertyValue', name: 'ห้องน้ำ', value: design.bathrooms } : undefined,
+      design.parking ? { '@type': 'PropertyValue', name: 'ที่จอดรถ', value: design.parking } : undefined,
+    ].filter(Boolean) as Array<{ '@type': string; name: string; value: string | number }>;
   }
 }

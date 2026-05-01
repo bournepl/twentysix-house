@@ -14,14 +14,21 @@
   text-transform: uppercase;
 }
 
+.services-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .services-title {
   max-width: 620px;
-  margin-bottom: 1.2rem;
+  margin: 0 auto 0.9rem;
+  text-align: center;
 }
 
 .services-lead {
-  max-width: 620px;
-  margin-bottom: 1.35rem;
+  max-width: 650px;
+  margin: 0 auto 1.35rem;
   color: #4f5d69;
   font-size: 1.04rem;
   line-height: 1.85;
@@ -30,6 +37,7 @@
 .services-keywords {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 0.65rem;
   margin-bottom: 1.5rem;
 }
@@ -50,6 +58,8 @@
   background: rgba(10, 20, 30, 0.9);
   box-shadow: 0 22px 50px rgba(0, 0, 0, 0.12);
 }
+
+
 
 .services-copy-kicker {
   margin-bottom: 0.55rem;
@@ -89,19 +99,30 @@
 
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
 }
 
 .service-card {
   height: 100%;
   padding: 1.6rem;
   border: 1px solid rgba(5, 22, 38, 0.08);
-  border-radius: 26px;
+  border-radius: 0px;
   background: rgba(255, 255, 255, 0.94);
   box-shadow: 0 16px 35px rgba(0, 0, 0, 0.05);
   text-align: center;
 }
+
+.service-card:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0rem;
+  right: 0rem;
+  height: 3px;
+  background: linear-gradient(90deg, rgba(183, 137, 63, 0.12), rgba(183, 137, 63, 0.8), rgba(183, 137, 63, 0.12));
+}
+
 
 .service-icon-wrap {
   display: inline-flex;
@@ -126,26 +147,40 @@
 .service-eyebrow {
   margin-bottom: 0.5rem;
   color: #a1752b;
-  font-size: 0.88rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   line-height: 1.4;
+  text-transform: uppercase;
 }
 
 .service-title {
-  margin-bottom: 0.7rem;
-  color: #102030;
-  font-size: 1.03rem;
+  margin-bottom: 0.55rem;
+  color: #a1752b;
+  font-size: 1.12rem;
+  font-weight: 700;
   line-height: 1.6;
 }
 
 .service-description {
   margin: 0;
   color: #66727d;
-  font-size: 0.98rem;
-  line-height: 1.82;
+  font-size: 0.96rem;
+  line-height: 1.72;
 }
 
 @media (max-width: 991.98px) {
   .services-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 575.98px) {
+  .services-grid {
     grid-template-columns: 1fr;
+  }
+
+  .services-keywords {
+    margin-bottom: 1rem;
   }
 }

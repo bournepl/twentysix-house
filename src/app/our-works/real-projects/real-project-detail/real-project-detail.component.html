@@ -6,51 +6,42 @@
 
       <div class="container">
         <div class="real-project-detail-hero__shell">
-          <div class="real-project-detail-hero__content text-center" data-aos="fade-up">
-            <p class="real-project-detail-hero__eyebrow font-le">PROJECT DETAIL</p>
-            <h1 class="real-project-detail-hero__title font-kn" id="real-project-detail-title">
-              {{ project.title }}
-            </h1>
+          <div class="real-project-detail-hero__showcase" data-aos="fade-up">
+            <div class="real-project-detail-hero__info">
+              <div class="real-project-detail-hero__summary">
+                <p class="real-project-detail-hero__eyebrow font-le">REAL PROJECT</p>
+                <h1 class="real-project-detail-hero__title font-kn" id="real-project-detail-title">
+                  {{ project.title }}
+                </h1>
+                <p class="real-project-detail-hero__location font-kn">{{ project.location }} / {{ project.year }}</p>
 
-            <div class="real-project-detail-hero__breadcrumbs">
-              <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item font-kn">
-                    <a routerLink="/">หน้าแรก</a>
-                  </li>
-                  <li class="breadcrumb-item font-kn">
-                    <a routerLink="/ourworks">ผลงานของเรา</a>
-                  </li>
-                  <li class="breadcrumb-item font-kn">
-                    <a routerLink="/ourworks/real-projects">ผลงานจริง</a>
-                  </li>
-                  <li class="breadcrumb-item active font-kn" aria-current="page">{{ project.category }}</li>
-                </ol>
-              </nav>
-            </div>
-            <p class="real-project-detail-hero__lead font-kn">{{ project.excerpt }}</p>
+                <div class="real-project-detail-hero__actions">
+                  <a class="btn btn-primary" routerLink="/contact">ปรึกษาโครงการ</a>
+                  <a class="btn btn-secondary" routerLink="/ourworks/real-projects">ดูผลงานจริงเพิ่มเติม</a>
+                </div>
+              </div>
 
-            <div class="real-project-detail-hero__actions">
-              <a class="btn btn-primary btn-round" routerLink="/contact">ปรึกษาโครงการ</a>
-              <a class="btn btn-secondary btn-round" routerLink="/ourworks/real-projects">กลับไปดูผลงานจริง</a>
-            </div>
-
-            <div class="real-project-detail-hero__meta font-kn" aria-label="ข้อมูลสรุปโครงการ">
-              <div class="real-project-detail-hero__meta-item">
-                <span>ประเภทบ้าน</span>
-                <strong>{{ project.category }}</strong>
-              </div>
-              <div class="real-project-detail-hero__meta-item">
-                <span>พื้นที่ใช้สอย</span>
-                <strong>{{ project.usableArea || project.scope }}</strong>
-              </div>
-              <div class="real-project-detail-hero__meta-item" *ngIf="project.bedrooms || project.bathrooms">
-                <span>พื้นที่ใช้งานหลัก</span>
-                <strong>{{ project.bedrooms || '-' }} ห้องนอน / {{ project.bathrooms || '-' }} ห้องน้ำ</strong>
-              </div>
-              <div class="real-project-detail-hero__meta-item">
-                <span>ที่ตั้งโครงการ</span>
-                <strong>{{ project.location }} / {{ project.year }}</strong>
+              <div class="real-project-detail-hero__stats font-kn" aria-label="ข้อมูลสรุปโครงการ">
+                <div class="real-project-detail-hero__stat">
+                  <i class="fas fa-bed" aria-hidden="true"></i>
+                  <strong>{{ project.bedrooms || '-' }}</strong>
+                  <span>ห้องนอน</span>
+                </div>
+                <div class="real-project-detail-hero__stat">
+                  <i class="fas fa-bath" aria-hidden="true"></i>
+                  <strong>{{ project.bathrooms || '-' }}</strong>
+                  <span>ห้องน้ำ</span>
+                </div>
+                <div class="real-project-detail-hero__stat">
+                  <i class="fas fa-car" aria-hidden="true"></i>
+                  <strong>{{ project.parking || '-' }}</strong>
+                  <span>ที่จอดรถ</span>
+                </div>
+                <div class="real-project-detail-hero__stat">
+                  <i class="fas fa-ruler-combined" aria-hidden="true"></i>
+                  <strong>{{ project.usableArea || '-' }}</strong>
+                  <span>พื้นที่ใช้สอย</span>
+                </div>
               </div>
             </div>
           </div>
@@ -62,46 +53,79 @@
       <section class="real-project-detail-overview about-section" aria-labelledby="real-project-overview-title">
         <div class="container">
           <div class="real-project-detail-overview__grid">
-            <div class="real-project-detail-overview__content" data-aos="fade-up">
-              <p class="real-project-detail-section__kicker font-le">PROJECT OVERVIEW</p>
-              <h2 class="real-project-detail-section__title font-kn" id="real-project-overview-title">
-                ภาพรวมของบ้านหลังนี้
-              </h2>
-              <div class="real-project-detail-overview__body-card">
-                <p class="real-project-detail-overview__body-label font-le">DESIGN STORY</p>
-                <p class="real-project-detail-overview__description font-kn">{{ project.description }}</p>
+            <div class="real-project-detail-overview__visual" data-aos="fade-up">
+              <button class="real-project-detail-overview__cover" type="button"
+                (click)="openGalleryImage(project.coverImage, 0)" [attr.aria-label]="'เปิดภาพหลักของ ' + project.title">
+                <img [src]="project.coverImage" [alt]="project.coverAlt || project.title" loading="lazy" />
+              </button>
 
-                <div class="real-project-detail-overview__highlights font-kn">
-                  <span *ngFor="let item of project.highlights; trackBy: trackByText">{{ item }}</span>
-                </div>
+              <div class="real-project-detail-overview__info-card font-kn">
+                <p class="real-project-detail-section__kicker font-le">PROJECT INFO</p>
+                <h2 class="real-project-detail-overview__heading font-kn" id="real-project-overview-title">ข้อมูลโครงการ
+                </h2>
+                <dl class="real-project-detail-overview__info-list">
+                  <div>
+                    <dt>ชื่อโครงการ</dt>
+                    <dd>{{ project.title }}</dd>
+                  </div>
+                  <div>
+                    <dt>ประเภทบ้าน</dt>
+                    <dd>{{ project.category }}</dd>
+                  </div>
+                  <div>
+                    <dt>สถานที่</dt>
+                    <dd>{{ project.location }}</dd>
+                  </div>
+                  <div>
+                    <dt>ปีที่สร้าง</dt>
+                    <dd>{{ project.year }}</dd>
+                  </div>
+                  <div>
+                    <dt>ขอบเขตงาน</dt>
+                    <dd>{{ project.scope }}</dd>
+                  </div>
+                  <div>
+                    <dt>สถานะ</dt>
+                    <dd>{{ project.status }}</dd>
+                  </div>
+                </dl>
               </div>
             </div>
 
-            <aside class="real-project-detail-overview__specs font-kn" data-aos="fade-up">
-              <p class="real-project-detail-overview__specs-label font-le">PROJECT INFO</p>
-              <div class="real-project-detail-overview__spec" *ngFor="let item of project.specs">
-                <span>{{ item.label }}</span>
-                <strong>{{ item.value }}</strong>
+            <div class="real-project-detail-overview__content" data-aos="fade-up">
+              <p class="real-project-detail-section__kicker font-le">PROJECT OVERVIEW</p>
+              <h2 class="real-project-detail-overview__heading font-kn">{{ project.title }}</h2>
+              <p class="real-project-detail-overview__description font-kn">{{ project.description }}</p>
+
+              <div class="real-project-detail-overview__summary font-kn" aria-label="ข้อมูลสรุปบ้าน">
+                <span>
+                  <i class="fas fa-ruler-combined" aria-hidden="true"></i>
+                  {{ project.usableArea || '-' }}
+                </span>
+                <span>
+                  <i class="fas fa-bed" aria-hidden="true"></i>
+                  {{ project.bedrooms || '-' }} ห้องนอน
+                </span>
+                <span>
+                  <i class="fas fa-bath" aria-hidden="true"></i>
+                  {{ project.bathrooms || '-' }} ห้องน้ำ
+                </span>
+                <span>
+                  <i class="fas fa-car" aria-hidden="true"></i>
+                  {{ project.parking || '-' }} ที่จอดรถ
+                </span>
               </div>
-              <div class="real-project-detail-overview__numbers" aria-label="ข้อมูลพื้นที่ใช้งานของบ้าน">
-                <div *ngIf="project.usableArea">
-                  <strong>{{ project.usableArea }}</strong>
-                  <span>พื้นที่ใช้สอย</span>
-                </div>
-                <div *ngIf="project.bedrooms">
-                  <strong>{{ project.bedrooms }}</strong>
-                  <span>ห้องนอน</span>
-                </div>
-                <div *ngIf="project.bathrooms">
-                  <strong>{{ project.bathrooms }}</strong>
-                  <span>ห้องน้ำ</span>
-                </div>
-                <div *ngIf="project.parking">
-                  <strong>{{ project.parking }}</strong>
-                  <span>ที่จอดรถ</span>
-                </div>
-              </div>
-            </aside>
+
+              <ul class="real-project-detail-overview__highlights font-kn">
+                <li *ngFor="let item of project.highlights; trackBy: trackByText">
+                  <span>{{ item }}</span>
+                </li>
+              </ul>
+
+              <a class="btn btn-outline-primary real-project-detail-overview__cta mb-0" routerLink="/contact">
+                ปรึกษาโครงการนี้
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -147,38 +171,53 @@
           <header class="real-project-detail-section__header text-center" data-aos="fade-up">
             <p class="real-project-detail-section__kicker font-le">RELATED PROJECTS</p>
             <h2 class="real-project-detail-section__title font-kn" id="real-project-related-title">
-              ผลงานจริงที่อาจช่วยให้เห็นแนวทางใกล้เคียงกัน
+              ผลงานจริงที่ใกล้เคียงกัน
             </h2>
           </header>
 
           <div class="real-project-detail-related__grid">
-            <a class="real-project-detail-related__card"
-              *ngFor="let item of vm.relatedProjects; trackBy: trackByProject"
-              [routerLink]="['/ourworks/real-projects', item.slug]" data-aos="fade-up">
-              <div class="real-project-detail-related__media">
+            <article class="real-project-detail-related__card"
+              *ngFor="let item of vm.relatedProjects; trackBy: trackByProject" data-aos="fade-up">
+              <a class="real-project-detail-related__media" [routerLink]="['/ourworks/real-projects', item.slug]"
+                [attr.aria-label]="item.title">
                 <img [src]="item.coverImage" [alt]="item.coverAlt" loading="lazy" />
-                <span class="real-project-detail-related__badge font-kn">{{ item.category }}</span>
-              </div>
+              </a>
               <div class="real-project-detail-related__body">
-                <p class="real-project-detail-related__meta font-kn">{{ item.year }} / {{ item.location }}</p>
+                <div class="real-project-detail-related__meta-row font-kn">
+                  <span class="real-project-detail-related__category">{{ item.category }}</span>
+                  <span class="real-project-detail-related__place">{{ item.location }} | {{ item.year }}</span>
+                </div>
                 <h3 class="font-kn">{{ item.title }}</h3>
                 <p class="real-project-detail-related__excerpt font-kn">{{ item.excerpt }}</p>
                 <div class="real-project-detail-related__facts font-kn">
-                  <span *ngIf="item.usableArea">{{ item.usableArea }}</span>
-                  <span *ngIf="item.bedrooms">{{ item.bedrooms }} ห้องนอน</span>
-                  <span *ngIf="item.bathrooms">{{ item.bathrooms }} ห้องน้ำ</span>
+                  <span *ngIf="item.usableArea">
+                    <i class="fas fa-ruler-combined" aria-hidden="true"></i>
+                    {{ item.usableArea }}
+                  </span>
+                  <span *ngIf="item.bedrooms">
+                    <i class="fas fa-bed" aria-hidden="true"></i>
+                    {{ item.bedrooms }} &#3627;&#3657;&#3629;&#3591;&#3609;&#3629;&#3609;
+                  </span>
+                  <span *ngIf="item.bathrooms">
+                    <i class="fas fa-bath" aria-hidden="true"></i>
+                    {{ item.bathrooms }} &#3627;&#3657;&#3629;&#3591;&#3609;&#3657;&#3635;
+                  </span>
+                  <span *ngIf="item.parking">
+                    <i class="fas fa-car" aria-hidden="true"></i>
+                    {{ item.parking }} &#3607;&#3637;&#3656;&#3592;&#3629;&#3604;
+                  </span>
                 </div>
-                <span class="real-project-detail-related__link font-kn">
-                  ดูรายละเอียดโครงการ
+                <a class="real-project-detail-related__link font-kn"
+                  [routerLink]="['/ourworks/real-projects', item.slug]">
+                  &#3604;&#3641;&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;&#3650;&#3588;&#3619;&#3591;&#3585;&#3634;&#3619;
                   <i class="now-ui-icons arrows-1_minimal-right" aria-hidden="true"></i>
-                </span>
+                </a>
               </div>
-            </a>
+            </article>
           </div>
-
           <div class="real-project-detail-related__actions text-center">
-            <a class="btn btn-primary btn-round" routerLink="/ourworks/real-projects">
-              ดูผลงานทั้งหมด
+            <a class="btn btn-outline-primary" routerLink="/ourworks/real-projects">
+              &#3604;&#3641;&#3612;&#3621;&#3591;&#3634;&#3609;&#3607;&#3633;&#3657;&#3591;&#3627;&#3617;&#3604;
             </a>
           </div>
         </div>
@@ -191,7 +230,9 @@
       <div class="container text-center">
         <p class="font-le">PROJECT NOT FOUND</p>
         <h1 class="font-kn">ไม่พบผลงานนี้</h1>
-        <a class="btn btn-primary btn-round" routerLink="/ourworks/real-projects">กลับไปหน้าผลงานจริง</a>
+        <a class="btn btn-primary" routerLink="/ourworks/real-projects">
+          &#3585;&#3621;&#3633;&#3610;&#3652;&#3611;&#3627;&#3609;&#3657;&#3634;&#3612;&#3621;&#3591;&#3634;&#3609;&#3592;&#3619;&#3636;&#3591;
+        </a>
       </div>
     </section>
   </ng-template>

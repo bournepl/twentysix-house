@@ -1,6 +1,5 @@
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID, Renderer2 } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import Aos from 'aos';
 import Rellax from 'rellax';
 import { RealProject } from '../../_model/real-project';
@@ -14,23 +13,14 @@ import { environment } from '../../../environments/environment';
   styleUrl: './real-projects.component.scss',
 })
 export class RealProjectsComponent implements OnInit, OnDestroy {
-  readonly pageSize = 6;
+  readonly loadStep = 6;
   readonly allCategory = 'ทั้งหมด';
+  readonly allFilter = 'ทั้งหมด';
   readonly isBrowser: boolean;
-  private readonly pageQueryParam = 'page';
-  readonly heroPoints = [
-    {
-      title: 'ดูคุณภาพงานจากบ้านที่สร้างจริง',
-      description: 'ช่วยให้เห็นมาตรฐานงานก่อสร้าง รายละเอียดหน้างาน และภาพรวมของบ้านหลังสร้างเสร็จอย่างชัดเจน',
-    },
-    {
-      title: 'เปรียบเทียบประเภทบ้านได้ง่าย',
-      description: 'ดูความต่างของบ้านแต่ละแนว ทั้งขนาด พื้นที่ใช้สอย และบรรยากาศการอยู่อาศัยจากโครงการจริง',
-    },
-    {
-      title: 'ใช้เป็นจุดเริ่มต้นในการคุยโครงการ',
-      description: 'เมื่อเจอบ้านที่ใกล้กับสิ่งที่ต้องการ สามารถหยิบไปคุยเรื่องงบประมาณ พื้นที่ใช้งาน และทิศทางงานต่อได้ทันที',
-    },
+  readonly heroTrustItems = [
+    'ภาพถ่ายจากบ้านจริง',
+    'รายละเอียดพื้นที่และฟังก์ชัน',
+    'ใช้เป็นตัวอย่างคุยโครงการได้'
   ];
   readonly ctaPoints = [
     'คุยโจทย์การใช้งานจริงก่อนเริ่มออกแบบ',
@@ -46,15 +36,20 @@ export class RealProjectsComponent implements OnInit, OnDestroy {
   ];
 
   categories: string[] = [this.allCategory];
+  bedroomOptions: string[] = [this.allFilter];
+  bathroomOptions: string[] = [this.allFilter];
+  parkingOptions: string[] = [this.allFilter];
   projects: RealProject[] = [];
   selectedCategory = this.allCategory;
-  page = 1;
+  selectedBedrooms = this.allFilter;
+  selectedBathrooms = this.allFilter;
+  selectedParking = this.allFilter;
+  searchTerm = '';
+  visibleCount = this.loadStep;
 
   constructor(
     private realProjectsService: RealProjectsService,
     private jsonLdService: JsonLdService,
-    private route: ActivatedRoute,
-    private router: Router,
     private renderer: Renderer2,
     @Inject(PLATFORM_ID) private platformId: object,
     @Inject(DOCUMENT) private document: Document
@@ -63,15 +58,30 @@ export class RealProjectsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.page = this.getPageFromRoute();
-
     this.realProjectsService.getProjects().subscribe((projects) => {
       this.projects = projects;
       this.categories = [
         this.allCategory,
         ...Array.from(new Set(projects.flatMap((project) => project.categories))),
       ];
-      this.ensureValidPage(this.filteredProjects.length);
+      this.bedroomOptions = [
+        this.allFilter,
+        ...Array.from(new Set(projects.map((project) => project.bedrooms).filter(Boolean)))
+          .sort((a, b) => Number(a) - Number(b))
+          .map((value) => `${value} ห้องนอน`),
+      ];
+      this.bathroomOptions = [
+        this.allFilter,
+        ...Array.from(new Set(projects.map((project) => project.bathrooms).filter(Boolean)))
+          .sort((a, b) => Number(a) - Number(b))
+          .map((value) => `${value} ห้องน้ำ`),
+      ];
+      this.parkingOptions = [
+        this.allFilter,
+        ...Array.from(new Set(projects.map((project) => project.parking).filter(Boolean)))
+          .sort((a, b) => Number(a) - Number(b))
+          .map((value) => `${value} ที่จอดรถ`),
+      ];
       this.setProjectsJsonLd(projects);
     });
 
@@ -96,25 +106,80 @@ export class RealProjectsComponent implements OnInit, OnDestroy {
   }
 
   get filteredProjects(): RealProject[] {
-    if (this.selectedCategory === this.allCategory) {
-      return this.projects;
-    }
+    const normalizedSearch = this.normalizeText(this.searchTerm);
 
-    return this.projects.filter((project) => project.categories.includes(this.selectedCategory));
+    return this.projects.filter((project) => {
+      const matchesSearch =
+        !normalizedSearch ||
+        this.normalizeText([
+          project.title,
+          project.excerpt,
+          project.description,
+          project.category,
+          project.location,
+          project.usableArea,
+          project.scope,
+          project.status,
+          ...(project.categories || []),
+          ...(project.tags || []),
+          ...(project.highlights || []),
+        ].filter(Boolean).join(' ')).includes(normalizedSearch);
+
+      const matchesCategory =
+        this.selectedCategory === this.allCategory ||
+        project.categories.includes(this.selectedCategory);
+
+      const matchesBedrooms =
+        this.selectedBedrooms === this.allFilter ||
+        `${project.bedrooms} ห้องนอน` === this.selectedBedrooms;
+
+      const matchesBathrooms =
+        this.selectedBathrooms === this.allFilter ||
+        `${project.bathrooms} ห้องน้ำ` === this.selectedBathrooms;
+
+      const matchesParking =
+        this.selectedParking === this.allFilter ||
+        `${project.parking} ที่จอดรถ` === this.selectedParking;
+
+      return matchesSearch && matchesCategory && matchesBedrooms && matchesBathrooms && matchesParking;
+    });
   }
 
-  selectCategory(category: string): void {
-    this.selectedCategory = category;
-    this.page = 1;
-    this.syncPageQueryParam();
-    this.refreshListView();
+  get visibleProjects(): RealProject[] {
+    return this.filteredProjects.slice(0, this.visibleCount);
   }
 
-  onPageChange(page: number): void {
-    this.page = page;
-    this.ensureValidPage(this.filteredProjects.length);
-    this.syncPageQueryParam();
-    this.scrollToFirstCard();
+  get hasMoreProjects(): boolean {
+    return this.visibleCount < this.filteredProjects.length;
+  }
+
+  onSearchInput(event: Event): void {
+    this.searchTerm = (event.target as HTMLInputElement).value;
+    this.resetListView();
+  }
+
+  onCategoryChange(event: Event): void {
+    this.selectedCategory = (event.target as HTMLSelectElement).value;
+    this.resetListView();
+  }
+
+  onBedroomsChange(event: Event): void {
+    this.selectedBedrooms = (event.target as HTMLSelectElement).value;
+    this.resetListView();
+  }
+
+  onBathroomsChange(event: Event): void {
+    this.selectedBathrooms = (event.target as HTMLSelectElement).value;
+    this.resetListView();
+  }
+
+  onParkingChange(event: Event): void {
+    this.selectedParking = (event.target as HTMLSelectElement).value;
+    this.resetListView();
+  }
+
+  loadMoreProjects(): void {
+    this.visibleCount += this.loadStep;
     this.refreshAos();
   }
 
@@ -122,72 +187,9 @@ export class RealProjectsComponent implements OnInit, OnDestroy {
     return project.id;
   }
 
-  private refreshListView(): void {
-    this.scrollToFirstCard();
+  private resetListView(): void {
+    this.visibleCount = this.loadStep;
     this.refreshAos();
-  }
-
-  private getPageFromRoute(): number {
-    const page = Number(this.route.snapshot.queryParamMap.get(this.pageQueryParam));
-
-    return Number.isInteger(page) && page > 0 ? page : 1;
-  }
-
-  private ensureValidPage(totalItems: number): void {
-    const maxPage = Math.max(1, Math.ceil(totalItems / this.pageSize));
-
-    if (this.page <= maxPage) {
-      return;
-    }
-
-    this.page = maxPage;
-    this.syncPageQueryParam();
-  }
-
-  private syncPageQueryParam(): void {
-    if (!this.isBrowser) {
-      return;
-    }
-
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: {
-        [this.pageQueryParam]: this.page > 1 ? this.page : null,
-      },
-      queryParamsHandling: 'merge',
-      replaceUrl: true,
-    });
-  }
-
-  private scrollToFirstCard(): void {
-    if (!this.isBrowser) {
-      return;
-    }
-
-    requestAnimationFrame(() => {
-      const firstCard = this.document.querySelector('.real-projects-list__card') as HTMLElement | null;
-
-      if (!firstCard) {
-        return;
-      }
-
-      const offset = 100;
-      const wrapper = this.document.querySelector('.wrapper') as HTMLElement | null;
-      const targetTop = firstCard.getBoundingClientRect().top;
-
-      if (wrapper && wrapper.scrollHeight > wrapper.clientHeight) {
-        const wrapperTop = wrapper.getBoundingClientRect().top;
-        wrapper.scrollTo({
-          top: wrapper.scrollTop + targetTop - wrapperTop - offset,
-          behavior: 'smooth',
-        });
-      }
-
-      window.scrollTo({
-        top: window.scrollY + targetTop - offset,
-        behavior: 'smooth',
-      });
-    });
   }
 
   private refreshAos(): void {
@@ -200,6 +202,10 @@ export class RealProjectsComponent implements OnInit, OnDestroy {
     });
   }
 
+  private normalizeText(value: string): string {
+    return value.toLowerCase().replace(/\s+/g, '');
+  }
+
   private setProjectsJsonLd(projects: RealProject[]): void {
     const url = `${environment.siteUrl}/ourworks/real-projects`;
 
@@ -209,8 +215,8 @@ export class RealProjectsComponent implements OnInit, OnDestroy {
         {
           '@type': 'CollectionPage',
           '@id': `${url}#webpage`,
-          name: 'ผลงานจริง | Twentysix House',
-          description: 'รวมผลงานบ้านที่สร้างจริงโดย Twentysix House พร้อมรายละเอียดโครงการและภาพตัวอย่าง',
+          name: 'ผลงานรับสร้างบ้านจริงในอุดรธานี | Twentysix House',
+          description: 'รวมผลงานบ้านที่สร้างเสร็จจริงโดย Twentysix House พร้อมพื้นที่ใช้สอย จำนวนห้อง ทำเล รายละเอียดโครงการ และภาพตัวอย่างจากบ้านจริง',
           url,
           inLanguage: 'th-TH',
           mainEntity: {

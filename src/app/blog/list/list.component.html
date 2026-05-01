@@ -27,18 +27,18 @@
             รวมความรู้สำหรับคนที่กำลังวางแผนสร้างบ้านในอุดรธานี ตั้งแต่การเลือกแนวทางออกแบบ การจัดพื้นที่ใช้งาน
             วัสดุ งานโครงสร้าง ไปจนถึงเรื่องที่ควรถามก่อนเริ่มโครงการจริง
           </p>
-
+          <div class="blogs-hero__overview-list" data-aos="fade-up">
+            <article class="blogs-hero__overview-item" *ngFor="let item of heroPoints">
+              <h3 class="blogs-hero__overview-title font-kn">{{ item.title }}</h3>
+            </article>
+          </div>
           <div class="blogs-hero__actions">
             <a class="btn btn-primary btn-round" routerLink="/contact">ปรึกษาเรื่องบ้าน</a>
             <a class="btn btn-secondary btn-round" routerLink="/services">ดูบริการของเรา</a>
           </div>
         </div>
 
-        <div class="blogs-hero__overview-list" data-aos="fade-up">
-          <article class="blogs-hero__overview-item" *ngFor="let item of heroPoints">
-            <h3 class="blogs-hero__overview-title font-kn">{{ item.title }}</h3>
-          </article>
-        </div>
+
       </div>
     </div>
   </section>
@@ -47,7 +47,7 @@
     <section class="blogs-list about-section" aria-labelledby="blogs-list-title">
       <div class="container">
         <div class="blogs-list__intro" data-aos="fade-up">
-          <header class="blogs-list__header">
+          <header class="blogs-list__header text-center">
             <p class="blogs-section__kicker font-le">ARTICLE CATALOG</p>
             <h2 class="blogs-section__title font-kn" id="blogs-list-title">
               เลือกอ่านตามเรื่องที่คุณกำลังสนใจ
@@ -58,11 +58,7 @@
             </p>
           </header>
 
-          <aside class="blogs-list__summary font-kn" aria-label="สรุปจำนวนบทความ">
-            <span class="blogs-list__summary-label font-le">CURRENT VIEW</span>
-            <strong>{{ filteredBlogs.length }}</strong>
-            <span>บทความในหมวด {{ selectedCategory }}</span>
-          </aside>
+
         </div>
 
         <div class="blogs-list__toolbar" data-aos="fade-up">

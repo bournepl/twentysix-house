@@ -94,7 +94,7 @@
     .nav-item .nav-link:not(.btn):hover,
     .nav-item .nav-link:not(.btn):active {
       background-color: $opacity-2;
-      border-radius: $border-radius-small;
+      border-radius: 0px !important;
     }
   }
 
@@ -240,7 +240,7 @@
     >a {
       font-weight: bold;
       margin: 5px 0 0;
-      border-radius: $btn-round-radius;
+      border-radius: 0px;
       color: $black-color;
       display: block;
       text-decoration: none;
