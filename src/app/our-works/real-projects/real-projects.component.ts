@@ -59,30 +59,32 @@ export class RealProjectsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.realProjectsService.getProjects().subscribe((projects) => {
-      this.projects = projects;
+      const orderedProjects = this.sortProjectsNewestFirst(projects);
+
+      this.projects = orderedProjects;
       this.categories = [
         this.allCategory,
-        ...Array.from(new Set(projects.flatMap((project) => project.categories))),
+        ...Array.from(new Set(orderedProjects.flatMap((project) => project.categories))),
       ];
       this.bedroomOptions = [
         this.allFilter,
-        ...Array.from(new Set(projects.map((project) => project.bedrooms).filter(Boolean)))
+        ...Array.from(new Set(orderedProjects.map((project) => project.bedrooms).filter(Boolean)))
           .sort((a, b) => Number(a) - Number(b))
           .map((value) => `${value} ห้องนอน`),
       ];
       this.bathroomOptions = [
         this.allFilter,
-        ...Array.from(new Set(projects.map((project) => project.bathrooms).filter(Boolean)))
+        ...Array.from(new Set(orderedProjects.map((project) => project.bathrooms).filter(Boolean)))
           .sort((a, b) => Number(a) - Number(b))
           .map((value) => `${value} ห้องน้ำ`),
       ];
       this.parkingOptions = [
         this.allFilter,
-        ...Array.from(new Set(projects.map((project) => project.parking).filter(Boolean)))
+        ...Array.from(new Set(orderedProjects.map((project) => project.parking).filter(Boolean)))
           .sort((a, b) => Number(a) - Number(b))
           .map((value) => `${value} ที่จอดรถ`),
       ];
-      this.setProjectsJsonLd(projects);
+      this.setProjectsJsonLd(orderedProjects);
     });
 
     if (!this.isBrowser) {
@@ -204,6 +206,15 @@ export class RealProjectsComponent implements OnInit, OnDestroy {
 
   private normalizeText(value: string): string {
     return value.toLowerCase().replace(/\s+/g, '');
+  }
+
+  private sortProjectsNewestFirst(projects: RealProject[]): RealProject[] {
+    return [...projects].sort((a, b) => this.getProjectOrder(b) - this.getProjectOrder(a));
+  }
+
+  private getProjectOrder(project: RealProject): number {
+    const source = `${project.id} ${project.slug}`;
+    return Number(source.match(/\d+/)?.[0] ?? 0);
   }
 
   private setProjectsJsonLd(projects: RealProject[]): void {
