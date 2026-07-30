@@ -25,7 +25,7 @@ export class HomeHeroSectionComponent {
       detail: 'ในงานออกแบบและก่อสร้างบ้าน',
     },
     {
-      value: '20+',
+      value: '80+',
       label: 'ผลงานจริง',
       detail: 'บ้านที่ดูแลและส่งมอบให้ลูกค้า',
     },
