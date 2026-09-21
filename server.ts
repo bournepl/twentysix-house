@@ -30,6 +30,30 @@ type RequestResolution =
   | { type: 'render'; path: string; status: 200 | 404 };
 
 const SITE_URL = 'https://twentysix.house';
+const CONTENT_SECURITY_POLICY = [
+  "default-src 'self'",
+  "base-uri 'self'",
+  "object-src 'none'",
+  "frame-ancestors 'none'",
+  "form-action 'self'",
+  "script-src 'self' 'unsafe-inline'",
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "font-src 'self' https://fonts.gstatic.com data:",
+  "img-src 'self' data: blob:",
+  "media-src 'self'",
+  "connect-src 'self'",
+  "frame-src 'none'",
+  "worker-src 'self' blob:",
+  "manifest-src 'self'",
+].join('; ');
+const SECURITY_HEADERS: Record<string, string> = {
+  'Content-Security-Policy': CONTENT_SECURITY_POLICY,
+  'X-Content-Type-Options': 'nosniff',
+  'Referrer-Policy': 'strict-origin-when-cross-origin',
+  'X-Frame-Options': 'DENY',
+  'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), payment=(), usb=()',
+  'Strict-Transport-Security': 'max-age=63072000; includeSubDomains',
+};
 const SSR_ALLOWED_HOSTS = [
   'localhost',
   '127.0.0.1',
@@ -205,6 +229,14 @@ export function app(): express.Express {
   const indexHtml = join(browserDistFolder, 'index.html');
   const commonEngine = new CommonEngine({ allowedHosts: SSR_ALLOWED_HOSTS });
 
+  server.disable('x-powered-by');
+  server.use((_req, res, next) => {
+    for (const [name, value] of Object.entries(SECURITY_HEADERS)) {
+      res.setHeader(name, value);
+    }
+    next();
+  });
+
   server.set('view engine', 'html');
   server.set('views', browserDistFolder);
 
@@ -258,7 +290,10 @@ ${uniqueSitemapEntries.map(entry => {
         if (resolution.status === 404) {
           res.set('X-Robots-Tag', 'noindex, follow');
         }
-        res.status(resolution.status).send(html);
+        res
+          .set('Cache-Control', 'private, no-store')
+          .status(resolution.status)
+          .send(html);
       })
       .catch(error => next(error));
   });

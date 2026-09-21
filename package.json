@@ -23,6 +23,7 @@
     "seo:audit-media": "node tools/audit-media-seo.mjs",
     "seo:validate-prerender": "node tools/validate-prerender-site.mjs",
     "seo:validate-http": "node tools/validate-http-release.mjs",
+    "security:validate": "node tools/validate-security-policy.mjs",
     "test": "ng test",
     "vercel-build": "npm run build"
   },

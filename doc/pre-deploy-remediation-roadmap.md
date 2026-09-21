@@ -1,7 +1,7 @@
 # Pre-deploy Remediation Roadmap
 
 วันที่จัดทำ: 21 กันยายน 2026
-สถานะ: Phase 4 เสร็จสมบูรณ์ - พร้อมเริ่ม Phase 5
+สถานะ: Phase 5 เสร็จสมบูรณ์ - พร้อมเริ่ม Phase 6
 แพลตฟอร์มเป้าหมาย: Vercel + Angular SSR
 
 ## เป้าหมาย
@@ -152,6 +152,9 @@ npm run seo:validate-structured-data
 ## Phase 5: Security Headers และ Cache Policy
 
 **เป้าหมาย:** ลดความเสี่ยงจาก browser-side attack และป้องกัน stale assets
+
+**สถานะ:** เสร็จสมบูรณ์สำหรับ local production และ Vercel build พร้อมตรวจ response จริงบน Preview ใน Phase 7
+**รายงาน:** [pre-deploy-phase-5-security-headers.md](./pre-deploy-phase-5-security-headers.md)
 
 ### งาน
 
