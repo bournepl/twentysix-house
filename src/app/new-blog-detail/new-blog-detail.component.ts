@@ -28,6 +28,9 @@ interface BlogDetailItem {
   dateFormat: string;
   modifiedDateFormat?: string;
   pictureUrl: string;
+  seoImage?: string;
+  seoTitle?: string;
+  seoDescription?: string;
   status: boolean;
   slug: string;
   tags: string[];
@@ -153,10 +156,10 @@ export class NewBlogDetailComponent implements OnInit, OnDestroy {
     const publishedTime = blog.publishedIso;
 
     this.seo.updatePage({
-      title: `${blog.title} | Twentysix House`,
-      description: blog.subTitle,
+      title: `${blog.seoTitle || blog.title} | Twentysix House`,
+      description: blog.seoDescription || blog.subTitle,
       url,
-      image: blog.pictureUrl,
+      image: blog.seoImage || blog.pictureUrl,
       type: 'article',
       keywords,
       publishedTime,
@@ -182,7 +185,7 @@ export class NewBlogDetailComponent implements OnInit, OnDestroy {
           '@id': `${url}#article`,
           headline: blog.title,
           description: blog.subTitle,
-          image: blog.pictureUrl,
+          image: this.seo.absoluteUrl(blog.seoImage || blog.pictureUrl),
           author: { '@id': ORGANIZATION_ID },
           publisher: { '@id': ORGANIZATION_ID },
           datePublished: publishedTime,

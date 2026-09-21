@@ -68,7 +68,7 @@ export class CompletedHomeDetailComponent implements OnDestroy {
           title,
           description: this.project.description,
           url,
-          image: this.project.heroImage,
+          image: this.project.socialImage || this.project.heroImage,
           preloadImage: this.project.heroImage,
           type: 'article',
           structuredData: structuredDataGraph(

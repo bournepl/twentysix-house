@@ -6,6 +6,7 @@ import blogData from '../../assets/json/blog.json';
 interface BlogRouteItem {
   _id: { $oid: string };
   title: string;
+  seoTitle?: string;
   slug: string;
   status: boolean;
 }
@@ -13,7 +14,7 @@ interface BlogRouteItem {
 const blogs = (blogData as BlogRouteItem[]).filter(blog => blog.status);
 const blogTitle = (routeValue: string): string => {
   const blog = blogs.find(item => item.slug === routeValue || item._id.$oid === routeValue);
-  return blog ? `${blog.title} | Twentysix House` : 'ไม่พบบทความ | Twentysix House';
+  return blog ? `${blog.seoTitle || blog.title} | Twentysix House` : 'ไม่พบบทความ | Twentysix House';
 };
 
 const routes: Routes = [

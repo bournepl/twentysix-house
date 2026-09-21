@@ -1,5 +1,6 @@
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { dirname, join, relative, resolve, sep } from 'node:path';
+import sharp from 'sharp';
 
 const browserRoot = resolve(process.argv[2] || 'dist/twentysix-house/browser');
 const siteUrl = 'https://twentysix.house';
@@ -15,6 +16,7 @@ const routes = new Set(pages.keys());
 const errors = [];
 const titles = new Map();
 const inboundLinks = new Map([...routes].map(route => [route, new Set()]));
+const socialImages = new Map();
 
 for (const [route, html] of pages) {
   const titleMatches = [...html.matchAll(/<title>([\s\S]*?)<\/title>/gi)];
@@ -30,6 +32,7 @@ for (const [route, html] of pages) {
   const imagePreloads = [...html.matchAll(/<link\b[^>]*rel=["']preload["'][^>]*as=["']image["'][^>]*>/gi)];
 
   if (titleMatches.length !== 1 || !title) errors.push(`${route}: expected one non-empty title`);
+  if (title.length > 65) errors.push(`${route}: title is ${title.length} characters; maximum is 65`);
   if (title) {
     const previous = titles.get(title);
     if (previous) errors.push(`${route}: duplicate title also used by ${previous}`);
@@ -41,11 +44,14 @@ for (const [route, html] of pages) {
     errors.push(`${route}: canonical is ${canonical}`);
   }
   if (descriptions.length !== 1 || !description?.trim()) errors.push(`${route}: missing unique meta description`);
+  if (description && description.length > 160) errors.push(`${route}: description is ${description.length} characters; maximum is 160`);
   if (/noindex/i.test(robots)) errors.push(`${route}: canonical prerender route is noindex`);
   if (h1Count !== 1) errors.push(`${route}: expected one h1, found ${h1Count}`);
   if (mainCount !== 1) errors.push(`${route}: expected one main landmark, found ${mainCount}`);
   if (!/<html\b[^>]*lang=["']th["']/i.test(html)) errors.push(`${route}: html lang is not th`);
   if (imagePreloads.length > 1) errors.push(`${route}: more than one image preload (${imagePreloads.length})`);
+
+  validateSocialMetadata(route, html, title, description, canonical);
 
   for (const match of html.matchAll(/<(button|a)\b([^>]*)>([\s\S]*?)<\/\1>/gi)) {
     const [, element, attributes, content] = match;
@@ -86,6 +92,20 @@ for (const [route, html] of pages) {
       continue;
     }
     if (target !== route) inboundLinks.get(target)?.add(route);
+  }
+}
+
+for (const [assetPath, imageRoutes] of socialImages) {
+  try {
+    const metadata = await sharp(assetPath).metadata();
+    const width = metadata.width || 0;
+    const height = metadata.height || 0;
+    const ratio = height ? width / height : 0;
+    if (width < 1200 || height < 600 || ratio < 1.5 || ratio > 2.1) {
+      errors.push(`${[...imageRoutes].join(', ')}: social image must be at least 1200x600 with a 1.5-2.1 ratio; got ${width}x${height}`);
+    }
+  } catch (error) {
+    errors.push(`${[...imageRoutes].join(', ')}: cannot inspect social image (${error.message})`);
   }
 }
 
@@ -147,6 +167,71 @@ function validateAsset(route, value) {
   if (!value || /^(https?:|data:|blob:)/i.test(value)) return;
   const pathname = decodeURI(new URL(value, siteUrl).pathname).replace(/^\/+/, '');
   if (!existsSync(join(browserRoot, pathname))) errors.push(`${route}: missing local asset /${pathname}`);
+}
+
+function validateSocialMetadata(route, html, title, description, canonical) {
+  const property = key => metaContent(html, 'property', key);
+  const named = key => metaContent(html, 'name', key);
+  const expected = [
+    ['og:title', property('og:title')],
+    ['og:description', property('og:description')],
+    ['og:url', property('og:url')],
+    ['og:type', property('og:type')],
+    ['og:site_name', property('og:site_name')],
+    ['og:locale', property('og:locale')],
+    ['og:image', property('og:image')],
+    ['og:image:alt', property('og:image:alt')],
+    ['twitter:card', named('twitter:card')],
+    ['twitter:title', named('twitter:title')],
+    ['twitter:description', named('twitter:description')],
+    ['twitter:image', named('twitter:image')],
+    ['twitter:image:alt', named('twitter:image:alt')],
+  ];
+
+  expected.forEach(([key, value]) => {
+    if (!value?.trim()) errors.push(`${route}: missing ${key}`);
+  });
+
+  const ogTitle = property('og:title');
+  const ogDescription = property('og:description');
+  const ogUrl = property('og:url');
+  const ogImage = property('og:image');
+  const twitterImage = named('twitter:image');
+
+  if (ogTitle && ogTitle !== title) errors.push(`${route}: og:title differs from title`);
+  if (ogDescription && ogDescription !== decodeEntities(description || '')) errors.push(`${route}: og:description differs from description`);
+  if (canonical && ogUrl && normalizeUrl(ogUrl) !== normalizeUrl(canonical)) errors.push(`${route}: og:url differs from canonical`);
+  if (named('twitter:title') && named('twitter:title') !== title) errors.push(`${route}: twitter:title differs from title`);
+  if (named('twitter:description') && named('twitter:description') !== decodeEntities(description || '')) errors.push(`${route}: twitter:description differs from description`);
+  if (ogImage && twitterImage && normalizeUrl(ogImage) !== normalizeUrl(twitterImage)) errors.push(`${route}: Twitter and Open Graph images differ`);
+
+  if (!ogImage) return;
+
+  const imageUrl = new URL(decodeEntities(ogImage), siteUrl);
+  if (imageUrl.origin !== siteUrl) {
+    errors.push(`${route}: social image must be hosted on ${siteUrl}`);
+    return;
+  }
+  if (imageUrl.search || imageUrl.hash) errors.push(`${route}: social image URL must not contain a query or hash`);
+
+  const pathname = decodeURI(imageUrl.pathname).replace(/^\/+/, '');
+  const assetPath = join(browserRoot, pathname);
+  if (!existsSync(assetPath)) {
+    errors.push(`${route}: missing social image /${pathname}`);
+    return;
+  }
+
+  if (!socialImages.has(assetPath)) socialImages.set(assetPath, new Set());
+  socialImages.get(assetPath).add(route);
+}
+
+function metaContent(html, attributeName, key) {
+  for (const match of html.matchAll(/<meta\b[^>]*>/gi)) {
+    if (attribute(match[0], attributeName) === key) {
+      return decodeEntities(attribute(match[0], 'content') || '');
+    }
+  }
+  return '';
 }
 
 function fail(message) {

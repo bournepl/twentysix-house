@@ -9,6 +9,7 @@ export interface CompletedHome {
   concept: string;
   image: string;
   heroImage: string;
+  socialImage?: string;
   gallery: string[];
   thumbnails: string[];
   area: number;
@@ -40,6 +41,7 @@ export const COMPLETED_HOMES: CompletedHome[] = [
     description: 'บ้านสไตล์ Modern Classic ที่ผสานเส้นสายร่วมสมัยกับรายละเอียดคลาสสิก พร้อมพื้นที่ใช้งานสำหรับครอบครัวอย่างครบถ้วน',
     concept: 'ออกแบบให้ความสง่างามและการใช้งานจริงอยู่ร่วมกัน ผ่านสัดส่วนอาคารที่ชัดเจน ช่องเปิดรับแสง และพื้นที่ส่วนกลางที่เชื่อมสมาชิกในบ้านเข้าหากัน',
     ...completedImages('khun-aod-residence'),
+    socialImage: 'assets/img/seo/completed-khun-aod-1200x630.webp',
     area: 320, bedrooms: 4, bathrooms: 5, parking: 3,
   },
   {

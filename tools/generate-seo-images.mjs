@@ -52,6 +52,18 @@ const images = [
   })),
 ];
 
+const socialImages = [
+  { source: 'src/assets/img/photo2.webp', name: 'blog-tropical' },
+  { source: 'src/assets/img/collection16.webp', name: 'blog-modern' },
+  { source: 'src/assets/img/photo15.jpg', name: 'blog-modern-classic' },
+  { source: 'src/assets/img/blog_2.webp', name: 'blog-concrete' },
+  { source: 'src/assets/img/blog_1.webp', name: 'blog-foundation' },
+  {
+    source: 'src/assets/img/ourworks/completed/khun-aod-residence/hero.webp',
+    name: 'completed-khun-aod',
+  },
+];
+
 await mkdir(outputDirectory, { recursive: true });
 
 for (const image of images) {
@@ -66,6 +78,18 @@ for (const image of images) {
 
     console.log(`${image.source} -> ${path.relative(process.cwd(), output)}`);
   }
+}
+
+for (const image of socialImages) {
+  const output = path.join(outputDirectory, `${image.name}-1200x630.webp`);
+
+  await sharp(path.resolve(image.source))
+    .rotate()
+    .resize({ width: 1200, height: 630, fit: 'cover', position: 'centre' })
+    .webp({ quality: 82, effort: 6 })
+    .toFile(output);
+
+  console.log(`${image.source} -> ${path.relative(process.cwd(), output)}`);
 }
 
 const faviconSource = path.resolve('src/assets/img/home/LOGO.png');

@@ -61,7 +61,7 @@ export class ListComponent {
     this.meta.updateTag({ name: 'keywords', content: 'Twentysix.House รับสร้างบ้านอุดรธานี ออกแบบพร้อมสร้างบ้าน ครบจบในที่เดียว สร้างบ้านอุดรธานี' });
     this.meta.updateTag({ property: 'og:title', content: 'Twentysix.House | รับสร้างบ้านอุดรธานี ออกแบบพร้อมสร้างบ้าน' });
     this.meta.updateTag({ property: 'og:description', content: 'Twentysix.House บริษัทรับสร้างบ้านพร้อมออกแบบบ้าน แบบ One Stop Service ครบจบในที่เดียวด้วยทีมงานมืออาชีพ สร้างบ้านในฝันที่คุณต้องการ งบประมาณไม่บานปลาย พร้อมรับรองคุณภาพด้วยมาตรฐาน' });
-    this.meta.updateTag({ property: 'og:image', content: 'https://firebasestorage.googleapis.com/v0/b/zocklip.appspot.com/o/twentysix%2Fhead.png?alt=media&token=a41d5179-03c0-42b0-8ef2-835f4239b332' });
+    this.meta.updateTag({ property: 'og:image', content: 'https://twentysix.house/assets/img/seo/blog-hero-1600.webp' });
     this.meta.updateTag({ property: 'og:url', content: 'https://twentysix.house/blogs' });
   }
 

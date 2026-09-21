@@ -2,7 +2,9 @@ import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { dirname, join, relative, resolve, sep } from 'node:path';
 
 const browserRoot = resolve(process.argv[2] || 'dist/twentysix-house/browser');
+const siteUrl = 'https://twentysix.house';
 const organizationId = 'https://twentysix.house/#organization';
+const expectedLogo = `${siteUrl}/assets/img/seo/brand-mark-640.webp`;
 
 if (!existsSync(browserRoot)) {
   fail(`Build output not found: ${browserRoot}`);
@@ -61,6 +63,17 @@ for (const file of htmlFiles) {
     if (fingerprint !== organizationFingerprint) {
       errors.push(`${route}: organization data differs from other routes`);
     }
+    if (organization.logo?.contentUrl !== expectedLogo || organization.logo?.url !== expectedLogo) {
+      errors.push(`${route}: organization logo must use ${expectedLogo}`);
+    }
+  }
+
+  if (/firebasestorage\.googleapis\.com/i.test(scripts[0][1])) {
+    errors.push(`${route}: structured data contains a temporary Firebase asset URL`);
+  }
+
+  for (const assetUrl of collectAssetUrls(document)) {
+    validateAssetUrl(route, assetUrl);
   }
 
   for (const expectedType of expectedTypes(route)) {
@@ -135,6 +148,60 @@ function hasProperty(value, property) {
   if (!value || typeof value !== 'object') return false;
   return Object.prototype.hasOwnProperty.call(value, property)
     || Object.values(value).some(item => hasProperty(item, property));
+}
+
+function collectAssetUrls(value, result = new Set()) {
+  if (Array.isArray(value)) {
+    value.forEach(item => collectAssetUrls(item, result));
+    return result;
+  }
+  if (!value || typeof value !== 'object') return result;
+
+  for (const [key, item] of Object.entries(value)) {
+    if (['image', 'logo', 'contentUrl', 'thumbnailUrl'].includes(key)) {
+      collectAssetValue(item, result);
+    }
+    collectAssetUrls(item, result);
+  }
+
+  return result;
+}
+
+function collectAssetValue(value, result) {
+  if (typeof value === 'string') {
+    result.add(value);
+    return;
+  }
+  if (Array.isArray(value)) {
+    value.forEach(item => collectAssetValue(item, result));
+    return;
+  }
+  if (!value || typeof value !== 'object') return;
+
+  for (const key of ['url', 'contentUrl', 'thumbnailUrl']) {
+    if (typeof value[key] === 'string') result.add(value[key]);
+  }
+}
+
+function validateAssetUrl(route, value) {
+  let url;
+  try {
+    url = new URL(value, `${siteUrl}/`);
+  } catch {
+    errors.push(`${route}: invalid structured-data asset URL ${value}`);
+    return;
+  }
+
+  if (url.origin !== siteUrl) {
+    errors.push(`${route}: structured-data asset is not hosted on ${siteUrl}: ${value}`);
+    return;
+  }
+
+  const pathname = decodeURIComponent(url.pathname).replace(/^\/+/, '');
+  const assetPath = resolve(browserRoot, pathname);
+  if (!assetPath.startsWith(`${browserRoot}${sep}`) || !existsSync(assetPath)) {
+    errors.push(`${route}: missing structured-data asset /${pathname}`);
+  }
 }
 
 function routeFromFile(file) {

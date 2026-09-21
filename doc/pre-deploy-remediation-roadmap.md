@@ -1,7 +1,7 @@
 # Pre-deploy Remediation Roadmap
 
 วันที่จัดทำ: 21 กันยายน 2026
-สถานะ: Phase 3 เสร็จสมบูรณ์ - พร้อมเริ่ม Phase 4
+สถานะ: Phase 4 เสร็จสมบูรณ์ - พร้อมเริ่ม Phase 5
 แพลตฟอร์มเป้าหมาย: Vercel + Angular SSR
 
 ## เป้าหมาย
@@ -128,6 +128,9 @@ npm run seo:validate-structured-data
 ## Phase 4: SEO Asset และ Metadata Integrity
 
 **เป้าหมาย:** ให้ metadata และ structured data อ้างถึง URL ที่เข้าถึงได้จริงทั้งหมด
+
+**สถานะ:** เสร็จสมบูรณ์สำหรับ local production build และพร้อมตรวจ Rich Results บน Preview ใน Phase 7
+**รายงาน:** [pre-deploy-phase-4-seo-assets.md](./pre-deploy-phase-4-seo-assets.md)
 
 ### งาน
 

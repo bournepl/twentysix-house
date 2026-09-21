@@ -19,6 +19,7 @@ interface BlogListItem {
   date: string;
   dateFormat: string;
   pictureUrl: string;
+  seoImage?: string;
   status: boolean;
   slug: string;
   publishedAt: number;
@@ -59,7 +60,7 @@ export class NewBlogListComponent {
       title,
       description,
       url,
-      image: this.featuredBlog?.pictureUrl,
+      image: this.featuredBlog?.seoImage || this.featuredBlog?.pictureUrl,
       preloadImage: 'assets/img/seo/blog-hero-1600.webp',
       preloadImageSrcset: 'assets/img/seo/blog-hero-960.webp 960w, assets/img/seo/blog-hero-1600.webp 1600w',
       preloadImageSizes: '100vw',
@@ -82,7 +83,7 @@ export class NewBlogListComponent {
         itemListSchema('บทความจาก Twentysix House', url, this.blogs.map(blog => ({
           name: blog.title,
           url: `${url}/${blog.slug}`,
-          image: blog.pictureUrl,
+          image: blog.seoImage || blog.pictureUrl,
         }))),
       ),
     });

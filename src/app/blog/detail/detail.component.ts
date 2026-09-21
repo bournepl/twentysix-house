@@ -90,7 +90,7 @@ export class DetailComponent {
 
     this.meta.updateTag({ property: 'og:title', content: data.title });
     this.meta.updateTag({ property: 'og:description', content: data.subTitle });
-    this.meta.updateTag({ property: 'og:image', content: data.pictureUrl });
+    this.meta.updateTag({ property: 'og:image', content: new URL(data.pictureUrl, 'https://twentysix.house/').href });
     this.meta.updateTag({ property: 'og:url', content: 'https://twentysix.house/blogs/detail/' + id });
   }
 

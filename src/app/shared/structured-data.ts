@@ -28,8 +28,8 @@ export function organizationSchema(): Record<string, unknown> {
     logo: {
       '@type': 'ImageObject',
       '@id': `${SITE_URL}/#logo`,
-      url: absoluteSiteUrl('assets/img/home/LOGO.png'),
-      contentUrl: absoluteSiteUrl('assets/img/home/LOGO.png'),
+      url: absoluteSiteUrl('assets/img/seo/brand-mark-640.webp'),
+      contentUrl: absoluteSiteUrl('assets/img/seo/brand-mark-640.webp'),
       caption: 'Twentysix House',
     },
     image: absoluteSiteUrl('assets/img/house-catalog/pure-collection/collection-hero.webp'),
