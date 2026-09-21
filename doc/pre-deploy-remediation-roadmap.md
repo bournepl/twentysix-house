@@ -1,7 +1,7 @@
 # Pre-deploy Remediation Roadmap
 
 วันที่จัดทำ: 21 กันยายน 2026
-สถานะ: Phase 0 เสร็จสมบูรณ์ - พร้อมเริ่ม Phase 1
+สถานะ: Phase 1 เสร็จสมบูรณ์ - พร้อมเริ่ม Phase 2
 แพลตฟอร์มเป้าหมาย: Vercel + Angular SSR
 
 ## เป้าหมาย
@@ -41,6 +41,9 @@
 ## Phase 1: Production Dependency Security
 
 **เป้าหมาย:** ปิดช่องโหว่ Critical/High ที่อยู่ใน production dependency tree
+
+**สถานะ:** เสร็จสมบูรณ์ อัปเกรดเป็น Angular 20 LTS และ production audit เหลือ 0 vulnerabilities
+**รายงาน:** [pre-deploy-phase-1-security.md](./pre-deploy-phase-1-security.md)
 
 ### งาน
 

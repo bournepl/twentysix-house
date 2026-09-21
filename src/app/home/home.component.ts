@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 
 
 @Component({
+  standalone: false,
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'

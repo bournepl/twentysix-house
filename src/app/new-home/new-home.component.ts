@@ -14,6 +14,7 @@ interface FeatureVideoItem {
 }
 
 @Component({
+  standalone: false,
   selector: 'app-new-home',
   templateUrl: './new-home.component.html',
   styleUrl: './new-home.component.scss'

@@ -14,6 +14,7 @@ import {
 import { DESIGN_PROJECTS, DesignProject } from '../design-projects.data';
 
 @Component({
+  standalone: false,
   selector: 'app-design-project-detail',
   templateUrl: './design-project-detail.component.html',
   styleUrls: [

@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import { FooterComponent } from './shared/footer/footer.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { provideLoadingBarRouter } from '@ngx-loading-bar/router';
@@ -30,7 +30,6 @@ import { SharedUiModule } from './shared/shared-ui.module';
     FormsModule,
 
     RouterModule,
-    HttpClientModule,
     LoadingBarModule,
     SharedUiModule,
     AppRoutingModule

@@ -1,6 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 
 @Component({
+  standalone: false,
   selector: 'app-site-menu',
   templateUrl: './site-menu.component.html',
   styleUrl: './site-menu.component.scss'

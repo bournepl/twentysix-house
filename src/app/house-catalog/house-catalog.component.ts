@@ -21,6 +21,7 @@ import {
 type BedroomFilter = 'all' | 2 | 3 | 4;
 
 @Component({
+  standalone: false,
   selector: 'app-house-catalog',
   templateUrl: './house-catalog.component.html',
   styleUrl: './house-catalog.component.scss'

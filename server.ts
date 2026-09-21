@@ -1,5 +1,5 @@
 import { APP_BASE_HREF } from '@angular/common';
-import { CommonEngine } from '@angular/ssr';
+import { CommonEngine } from '@angular/ssr/node';
 import express from 'express';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -30,6 +30,13 @@ type RequestResolution =
   | { type: 'render'; path: string; status: 200 | 404 };
 
 const SITE_URL = 'https://twentysix.house';
+const SSR_ALLOWED_HOSTS = [
+  'localhost',
+  '127.0.0.1',
+  'twentysix.house',
+  '*.twentysix.house',
+  '*.vercel.app',
+];
 
 const normalizeSlug = (value = ''): string => {
   try {
@@ -196,7 +203,7 @@ export function app(): express.Express {
   const serverDistFolder = dirname(fileURLToPath(import.meta.url));
   const browserDistFolder = resolve(serverDistFolder, '../browser');
   const indexHtml = join(browserDistFolder, 'index.html');
-  const commonEngine = new CommonEngine();
+  const commonEngine = new CommonEngine({ allowedHosts: SSR_ALLOWED_HOSTS });
 
   server.set('view engine', 'html');
   server.set('views', browserDistFolder);

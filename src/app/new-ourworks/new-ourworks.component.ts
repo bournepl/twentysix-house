@@ -19,6 +19,7 @@ interface WorkItem {
 }
 
 @Component({
+  standalone: false,
   selector: 'app-new-ourworks',
   templateUrl: './new-ourworks.component.html',
   styleUrl: './new-ourworks.component.scss'

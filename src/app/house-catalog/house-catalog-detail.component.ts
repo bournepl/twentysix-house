@@ -14,6 +14,7 @@ import {
 import { HOUSE_CATALOG_ITEMS, HouseCatalogItem, findHouseCatalogItem } from './house-catalog.data';
 
 @Component({
+  standalone: false,
   selector: 'app-house-catalog-detail',
   templateUrl: './house-catalog-detail.component.html',
   styleUrls: [

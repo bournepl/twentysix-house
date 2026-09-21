@@ -9,6 +9,7 @@ import { BlogService } from '../../_service/blog.service';
 
 
 @Component({
+  standalone: false,
   selector: 'app-list',
 
 

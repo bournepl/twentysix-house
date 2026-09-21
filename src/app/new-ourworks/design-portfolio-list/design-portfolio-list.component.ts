@@ -11,6 +11,7 @@ import {
 import { DESIGN_PROJECTS } from '../design-projects.data';
 
 @Component({
+  standalone: false,
   selector: 'app-design-portfolio-list',
   templateUrl: './design-portfolio-list.component.html',
   styleUrls: [

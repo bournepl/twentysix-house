@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef, PLATFORM_ID, Inject } from '@angular/cor
 import { isPlatformBrowser, Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 @Component({
+  standalone: false,
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']

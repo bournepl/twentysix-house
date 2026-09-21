@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
+  standalone: false,
   selector: 'app-new-contact',
   templateUrl: './new-contact.component.html',
   styleUrl: './new-contact.component.scss'

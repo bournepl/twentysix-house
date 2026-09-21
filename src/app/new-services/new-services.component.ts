@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
+  standalone: false,
   selector: 'app-new-services',
   templateUrl: './new-services.component.html',
   styleUrl: './new-services.component.scss'

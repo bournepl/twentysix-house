@@ -26,6 +26,7 @@ interface BlogListItem {
 }
 
 @Component({
+  standalone: false,
   selector: 'app-new-blog-list',
   templateUrl: './new-blog-list.component.html',
   styleUrl: './new-blog-list.component.scss'

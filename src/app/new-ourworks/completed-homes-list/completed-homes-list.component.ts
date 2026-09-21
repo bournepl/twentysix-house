@@ -11,6 +11,7 @@ import {
 import { COMPLETED_HOMES } from '../completed-homes.data';
 
 @Component({
+  standalone: false,
   selector: 'app-completed-homes-list',
   templateUrl: './completed-homes-list.component.html',
   styleUrl: './completed-homes-list.component.scss'

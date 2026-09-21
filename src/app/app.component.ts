@@ -1,6 +1,5 @@
-import { Component, Inject } from '@angular/core';
+import { Component, DOCUMENT, Inject } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-import { DOCUMENT } from '@angular/common';
 
 import { filter } from 'rxjs';
 import { SeoPageConfig, SeoService } from './shared/seo.service';
@@ -8,6 +7,7 @@ import { staticPageStructuredData } from './shared/structured-data';
 
 
 @Component({
+  standalone: false,
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

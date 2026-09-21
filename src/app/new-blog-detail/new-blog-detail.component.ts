@@ -39,6 +39,7 @@ interface BlogDetailItem {
 }
 
 @Component({
+  standalone: false,
   selector: 'app-new-blog-detail',
   templateUrl: './new-blog-detail.component.html',
   styleUrl: './new-blog-detail.component.scss'

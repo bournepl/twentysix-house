@@ -5,11 +5,11 @@ import { LoadingBarService } from '@ngx-loading-bar/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Blog } from '../../_model/blog';
-import { QuillModule } from 'ngx-quill';
 import { Meta, Title } from '@angular/platform-browser';
 import { BlogService } from '../../_service/blog.service';
 
 @Component({
+  standalone: false,
   selector: 'app-detail',
 
   templateUrl: './detail.component.html',
