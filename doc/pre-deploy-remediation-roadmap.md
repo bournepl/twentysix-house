@@ -1,7 +1,7 @@
 # Pre-deploy Remediation Roadmap
 
 วันที่จัดทำ: 21 กันยายน 2026
-สถานะ: Phase 2 เสร็จสมบูรณ์ - พร้อมเริ่ม Phase 3
+สถานะ: Phase 3 เสร็จสมบูรณ์ - พร้อมเริ่ม Phase 4
 แพลตฟอร์มเป้าหมาย: Vercel + Angular SSR
 
 ## เป้าหมาย
@@ -105,9 +105,12 @@ npm run seo:validate-structured-data
 
 **เป้าหมาย:** ไม่ชนข้อจำกัด source upload และไม่ส่งไฟล์หนักผ่าน function โดยไม่ตั้งใจ
 
+**สถานะ:** เสร็จสมบูรณ์สำหรับ workflow GitHub → Vercel และพร้อมตรวจซ้ำบน Preview ใน Phase 7
+**รายงาน:** [pre-deploy-phase-3-video-delivery.md](./pre-deploy-phase-3-video-delivery.md)
+
 ### งาน
 
-- แก้ `.vercelignore` จาก `src/assets/video` ให้ตรงกับ `src/assets/videos`
+- ลบกฎ `.vercelignore` ที่เขียนผิดเป็น `src/assets/video` และเก็บ `src/assets/videos` ไว้ใน build เพราะเป็นไฟล์ production ที่ Angular ต้องคัดลอก
 - ตรวจว่าไฟล์ที่ ignore ยังถูกสร้างหรือคัดลอกใน Vercel build ได้อย่างถูกต้อง
 - ตัดสินใจว่าจะเก็บวิดีโอบน Vercel static assets หรือย้ายไป media CDN
 - หากใช้ Vercel Hobby ต้องลด source upload ให้ต่ำกว่า 100 MB

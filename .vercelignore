@@ -4,6 +4,5 @@ source-media
 src/assets/img/Photo/02 ผลงานการส่งมอบจริง/**/*.mp4
 src/assets/img/Photo/02 ผลงานการส่งมอบจริง/**/*.mov
 src/assets/img/Photo/02 ผลงานการส่งมอบจริง/**/*.MOV
-src/assets/video/**/*.mp4
-src/assets/video/**/*.mov
-src/assets/video/**/*.MOV
+
+# Keep src/assets/videos: these are the optimized production files copied by Angular.
