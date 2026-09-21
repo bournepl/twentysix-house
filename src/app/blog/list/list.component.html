@@ -1,0 +1,63 @@
+<div class="wrapper">
+  <div class="page-header page-header-small" style="background-image: url('./assets/img/blurred-image-1.jpg')">
+    <div class="content-center">
+      <div class="row">
+        <div class="col-md-8 ml-auto mr-auto">
+          <h2>Blogs</h2>
+          <h5 class="description text-gray">Latest Blogs & Articles</h5>
+          <div class="section-space"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="main">
+    <div class="section-breadcrumb">
+      <div class="container">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="'/'">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Blogs</li>
+
+          </ol>
+        </nav>
+      </div>
+
+    </div>
+    <div class="section">
+      <div class="container">
+
+        <div class="row mt-5">
+          <div class="col-md-12 ml-auto mr-auto">
+            <div class="row">
+              <div class="col-md-4 mb-3" *ngFor="let getBlog of getBlogs ">
+                <div class="card card-blog">
+                  <div class="card-image">
+                    <a href="javascript:void(0)"><img class="img img-raised" [src]="getBlog.pictureUrl" /></a>
+                  </div>
+                  <div class="card-body">
+                    <h6 class="card-category text-primary"> {{getBlog.blogCategory.blogCategoryName}}</h6>
+                    <h3 class="card-title " (click)="onDetail(getBlog._id.$oid)">
+                      <a href="javascript:void(0)">{{getBlog.title}}</a>
+                    </h3>
+                    <p class="card-description">
+                      {{getBlog.subTitle}}
+                    </p>
+                    <hr />
+                    <div class="card-footer">
+                      <div class="author"><img alt="..." class="avatar img-raised" src="assets/img/logo.jpg"><span
+                          class="text-secondary">TWENTYSIX.HOUSE</span>
+                      </div>
+                      <div class=" stats"> {{getBlog.date | date}} </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>

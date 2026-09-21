@@ -1,0 +1,178 @@
+<main class="home-detail-page catalog-detail-page" *ngIf="house as design; else houseNotFound">
+  <app-site-menu></app-site-menu>
+
+  <header class="detail-hero">
+    <nav class="detail-nav">
+      <a class="detail-logo" routerLink="/" aria-label="กลับหน้าแรก Twentysix House">
+        <img src="assets/img/seo/brand-mark-320.webp" alt="" width="320" height="226" decoding="async">
+      </a>
+      <a class="detail-brand" routerLink="/">
+        <span>TWENTYSIX<span>.</span>HOUSE</span>
+        <small class="font-pr">รับสร้างบ้านอุดรธานี</small>
+      </a>
+    </nav>
+
+    <img class="detail-hero-image" [src]="design.coverImage" [alt]="'ภาพภายนอกแบบบ้าน ' + design.name + ' ' + design.thaiName"
+      width="1920" height="1080" loading="eager" fetchpriority="high" decoding="async">
+    <div class="detail-hero-overlay" aria-hidden="true"></div>
+    <span class="detail-hero-word" aria-hidden="true">PURE</span>
+
+    <div class="detail-hero-content">
+      <div class="detail-breadcrumb">
+        <a routerLink="/">หน้าแรก</a><span>/</span>
+        <a routerLink="/house-catalog">แบบบ้านของเรา</a><span>/</span><strong>{{ design.name }}</strong>
+      </div>
+      <p class="font-rp">{{ design.collection }}</p>
+      <h1>{{ design.name }} <small>{{ design.thaiName }}</small></h1>
+      <div class="detail-title-rule" aria-hidden="true"></div>
+      <span>{{ design.style }} · {{ design.floors }} ชั้น · เริ่มต้น {{ formatBudget(design.startingBudget) }}*</span>
+    </div>
+  </header>
+
+  <section class="project-overview-section">
+    <div class="gold-section-divider" aria-hidden="true"></div>
+    <div class="project-overview">
+      <header class="overview-heading">
+        <p class="font-rp">The Idea Of Living</p>
+        <h2 class="font-kn">แบบบ้านที่เริ่มจาก<br>ความสบายในการใช้ชีวิต</h2>
+        <span class="overview-rule" aria-hidden="true"></span>
+      </header>
+      <div class="overview-copy">
+        <p>{{ design.description }}</p>
+        <p>{{ design.concept }}</p>
+      </div>
+    </div>
+
+    <div class="project-specs catalog-project-specs" aria-label="ข้อมูลแบบบ้าน">
+      <div><i class="now-ui-icons users_single-02" aria-hidden="true"></i><small>BEDROOM</small><strong>{{ design.bedrooms }}</strong><span>ห้องนอน</span></div>
+      <div><i class="now-ui-icons objects_support-17" aria-hidden="true"></i><small>BATHROOM</small><strong>{{ design.bathrooms }}</strong><span>ห้องน้ำ</span></div>
+      <div><i class="now-ui-icons shopping_shop" aria-hidden="true"></i><small>LIVING ROOM</small><strong>{{ design.livingRooms }}</strong><span>ห้องนั่งเล่น</span></div>
+      <div><i class="now-ui-icons ui-1_settings-gear-63" aria-hidden="true"></i><small>KITCHEN</small><strong>{{ design.kitchens }}</strong><span>ห้องครัว</span></div>
+      <div><i class="now-ui-icons transportation_bus-front-12" aria-hidden="true"></i><small>PARKING</small><strong>{{ design.parking }}</strong><span>ที่จอดรถ</span></div>
+    </div>
+  </section>
+
+  <section class="project-gallery-section">
+    <div class="gold-section-divider" aria-hidden="true"></div>
+    <header class="gallery-heading">
+      <p class="font-rp">Explore The Design</p>
+      <h2 class="font-kn">มองบ้านจากทุกมุม</h2>
+      <span class="gallery-rule" aria-hidden="true"></span>
+      <p>สำรวจรูปทรงภายนอก พื้นที่ และรายละเอียดสำคัญของแบบบ้าน {{ design.name }}</p>
+    </header>
+
+    <div class="gallery-stage catalog-gallery-stage" tabindex="0" aria-label="แกลเลอรีแบบบ้าน ใช้ปุ่มลูกศรซ้ายขวาเพื่อเปลี่ยนภาพ"
+      (keydown)="onGalleryKeydown($event)" (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event)">
+      <div class="catalog-gallery-track" [style.transform]="'translateX(-' + activeGalleryIndex * 100 + '%)'">
+        <img *ngFor="let image of design.gallery; let i = index" [src]="image"
+          [alt]="'มุมมองแบบบ้าน ' + design.name + ' ' + design.thaiName + ' ภาพที่ ' + (i + 1)"
+          width="1600" height="1000" loading="lazy" decoding="async">
+      </div>
+      <button class="gallery-nav gallery-nav-prev" type="button" aria-label="ภาพก่อนหน้า" (click)="changeGalleryImage('previous')"><span></span></button>
+      <button class="gallery-nav gallery-nav-next" type="button" aria-label="ภาพถัดไป" (click)="changeGalleryImage('next')"><span></span></button>
+      <span class="gallery-counter">{{ activeGalleryIndex + 1 | number:'2.0' }} / {{ design.gallery.length | number:'2.0' }}</span>
+    </div>
+
+    <div class="gallery-thumbnails catalog-gallery-thumbnails" aria-label="เลือกภาพแบบบ้าน">
+      <button *ngFor="let image of design.galleryThumbnails; let i = index" type="button"
+        [class.is-active]="i === activeGalleryIndex" [attr.aria-label]="'แสดงภาพที่ ' + (i + 1)"
+        (click)="selectGalleryImage(i)">
+        <img [src]="image" alt="" width="320" height="200" loading="lazy" decoding="async">
+      </button>
+    </div>
+
+    <div class="catalog-principles">
+      <article *ngFor="let principle of designPrinciples">
+        <small>{{ principle.eyebrow }}</small>
+        <h3 class="font-kn">{{ principle.title }}</h3>
+        <span aria-hidden="true"></span>
+        <p>{{ principle.description }}</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="floor-plan-section" *ngIf="design.floorPlanImages.length">
+    <div class="navy-section-divider" aria-hidden="true"></div>
+    <header class="floor-plan-heading">
+      <p class="font-rp">Plan & Function</p>
+      <h2 class="font-kn">ผังพื้นที่ของ {{ design.name }}</h2>
+      <span aria-hidden="true"></span>
+      <p>ภาพรวมการจัดวางพื้นที่และฟังก์ชันของบ้าน สามารถพูดคุยเพื่อปรับรายละเอียดให้เหมาะกับที่ดินและความต้องการได้</p>
+    </header>
+    <figure *ngFor="let plan of design.floorPlanImages">
+      <img [src]="plan" [alt]="'แปลนพื้นที่แบบบ้าน ' + design.name + ' ' + design.thaiName"
+        width="1600" height="1200" loading="lazy" decoding="async">
+    </figure>
+    <p class="floor-plan-note">* แบบและมูลค่าก่อสร้างอาจเปลี่ยนแปลงตามสภาพพื้นที่ วัสดุ และขอบเขตงาน กรุณาปรึกษาทีมงานเพื่อประเมินโครงการ</p>
+  </section>
+
+  <section class="catalog-consult-section">
+    <div class="gold-section-divider" aria-hidden="true"></div>
+    <div class="catalog-consult">
+      <div>
+        <p class="font-rp">Adapted For You</p>
+        <h2 class="font-kn">สนใจ {{ design.name }} นำไปปรับให้เป็นบ้านของคุณ</h2>
+        <span>พูดคุยเรื่องที่ดิน ฟังก์ชัน วัสดุ และงบประมาณ เพื่อประเมินแนวทางที่เหมาะกับครอบครัวของคุณ</span>
+      </div>
+      <a routerLink="/contact">ปรึกษาเพื่อปรับแบบ</a>
+    </div>
+  </section>
+
+  <section class="project-articles-section" *ngIf="helpfulArticles.length">
+    <div class="gold-section-divider" aria-hidden="true"></div>
+    <header>
+      <p class="font-rp">Before You Build</p>
+      <h2 class="font-kn">อ่านต่อเพื่อวางแผนแบบบ้านให้ชัดขึ้น</h2>
+      <span aria-hidden="true"></span>
+    </header>
+    <div class="project-articles-grid">
+      <a *ngFor="let article of helpfulArticles" [routerLink]="['/blogs', article.slug]">
+        <small>{{ article.topic === 'construction-structure' ? 'โครงสร้างและการก่อสร้าง' : 'แนวคิดการออกแบบ' }}</small>
+        <h3 class="font-kn">{{ article.title }}</h3>
+        <p>{{ article.summary }}</p>
+        <strong>อ่านบทความ <span aria-hidden="true">›</span></strong>
+      </a>
+    </div>
+  </section>
+
+  <section class="related-homes-section" *ngIf="relatedHouses.length">
+    <div class="navy-section-divider" aria-hidden="true"></div>
+    <header class="related-homes-heading">
+      <p class="font-rp">Related House Designs</p>
+      <h2 class="font-kn">แบบบ้านที่คุณอาจสนใจ</h2>
+      <span aria-hidden="true"></span>
+    </header>
+
+    <div class="related-homes-grid">
+      <a class="related-home-card catalog-related-card" *ngFor="let related of relatedHouses"
+        [routerLink]="['/house-catalog', related.slug]" (click)="scrollToTop()">
+        <div class="related-home-media"><img [src]="related.cardImage" [alt]="'ภาพด้านหน้าแบบบ้าน ' + related.name + ' ' + related.thaiName"
+          width="960" height="600" loading="lazy" decoding="async"></div>
+        <div class="related-home-copy">
+          <div class="related-home-meta"><span>{{ related.thaiName }}</span><small>เริ่มต้น {{ formatBudget(related.startingBudget) }}*</small></div>
+          <h3>{{ related.name }}</h3>
+          <p>{{ related.description }}</p>
+          <div class="related-home-specs">
+            <span><i class="now-ui-icons users_single-02" aria-hidden="true"></i><strong>{{ related.bedrooms }}</strong> ห้องนอน</span>
+            <span><i class="now-ui-icons objects_support-17" aria-hidden="true"></i><strong>{{ related.bathrooms }}</strong> ห้องน้ำ</span>
+            <span><i class="now-ui-icons transportation_bus-front-12" aria-hidden="true"></i><strong>{{ related.parking }}</strong> ที่จอด</span>
+            <span><i class="now-ui-icons shopping_shop" aria-hidden="true"></i><strong>{{ related.livingRooms }}</strong> ห้องนั่งเล่น</span>
+          </div>
+          <div class="related-home-footer"><span>{{ related.collection }}</span><strong>ดูรายละเอียดแบบบ้าน</strong></div>
+        </div>
+      </a>
+    </div>
+    <a class="related-all-link" routerLink="/house-catalog">ดูแบบบ้านทั้งหมด <span aria-hidden="true">›</span></a>
+  </section>
+
+  <button class="scroll-top-button" type="button" aria-label="เลื่อนไปด้านบน" (click)="scrollToTop()"><span></span></button>
+</main>
+
+<ng-template #houseNotFound>
+  <main class="project-not-found">
+    <app-site-menu></app-site-menu>
+    <p class="font-rp">House Design Not Found</p>
+    <h1 class="font-kn">ไม่พบข้อมูลแบบบ้านนี้</h1>
+    <a routerLink="/house-catalog">ดูแบบบ้านทั้งหมด</a>
+  </main>
+</ng-template>

@@ -1,0 +1,76 @@
+<main class="completed-page design-list-page">
+  <app-site-menu></app-site-menu>
+
+  <header class="completed-hero design-list-hero">
+    <nav class="completed-nav">
+      <a class="completed-logo" routerLink="/" aria-label="Twentysix House home">
+        <img src="assets/img/seo/brand-mark-320.webp" alt="Twentysix House" width="320" height="226" decoding="async">
+      </a>
+
+      <a class="completed-brand" routerLink="/" aria-label="Twentysix House home">
+        <span>TWENTYSIX<span>.</span>HOUSE</span>
+        <small class="font-pr">รับสร้างบ้านอุดรธานี</small>
+      </a>
+
+    </nav>
+
+    <div class="completed-hero-media" aria-hidden="true"></div>
+    <div class="completed-hero-overlay" aria-hidden="true"></div>
+    <div class="completed-hero-content">
+      <div class="completed-breadcrumb">
+        <a routerLink="/ourworks">Our Works</a><span>/</span><strong>Design Portfolio</strong>
+      </div>
+      <p class="font-rp">Design Portfolio</p>
+      <h1 class="font-kn">แนวคิดที่ออกแบบ<br>เพื่อชีวิตในแบบของคุณ</h1>
+      <div class="completed-title-rule" aria-hidden="true"></div>
+      <span>ผลงานออกแบบสถาปัตยกรรมและพื้นที่ภายใน ที่เริ่มจากการทำความเข้าใจผู้อยู่อาศัย</span>
+    </div>
+  </header>
+
+  <section class="completed-list-section design-projects-section">
+    <div class="gold-section-divider" aria-hidden="true"></div>
+    <div class="completed-list-heading">
+      <div>
+        <p class="font-rp">Designed With Purpose</p>
+        <h2 class="font-kn">ผลงานออกแบบของเรา</h2>
+        <span class="completed-heading-rule" aria-hidden="true"></span>
+      </div>
+      <p>แต่ละแบบถูกพัฒนาจากบริบทของที่ดิน ฟังก์ชัน งบประมาณ และบรรยากาศที่เจ้าของบ้านต้องการ</p>
+    </div>
+
+    <div class="completed-grid">
+      <a class="completed-project design-project" *ngFor="let project of designProjects"
+        [routerLink]="['/ourworks/design', project.slug]">
+        <div class="completed-project-media">
+          <img [src]="project.image" [alt]="project.title" width="960" height="600" loading="lazy" decoding="async">
+          <span class="design-project-category">{{ project.category }}</span>
+        </div>
+        <div class="completed-project-copy">
+          <small>{{ project.style }}</small>
+          <h3 class="font-kn">{{ project.title }}</h3>
+          <p>{{ project.description }}</p>
+          <div class="design-project-footer">
+            <span>{{ project.scope }}</span>
+            <strong>รายละเอียดแนวคิด</strong>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="completed-cta-section design-cta-section">
+    <div class="navy-section-divider" aria-hidden="true"></div>
+    <div class="completed-cta">
+      <div>
+        <p class="font-rp">Begin With A Clear Idea</p>
+        <h2 class="font-kn">เริ่มเปลี่ยนความต้องการให้เป็นแบบบ้านที่ชัดเจน</h2>
+        <span>พูดคุยเรื่องที่ดิน ฟังก์ชัน สไตล์ และงบประมาณกับทีมออกแบบของเราได้</span>
+      </div>
+      <a routerLink="/contact">ปรึกษาทีมออกแบบ</a>
+    </div>
+  </section>
+
+  <button class="scroll-top-button" type="button" aria-label="เลื่อนไปด้านบน" (click)="scrollToTop()">
+    <span></span>
+  </button>
+</main>

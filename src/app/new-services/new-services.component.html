@@ -1,0 +1,124 @@
+<main class="new-services-page">
+  <section class="services-hero">
+    <nav class="services-nav">
+      <a class="services-logo" routerLink="/" aria-label="Twentysix House home">
+        <img src="assets/img/seo/brand-mark-320.webp" alt="Twentysix House" width="320" height="226" decoding="async">
+      </a>
+
+      <a class="services-brand" routerLink="/" aria-label="Twentysix House home">
+        <span>TWENTYSIX<span>.</span>HOUSE</span>
+        <small class="font-pr">รับสร้างบ้านอุดรธานี</small>
+      </a>
+
+      <div class="services-actions">
+        <app-site-menu></app-site-menu>
+      </div>
+    </nav>
+
+    <div class="services-hero-media" aria-hidden="true"></div>
+    <div class="services-hero-overlay" aria-hidden="true"></div>
+
+    <div class="services-hero-content">
+      <p class="services-script font-rp">Our Services</p>
+      <h1 class="font-kn section-title-rule section-title-rule-gold">บริการออกแบบและสร้างบ้าน<br>ดูแลครบทุกขั้นตอน</h1>
+      <p>
+        ตั้งแต่การคุยโจทย์ วางแบบและงบประมาณ ไปจนถึงก่อสร้าง ส่งมอบ และดูแลหลังการขาย
+        ด้วยทีมที่ทำงานร่วมกันตลอดโครงการ
+      </p>
+    </div>
+  </section>
+
+  <section class="services-overview-section">
+    <div class="gold-section-divider" aria-hidden="true"></div>
+    <div class="services-watermark" aria-hidden="true"></div>
+    <header class="services-section-heading">
+      <p class="services-script font-rp">Solutions We Offer</p>
+      <h2 class="font-kn section-title-rule section-title-rule-gold">บริการที่ออกแบบมาเพื่อให้เรื่องบ้านชัดขึ้น</h2>
+      <p>เลือกเริ่มจากบริการที่คุณต้องการ หรือให้ทีมช่วยวางแนวทางตั้งแต่ต้นจนจบ</p>
+    </header>
+
+    <div class="services-grid">
+      <article class="service-card" *ngFor="let service of services">
+        <div class="service-icon">
+          <img [src]="service.image" [alt]="service.title" width="204" height="185" loading="lazy" decoding="async">
+        </div>
+        <h3 class="font-kn">{{ service.title }}</h3>
+        <p>{{ service.description }}</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="services-care-section">
+    <div class="gold-section-divider" aria-hidden="true"></div>
+    <div class="services-care-media">
+      <img src="assets/img/seo/portfolio-house-2-960.webp" alt="ทีม Twentysix House ส่งมอบบ้านให้ลูกค้า"
+        width="960" height="961" loading="lazy" decoding="async">
+    </div>
+
+    <div class="services-care-content">
+      <p class="services-eyebrow font-rp">One Team, One Direction</p>
+      <h2 class="font-kn section-title-rule section-title-rule-navy section-title-rule-left">ไม่ได้ดูแลแค่ตัวบ้าน<br>แต่ดูแลประสบการณ์ตลอดทาง</h2>
+      <p class="services-care-lead">
+        บ้านหนึ่งหลังมีหลายการตัดสินใจ เราจึงให้ความสำคัญกับการประสานงานและการสื่อสาร
+        เพื่อให้เจ้าของบ้านเข้าใจสิ่งที่กำลังเกิดขึ้นในแต่ละช่วงของโครงการ
+      </p>
+
+      <div class="services-care-list">
+        <article *ngFor="let item of carePoints">
+          <h3 class="font-kn">{{ item.title }}</h3>
+          <p>{{ item.description }}</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="services-process-section">
+    <div class="gold-section-divider" aria-hidden="true"></div>
+    <div class="services-section-heading services-section-heading-light">
+      <p class="services-script font-rp">How We Work</p>
+      <h2 class="font-kn section-title-rule section-title-rule-gold">6 ขั้นตอนจากแนวคิดสู่บ้านที่พร้อมอยู่อาศัย</h2>
+    </div>
+
+    <div class="services-process-list">
+      <article *ngFor="let item of processSteps; let i = index">
+        <span>{{ i + 1 | number: '2.0' }}</span>
+        <div>
+          <h3 class="font-kn">{{ item.title }}</h3>
+          <p>{{ item.description }}</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="services-cta" aria-label="เริ่มปรึกษาโครงการ">
+    <div class="gold-section-divider" aria-hidden="true"></div>
+    <div class="services-cta-panel">
+      <div class="services-cta-copy">
+        <p class="services-cta-eyebrow">NEXT STEP</p>
+        <h2 class="font-kn section-title-rule section-title-rule-gold section-title-rule-left">ยังไม่แน่ใจว่าควร<br>เริ่มจากบริการไหน</h2>
+        <p>ส่งข้อมูลที่มีมาให้ทีมช่วยดูภาพรวมและแนะนำแนวทางเริ่มต้นที่เหมาะกับโครงการของคุณ</p>
+
+        <div class="services-cta-actions">
+          <a class="services-cta-button services-cta-button-primary" href="https://lin.ee/jzuOAtF" target="_blank"
+            rel="noopener">คุยผ่าน LINE</a>
+          <a class="services-cta-button" href="tel:0994708877">โทร 099-470-8877</a>
+          <a class="services-cta-button" routerLink="/contact">ดูช่องทางติดต่อ</a>
+        </div>
+      </div>
+
+      <aside class="services-cta-note">
+        <p>START WITH</p>
+        <h3 class="font-kn">ข้อมูลเบื้องต้นที่ช่วยให้คุยกันง่ายขึ้น</h3>
+        <ul>
+          <li>ขนาดและตำแหน่งที่ดิน</li>
+          <li>จำนวนสมาชิกและพื้นที่ใช้งาน</li>
+          <li>งบประมาณและแบบบ้านที่ชอบ</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <button class="services-scroll-top" type="button" aria-label="เลื่อนขึ้นด้านบน" (click)="scrollToTop()">
+    <span aria-hidden="true"></span>
+  </button>
+</main>

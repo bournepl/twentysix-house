@@ -1,0 +1,56 @@
+:host {
+  display: block;
+}
+
+.not-found-page {
+  align-items: center;
+  background: #061d29;
+  color: #f6f2ea;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 7rem 1.5rem;
+  text-align: center;
+}
+
+.not-found-content {
+  max-width: 720px;
+}
+
+.not-found-eyebrow {
+  color: #b78329;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  color: inherit;
+  margin: 0 0 1rem;
+}
+
+.not-found-content > p:not(.not-found-eyebrow) {
+  color: rgba(246, 242, 234, 0.72);
+}
+
+.not-found-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.not-found-actions a {
+  border: 1px solid rgba(183, 131, 41, 0.7);
+  color: #f6f2ea;
+  padding: 0.75rem 1.25rem;
+  text-decoration: none;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+.not-found-actions a:hover,
+.not-found-actions a:focus-visible {
+  background: #b78329;
+  color: #061d29;
+}

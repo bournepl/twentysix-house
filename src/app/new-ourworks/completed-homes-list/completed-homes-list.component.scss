@@ -1,0 +1,435 @@
+@use '../../../assets/sass/hero-navigation' as heroNavigation;
+
+:host {
+  display: block;
+  color: #061d29;
+  background: #eef2f4;
+  font-family: 'Kanit', sans-serif;
+}
+
+@include heroNavigation.styles('completed-nav', 'completed-logo', 'completed-brand');
+
+.completed-page { overflow: hidden; }
+
+.completed-page :is(a, button):focus-visible {
+  outline: 2px solid #d4af52;
+  outline-offset: 4px;
+}
+
+.completed-hero {
+  position: relative;
+  min-height: 72vh;
+  min-height: 72svh;
+  isolation: isolate;
+  color: #fff;
+}
+
+.completed-hero-media,
+.completed-hero-overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.completed-hero-media {
+  z-index: -2;
+  background: url('/assets/img/ourworks/completed/khun-jane-ban-dung-residence/hero.webp') center 30% / cover no-repeat;
+}
+
+.completed-hero-overlay {
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(3, 19, 31, .54), rgba(3, 19, 31, .18) 42%, rgba(3, 19, 31, .88)),
+    linear-gradient(90deg, rgba(3, 19, 31, .76), transparent 70%);
+}
+
+.completed-nav {
+  position: absolute;
+  z-index: 30;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 116px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 0 clamp(30px, 5vw, 82px);
+}
+
+.completed-logo,
+.completed-brand { color: #fff; text-decoration: none; }
+.completed-logo { justify-self: start; width: 58px; height: 58px; }
+.completed-logo img,
+.completed-menu-header img { width: 100%; height: 100%; object-fit: contain; filter: grayscale(1) brightness(2.3); }
+.completed-brand { justify-self: center; display: flex; flex-direction: column; align-items: center; line-height: 1; text-shadow: 0 2px 12px rgba(0, 0, 0, .42); }
+.completed-brand > span { font-family: 'Le Jour Serif', Georgia, serif; font-size: 25px; }
+.completed-brand small { margin-top: 7px; font-size: 13px; }
+
+.menu-button {
+  position: fixed;
+  z-index: 60;
+  top: 31px;
+  right: clamp(24px, 4vw, 56px);
+  width: 54px;
+  height: 54px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0;
+  border: 1px solid rgba(224, 220, 185, .24);
+  border-radius: 4px;
+  background: rgba(6, 29, 41, .68);
+  color: #fff;
+  box-shadow: 0 10px 28px rgba(3, 19, 31, .2);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+}
+
+.menu-button span { width: 31px; height: 2px; display: block; background: currentColor; transition: opacity .25s ease, transform .25s ease; }
+.menu-button.is-open span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+.menu-button.is-open span:nth-child(2) { opacity: 0; }
+.menu-button.is-open span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+.completed-menu-backdrop {
+  position: fixed;
+  z-index: 40;
+  inset: 0;
+  border: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: rgba(3, 12, 18, .54);
+  backdrop-filter: blur(3px);
+  transition: opacity .35s ease;
+}
+
+.completed-menu-backdrop.is-open { pointer-events: auto; opacity: 1; }
+
+.completed-menu {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  right: 0;
+  width: min(560px, 48vw);
+  height: 100vh;
+  height: 100svh;
+  padding: 30px 72px 50px;
+  overflow: hidden;
+  transform: translateX(102%);
+  background: rgba(18, 43, 56, .94);
+  backdrop-filter: blur(20px);
+  box-shadow: -20px 0 50px rgba(0, 0, 0, .2);
+  transition: transform .42s cubic-bezier(.72, 0, .2, 1);
+}
+
+.completed-menu.is-open { transform: translateX(0); }
+.completed-menu-header { min-height: 58px; display: inline-flex; align-items: center; gap: 16px; color: #fff; text-decoration: none; }
+.completed-menu-header img { width: 45px; height: 45px; }
+.completed-menu-header span { display: flex; flex-direction: column; }
+.completed-menu-header strong { font-family: 'Le Jour Serif', Georgia, serif; font-size: 18px; font-weight: 400; }
+.completed-menu-header small { margin-top: 4px; font-size: 12px; }
+.completed-menu-nav { min-height: calc(100% - 70px); display: flex; flex-direction: column; justify-content: center; gap: 20px; }
+.completed-menu-nav a { position: relative; padding-left: 50px; color: rgba(255, 255, 255, .78); font-size: clamp(20px, 2vw, 28px); font-weight: 500; text-decoration: none; transition: color .25s ease, transform .25s ease; }
+.completed-menu-nav a::before { content: ''; position: absolute; top: 50%; left: 0; width: 18px; height: 1px; background: linear-gradient(90deg, #856905, #e0dcb9); }
+.completed-menu-nav a:hover { color: #e0dcb9; transform: translateX(6px); }
+.completed-menu-watermark { position: absolute; right: -110px; bottom: -130px; width: 360px; aspect-ratio: 1; opacity: .055; background: url('/assets/img/seo/brand-mark-640.webp') center / contain no-repeat; }
+
+.completed-hero-content {
+  position: absolute;
+  left: clamp(28px, 8vw, 150px);
+  bottom: clamp(58px, 8vh, 96px);
+  width: min(760px, calc(100% - 56px));
+}
+
+.completed-breadcrumb { display: flex; gap: 10px; align-items: center; margin-bottom: 24px; font-family: 'Le Jour Serif', Georgia, serif; font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; }
+.completed-breadcrumb a { color: rgba(255, 255, 255, .62); text-decoration: none; }
+.completed-breadcrumb span { color: #c79a35; }
+.completed-breadcrumb strong { color: #e0dcb9; font-weight: 400; }
+.completed-hero-content > p { margin: 0 0 8px; color: #c18a24; font-size: clamp(30px, 3.4vw, 48px); line-height: 1; }
+.completed-hero-content h1 { margin: 0; color: #fff; font-weight: 400; }
+.completed-title-rule { width: min(380px, 72%); height: 1px; margin: 22px 0; background: linear-gradient(90deg, #856905, #e0dcb9 55%, transparent); }
+.completed-hero-content > span { display: block; max-width: 620px; color: rgba(255, 255, 255, .82); font-size: clamp(16px, 1.25vw, 19px); line-height: 1.8; }
+
+.completed-list-section,
+.completed-cta-section { position: relative; padding: clamp(74px, 8vw, 124px) clamp(22px, 6vw, 104px); }
+.completed-list-section { background: #f3f1ec; }
+.gold-section-divider,
+.navy-section-divider { position: absolute; top: 0; left: 0; width: 100%; height: 1px; }
+.gold-section-divider { background: linear-gradient(90deg, transparent, #856905 18%, #e0dcb9 50%, #856905 82%, transparent); }
+.navy-section-divider { background: linear-gradient(90deg, transparent, #426170 18%, #061d29 50%, #426170 82%, transparent); }
+
+.completed-list-heading {
+  width: min(1320px, 100%);
+  margin: 0 auto clamp(42px, 6vw, 76px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, .65fr) auto;
+  gap: clamp(28px, 5vw, 74px);
+  align-items: end;
+}
+
+.completed-list-heading > div > p { margin: 0 0 7px; color: #a87418; font-size: clamp(30px, 3.5vw, 46px); line-height: 1; }
+.completed-list-heading h2 { margin: 0; color: #061d29; font-weight: 400; }
+.completed-heading-rule { display: block; width: min(230px, 70%); height: 1px; margin-top: 22px; background: linear-gradient(90deg, #061d29, rgba(6, 29, 41, 0)); }
+.completed-list-heading > p { margin: 0 0 2px; color: #5c6b72; font-size: 16px; line-height: 1.85; }
+.completed-count { color: #9b741e; font-family: 'Le Jour Serif', Georgia, serif; font-size: 11px; letter-spacing: 1.5px; white-space: nowrap; }
+
+.completed-grid {
+  width: min(1320px, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(32px, 4vw, 58px) clamp(16px, 2vw, 28px);
+}
+
+.completed-project { min-width: 0; color: inherit; cursor: pointer; text-decoration: none; }
+.completed-project.is-featured { grid-column: span 2; }
+.completed-project-media { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: #d9d9d5; }
+.completed-project.is-featured .completed-project-media { aspect-ratio: 16 / 9; }
+.completed-project-media::after { content: ''; position: absolute; inset: 10px; border: 1px solid transparent; pointer-events: none; transition: border-color .3s ease; }
+.completed-project-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .75s cubic-bezier(.2, .7, .2, 1); }
+.completed-project-media > span { position: absolute; top: 18px; left: 20px; min-width: 37px; padding: 6px 8px; color: #e0dcb9; background: rgba(6, 29, 41, .82); font-family: 'Le Jour Serif', Georgia, serif; font-size: 11px; text-align: center; }
+.completed-project-copy { min-height: 92px; display: flex; justify-content: space-between; gap: 20px; padding: 18px 2px 0; border-top: 1px solid rgba(6, 29, 41, .13); }
+.completed-project-copy small { color: #9b741e; font-family: 'Le Jour Serif', Georgia, serif; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; }
+.completed-project-copy h3 { margin: 6px 0 0; color: #061d29; font-weight: 400; transition: color .25s ease; }
+.completed-project-copy > p { margin: 5px 0 0; color: #708087; font-size: 13px; white-space: nowrap; }
+.completed-project:hover .completed-project-media::after { border-color: rgba(224, 220, 185, .8); }
+.completed-project:hover img { transform: scale(1.035); }
+.completed-project:hover h3 { color: #a87418; }
+
+.completed-homes-page .completed-list-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  text-align: center;
+}
+
+.completed-homes-page .completed-list-heading > div > p {
+  margin-bottom: 8px;
+}
+
+.completed-homes-page .completed-heading-rule {
+  margin: 22px auto 0;
+  background: linear-gradient(90deg, transparent, #061d29 50%, transparent);
+}
+
+.completed-homes-page .completed-list-heading > p {
+  max-width: 760px;
+  margin: 24px auto 0;
+  color: #5c6b72;
+  font-size: 16px;
+  line-height: 1.85;
+}
+
+.completed-homes-page .completed-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(28px, 3.5vw, 48px) clamp(20px, 2.4vw, 34px);
+}
+
+.completed-homes-page .completed-project {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(6, 29, 41, .11);
+  background: #fff;
+  box-shadow: 0 18px 42px rgba(6, 29, 41, .07);
+}
+
+.completed-homes-page .completed-project-media {
+  aspect-ratio: 16 / 10;
+}
+
+.completed-homes-page .completed-project-copy {
+  min-height: 240px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0;
+  padding: 20px 24px 0;
+  border-top: 0;
+}
+
+.completed-project-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.completed-project-meta > span {
+  padding: 6px 10px;
+  color: #8d6518;
+  background: #f5f0e5;
+  font-size: 13px;
+}
+
+.completed-project-meta small {
+  color: #6a7880;
+  font-family: 'Kanit', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.completed-homes-page .completed-project-copy h3 {
+  margin: 17px 0 8px;
+}
+
+.completed-homes-page .completed-project-copy > p {
+  margin: 0;
+  color: #64737b;
+  font-size: 14px;
+  line-height: 1.75;
+  white-space: normal;
+}
+
+.completed-project-specs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin: 20px -24px 0;
+  padding: 15px 24px;
+  border-top: 1px solid rgba(6, 29, 41, .1);
+  border-bottom: 1px solid rgba(6, 29, 41, .1);
+}
+
+.completed-project-specs > span {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #2d4049;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.completed-project-specs i {
+  flex: 0 0 auto;
+  color: #a87418;
+  font-size: 17px;
+}
+
+.completed-project-specs strong {
+  font-weight: 500;
+}
+
+.completed-project-footer {
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: auto;
+  border-top: 1px solid rgba(6, 29, 41, .1);
+}
+
+.completed-project-footer span {
+  color: #8d6518;
+  font-family: 'Le Jour Serif', Georgia, serif;
+  font-size: 10px;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+}
+
+.completed-project-footer strong {
+  color: #061d29;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.completed-project-footer strong::after {
+  content: '›';
+  margin-left: 8px;
+  color: #a87418;
+  font-size: 18px;
+  vertical-align: -1px;
+}
+
+.completed-cta-section { color: #fff; background: #eaf0f3; }
+.completed-cta { width: min(1260px, 100%); margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 50px; align-items: end; padding: clamp(46px, 6vw, 78px); border-top: 1px solid #c9a64f; background: linear-gradient(110deg, #03131f, #0b2a39); box-shadow: 0 18px 48px rgba(6, 29, 41, .12); }
+.completed-cta p { margin: 0 0 7px; color: #b47c1c; font-size: clamp(29px, 3.5vw, 44px); line-height: 1; }
+.completed-cta h2 { max-width: 780px; margin: 0; color: #fff; font-weight: 400; }
+.completed-cta span { display: block; margin-top: 14px; color: rgba(255, 255, 255, .7); font-size: 16px; }
+.completed-cta > a { min-height: 50px; display: inline-flex; align-items: center; justify-content: center; padding: 0 26px; border: 1px solid #d4af52; color: #061d29; background: #d4af52; font-weight: 500; text-decoration: none; transition: background .25s ease, color .25s ease; }
+.completed-cta > a:hover { color: #fff; background: transparent; }
+
+.scroll-top-button { position: fixed; z-index: 35; right: 24px; bottom: 24px; width: 48px; height: 48px; border: 1px solid rgba(224, 220, 185, .5); border-radius: 4px; background: rgba(6, 29, 41, .9); cursor: pointer; }
+.scroll-top-button span { position: absolute; top: 19px; left: 16px; width: 15px; height: 15px; border-top: 2px solid #fff; border-left: 2px solid #fff; transform: rotate(45deg); }
+
+@media (max-width: 960px) {
+  .completed-list-heading { grid-template-columns: 1fr auto; }
+  .completed-list-heading > p { grid-column: 1 / -1; grid-row: 2; max-width: 680px; }
+  .completed-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .completed-project.is-featured { grid-column: 1 / -1; }
+  .completed-cta { grid-template-columns: 1fr; }
+  .completed-menu { width: 80%; padding: 22px 42px 36px; }
+}
+
+@media (max-width: 768px) {
+  .menu-button {
+    top: 14px;
+    right: 14px;
+    width: 40px;
+    height: 40px;
+    gap: 5px;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .menu-button span { width: 24px; }
+  .menu-button.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .menu-button.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+}
+
+@media (max-width: 640px) {
+  .completed-hero { min-height: 78vh; min-height: 78svh; }
+  .completed-nav { height: 80px; grid-template-columns: auto 1fr auto; gap: 10px; padding: 0 14px; }
+  .completed-logo { width: 39px; height: 39px; }
+  .completed-brand { justify-self: start; align-items: flex-start; }
+  .completed-brand > span { font-size: 16px; }
+  .completed-brand small { margin-top: 5px; font-size: 10px; }
+  .completed-menu { width: 80%; padding: 16px 24px 30px; }
+  .completed-menu-header { max-width: calc(100% - 50px); gap: 10px; }
+  .completed-menu-header img { width: 36px; height: 36px; }
+  .completed-menu-header strong { font-size: 14px; }
+  .completed-menu-header small { font-size: 9px; }
+  .completed-menu-nav { gap: 17px; }
+  .completed-menu-nav a { padding-left: 36px; font-size: 21px; }
+  .completed-hero-media { background-position: 58% center; }
+  .completed-hero-content { left: 20px; bottom: 50px; width: calc(100% - 40px); }
+  .completed-breadcrumb { margin-bottom: 18px; }
+  .completed-list-section,
+  .completed-cta-section { padding: 68px 18px; }
+  .completed-list-heading { grid-template-columns: 1fr; gap: 22px; margin-bottom: 36px; }
+  .completed-list-heading > p { grid-column: auto; grid-row: auto; }
+  .completed-count { grid-row: 2; }
+  .completed-grid { grid-template-columns: 1fr; gap: 36px; }
+  .completed-project.is-featured { grid-column: auto; }
+  .completed-project.is-featured .completed-project-media,
+  .completed-project-media { aspect-ratio: 4 / 3; }
+  .completed-project-copy { min-height: 0; }
+  .completed-project-copy > p { font-size: 12px; }
+  .completed-homes-page .completed-list-heading { gap: 0; }
+  .completed-homes-page .completed-list-heading > p { margin-top: 20px; }
+  .completed-homes-page .completed-grid { grid-template-columns: 1fr; }
+  .completed-homes-page .completed-project-copy { min-height: 250px; padding: 18px 18px 0; }
+  .completed-project-specs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 18px;
+    margin: 18px -18px 0;
+    padding: 14px 18px;
+  }
+  .completed-project-meta { align-items: flex-start; }
+  .completed-project-meta small { text-align: right; }
+  .completed-project-footer span { max-width: 55%; }
+  .completed-cta { padding: 34px 22px; }
+  .completed-cta > a { width: 100%; }
+  .scroll-top-button { right: 14px; bottom: 14px; width: 42px; height: 42px; }
+  .scroll-top-button span { top: 17px; left: 14px; width: 13px; height: 13px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: .01ms !important; }
+}

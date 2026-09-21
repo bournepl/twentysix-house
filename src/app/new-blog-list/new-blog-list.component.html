@@ -1,0 +1,108 @@
+<main class="new-blog-page">
+  <section class="blog-hero">
+    <nav class="blog-nav">
+      <a class="blog-logo" routerLink="/" aria-label="Twentysix House home">
+        <img src="assets/img/seo/brand-mark-320.webp" alt="Twentysix House" width="320" height="226" decoding="async">
+      </a>
+
+      <a class="blog-brand" routerLink="/" aria-label="Twentysix House home">
+        <span>TWENTYSIX<span>.</span>HOUSE</span>
+        <small class="font-pr">รับสร้างบ้านอุดรธานี</small>
+      </a>
+
+      <div class="blog-nav-actions">
+        <app-site-menu></app-site-menu>
+      </div>
+    </nav>
+
+    <div class="blog-hero-media" aria-hidden="true"></div>
+    <div class="blog-hero-overlay" aria-hidden="true"></div>
+
+    <div class="blog-hero-content">
+      <p class="blog-script font-rp">Journal & Knowledge</p>
+      <h1 class="font-kn section-title-rule section-title-rule-gold">บทความและความรู้<br>สำหรับคนกำลังสร้างบ้าน</h1>
+      <p>แนวคิดการออกแบบ วัสดุ โครงสร้าง และเรื่องควรรู้ที่ช่วยให้ตัดสินใจเรื่องบ้านได้ชัดขึ้น</p>
+    </div>
+  </section>
+
+  <section class="blog-featured-section" *ngIf="featuredBlog as featured">
+    <div class="gold-section-divider" aria-hidden="true"></div>
+    <div class="blog-featured-inner">
+      <a class="blog-featured-media" [routerLink]="['/blogs', featured.slug]">
+        <img [src]="featured.pictureUrl" [alt]="featured.title" width="1600" height="1000"
+          loading="eager" fetchpriority="high" decoding="async">
+        <span>FEATURED ARTICLE</span>
+      </a>
+
+      <article class="blog-featured-copy">
+        <div class="blog-meta">
+          <span>{{ featured.blogCategory.blogCategoryName }}</span>
+          <time>{{ featured.dateLabel }}</time>
+        </div>
+        <h2 class="font-kn">
+          <a [routerLink]="['/blogs', featured.slug]">{{ featured.title }}</a>
+        </h2>
+        <p>{{ featured.subTitle }}</p>
+        <a class="blog-read-link" [routerLink]="['/blogs', featured.slug]">อ่านบทความ <span>→</span></a>
+      </article>
+    </div>
+  </section>
+
+  <section class="blog-library-section">
+    <div class="gold-section-divider" aria-hidden="true"></div>
+    <div class="blog-watermark" aria-hidden="true"></div>
+    <header class="blog-library-heading">
+      <div>
+        <p class="blog-script font-rp">Explore The Journal</p>
+        <h2 class="font-kn section-title-rule section-title-rule-gold">เรื่องบ้านที่ควรรู้</h2>
+      </div>
+
+      <div class="blog-category-filter" role="group" aria-label="กรองบทความตามหมวดหมู่">
+        <button *ngFor="let category of categories" type="button" [class.is-active]="activeCategory === category"
+          (click)="selectCategory(category)">
+          {{ category }}
+        </button>
+      </div>
+    </header>
+
+    <div class="blog-grid">
+      <article class="blog-card" *ngFor="let blog of visibleBlogs">
+        <a class="blog-card-media" [routerLink]="['/blogs', blog.slug]">
+          <img [src]="blog.pictureUrl" [alt]="blog.title" width="960" height="600" loading="lazy" decoding="async">
+        </a>
+
+        <div class="blog-card-copy">
+          <div class="blog-card-meta">
+            <time>{{ blog.dateLabel }}</time>
+            <span>{{ blog.blogCategory.blogCategoryName }}</span>
+          </div>
+          <h3 class="font-kn">
+            <a [routerLink]="['/blogs', blog.slug]">{{ blog.title }}</a>
+          </h3>
+          <p>{{ blog.subTitle }}</p>
+          <a class="blog-card-link" [routerLink]="['/blogs', blog.slug]" aria-label="อ่านบทความ">
+            อ่านต่อ <span>→</span>
+          </a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="blog-cta">
+    <div class="gold-section-divider" aria-hidden="true"></div>
+    <div class="blog-cta-panel">
+      <div>
+        <p class="blog-cta-eyebrow">PLANNING YOUR HOME?</p>
+        <h2 class="font-kn section-title-rule section-title-rule-gold section-title-rule-left">มีคำถามจากบทความ<br>หรืออยากเริ่มวางแผนบ้าน</h2>
+      </div>
+      <div class="blog-cta-actions">
+        <a href="https://lin.ee/jzuOAtF" target="_blank" rel="noopener">ปรึกษาผ่าน LINE</a>
+        <a routerLink="/contact">ติดต่อทีมงาน</a>
+      </div>
+    </div>
+  </section>
+
+  <button class="blog-scroll-top" type="button" aria-label="เลื่อนขึ้นด้านบน" (click)="scrollToTop()">
+    <span aria-hidden="true"></span>
+  </button>
+</main>

@@ -1,0 +1,104 @@
+<nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="500">
+  <div class="container">
+
+    <div class="navbar-translate">
+      <a class="navbar-brand" [routerLink]="'/'" placement="bottom">
+        <img class="img-logo  img-round mr-3" src="./assets/img/logobg.png" />
+        <p style="font-size: 15px !important;" class="font-le ">Twentysix<span class="font-kn"
+            style="font-size: 25px;">.</span>house</p>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
+        aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation"
+        (click)="sidebarToggle()">
+        <span class="navbar-toggler-bar bar1"></span>
+        <span class="navbar-toggler-bar bar2"></span>
+        <span class="navbar-toggler-bar bar3"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" data-color="primary">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/'">
+
+            <p>หน้าแรก</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/about'">
+
+            <p>เกี่ยวกับเรา</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/services'">
+
+            <p>บริการของเรา</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/house-catalog'">
+
+            <p>แบบบ้านของเรา</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/ourworks'">
+
+            <p>ผลงานของเรา</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/blogs'">
+
+            <p>บทความ</p>
+          </a>
+        </li>
+        <li class="nav-item" [routerLink]="'/contact'">
+          <a class="nav-link" target="_blank">
+
+            <p>ติดต่อเรา</p>
+          </a>
+        </li>
+
+      </ul>
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item">
+          <a class="nav-link  " rel="tooltip" title="Contact us on Line" data-placement="bottom"
+            href="https://lin.ee/jzuOAtF" target="_blank">
+            <i class="fab fa-line"></i>
+            <p class="d-lg-none d-xl-none">Line</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" rel="tooltip" title="Like us on Facebook" data-placement="bottom"
+            href="https://www.facebook.com/share/19APWzVgu7/?mibextid=wwXIfr" target="_blank">
+            <i class="fab fa-facebook-square"></i>
+            <p class="d-lg-none d-xl-none">Facebook</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" rel="tooltip" title="Follow us on Instagram" data-placement="bottom"
+            href="https://www.instagram.com/26twentysix.house?igsh=YXFmMWt3bGhlaHpm" target="_blank">
+            <i class="fab fa-instagram"></i>
+            <p class="d-lg-none d-xl-none">Instagram</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" rel="tooltip" title="Follow us on Tiktok" data-placement="bottom"
+            href="https://www.tiktok.com/@twentysix.house?_t=ZS-8vm31ijyhPc&_r=1" target="_blank">
+            <i class="fab fa-tiktok"></i>
+            <p class="d-lg-none d-xl-none">Tiktok</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" rel="tooltip" title="Call Me" data-placement="bottom" href="tel:0994708877"
+            target="_blank">
+            <i class="fas fa-phone-alt"></i>
+            <p class="d-lg-none d-xl-none">Tel</p>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

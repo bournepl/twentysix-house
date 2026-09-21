@@ -1,0 +1,106 @@
+<main class="works-page">
+  <app-site-menu></app-site-menu>
+
+  <section class="works-hero">
+    <nav class="works-nav">
+      <a class="works-logo" routerLink="/" aria-label="Twentysix House home">
+        <img src="assets/img/seo/brand-mark-320.webp" alt="Twentysix House" width="320" height="226" decoding="async">
+      </a>
+
+      <a class="works-brand" routerLink="/" aria-label="Twentysix House home">
+        <span>TWENTYSIX<span>.</span>HOUSE</span>
+        <small class="font-pr">รับสร้างบ้านอุดรธานี</small>
+      </a>
+
+    </nav>
+
+    <div class="works-hero-media" aria-hidden="true"></div>
+    <div class="works-hero-overlay" aria-hidden="true"></div>
+    <span class="works-hero-index" aria-hidden="true">PORTFOLIO / 2026</span>
+    <div class="works-hero-content">
+      <p class="works-script font-rp">Our Selected Works</p>
+      <h1 class="font-kn">ผลงานออกแบบและสร้างบ้าน<br>ที่เริ่มจากชีวิตจริง</h1>
+      <div class="works-title-rule" aria-hidden="true"></div>
+      <p>รวมผลงานออกแบบและบ้านที่เราดูแล ตั้งแต่แนวคิดแรกจนถึงรายละเอียดในวันส่งมอบ</p>
+    </div>
+    <span class="works-scroll-cue" aria-hidden="true">SCROLL TO EXPLORE</span>
+  </section>
+
+  <section class="works-explore-section">
+    <div class="section-divider section-divider-gold" aria-hidden="true"></div>
+    <div class="works-heading">
+      <p class="font-rp">Explore Our Work</p>
+      <h2 class="font-kn">เลือกชมผลงานในมุมที่คุณสนใจ</h2>
+      <div class="heading-rule heading-rule-gold" aria-hidden="true"></div>
+      <span>แยกชมบ้านที่ก่อสร้างและส่งมอบจริง หรือดูแนวคิดและรายละเอียดจากงานออกแบบ</span>
+    </div>
+
+    <div class="works-category-tabs" role="tablist" aria-label="ประเภทผลงาน">
+      <button id="works-tab-built" type="button" role="tab" [class.is-active]="activeCategory === 'built'"
+        [attr.aria-selected]="activeCategory === 'built'" [attr.tabindex]="activeCategory === 'built' ? 0 : -1"
+        aria-controls="works-project-panel" (click)="setCategory('built')" (keydown)="onCategoryKeydown($event)">
+        <span>บ้านสร้างจริง</span>
+      </button>
+      <button id="works-tab-design" type="button" role="tab" [class.is-active]="activeCategory === 'design'"
+        [attr.aria-selected]="activeCategory === 'design'" [attr.tabindex]="activeCategory === 'design' ? 0 : -1"
+        aria-controls="works-project-panel" (click)="setCategory('design')" (keydown)="onCategoryKeydown($event)">
+        <span>ผลงานออกแบบ</span>
+      </button>
+    </div>
+  </section>
+
+  <section class="projects-section">
+    <div class="section-divider section-divider-gold" aria-hidden="true"></div>
+    <div class="projects-heading-row">
+      <div class="works-heading works-heading-left">
+        <p class="font-rp">{{ activeCategory === 'built' ? 'Completed Homes' : 'Design Portfolio' }}</p>
+        <h2 class="font-kn">{{ activeCategory === 'built' ? 'บ้านที่เราดูแลและส่งมอบ' : 'แนวคิดที่ออกแบบจากการใช้ชีวิต'
+          }}</h2>
+        <div class="heading-rule heading-rule-gold" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <div id="works-project-panel" class="projects-grid" role="tabpanel"
+      [attr.aria-labelledby]="activeCategory === 'built' ? 'works-tab-built' : 'works-tab-design'">
+      <a class="project-item" *ngFor="let project of visibleProjects; let i = index"
+        [class.project-item-wide]="i === 0"
+        [routerLink]="[activeCategory === 'built' ? '/ourworks/completed' : '/ourworks/design', project.slug]">
+        <div class="project-media">
+          <img [src]="project.image" [alt]="project.title" width="960" height="600" loading="lazy" decoding="async">
+          <div class="project-overlay" aria-hidden="true"></div>
+          <span class="project-label">{{ project.label }}</span>
+          <div class="project-copy">
+            <h3 class="font-kn">{{ project.title }}</h3>
+            <p>{{ project.subtitle }}</p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="projects-more">
+      <a [routerLink]="activeCategory === 'built' ? '/ourworks/completed' : '/ourworks/design'">
+        <span>{{ activeCategory === 'built' ? 'ดูบ้านสร้างจริงทั้งหมด' : 'ดูผลงานออกแบบทั้งหมด' }}</span>
+        <i aria-hidden="true"></i>
+      </a>
+    </div>
+  </section>
+
+  <section class="works-cta-section">
+    <div class="section-divider section-divider-navy" aria-hidden="true"></div>
+    <div class="works-cta">
+      <div>
+        <p class="font-rp">Your Home, Your Story</p>
+        <h2 class="font-kn">ให้ผลงานต่อไป เป็นบ้านที่เล่าเรื่องคุณ</h2>
+        <span>ส่งโจทย์เบื้องต้น งบประมาณ หรือแบบบ้านที่ชอบมาเริ่มคุยกับทีมของเราได้</span>
+      </div>
+      <div class="works-cta-actions">
+        <a href="https://lin.ee/jzuOAtF" target="_blank" rel="noopener">คุยผ่าน LINE</a>
+        <a routerLink="/contact">ดูช่องทางติดต่อ</a>
+      </div>
+    </div>
+  </section>
+
+  <button class="scroll-top-button" type="button" aria-label="เลื่อนไปด้านบน" (click)="scrollToTop()">
+    <span></span>
+  </button>
+</main>

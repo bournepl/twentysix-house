@@ -1,0 +1,29 @@
+<button class="site-menu-button" type="button" [class.is-open]="isOpen"
+  [attr.aria-label]="isOpen ? 'ปิดเมนู' : 'เปิดเมนู'" [attr.aria-expanded]="isOpen"
+  aria-controls="site-menu-panel" (click)="toggle()">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+
+<button class="site-menu-backdrop" type="button" aria-label="ปิดเมนู" [class.is-open]="isOpen"
+  [attr.tabindex]="isOpen ? 0 : -1" (click)="close()"></button>
+
+<aside id="site-menu-panel" class="site-menu-panel" [class.is-open]="isOpen" aria-label="เมนูหลัก"
+  [attr.aria-hidden]="!isOpen" [attr.inert]="isOpen ? null : ''">
+  <div class="site-menu-watermark" aria-hidden="true"></div>
+  <a class="site-menu-header" routerLink="/" (click)="close()" aria-label="Twentysix House home">
+    <img src="assets/img/seo/brand-mark-320.webp" alt="" width="320" height="226" decoding="async">
+    <span>
+      <strong>TWENTYSIX.HOUSE</strong>
+      <small class="font-pr">รับสร้างบ้านอุดรธานี</small>
+    </span>
+  </a>
+
+  <nav class="site-menu-nav">
+    <a *ngFor="let item of menuItems" [routerLink]="item.url" routerLinkActive="is-active"
+      [routerLinkActiveOptions]="{ exact: item.url === '/' }" (click)="close()">
+      {{ item.label }}
+    </a>
+  </nav>
+</aside>

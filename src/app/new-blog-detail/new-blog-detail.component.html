@@ -1,0 +1,136 @@
+<main class="new-blog-detail-page">
+  <header class="detail-header">
+    <nav class="detail-nav">
+      <a class="detail-logo" routerLink="/" aria-label="Twentysix House home">
+        <img src="assets/img/seo/brand-mark-320.webp" alt="Twentysix House" width="320" height="226" decoding="async">
+      </a>
+
+      <a class="detail-brand" routerLink="/" aria-label="Twentysix House home">
+        <span>TWENTYSIX<span>.</span>HOUSE</span>
+        <small class="font-pr">รับสร้างบ้านอุดรธานี</small>
+      </a>
+
+      <div class="detail-nav-actions">
+        <app-site-menu></app-site-menu>
+      </div>
+    </nav>
+  </header>
+
+  <ng-container *ngIf="blog as article; else articleNotFound">
+    <section class="article-hero">
+      <div class="article-hero-watermark" aria-hidden="true"></div>
+      <div class="article-hero-inner">
+        <div class="article-meta">
+          <span>{{ article.blogCategory.blogCategoryName }}</span>
+          <time [attr.datetime]="article.publishedIso">{{ article.dateLabel }}</time>
+        </div>
+        <h1 class="font-kn section-title-rule section-title-rule-gold">{{ article.title }}</h1>
+        <p>{{ article.subTitle }}</p>
+      </div>
+    </section>
+
+    <section class="article-body-section">
+      <div class="article-cover">
+        <img [src]="article.pictureUrl" [alt]="article.title" width="1600" height="1000"
+          loading="eager" fetchpriority="high" decoding="async">
+      </div>
+
+      <div class="article-layout">
+        <aside class="article-sidebar">
+          <div class="article-author">
+            <img src="assets/img/seo/brand-mark-320.webp" alt="Twentysix House" width="320" height="226" loading="lazy" decoding="async">
+            <div>
+              <small>WRITTEN BY</small>
+              <strong>TWENTYSIX.HOUSE</strong>
+            </div>
+          </div>
+          <div class="article-sidebar-row">
+            <small>PUBLISHED</small>
+            <time [attr.datetime]="article.publishedIso">{{ article.dateLabel }}</time>
+          </div>
+          <div class="article-sidebar-row">
+            <small>TOPIC</small>
+            <span>{{ topicLabel }}</span>
+          </div>
+          <button type="button" class="article-copy-link" (click)="copyArticleLink()">
+            {{ copied ? 'คัดลอกลิงก์แล้ว' : 'คัดลอกลิงก์บทความ' }}
+          </button>
+        </aside>
+
+        <div class="article-main">
+          <article class="article-content" [innerHTML]="article.content"></article>
+
+          <div class="article-tags" *ngIf="article.tags.length">
+            <span class="article-tags-label">TAGS</span>
+            <span *ngFor="let tag of article.tags">{{ tag }}</span>
+          </div>
+
+          <nav class="article-resource-links" aria-label="เนื้อหาที่เกี่ยวข้องกับบทความ">
+            <header>
+              <small>EXPLORE NEXT</small>
+              <h2 class="font-kn">นำข้อมูลไปวางแผนบ้านต่อ</h2>
+            </header>
+            <a *ngFor="let link of contextualLinks" [routerLink]="link.path">
+              <span>
+                <strong>{{ link.title }}</strong>
+                <small>{{ link.description }}</small>
+              </span>
+              <b aria-hidden="true">›</b>
+            </a>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <section class="related-section" *ngIf="relatedBlogs.length">
+      <div class="gold-section-divider" aria-hidden="true"></div>
+      <header class="related-heading">
+        <div>
+          <p class="detail-script font-rp">Continue Reading</p>
+          <h2 class="font-kn section-title-rule section-title-rule-gold section-title-rule-left">บทความที่คุณอาจสนใจ</h2>
+        </div>
+        <a routerLink="/blogs">ดูบทความทั้งหมด <span>→</span></a>
+      </header>
+
+      <div class="related-grid">
+        <article class="related-card" *ngFor="let related of relatedBlogs">
+          <a class="related-media" [routerLink]="['/blogs', related.slug]">
+            <img [src]="related.pictureUrl" [alt]="related.title" width="960" height="600" loading="lazy" decoding="async">
+          </a>
+          <div class="related-copy">
+            <div><span>{{ related.blogCategory.blogCategoryName }}</span><time [attr.datetime]="related.publishedIso">{{ related.dateLabel }}</time></div>
+            <h3 class="font-kn"><a [routerLink]="['/blogs', related.slug]">{{ related.title }}</a></h3>
+            <a class="related-link" [routerLink]="['/blogs', related.slug]">อ่านบทความ <span>→</span></a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="detail-cta">
+      <div class="gold-section-divider" aria-hidden="true"></div>
+      <div class="detail-cta-panel">
+        <div>
+          <p>START YOUR HOME JOURNEY</p>
+          <h2 class="font-kn section-title-rule section-title-rule-gold section-title-rule-left">อ่านแล้วมีคำถาม<br>คุยเรื่องบ้านกับทีมของเราได้เลย</h2>
+        </div>
+        <div class="detail-cta-actions">
+          <a href="https://lin.ee/jzuOAtF" target="_blank" rel="noopener">ปรึกษาผ่าน LINE</a>
+          <a routerLink="/contact">ติดต่อทีมงาน</a>
+        </div>
+      </div>
+    </section>
+  </ng-container>
+
+  <ng-template #articleNotFound>
+    <section class="article-not-found">
+      <p class="detail-script font-rp">Article Not Found</p>
+      <h1 class="font-kn">ไม่พบบทความนี้</h1>
+      <p>บทความอาจถูกย้ายหรือไม่มีอยู่ในระบบ</p>
+      <a routerLink="/blogs">กลับไปหน้าบทความ</a>
+    </section>
+  </ng-template>
+
+  <button class="detail-scroll-top" type="button" aria-label="เลื่อนขึ้นด้านบน" (click)="scrollToTop()">
+    <span aria-hidden="true"></span>
+  </button>
+</main>

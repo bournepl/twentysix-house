@@ -1,0 +1,29 @@
+.footer {
+  background-color: #061d29;
+
+  .img-logo {
+    display: block;
+    width: 132px;
+    max-width: 100%;
+    height: auto;
+    margin-inline: auto;
+    object-fit: contain;
+  }
+
+  .social-area .btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .social-area .btn.btn-icon i.fab,
+  .social-area .btn.btn-icon i.fas {
+    position: static;
+    top: auto;
+    left: auto;
+    display: block;
+    width: auto;
+    transform: none;
+    line-height: 1;
+  }
+}

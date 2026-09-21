@@ -1,0 +1,113 @@
+.info {
+  max-width: 360px;
+  margin: 0 auto;
+  padding: 70px 0 30px;
+  text-align: center;
+
+  .icon.icon-circle {
+    max-width: 80px;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    border-radius: 50%;
+    box-shadow: 0 9px 35px -6px rgba(0, 0, 0, .3);
+    font-size: .7142em;
+    background-color: #fff;
+    position: relative;
+
+    i {
+      line-height: 2.7;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .icon>i {
+    font-size: 3em;
+  }
+
+}
+
+.card-background {
+  background-position: center center;
+  background-size: cover;
+  text-align: center;
+
+  .card-body {
+    padding-top: 140px;
+    padding-bottom: 140px;
+  }
+
+  .card-description,
+  .card-background .category,
+  .card-background small {
+    color: rgba(255, 255, 255, .8);
+  }
+}
+
+.card-background:after {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: block;
+  left: 0;
+  top: 0;
+  content: "";
+  background-color: rgba(0, 0, 0, .63);
+  border-radius: .25rem;
+}
+
+.card-background .card-body {
+  position: relative;
+  z-index: 2;
+  min-height: 370px;
+  max-width: 530px;
+  margin: 0 auto;
+
+}
+
+.card-background .card-title {
+  color: #fff;
+
+}
+
+.info-horizontal {
+  text-align: left !important;
+}
+
+.info .info-title {
+  margin: 25px 0 15px;
+
+  color: #2c2c2c;
+}
+
+.info-horizontal .icon>i {
+  font-size: 2em;
+}
+
+.info-horizontal .description {
+  overflow: hidden;
+}
+
+.info-horizontal {
+  padding: 0;
+}
+
+.info-horizontal .icon {
+  float: left;
+  margin-top: 23px;
+  margin-right: 20px;
+}
+
+
+.section-about .description {
+  margin-bottom: 70px;
+}
+
+.house-2 {
+  margin-top: 40px;
+
+}

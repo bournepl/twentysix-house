@@ -1,0 +1,206 @@
+<main class="home-detail-page" *ngIf="project as home; else projectNotFound">
+  <app-site-menu></app-site-menu>
+
+  <header class="detail-hero">
+    <nav class="detail-nav">
+      <a class="detail-logo" routerLink="/" aria-label="Twentysix House home">
+        <img src="assets/img/seo/brand-mark-320.webp" alt="Twentysix House" width="320" height="226" decoding="async">
+      </a>
+      <a class="detail-brand" routerLink="/">
+        <span>TWENTYSIX<span>.</span>HOUSE</span>
+        <small class="font-pr">รับสร้างบ้านอุดรธานี</small>
+      </a>
+    </nav>
+
+    <img class="detail-hero-image" [src]="home.heroImage" [alt]="home.title" width="1920" height="1080"
+      loading="eager" fetchpriority="high" decoding="async">
+    <div class="detail-hero-overlay" aria-hidden="true"></div>
+    <span class="detail-hero-word" aria-hidden="true">HOME</span>
+
+    <div class="detail-hero-content">
+      <div class="detail-breadcrumb">
+        <a routerLink="/">หน้าแรก</a><span>/</span>
+        <a routerLink="/ourworks">Our Works</a><span>/</span>
+        <a routerLink="/ourworks/completed">Completed Homes</a><span>/</span>
+        <strong>{{ home.title }}</strong>
+      </div>
+      <p class="font-rp">The Journey Of Home</p>
+      <h1 class="font-kn">{{ home.title }}</h1>
+      <div class="detail-title-rule" aria-hidden="true"></div>
+      <span>{{ home.style }} · {{ home.location }} · {{ home.year }}</span>
+    </div>
+  </header>
+
+  <section class="project-overview-section">
+    <div class="gold-section-divider" aria-hidden="true"></div>
+    <div class="project-overview">
+      <header class="overview-heading">
+        <p class="font-rp">The Story Of This Home</p>
+        <h2 class="font-kn">บ้านที่เริ่มจากความเข้าใจ<br>และสร้างเพื่อการใช้ชีวิตจริง</h2>
+        <span class="overview-rule" aria-hidden="true"></span>
+      </header>
+
+      <div class="overview-copy">
+        <p>{{ home.description }}</p>
+        <p>{{ home.concept }}</p>
+      </div>
+    </div>
+
+    <div class="project-specs" aria-label="ข้อมูลโครงการ">
+      <div>
+        <i class="now-ui-icons design-2_ruler-pencil" aria-hidden="true"></i>
+        <small>USAGE AREA</small><strong>{{ home.area }}</strong><span>ตร.ม.</span>
+      </div>
+      <div>
+        <i class="now-ui-icons users_single-02" aria-hidden="true"></i>
+        <small>BEDROOM</small><strong>{{ home.bedrooms }}</strong><span>ห้องนอน</span>
+      </div>
+      <div>
+        <i class="now-ui-icons objects_support-17" aria-hidden="true"></i>
+        <small>BATHROOM</small><strong>{{ home.bathrooms }}</strong><span>ห้องน้ำ</span>
+      </div>
+      <div>
+        <i class="now-ui-icons transportation_bus-front-12" aria-hidden="true"></i>
+        <small>CAR PARK</small><strong>{{ home.parking }}</strong><span>ที่จอดรถ</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="project-gallery-section">
+    <div class="gold-section-divider" aria-hidden="true"></div>
+    <header class="gallery-heading">
+      <p class="font-rp">A Closer Look</p>
+      <h2 class="font-kn">รายละเอียดของบ้านหลังนี้</h2>
+      <span class="gallery-rule" aria-hidden="true"></span>
+      <p>ชมบรรยากาศจริง วัสดุ และพื้นที่ใช้งานที่เกิดขึ้นหลังงานก่อสร้างเสร็จสมบูรณ์</p>
+    </header>
+
+    <div class="editorial-lead">
+      <img [src]="home.gallery[0]" [alt]="home.title + ' ภาพรวมโครงการ'" width="1600" height="1000"
+        loading="lazy" decoding="async">
+      <div class="editorial-lead-caption">
+        <small>COMPLETED RESIDENCE</small>
+        <strong class="font-le">{{ home.style }}</strong>
+        <span>{{ home.location }} / {{ home.year }}</span>
+      </div>
+    </div>
+
+    <div class="editorial-story">
+      <article class="editorial-row" *ngFor="let item of editorialSections; let i = index">
+        <figure>
+          <img class="editorial-slide editorial-slide-current"
+            [class.slide-out-left]="editorialImageChanging[i] && editorialSlideDirections[i] === 'next'"
+            [class.slide-out-right]="editorialImageChanging[i] && editorialSlideDirections[i] === 'previous'"
+            [src]="home.gallery[editorialImageIndexes[i]]" [alt]="home.title + ' ' + item.title"
+            width="1600" height="1000" loading="lazy" decoding="async">
+          <img *ngIf="editorialPendingImageIndexes[i] !== null"
+            class="editorial-slide editorial-slide-incoming"
+            [class.slide-in-from-right]="editorialSlideDirections[i] === 'next'"
+            [class.slide-in-from-left]="editorialSlideDirections[i] === 'previous'"
+            [src]="home.gallery[editorialPendingImageIndexes[i]!]" [alt]="home.title + ' ' + item.title"
+            width="1600" height="1000" loading="lazy" decoding="async">
+          <button class="editorial-image-nav editorial-image-prev" type="button" aria-label="ภาพก่อนหน้า"
+            (click)="changeEditorialImage(i, 'previous')"><span></span></button>
+          <button class="editorial-image-nav editorial-image-next" type="button" aria-label="ภาพถัดไป"
+            (click)="changeEditorialImage(i, 'next')"><span></span></button>
+          <figcaption>
+            {{ editorialImageIndexes[i] + 1 | number:'2.0' }} / {{ home.gallery.length | number:'2.0' }} · {{ item.eyebrow }}
+          </figcaption>
+        </figure>
+        <div class="editorial-copy">
+          <small>{{ item.eyebrow }}</small>
+          <h3 class="font-kn">{{ item.title }}</h3>
+          <span class="editorial-copy-rule" aria-hidden="true"></span>
+          <p>{{ item.description }}</p>
+          <dl *ngIf="i === 0">
+            <div><dt>พื้นที่ใช้สอย</dt><dd>{{ home.area }} ตร.ม.</dd></div>
+            <div><dt>ห้องนอน</dt><dd>{{ home.bedrooms }} ห้อง</dd></div>
+            <div><dt>ห้องน้ำ</dt><dd>{{ home.bathrooms }} ห้อง</dd></div>
+            <div><dt>ที่จอดรถ</dt><dd>{{ home.parking }} คัน</dd></div>
+          </dl>
+        </div>
+      </article>
+    </div>
+
+    <figure class="editorial-closing">
+      <img [src]="home.gallery[4]" [alt]="home.title + ' รายละเอียดเพิ่มเติม'" width="1600" height="1000"
+        loading="lazy" decoding="async">
+      <figcaption>
+        <span class="font-rp">Built For Real Living</span>
+        <strong class="font-kn">บ้านที่สวยในภาพ<br>และอยู่สบายในทุกวัน</strong>
+      </figcaption>
+    </figure>
+  </section>
+
+  <section class="project-articles-section" *ngIf="helpfulArticles.length">
+    <div class="gold-section-divider" aria-hidden="true"></div>
+    <header>
+      <p class="font-rp">Planning Knowledge</p>
+      <h2 class="font-kn">เรื่องควรรู้ก่อนวางแผนบ้านของคุณ</h2>
+      <span aria-hidden="true"></span>
+    </header>
+    <div class="project-articles-grid">
+      <a *ngFor="let article of helpfulArticles" [routerLink]="['/blogs', article.slug]">
+        <small>{{ article.topic === 'construction-structure' ? 'โครงสร้างและการก่อสร้าง' : 'แนวคิดการออกแบบ' }}</small>
+        <h3 class="font-kn">{{ article.title }}</h3>
+        <p>{{ article.summary }}</p>
+        <strong>อ่านบทความ <span aria-hidden="true">›</span></strong>
+      </a>
+    </div>
+  </section>
+
+  <section class="related-homes-section" *ngIf="relatedProjects.length">
+    <div class="navy-section-divider" aria-hidden="true"></div>
+    <header class="related-homes-heading">
+      <p class="font-rp">Related Completed Homes</p>
+      <h2 class="font-kn">บ้านสร้างจริงที่คุณอาจสนใจ</h2>
+      <span aria-hidden="true"></span>
+    </header>
+
+    <div class="related-homes-grid">
+      <a class="related-home-card" *ngFor="let related of relatedProjects"
+        [routerLink]="['/ourworks/completed', related.slug]" (click)="scrollToTop()">
+        <div class="related-home-media">
+          <img [src]="related.image" [alt]="related.title" width="960" height="600" loading="lazy" decoding="async">
+        </div>
+        <div class="related-home-copy">
+          <div class="related-home-meta">
+            <span>{{ related.type }}</span>
+            <small>{{ related.location }} | {{ related.year }}</small>
+          </div>
+          <h3 class="font-kn">{{ related.title }}</h3>
+          <p>{{ related.description }}</p>
+
+          <div class="related-home-specs" aria-label="ข้อมูลเบื้องต้นของโครงการ">
+            <span><i class="now-ui-icons design-2_ruler-pencil" aria-hidden="true"></i><strong>{{ related.area }}</strong> ตร.ม.</span>
+            <span><i class="now-ui-icons users_single-02" aria-hidden="true"></i><strong>{{ related.bedrooms }}</strong> ห้องนอน</span>
+            <span><i class="now-ui-icons objects_support-17" aria-hidden="true"></i><strong>{{ related.bathrooms }}</strong> ห้องน้ำ</span>
+            <span><i class="now-ui-icons transportation_bus-front-12" aria-hidden="true"></i><strong>{{ related.parking }}</strong> ที่จอด</span>
+          </div>
+
+          <div class="related-home-footer">
+            <span>{{ related.style }}</span>
+            <strong>รายละเอียดโครงการ</strong>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <a class="related-all-link" routerLink="/ourworks/completed">
+      ดูบ้านสร้างจริงทั้งหมด <span aria-hidden="true">›</span>
+    </a>
+  </section>
+
+  <button class="scroll-top-button" type="button" aria-label="เลื่อนไปด้านบน" (click)="scrollToTop()">
+    <span></span>
+  </button>
+</main>
+
+<ng-template #projectNotFound>
+  <main class="project-not-found">
+    <app-site-menu></app-site-menu>
+    <p class="font-rp">Project Not Found</p>
+    <h1 class="font-kn">ไม่พบข้อมูลโครงการนี้</h1>
+    <a routerLink="/ourworks/completed">ดูบ้านสร้างจริงทั้งหมด</a>
+  </main>
+</ng-template>

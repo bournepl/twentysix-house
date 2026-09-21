@@ -1,0 +1,19 @@
+img {
+  max-width: 100%;
+  border-radius: 1px;
+}
+
+.img-raised {
+  box-shadow: $box-shadow-raised;
+}
+
+.img-round {
+  border-radius: 50%;
+}
+
+
+.img-blog {
+  width: 100%;
+  margin-bottom: 30px;
+  box-shadow: $box-shadow;
+}

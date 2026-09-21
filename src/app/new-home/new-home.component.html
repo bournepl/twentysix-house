@@ -1,0 +1,335 @@
+<main class="new-home-page">
+<section class="new-home-hero page-header">
+  <nav class="hero-nav">
+    <a class="hero-logo" routerLink="/" aria-label="กลับหน้าแรก Twentysix House">
+      <img src="assets/img/seo/brand-mark-320.webp" alt="Twentysix House" width="320" height="226" decoding="async">
+    </a>
+    <a class="hero-brand" routerLink="/" aria-label="กลับหน้าแรก Twentysix House">
+      <span>TWENTYSIX<span>.</span>HOUSE</span>
+      <small class="font-pr">รับสร้างบ้านอุดรธานี</small>
+    </a>
+
+    <div class="hero-actions">
+      <app-site-menu></app-site-menu>
+    </div>
+  </nav>
+
+  <div class="hero-media">
+    <img class="hero-image" [src]="heroSlides[0].image"
+      srcset="assets/img/seo/home-hero-960.webp 960w, assets/img/seo/home-hero-1920.webp 1920w"
+      sizes="100vw" [alt]="heroSlides[0].title" width="1920" height="1080"
+      loading="eager" fetchpriority="high" decoding="async">
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content content-center">
+      <p class="title font-le">{{ heroSlides[0].title }}</p>
+      <div class="title-rule" aria-hidden="true"></div>
+      <p class="font-rp">{{ heroSlides[0].subtitle }}</p>
+    </div>
+  </div>
+</section>
+
+<section class="portfolio-section" aria-label="Portfolio">
+  <div class="gold-section-divider" aria-hidden="true"></div>
+  <div class="portfolio-heading">
+    <p class="portfolio-script font-rp">Portfolio</p>
+    <h2 class="font-kn section-title-rule section-title-rule-gold">ผลงานของเรา</h2>
+  </div>
+
+  <div class="portfolio-carousel" (mouseenter)="pausePortfolioAutoScroll()" (mouseleave)="resumePortfolioAutoScroll()">
+    <button class="portfolio-nav portfolio-nav-prev" type="button" aria-label="Previous portfolio"
+      (click)="scrollPortfolio('previous')">
+      <span aria-hidden="true"></span>
+    </button>
+
+    <div class="portfolio-scroller" #portfolioScroller>
+      <a class="portfolio-card" *ngFor="let item of portfolioLoopItems" routerLink="/ourworks"
+        [attr.aria-label]="'ดูผลงานของเรา: ' + item.title">
+        <img [src]="item.image" [alt]="item.title" width="960" height="600" loading="lazy" decoding="async">
+        <div class="portfolio-overlay">
+          <div class="portfolio-overlay-copy">
+            <h3>{{ item.title }}</h3>
+            <p>Twentysix.House</p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <button class="portfolio-nav portfolio-nav-next" type="button" aria-label="Next portfolio"
+      (click)="scrollPortfolio('next')">
+      <span aria-hidden="true"></span>
+    </button>
+  </div>
+</section>
+
+<section class="build-intro-section">
+  <div class="gold-section-divider" aria-hidden="true"></div>
+  <div class="watermark watermark-left" aria-hidden="true"></div>
+  <div class="watermark watermark-right" aria-hidden="true"></div>
+
+  <div class="build-intro-inner">
+    <header class="build-intro-heading">
+      <h1 class="mb-3">รับสร้างบ้านอุดรธานี</h1>
+      <h2>ออกแบบและก่อสร้างบ้านครบวงจร</h2>
+    </header>
+
+    <div class="build-intro-copy mb-3">
+      <p>
+        <span class="script-mark font-rp">Twentysix.House</span>
+        คือ บริษัทรับสร้างบ้านอุดรธานีที่ดูแลตั้งแต่เริ่มออกแบบ วางแผนงบประมาณ
+        ไปจนถึงก่อสร้างและส่งมอบบ้าน เพื่อให้เจ้าของบ้านมั่นใจได้ทั้งเรื่องดีไซน์
+        คุณภาพงาน และการดูแลระยะยาว
+      </p>
+    </div>
+
+    <div class="build-intro-features">
+      <article>
+        <span>Lifestyle</span>
+        <h3>เข้าใจไลฟ์สไตล์</h3>
+        <p>เริ่มจากการคุยวิธีการใช้ชีวิต จำนวนสมาชิก ฟังก์ชันที่ต้องการ พื้นที่ใช้สอย และบรรยากาศบ้านที่ชอบ</p>
+      </article>
+
+      <article>
+        <span>Planning</span>
+        <h3>วางแผนก่อนสร้าง</h3>
+        <p>ช่วยจัดลำดับโจทย์ แบบ งบประมาณ และขอบเขตงานให้ชัด ก่อนเริ่มก่อสร้างจริง</p>
+      </article>
+
+      <article>
+        <span>Care</span>
+        <h3>ดูแลงานอย่างเป็นระบบ</h3>
+        <p>ประสานงาน อัปเดตความคืบหน้า และควบคุมรายละเอียด เพื่อให้บ้านออกมาตรงตามแผนที่วางไว้</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="home-builder-section">
+  <div class="gold-section-divider" aria-hidden="true"></div>
+  <div class="home-builder-inner">
+    <p class="home-builder-script font-rp">Udon Thani Home Builder</p>
+    <h2 class="font-kn section-title-rule section-title-rule-navy">ทีมที่ช่วยให้คุณเริ่มเรื่องบ้านได้ชัดขึ้น</h2>
+
+    <div class="home-builder-stats" aria-label="จุดเด่นของ Twentysix House">
+      <article class="stat-circle">
+        <strong>10+</strong>
+        <span class="stat-title">ปีประสบการณ์</span>
+        <span class="stat-description">ในงานออกแบบและ<br>ก่อสร้างบ้าน</span>
+      </article>
+
+      <article class="stat-circle">
+        <strong>80+</strong>
+        <span class="stat-title">ผลงานจริง</span>
+        <span class="stat-description">บ้านที่ดูแลและส่ง<br>มอบให้ลูกค้า</span>
+      </article>
+
+      <article class="stat-circle">
+        <strong>ครบวงจร</strong>
+        <span class="stat-title">ตั้งแต่ต้นจนจบ</span>
+        <span class="stat-description">ตั้งแต่แนวคิด แบบบ้าน<br>ไปจนถึงส่งมอบ</span>
+      </article>
+
+      <article class="stat-circle">
+        <strong>ดูแลต่อเนื่อง</strong>
+        <span class="stat-title">หลังส่งมอบบ้าน</span>
+        <span class="stat-description">ให้คำปรึกษา<br>และติดตามงาน</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="feature-video-section" aria-label="Twentysix House video">
+  <div class="gold-section-divider" aria-hidden="true"></div>
+  <div class="feature-video-inner">
+    <div class="feature-video-media">
+      <div #featureVideoFrame class="feature-video-frame" [class.is-loading]="featureVideoStatus === 'loading'"
+        [class.has-started]="featureVideoHasStarted">
+        <video #featureVideo class="feature-video" [attr.src]="featureVideoSource" [poster]="featureVideoPoster"
+          controls muted playsinline preload="none" (loadstart)="onFeatureVideoLoadStart()"
+          (canplay)="onFeatureVideoCanPlay()" (playing)="onFeatureVideoPlaying()"
+          (waiting)="onFeatureVideoWaiting()" (error)="onFeatureVideoError()">
+          <track *ngIf="activeFeatureVideo.captions" kind="captions" [src]="activeFeatureVideo.captions"
+            srclang="th" label="คำบรรยายภาษาไทย" default>
+        </video>
+
+        <button *ngIf="!featureVideoHasStarted && featureVideoStatus !== 'loading' && featureVideoStatus !== 'error'"
+          class="feature-video-play" type="button" aria-label="เล่นวิดีโอ" (click)="playFeatureVideo()">
+          <span aria-hidden="true"></span>
+        </button>
+
+        <div *ngIf="featureVideoStatus === 'loading'" class="feature-video-state feature-video-loading"
+          role="status" aria-live="polite">
+          <span class="feature-video-spinner" aria-hidden="true"></span>
+          <span>กำลังโหลดวิดีโอ</span>
+        </div>
+
+        <div *ngIf="featureVideoStatus === 'error'" class="feature-video-state feature-video-error"
+          role="alert">
+          <span>ไม่สามารถเล่นวิดีโอได้</span>
+          <button type="button" (click)="retryFeatureVideo()">ลองอีกครั้ง</button>
+        </div>
+      </div>
+
+      <div class="feature-video-carousel" [class.is-empty]="!featureVideoThumbnails.length"
+        aria-label="Video playlist">
+        <button *ngIf="featureVideoThumbnails.length" class="feature-video-nav feature-video-nav-prev" type="button" aria-label="Previous video"
+          (click)="previousFeatureVideo()">
+          <span aria-hidden="true"></span>
+        </button>
+
+        <div class="feature-video-list">
+          <button class="feature-video-thumb" type="button" *ngFor="let item of featureVideoThumbnails"
+            (click)="selectFeatureVideo(item.index)">
+            <img [src]="item.poster" [alt]="item.title" width="960" height="540" loading="lazy" decoding="async">
+            <span>{{ item.title }}</span>
+          </button>
+        </div>
+
+        <button *ngIf="featureVideoThumbnails.length" class="feature-video-nav feature-video-nav-next" type="button" aria-label="Next video"
+          (click)="nextFeatureVideo()">
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="feature-video-copy">
+      <p class="feature-video-script font-rp">The Real Living Story</p>
+      <h2 class="font-kn">ฟังประสบการณ์จริงจากเจ้าของบ้าน</h2>
+      <hr class="feature-video-heading-rule" aria-hidden="true">
+      <div class="feature-video-details" aria-live="polite">
+        <h3 class="font-kn">{{ activeFeatureVideo.title }}</h3>
+        <p>{{ activeFeatureVideo.description }}</p>
+      </div>
+      <a href="https://lin.ee/jzuOAtF" target="_blank" rel="noopener">ปรึกษาโครงการ</a>
+    </div>
+  </div>
+</section>
+
+<section class="services-section" aria-label="Solutions We Offer">
+  <div class="gold-section-divider" aria-hidden="true"></div>
+  <div class="services-inner">
+    <header class="services-heading">
+      <p class="services-script font-rp">Solutions We Offer</p>
+      <h2 class="font-kn section-title-rule section-title-rule-gold section-title-rule-left">บริการของเรา</h2>
+    </header>
+
+    <div class="services-grid">
+      <article class="service-card" *ngFor="let service of services">
+        <div class="service-icon">
+          <img [src]="service.image" [alt]="service.title" width="204" height="185" loading="lazy" decoding="async">
+        </div>
+        <h3 class="font-kn">{{ service.title }}</h3>
+        <p>{{ service.description }}</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="catalog-section" aria-label="House catalog">
+  <div class="gold-section-divider" aria-hidden="true"></div>
+  <div class="catalog-heading">
+    <p class="catalog-script font-rp">House Catalog</p>
+    <h2 class="font-kn section-title-rule section-title-rule-gold">แบบบ้านที่ออกแบบเพื่อไลฟ์สไตล์</h2>
+  </div>
+
+  <div class="catalog-carousel">
+    <button class="catalog-nav catalog-nav-prev" type="button" aria-label="Previous catalog"
+      (click)="previousCatalog()">
+      <span aria-hidden="true"></span>
+    </button>
+
+    <div class="catalog-stage">
+      <a class="catalog-card" *ngFor="let item of catalogItems; let i = index"
+        [routerLink]="item.route"
+        [attr.aria-label]="'ดูแบบบ้าน ' + item.name"
+        [class.is-active]="i === activeCatalogIndex" [class.is-prev]="getCatalogOffset(i) === -1"
+        [class.is-next]="getCatalogOffset(i) === 1" [style.--offset]="getCatalogOffset(i)">
+        <img [src]="item.coverImage" [alt]="item.name + ' แบบบ้านของ Twentysix House'"
+          width="1200" height="675" loading="lazy" decoding="async">
+        <div class="catalog-card-overlay"></div>
+        <div class="catalog-card-content">
+          <h3>{{ item.name }}</h3>
+          <p>{{ item.thaiName }}</p>
+        </div>
+      </a>
+    </div>
+
+    <button class="catalog-nav catalog-nav-next" type="button" aria-label="Next catalog" (click)="nextCatalog()">
+      <span aria-hidden="true"></span>
+    </button>
+  </div>
+
+  <div class="catalog-indicators" aria-label="Catalog pagination">
+    <button type="button" *ngFor="let item of catalogItems; let i = index" [class.active]="i === activeCatalogIndex"
+      [attr.aria-label]="'แสดงแบบบ้าน ' + item.name" (click)="setCatalog(i)">
+    </button>
+  </div>
+
+  <div class="house-design-carousel" (mouseenter)="pauseHouseDesignAutoScroll()"
+    (mouseleave)="resumeHouseDesignAutoScroll()">
+    <button class="house-design-nav house-design-nav-prev" type="button" aria-label="Previous house design"
+      (click)="scrollHouseDesign('previous')">
+      <span aria-hidden="true"></span>
+    </button>
+
+    <div class="house-design-scroller" #houseDesignScroller>
+      <a class="house-design-card" *ngFor="let item of houseDesignLoopItems"
+        [routerLink]="['/house-catalog', item.slug]">
+        <img [src]="item.cardImage" [alt]="'แบบบ้าน ' + item.name + ' ' + item.thaiName"
+          width="960" height="600" loading="lazy" decoding="async">
+        <div class="house-design-overlay">
+          <h3>{{ item.name }}</h3>
+          <p>{{ item.thaiName }}</p>
+        </div>
+      </a>
+    </div>
+
+    <button class="house-design-nav house-design-nav-next" type="button" aria-label="Next house design"
+      (click)="scrollHouseDesign('next')">
+      <span aria-hidden="true"></span>
+    </button>
+  </div>
+
+  <a class="catalog-all-link" routerLink="/house-catalog">
+    ดูแบบบ้านทั้งหมด <span aria-hidden="true">›</span>
+  </a>
+</section>
+
+<section class="final-cta-section" aria-label="Next step">
+  <div class="gold-section-divider" aria-hidden="true"></div>
+  <div class="final-cta-panel">
+    <div class="final-cta-copy">
+      <p class="final-cta-eyebrow">NEXT STEP</p>
+      <h2 class="font-kn section-title-rule section-title-rule-gold section-title-rule-left">เริ่มคุยเรื่องบ้านของคุณกับ<br>ทีม Twentysix House</h2>
+      <p class="final-cta-text">ส่งโจทย์เบื้องต้น งบประมาณ ที่ดิน หรือแบบบ้านที่ชอบมาให้เราช่วยดูแนวทางต่อได้</p>
+
+      <div class="final-cta-actions">
+        <a class="final-cta-button final-cta-button-primary" href="https://lin.ee/jzuOAtF" target="_blank"
+          rel="noopener noreferrer">
+          คุยผ่าน LINE
+        </a>
+        <a class="final-cta-button" href="tel:0994708877">
+          โทร 099-470-8877
+        </a>
+        <a class="final-cta-button" routerLink="/contact">
+          ดูช่องทางติดต่อ
+        </a>
+      </div>
+    </div>
+
+    <aside class="final-cta-note">
+      <p>START WITH</p>
+      <h3 class="font-kn">ส่งข้อมูลสั้น ๆ มาให้ทีมงานช่วยดูได้</h3>
+      <ul>
+        <li>ขนาดที่ดินหรือทำเลที่ต้องการสร้าง</li>
+        <li>งบประมาณเบื้องต้นที่วางไว้</li>
+        <li>รูปบ้านหรือแบบบ้านที่ชอบ</li>
+      </ul>
+    </aside>
+  </div>
+</section>
+
+<button class="scroll-top-button" type="button" aria-label="Scroll to top" (click)="scrollToTop()">
+  <span aria-hidden="true"></span>
+</button>
+</main>

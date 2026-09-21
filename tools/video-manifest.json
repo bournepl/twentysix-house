@@ -1,0 +1,75 @@
+[
+  {
+    "slug": "khun-fai-testimonial",
+    "source": "01 VDO Khun win Fai/K Fai Testimonial 2k 30fbs.mp4",
+    "title": "ประสบการณ์สร้างบ้านของคุณฝ้าย",
+    "description": "พูดคุยถึงประสบการณ์ระหว่างเจ้าของบ้านกับทีม ตั้งแต่การสื่อสารรายละเอียดไปจนถึงวันที่บ้านพร้อมใช้งาน",
+    "transcriptSummary": "เจ้าของบ้านเล่ามุมมองต่อการทำงานร่วมกับทีมและความรู้สึกหลังเข้าอยู่อาศัยจริง",
+    "poster": "assets/img/videos/posters/khun-fai-testimonial.webp",
+    "posterTimeSeconds": 73,
+    "captions": null,
+    "captionStatus": "pending-transcription",
+    "preserveAudio": true
+  },
+  {
+    "slug": "khun-kak-home-handover",
+    "source": "03 VDO Khun Kak/ส่งมอบบ้านคุณกั๊ก.mp4",
+    "title": "ส่งมอบบ้านคุณกั๊ก",
+    "description": "ชมบ้านชั้นเดียวและรายละเอียดการใช้งานจริง พร้อมเรื่องราวจากเจ้าของบ้านในวันส่งมอบ",
+    "transcriptSummary": "เจ้าของบ้านพูดถึงประสบการณ์สร้างบ้านและพาชมพื้นที่สำคัญทั้งภายนอกและภายใน",
+    "poster": "assets/img/videos/posters/khun-kak-home-handover.webp",
+    "posterTimeSeconds": 182,
+    "captions": null,
+    "captionStatus": "pending-transcription",
+    "preserveAudio": true
+  },
+  {
+    "slug": "khun-jane-finishing",
+    "source": "05 VDO Khun Jane บ้านดุง/คลิป finishing khun Jane.MOV",
+    "title": "เยี่ยมชมบ้านคุณเจน บ้านดุง",
+    "description": "สำรวจงานภายนอกและพื้นที่ภายในของบ้านที่ออกแบบให้เรียบง่าย พร้อมรายละเอียดวัสดุที่เห็นได้จากการใช้งานจริง",
+    "transcriptSummary": "วิดีโอพาชมภาพรวม รูปด้าน ช่องเปิด ห้องใช้งาน และรายละเอียดช่วงเก็บงานก่อนส่งมอบ",
+    "poster": "assets/img/videos/posters/khun-jane-finishing.webp",
+    "posterTimeSeconds": 17,
+    "captions": null,
+    "captionStatus": "pending-transcription",
+    "preserveAudio": true
+  },
+  {
+    "slug": "khun-pui-home-handover",
+    "source": "06 VDO Khun Pui/คลิปส่งมอบคุณปุ้ย.mp4",
+    "title": "ส่งมอบบ้านคุณปุ้ย",
+    "description": "เรื่องราวบ้านสองชั้นที่เชื่อมพื้นที่อยู่อาศัยกับความต้องการของครอบครัว พร้อมมุมมองจากเจ้าของบ้าน",
+    "transcriptSummary": "เจ้าของบ้านเล่าความรู้สึกหลังได้รับมอบบ้าน สลับกับภาพพื้นที่ภายนอกและฟังก์ชันภายใน",
+    "poster": "assets/img/videos/posters/khun-pui-home-handover.webp",
+    "posterTimeSeconds": 93,
+    "captions": null,
+    "captionStatus": "pending-transcription",
+    "preserveAudio": true
+  },
+  {
+    "slug": "khun-tae-home-handover",
+    "source": "09 VDO Khun Tae/คลิปส่งมอบคุณเท่.mov",
+    "title": "ส่งมอบบ้านคุณเท่",
+    "description": "ชมบ้านและฟังประสบการณ์จากเจ้าของบ้าน ตั้งแต่มุมใช้งานภายในไปจนถึงบรรยากาศในวันส่งมอบ",
+    "transcriptSummary": "เจ้าของบ้านพูดถึงความไว้วางใจและการทำงานร่วมกับทีม พร้อมภาพรายละเอียดของบ้านหลังสร้างเสร็จ",
+    "poster": "assets/img/videos/posters/khun-tae-home-handover.webp",
+    "posterTimeSeconds": 70,
+    "captions": null,
+    "captionStatus": "pending-transcription",
+    "preserveAudio": true,
+    "notes": "The 100fps source should be capped at 30fps for the web version."
+  },
+  {
+    "slug": "khun-looknam-interview",
+    "source": "11 VDO Khun Looknam/VDO สัมภาษณ์คุณบูม และคุณลูกน้ำ.mov",
+    "title": "บ้านของคุณบูมและคุณลูกน้ำ",
+    "description": "บทสนทนาจากครอบครัวเจ้าของบ้าน เล่าตั้งแต่โจทย์เริ่มต้น การตัดสินใจ และชีวิตหลังเข้าอยู่จริง",
+    "transcriptSummary": "ครอบครัวเล่ากระบวนการเริ่มสร้างบ้าน การสื่อสารระหว่างโครงการ และประสบการณ์เมื่อได้ใช้พื้นที่จริง",
+    "poster": "assets/img/videos/posters/khun-looknam-interview.webp",
+    "posterTimeSeconds": 15,
+    "captions": null,
+    "captionStatus": "pending-transcription",
+    "preserveAudio": true
+  }
+]

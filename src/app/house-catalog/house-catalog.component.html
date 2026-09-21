@@ -1,0 +1,156 @@
+<main class="catalog-page">
+  <app-site-menu></app-site-menu>
+
+  <header class="catalog-hero">
+    <nav class="catalog-nav" aria-label="แบรนด์ Twentysix House">
+      <a class="catalog-logo" routerLink="/" aria-label="กลับหน้าแรก Twentysix House">
+        <img src="assets/img/seo/brand-mark-320.webp" alt="" width="320" height="226" decoding="async">
+      </a>
+      <a class="catalog-brand" routerLink="/">
+        <span>TWENTYSIX<span>.</span>HOUSE</span>
+        <small class="font-pr">รับสร้างบ้านอุดรธานี</small>
+      </a>
+    </nav>
+
+    <div class="catalog-hero-media" [style.background-image]="'url(\'' + activeCollection.heroImage + '\')'"
+      aria-hidden="true"></div>
+    <div class="catalog-hero-overlay" aria-hidden="true"></div>
+    <div class="catalog-hero-content">
+      <nav class="catalog-breadcrumb" aria-label="เส้นทางหน้าเว็บ">
+        <a routerLink="/">หน้าแรก</a><span aria-hidden="true">/</span>
+        <strong aria-current="page">แบบบ้านของเรา</strong>
+      </nav>
+      <p class="font-rp">House Collections</p>
+      <h1 class="font-kn">แบบบ้านของเรา<br>จุดเริ่มต้นที่ปรับให้เป็นบ้านของคุณได้</h1>
+      <span class="catalog-title-rule" aria-hidden="true"></span>
+      <span>สำรวจ Collection และแบบบ้านที่วางฟังก์ชันมาอย่างชัดเจน พร้อมนำไปปรับให้เข้ากับที่ดิน งบประมาณ และวิถีชีวิตของแต่ละครอบครัว</span>
+    </div>
+  </header>
+
+  <section class="catalog-list-section" aria-labelledby="catalog-list-title">
+    <div class="gold-section-divider" aria-hidden="true"></div>
+
+    <div class="catalog-list-heading">
+      <p class="font-rp">Find Your Home</p>
+      <h2 id="catalog-list-title" class="font-kn">เลือก Collection ที่ใกล้กับชีวิตของคุณ</h2>
+      <span class="catalog-heading-rule" aria-hidden="true"></span>
+      <p>เลือกแนวคิดของ Collection ก่อน แล้วสำรวจแบบบ้านตามจำนวนสมาชิกและพื้นที่ที่ต้องการ เพื่อปรับผัง วัสดุ และรายละเอียดให้เหมาะกับครอบครัวของคุณ</p>
+    </div>
+
+    <div class="collection-carousel" aria-label="เลือก Collection แบบบ้าน">
+      <button class="collection-nav collection-nav-prev" type="button" aria-label="Collection ก่อนหน้า"
+        (click)="previousCollection()">
+        <span aria-hidden="true"></span>
+      </button>
+
+      <div class="collection-stage">
+        <button class="collection-card" *ngFor="let collection of collections; let i = index; trackBy: trackByCollectionSlug"
+          type="button"
+          [class.is-active]="i === activeCollectionIndex"
+          [class.is-prev]="getCollectionOffset(i) === -1"
+          [class.is-next]="getCollectionOffset(i) === 1"
+          [attr.aria-pressed]="activeCollectionSlug === collection.slug"
+          [attr.aria-label]="'เลือก ' + collection.name"
+          (click)="setCollection(collection.slug)">
+          <img [src]="collection.coverImage" [alt]="'ภาพรวมแบบบ้านใน ' + collection.name" width="1200"
+            height="750" loading="lazy" decoding="async">
+          <span class="collection-card-overlay" aria-hidden="true"></span>
+          <span class="collection-card-copy">
+            <small>House Collection</small>
+            <strong>{{ collection.name }}</strong>
+            <span>{{ collection.items.length }} แบบบ้าน</span>
+          </span>
+        </button>
+      </div>
+
+      <button class="collection-nav collection-nav-next" type="button" aria-label="Collection ถัดไป"
+        (click)="nextCollection()">
+        <span aria-hidden="true"></span>
+      </button>
+    </div>
+
+    <div class="collection-indicators" aria-label="Collection pagination">
+      <button type="button" *ngFor="let collection of collections; let i = index; trackBy: trackByCollectionSlug"
+        [class.is-active]="i === activeCollectionIndex"
+        [attr.aria-label]="'แสดง ' + collection.name"
+        (click)="setCollection(collection.slug)">
+      </button>
+    </div>
+
+    <div class="active-collection-heading">
+      <p class="font-rp">{{ activeCollection.name }}</p>
+      <h3 class="font-kn">{{ activeCollection.thaiName }}</h3>
+    </div>
+
+    <div class="catalog-filter" role="group" aria-label="กรองแบบบ้านตามจำนวนห้องนอน">
+      <button *ngFor="let filter of bedroomFilters" type="button"
+        [class.is-active]="activeBedroomFilter === filter.value"
+        [attr.aria-pressed]="activeBedroomFilter === filter.value"
+        (click)="setBedroomFilter(filter.value)">
+        {{ filter.label }}
+      </button>
+    </div>
+
+    <div class="catalog-grid" *ngIf="filteredHouses.length; else emptyCatalog">
+      <a class="house-card" *ngFor="let house of filteredHouses; trackBy: trackBySlug"
+        [routerLink]="['/house-catalog', house.slug]">
+        <div class="house-card-media">
+          <img [src]="house.cardImage" [alt]="'ภาพด้านหน้าแบบบ้าน ' + house.name + ' ' + house.thaiName"
+            width="960" height="600" loading="lazy" decoding="async">
+          <span>{{ house.collection }}</span>
+        </div>
+
+        <div class="house-card-body">
+          <div class="house-card-heading">
+            <div>
+              <small>{{ house.style }}</small>
+              <h3>{{ house.name }}</h3>
+              <span>{{ house.thaiName }}</span>
+            </div>
+            <strong>เริ่มต้น {{ formatBudget(house.startingBudget) }}*</strong>
+          </div>
+
+          <p>{{ house.description }}</p>
+
+          <div class="house-card-specs" aria-label="ข้อมูลแบบบ้าน">
+            <span><i class="now-ui-icons users_single-02" aria-hidden="true"></i><strong>{{ house.bedrooms }}</strong> ห้องนอน</span>
+            <span><i class="now-ui-icons objects_support-17" aria-hidden="true"></i><strong>{{ house.bathrooms }}</strong> ห้องน้ำ</span>
+            <span><i class="now-ui-icons transportation_bus-front-12" aria-hidden="true"></i><strong>{{ house.parking }}</strong> ที่จอด</span>
+            <span><i class="now-ui-icons shopping_shop" aria-hidden="true"></i><strong>{{ house.livingRooms }}</strong> ห้องนั่งเล่น</span>
+          </div>
+
+          <div class="house-card-footer">
+            <span>{{ house.collection }}</span>
+            <strong>ดูรายละเอียดแบบบ้าน</strong>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <ng-template #emptyCatalog>
+      <div class="catalog-empty">
+        <h3 class="font-kn">ยังไม่มีแบบบ้านตามตัวเลือกนี้</h3>
+        <p>ลองเลือกจำนวนห้องนอนอื่น หรือพูดคุยกับทีมเพื่อออกแบบตามโจทย์เฉพาะของคุณ</p>
+        <button type="button" (click)="setBedroomFilter('all')">ดูแบบบ้านทั้งหมด</button>
+      </div>
+    </ng-template>
+
+    <p class="catalog-price-note">* มูลค่าก่อสร้างเป็นข้อมูลอ้างอิงของแต่ละ Collection อาจเปลี่ยนแปลงตามพื้นที่ก่อสร้าง วัสดุ และขอบเขตงาน</p>
+  </section>
+
+  <section class="catalog-cta-section">
+    <div class="navy-section-divider" aria-hidden="true"></div>
+    <div class="catalog-cta">
+      <div>
+        <p class="font-rp">Made For Your Life</p>
+        <h2 class="font-kn">ชอบแบบไหน นำมาปรับให้เหมาะกับบ้านของคุณ</h2>
+        <span>ส่งข้อมูลที่ดิน จำนวนสมาชิก ฟังก์ชัน และงบประมาณ เพื่อเริ่มประเมินแนวทางร่วมกับทีมของเรา</span>
+      </div>
+      <a routerLink="/contact">ปรึกษาเพื่อปรับแบบ</a>
+    </div>
+  </section>
+
+  <button class="scroll-top-button" type="button" aria-label="เลื่อนไปด้านบน" (click)="scrollToTop()">
+    <span></span>
+  </button>
+</main>
