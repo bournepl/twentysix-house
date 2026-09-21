@@ -2,7 +2,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { CommonEngine } from '@angular/ssr/node';
 import express from 'express';
 import { dirname, join, resolve } from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 
 import AppServerModule from './src/main.server';
 import blogs from './src/assets/json/blog.json';
@@ -238,8 +238,6 @@ ${uniqueSitemapEntries.map(entry => {
       .send(sitemapXml);
   });
 
-  server.get('*.*', express.static(browserDistFolder, { maxAge: '1y' }));
-
   server.get('*', (req, res, next) => {
     const resolution = resolveRequest(req.path);
 
@@ -266,18 +264,6 @@ ${uniqueSitemapEntries.map(entry => {
   });
 
   return server;
-}
-
-function run(): void {
-  const port = process.env['PORT'] || 3000;
-  const server = app();
-  server.listen(port, () => {
-    console.log(`Node Express server listening on http://localhost:${port}`);
-  });
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-  run();
 }
 
 export const handler = app();

@@ -1,7 +1,7 @@
 # Pre-deploy Remediation Roadmap
 
 วันที่จัดทำ: 21 กันยายน 2026
-สถานะ: Phase 1 เสร็จสมบูรณ์ - พร้อมเริ่ม Phase 2
+สถานะ: Phase 2 เสร็จสมบูรณ์ - พร้อมเริ่ม Phase 3
 แพลตฟอร์มเป้าหมาย: Vercel + Angular SSR
 
 ## เป้าหมาย
@@ -73,6 +73,9 @@ npm run seo:validate-structured-data
 ## Phase 2: Vercel SSR Build Pipeline
 
 **เป้าหมาย:** ให้มี SSR build pipeline เพียงแบบเดียวและ output ใช้งานได้จริง
+
+**สถานะ:** เสร็จสมบูรณ์ ใช้ Angular application builder เป็น pipeline เดียวและ `vercel build` ผ่าน
+**รายงาน:** [pre-deploy-phase-2-vercel-ssr.md](./pre-deploy-phase-2-vercel-ssr.md)
 
 ### ปัญหาปัจจุบัน
 

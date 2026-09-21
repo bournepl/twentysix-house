@@ -4,10 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng run twentysix-house:build",
-    "build:ssr": "ng run twentysix-house:build && ng run twentysix-house:server",
-    "serve:ssr": "node dist/twentysix-house/server/server.mjs",
-    "dev:ssr": "ng run twentysix-house:serve-ssr",
+    "build": "ng build",
+    "build:ssr": "npm run build",
+    "serve:ssr": "node tools/serve-ssr.mjs",
+    "dev:ssr": "ng serve",
     "watch": "ng run twentysix-house:build --watch --configuration development",
     "images:house-catalog": "node tools/generate-house-catalog-images.mjs",
     "images:ourworks": "node tools/generate-ourworks-images.mjs",
@@ -23,7 +23,7 @@
     "seo:validate-prerender": "node tools/validate-prerender-site.mjs",
     "seo:validate-http": "node tools/validate-http-release.mjs",
     "test": "ng test",
-    "vercel-build": "npm run build:ssr"
+    "vercel-build": "npm run build"
   },
   "private": true,
   "dependencies": {

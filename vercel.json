@@ -1,15 +1,19 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "server.ts",
-      "use": "@vercel/node"
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "npm run vercel-build",
+  "outputDirectory": "dist/twentysix-house/browser",
+  "functions": {
+    "api/index.mjs": {
+      "includeFiles": "dist/twentysix-house/browser/{**/*.html,*.css}",
+      "excludeFiles": "{dist/twentysix-house/browser/assets/**,dist/twentysix-house/browser/media/**}",
+      "maxDuration": 30
     }
-  ],
-  "routes": [
+  },
+  "rewrites": [
     {
-      "src": "/(.*)",
-      "dest": "server.ts"
+      "source": "/(.*)",
+      "destination": "/api/index"
     }
   ]
 }
