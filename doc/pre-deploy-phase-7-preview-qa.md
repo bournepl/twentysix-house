@@ -4,9 +4,9 @@
 
 ## สถานะ
 
-**เตรียม local preflight - ยังไม่ได้ deploy**
+**Local preflight ผ่าน - การสร้าง Preview ถูกบล็อกด้วย Git LFS quota**
 
-โปรเจกต์เชื่อมกับ Vercel project ID แล้วผ่าน `.vercel/project.json` และกำหนด Node.js 20.x แต่ Git repository ในเครื่องยังไม่มี remote จึงยังไม่สามารถใช้ workflow ที่กำหนดไว้ คือ push branch ไป GitHub แล้วให้ Vercel สร้าง Preview Deployment อัตโนมัติ
+โปรเจกต์เชื่อมกับ Vercel project ID แล้วผ่าน `.vercel/project.json` และกำหนด Node.js 20.x พร้อมตั้ง `origin` เป็น `https://github.com/bournepl/twentysix-house.git` แล้ว แต่ GitHub ปฏิเสธการ push เพราะ repository owner ใช้ Git LFS budget ครบโควตา
 
 จะไม่ใช้ `vercel deploy` โดยตรง เนื่องจาก workflow ของโปรเจกต์ใช้ GitHub integration
 
@@ -58,6 +58,7 @@ Local `vercel build` ผ่านและสร้าง `.vercel/output` ส�
 
 ## Blockers ก่อนปิด Phase 7
 
-- ยังไม่มี Git remote และ Preview URL
+- ยังไม่มี Preview URL เพราะ push ถูกปฏิเสธด้วยข้อความ `This repository exceeded its LFS budget`
+- วิดีโอ 3 ไฟล์รวม 93.48 MB ถูก track ด้วย Git LFS; ต้องเพิ่ม LFS budget หรือย้ายไฟล์ออกจาก LFS โดย rewrite เฉพาะ local preview branch ก่อน push
 - Caption ภาษาไทยของวิดีโอ 3 คลิปยังรอ transcript ที่ตรวจทานแล้วจาก Phase 6
 - Privacy Policy และ Terms of Use ยังควรได้รับการตรวจข้อความจากผู้รับผิดชอบด้านกฎหมาย/ธุรกิจ
