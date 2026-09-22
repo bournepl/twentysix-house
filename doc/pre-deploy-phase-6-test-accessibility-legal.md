@@ -23,6 +23,7 @@
 - ยืนยันว่า gallery, carousel และ scroll-to-top ใช้ native button/link พร้อม accessible label
 - เพิ่ม global `:focus-visible` และ `prefers-reduced-motion`
 - สร้างหน้า `/privacy-policy` และ `/terms-of-use` พร้อม footer links, canonical, social metadata และ schema
+- ตรวจ source code แล้วไม่พบ analytics, advertising pixel, cookie, local storage หรือ third-party embed จึงเพิ่ม Cookie Notice โดยยังไม่แสดง consent banner ที่ไม่จำเป็น
 - เพิ่ม legal routes ใน prerender routes และ sitemap
 
 ## ผลการตรวจอัตโนมัติ
@@ -52,6 +53,10 @@ Build ยังรายงาน Sass deprecation warnings จาก Now UI Kit
 ใน `tools/video-manifest.json` ทั้งสามรายการยังมี `captions: null` และ `captionStatus: pending-transcription` จึงไม่ควรสร้างข้อความแทนจาก summary เพราะเวลาและเนื้อหาอาจไม่ตรงกับเสียงจริง
 
 ไฟล์ caption ที่รับได้ควรเป็น WebVTT (`.vtt`) ภาษาไทย มี timecode ตรงกับเสียง และผ่านการตรวจชื่อบุคคล/คำเฉพาะก่อนผูกเข้ากับ `featureVideos`
+
+## เงื่อนไขที่ต้องเพิ่ม Cookie Consent
+
+ต้องเพิ่ม consent manager ก่อนโหลดเครื่องมือที่ไม่จำเป็น หากภายหลังติดตั้ง Google Analytics, Google Tag Manager, Meta/TikTok Pixel, session recording, embedded YouTube หรือบริการภายนอกอื่นที่ติดตามผู้ใช้ โดยต้องมีตัวเลือกยอมรับ ปฏิเสธ ตั้งค่า และถอนความยินยอมได้
 
 ## งานตรวจบน Preview
 

@@ -191,6 +191,7 @@ npm run seo:validate-structured-data
 - เพิ่ม focus trap, focus restore และ body scroll lock ให้ site menu
 - ตรวจ keyboard navigation ของ carousel, gallery, menu และ scroll-top buttons
 - สร้างหน้าหรือลิงก์ Privacy Policy และ Terms of Use ที่ใช้งานได้จริง
+- ตรวจการใช้ cookie/tracker และเพิ่ม consent manager เฉพาะเมื่อมี non-essential tracking
 - ตรวจ contrast, focus indicator, zoom 200% และ reduced motion
 
 ### ผ่านเมื่อ
@@ -203,6 +204,9 @@ npm run seo:validate-structured-data
 ## Phase 7: Vercel Preview QA
 
 **เป้าหมาย:** ตรวจสภาพแวดล้อมจริงโดยยังไม่ promote เป็น Production
+
+**สถานะ:** เตรียม local preflight - ยังไม่มี Preview URL เพราะ repository ในเครื่องยังไม่ได้ตั้ง Git remote
+**รายงาน:** [pre-deploy-phase-7-preview-qa.md](./pre-deploy-phase-7-preview-qa.md)
 
 ### งาน
 
