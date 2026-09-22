@@ -4,16 +4,16 @@
 
 ## สถานะ
 
-**Local preflight ผ่าน - การสร้าง Preview ถูกบล็อกด้วย Git LFS quota**
+**Local preflight ผ่าน - พร้อม push branch เพื่อสร้าง Preview**
 
-โปรเจกต์เชื่อมกับ Vercel project ID แล้วผ่าน `.vercel/project.json` และกำหนด Node.js 20.x พร้อมตั้ง `origin` เป็น `https://github.com/bournepl/twentysix-house.git` แล้ว แต่ GitHub ปฏิเสธการ push เพราะ repository owner ใช้ Git LFS budget ครบโควตา
+โปรเจกต์เชื่อมกับ Vercel project ID แล้วผ่าน `.vercel/project.json` และกำหนด Node.js 20.x พร้อมตั้ง `origin` เป็น `https://github.com/bournepl/twentysix-house.git` แล้ว การ push ครั้งแรกถูก GitHub ปฏิเสธเพราะ LFS budget เต็ม จึงสำรองประวัติเดิมไว้ใน local branch `pre-deploy-remediation-lfs-backup` และย้ายวิดีโอ 3 ไฟล์ออกจาก LFS เฉพาะ branch ที่ยังไม่เคย push โดย hash ของไฟล์หลังย้ายตรงกับต้นฉบับทั้งหมด
 
 จะไม่ใช้ `vercel deploy` โดยตรง เนื่องจาก workflow ของโปรเจกต์ใช้ GitHub integration
 
 ## ข้อมูลก่อนสร้าง Preview
 
 - Branch: `pre-deploy-remediation`
-- Phase 6 checkpoint: `975caf7`
+- Phase 6 checkpoint หลัง LFS migration: `9e8157f`
 - Vercel project: `prj_RgZPxTuE3AwZfWQcn9E7lrUeapKP`
 - Build command: `npm run vercel-build`
 - Node.js: `20.x`
@@ -58,7 +58,6 @@ Local `vercel build` ผ่านและสร้าง `.vercel/output` ส�
 
 ## Blockers ก่อนปิด Phase 7
 
-- ยังไม่มี Preview URL เพราะ push ถูกปฏิเสธด้วยข้อความ `This repository exceeded its LFS budget`
-- วิดีโอ 3 ไฟล์รวม 93.48 MB ถูก track ด้วย Git LFS; ต้องเพิ่ม LFS budget หรือย้ายไฟล์ออกจาก LFS โดย rewrite เฉพาะ local preview branch ก่อน push
+- ยังไม่มี Preview URL จนกว่า branch หลัง LFS migration จะถูก push และ Vercel build เสร็จ
 - Caption ภาษาไทยของวิดีโอ 3 คลิปยังรอ transcript ที่ตรวจทานแล้วจาก Phase 6
 - Privacy Policy และ Terms of Use ยังควรได้รับการตรวจข้อความจากผู้รับผิดชอบด้านกฎหมาย/ธุรกิจ
