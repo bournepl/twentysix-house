@@ -175,6 +175,18 @@ export function staticPageStructuredData(
         { ...page('ContactPage'), mainEntity: { '@id': ORGANIZATION_ID } },
         breadcrumbs('ติดต่อเรา'),
       );
+    case '/privacy-policy':
+      return structuredDataGraph(
+        websiteSchema(),
+        page('WebPage'),
+        breadcrumbs('นโยบายความเป็นส่วนตัว'),
+      );
+    case '/terms-of-use':
+      return structuredDataGraph(
+        websiteSchema(),
+        page('WebPage'),
+        breadcrumbs('ข้อกำหนดการใช้งาน'),
+      );
     default:
       return undefined;
   }

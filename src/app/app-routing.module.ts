@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { NotFoundComponent } from './not-found/not-found.component';
+import { LegalComponent } from './legal/legal.component';
 
 const routes: Routes = [
   {
@@ -136,6 +137,40 @@ const routes: Routes = [
     loadChildren: () => import('./new-contact/new-contact.module').then(m => m.NewContactModule),
   },
   { path: 'contactus', redirectTo: 'contact', pathMatch: 'full' },
+  {
+    path: 'privacy-policy',
+    component: LegalComponent,
+    title: 'นโยบายความเป็นส่วนตัว | Twentysix House',
+    data: {
+      legalPage: 'privacy',
+      sitemap: true,
+      canonical: '/privacy-policy',
+      seo: { image: 'assets/img/seo/home-hero-1920.webp' },
+      meta: [
+        { name: 'description', content: 'นโยบายความเป็นส่วนตัวของ Twentysix House อธิบายการรับ ใช้ จัดเก็บ และสิทธิในข้อมูลส่วนบุคคลของผู้ติดต่อ' },
+        { name: 'robots', content: 'index, follow' },
+        { property: 'og:title', content: 'นโยบายความเป็นส่วนตัว | Twentysix House' },
+        { property: 'og:url', content: 'https://twentysix.house/privacy-policy' },
+      ],
+    },
+  },
+  {
+    path: 'terms-of-use',
+    component: LegalComponent,
+    title: 'ข้อกำหนดการใช้งาน | Twentysix House',
+    data: {
+      legalPage: 'terms',
+      sitemap: true,
+      canonical: '/terms-of-use',
+      seo: { image: 'assets/img/seo/home-hero-1920.webp' },
+      meta: [
+        { name: 'description', content: 'ข้อกำหนดการใช้งานเว็บไซต์ Twentysix House ครอบคลุมข้อมูลแบบบ้าน ราคาอ้างอิง ทรัพย์สินทางปัญญา และลิงก์ภายนอก' },
+        { name: 'robots', content: 'index, follow' },
+        { property: 'og:title', content: 'ข้อกำหนดการใช้งาน | Twentysix House' },
+        { property: 'og:url', content: 'https://twentysix.house/terms-of-use' },
+      ],
+    },
+  },
   {
     path: '**',
     component: NotFoundComponent,

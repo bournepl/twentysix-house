@@ -147,6 +147,8 @@ const sitemapEntries: SitemapEntry[] = [
   '/house-catalog',
   '/blogs',
   '/contact',
+  '/privacy-policy',
+  '/terms-of-use',
   ...completedPaths,
   ...designPaths,
   ...catalogPaths,

@@ -36,8 +36,9 @@
     <h2 class="font-kn section-title-rule section-title-rule-gold">ผลงานของเรา</h2>
   </div>
 
-  <div class="portfolio-carousel" (mouseenter)="pausePortfolioAutoScroll()" (mouseleave)="resumePortfolioAutoScroll()">
-    <button class="portfolio-nav portfolio-nav-prev" type="button" aria-label="Previous portfolio"
+  <div class="portfolio-carousel" (mouseenter)="pausePortfolioAutoScroll()" (mouseleave)="resumePortfolioAutoScroll()"
+    (focusin)="pausePortfolioAutoScroll()" (focusout)="resumePortfolioAutoScroll()">
+    <button class="portfolio-nav portfolio-nav-prev" type="button" aria-label="ดูผลงานก่อนหน้า"
       (click)="scrollPortfolio('previous')">
       <span aria-hidden="true"></span>
     </button>
@@ -55,7 +56,7 @@
       </a>
     </div>
 
-    <button class="portfolio-nav portfolio-nav-next" type="button" aria-label="Next portfolio"
+    <button class="portfolio-nav portfolio-nav-next" type="button" aria-label="ดูผลงานถัดไป"
       (click)="scrollPortfolio('next')">
       <span aria-hidden="true"></span>
     </button>
@@ -172,7 +173,7 @@
 
       <div class="feature-video-carousel" [class.is-empty]="!featureVideoThumbnails.length"
         aria-label="Video playlist">
-        <button *ngIf="featureVideoThumbnails.length" class="feature-video-nav feature-video-nav-prev" type="button" aria-label="Previous video"
+        <button *ngIf="featureVideoThumbnails.length" class="feature-video-nav feature-video-nav-prev" type="button" aria-label="ดูวิดีโอก่อนหน้า"
           (click)="previousFeatureVideo()">
           <span aria-hidden="true"></span>
         </button>
@@ -185,7 +186,7 @@
           </button>
         </div>
 
-        <button *ngIf="featureVideoThumbnails.length" class="feature-video-nav feature-video-nav-next" type="button" aria-label="Next video"
+        <button *ngIf="featureVideoThumbnails.length" class="feature-video-nav feature-video-nav-next" type="button" aria-label="ดูวิดีโอถัดไป"
           (click)="nextFeatureVideo()">
           <span aria-hidden="true"></span>
         </button>
@@ -266,8 +267,9 @@
   </div>
 
   <div class="house-design-carousel" (mouseenter)="pauseHouseDesignAutoScroll()"
-    (mouseleave)="resumeHouseDesignAutoScroll()">
-    <button class="house-design-nav house-design-nav-prev" type="button" aria-label="Previous house design"
+    (mouseleave)="resumeHouseDesignAutoScroll()" (focusin)="pauseHouseDesignAutoScroll()"
+    (focusout)="resumeHouseDesignAutoScroll()">
+    <button class="house-design-nav house-design-nav-prev" type="button" aria-label="ดูแบบบ้านก่อนหน้า"
       (click)="scrollHouseDesign('previous')">
       <span aria-hidden="true"></span>
     </button>
@@ -284,7 +286,7 @@
       </a>
     </div>
 
-    <button class="house-design-nav house-design-nav-next" type="button" aria-label="Next house design"
+    <button class="house-design-nav house-design-nav-next" type="button" aria-label="ดูแบบบ้านถัดไป"
       (click)="scrollHouseDesign('next')">
       <span aria-hidden="true"></span>
     </button>
@@ -329,7 +331,7 @@
   </div>
 </section>
 
-<button class="scroll-top-button" type="button" aria-label="Scroll to top" (click)="scrollToTop()">
+<button class="scroll-top-button" type="button" aria-label="เลื่อนไปด้านบน" (click)="scrollToTop()">
   <span aria-hidden="true"></span>
 </button>
 </main>

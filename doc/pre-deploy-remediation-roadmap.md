@@ -178,6 +178,9 @@ npm run seo:validate-structured-data
 
 **เป้าหมาย:** มี regression gate และรองรับผู้ใช้ก่อนสร้าง Preview
 
+**สถานะ:** อยู่ระหว่างดำเนินการ - งาน code และ automated test ผ่านแล้ว รอ caption ภาษาไทยที่ตรวจทานแล้วและ visual accessibility QA
+**รายงาน:** [pre-deploy-phase-6-test-accessibility-legal.md](./pre-deploy-phase-6-test-accessibility-legal.md)
+
 ### งาน
 
 - เพิ่ม unit tests ขั้นต่ำให้ routing, SEO service และ data lookup
@@ -271,4 +274,4 @@ vercel build
 8. Phase 7: Vercel Preview
 9. Phase 8: Production launch
 
-สถานะปัจจุบัน: **ยังไม่พร้อม deploy Production** และควรเริ่มจาก Phase 0 ก่อน
+สถานะปัจจุบัน: **ยังไม่พร้อม deploy Production** โดย Phase 0-5 เสร็จแล้ว และ Phase 6 รอ caption กับ visual accessibility QA ก่อนเริ่ม Vercel Preview ใน Phase 7

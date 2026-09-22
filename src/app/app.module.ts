@@ -15,13 +15,15 @@ import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SharedUiModule } from './shared/shared-ui.module';
+import { LegalComponent } from './legal/legal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     FooterComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    LegalComponent
   ],
   imports: [
     BrowserModule,

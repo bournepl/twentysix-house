@@ -25,6 +25,7 @@
     "seo:validate-http": "node tools/validate-http-release.mjs",
     "security:validate": "node tools/validate-security-policy.mjs",
     "test": "ng test",
+    "test:ci": "ng test --watch=false --browsers=ChromeHeadlessCI",
     "vercel-build": "npm run build"
   },
   "private": true,
