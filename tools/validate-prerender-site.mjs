@@ -4,6 +4,8 @@ import sharp from 'sharp';
 
 const browserRoot = resolve(process.argv[2] || 'dist/twentysix-house/browser');
 const siteUrl = 'https://twentysix.house';
+const primaryKeyword = 'รับสร้างบ้านอุดรธานี';
+const companyKeyword = 'บริษัทรับสร้างบ้านอุดรธานี';
 
 if (!existsSync(browserRoot)) {
   fail(`Build output not found: ${browserRoot}`);
@@ -27,7 +29,11 @@ for (const [route, html] of pages) {
   const description = attribute(descriptions[0]?.[0], 'content');
   const robotsTags = [...html.matchAll(/<meta\b[^>]*name=["']robots["'][^>]*>/gi)];
   const robots = attribute(robotsTags[0]?.[0], 'content') || '';
-  const h1Count = (html.match(/<h1\b/gi) || []).length;
+  const h1Matches = [...html.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/gi)];
+  const h1Count = h1Matches.length;
+  const h1 = decodeEntities(h1Matches[0]?.[1]?.replace(/<[^>]+>/g, ' ') || '')
+    .replace(/\s+/g, ' ')
+    .trim();
   const mainCount = (html.match(/<main\b/gi) || []).length;
   const imagePreloads = [...html.matchAll(/<link\b[^>]*rel=["']preload["'][^>]*as=["']image["'][^>]*>/gi)];
 
@@ -50,6 +56,12 @@ for (const [route, html] of pages) {
   if (mainCount !== 1) errors.push(`${route}: expected one main landmark, found ${mainCount}`);
   if (!/<html\b[^>]*lang=["']th["']/i.test(html)) errors.push(`${route}: html lang is not th`);
   if (imagePreloads.length > 1) errors.push(`${route}: more than one image preload (${imagePreloads.length})`);
+
+  if (route === '/') {
+    if (!title.startsWith(primaryKeyword)) errors.push(`/: title must start with ${primaryKeyword}`);
+    if (h1 !== primaryKeyword) errors.push(`/: h1 must be exactly ${primaryKeyword}`);
+    if (!description?.includes(companyKeyword)) errors.push(`/: description must include ${companyKeyword}`);
+  }
 
   validateSocialMetadata(route, html, title, description, canonical);
 
