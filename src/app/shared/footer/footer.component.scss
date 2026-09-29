@@ -26,4 +26,19 @@
     transform: none;
     line-height: 1;
   }
+
+  .footer-cookie-settings {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    font: inherit;
+  }
+
+  .footer-cookie-settings:hover,
+  .footer-cookie-settings:focus-visible {
+    color: #e0dcb9;
+    text-decoration: underline;
+  }
 }

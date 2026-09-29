@@ -11,7 +11,7 @@ type LegalPageType = 'privacy' | 'terms';
 })
 export class LegalComponent {
   readonly pageType: LegalPageType;
-  readonly lastUpdated = '22 กันยายน 2569';
+  readonly lastUpdated = '29 กันยายน 2569';
 
   constructor(route: ActivatedRoute) {
     this.pageType = route.snapshot.data['legalPage'] as LegalPageType;

@@ -59,6 +59,18 @@ const socialImages = [
   { source: 'src/assets/img/blog_2.webp', name: 'blog-concrete' },
   { source: 'src/assets/img/blog_1.webp', name: 'blog-foundation' },
   {
+    source: 'src/assets/img/ourworks/completed/khun-aod-residence/card.webp',
+    name: 'blog-home-budget-udon',
+  },
+  {
+    source: 'src/assets/img/ourworks/completed/khun-chart-residence/gallery-02.webp',
+    name: 'blog-choose-home-builder-udon',
+  },
+  {
+    source: 'src/assets/img/ourworks/completed/khun-pui-residence/card.webp',
+    name: 'blog-build-home-process-udon',
+  },
+  {
     source: 'src/assets/img/ourworks/completed/khun-aod-residence/hero.webp',
     name: 'completed-khun-aod',
   },

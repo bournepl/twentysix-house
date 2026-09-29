@@ -454,9 +454,9 @@
 :host ::ng-deep .article-content h2:first-child,
 :host ::ng-deep .article-content h3:first-child { margin-top: 0; }
 
-:host ::ng-deep .article-content h1 { font-size: 36px; }
-:host ::ng-deep .article-content h2 { font-size: 30px; }
-:host ::ng-deep .article-content h3 { font-size: 24px; }
+:host ::ng-deep .article-content h1 { font-size: 28px !important; }
+:host ::ng-deep .article-content h2 { font-size: 23px !important; }
+:host ::ng-deep .article-content h3 { font-size: 19px !important; }
 :host ::ng-deep .article-content p { margin: 0 0 1.35em; }
 :host ::ng-deep .article-content strong { color: #102d3b; font-weight: 600; }
 :host ::ng-deep .article-content ul,
@@ -818,9 +818,9 @@
   .article-sidebar { grid-template-columns: 1fr; gap: 20px; }
   .article-author { grid-row: auto; }
   .article-content { font-size: 16px; line-height: 1.9; }
-  :host ::ng-deep .article-content h1 { font-size: 30px; }
-  :host ::ng-deep .article-content h2 { font-size: 26px; }
-  :host ::ng-deep .article-content h3 { font-size: 22px; }
+  :host ::ng-deep .article-content h1 { font-size: 25px !important; }
+  :host ::ng-deep .article-content h2 { font-size: 21px !important; }
+  :host ::ng-deep .article-content h3 { font-size: 18px !important; }
 
   .related-section { padding-right: 20px; padding-left: 20px; }
   .related-heading { align-items: start; flex-direction: column; }

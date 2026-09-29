@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AnalyticsConsentService } from '../analytics-consent.service';
+
 @Component({
   standalone: false,
     selector: 'app-footer',
@@ -9,7 +11,11 @@ import { Component, OnInit } from '@angular/core';
 export class FooterComponent implements OnInit {
     readonly currentYear = new Date().getFullYear();
 
-    constructor() { }
+    constructor(private readonly consent: AnalyticsConsentService) { }
 
     ngOnInit() {}
+
+    openCookieSettings(): void {
+      this.consent.openPreferences();
+    }
 }

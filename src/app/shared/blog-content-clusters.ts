@@ -1,4 +1,4 @@
-export type BlogTopic = 'design-and-living' | 'construction-structure';
+export type BlogTopic = 'design-and-living' | 'construction-structure' | 'home-planning';
 
 export interface BlogResourceLink {
   title: string;
@@ -15,10 +15,12 @@ export interface HelpfulArticle {
 
 const DESIGN_TOPIC: BlogTopic = 'design-and-living';
 const STRUCTURE_TOPIC: BlogTopic = 'construction-structure';
+const PLANNING_TOPIC: BlogTopic = 'home-planning';
 
 export const BLOG_TOPIC_LABELS: Record<BlogTopic, string> = {
   [DESIGN_TOPIC]: 'แนวคิดการออกแบบและการอยู่อาศัย',
   [STRUCTURE_TOPIC]: 'โครงสร้างและการก่อสร้าง',
+  [PLANNING_TOPIC]: 'วางแผนก่อนเริ่มสร้างบ้าน',
 };
 
 const articles: readonly HelpfulArticle[] = [
@@ -51,6 +53,24 @@ const articles: readonly HelpfulArticle[] = [
     title: 'เสาเข็มตอก เสาเข็มเจาะ และฐานราก ต่างกันอย่างไร?',
     summary: 'เปรียบเทียบระบบฐานรากและข้อควรรู้ก่อนเลือกให้เหมาะกับพื้นที่',
     topic: STRUCTURE_TOPIC,
+  },
+  {
+    slug: 'สร้างบ้านอุดรธานีใช้งบเท่าไร-วางแผนก่อนเริ่มสร้าง',
+    title: 'สร้างบ้านที่อุดรธานีใช้งบเท่าไร? วางแผนอย่างไรก่อนเริ่มสร้าง',
+    summary: 'แยกงบตัวบ้าน งานภายนอก วัสดุ และเงินสำรองให้ครบก่อนเริ่มออกแบบ',
+    topic: PLANNING_TOPIC,
+  },
+  {
+    slug: 'เลือกบริษัทรับสร้างบ้านอุดรธานีอย่างไรให้มั่นใจ',
+    title: 'เลือกบริษัทรับสร้างบ้านอุดรธานีอย่างไร ให้ได้งานตรงแบบและคุมงบได้',
+    summary: 'ตรวจผลงาน BOQ สัญญา ทีมควบคุม และการรับประกันก่อนตัดสินใจ',
+    topic: PLANNING_TOPIC,
+  },
+  {
+    slug: 'มีที่ดินแล้วเริ่มสร้างบ้านในอุดรธานีอย่างไร',
+    title: 'มีที่ดินแล้ว เริ่มสร้างบ้านในอุดรธานีอย่างไร? ตั้งแต่สำรวจถึงส่งมอบ',
+    summary: 'เรียงขั้นตอนจากสำรวจที่ดิน วางงบ ออกแบบ ขออนุญาต จนถึงตรวจรับบ้าน',
+    topic: PLANNING_TOPIC,
   },
 ];
 
@@ -96,6 +116,28 @@ const resourcesByTopic: Record<BlogTopic, readonly BlogResourceLink[]> = {
     {
       title: 'ปรึกษาทีมก่อนเริ่มก่อสร้าง',
       description: 'พูดคุยเรื่องที่ดิน แบบบ้าน งบประมาณ และคำถามด้านงานก่อสร้าง',
+      path: '/contact',
+    },
+  ],
+  [PLANNING_TOPIC]: [
+    {
+      title: 'เปรียบเทียบแบบบ้านและงบตั้งต้น',
+      description: 'ดูฟังก์ชัน จำนวนห้อง และงบประมาณเริ่มต้นของ Pure Collection เพื่อเตรียมโจทย์ก่อนคุยกับทีม',
+      path: '/house-catalog',
+    },
+    {
+      title: 'ดูบริการและขั้นตอนการทำงาน',
+      description: 'ทำความเข้าใจลำดับงานตั้งแต่รับโจทย์ สำรวจ ออกแบบ ก่อสร้าง ไปจนถึงส่งมอบบ้าน',
+      path: '/services',
+    },
+    {
+      title: 'ตรวจสอบผลงานบ้านสร้างจริง',
+      description: 'ชมบ้านที่ก่อสร้างและส่งมอบแล้ว พร้อมข้อมูลพื้นที่ใช้สอยและฟังก์ชันของแต่ละโครงการ',
+      path: '/ourworks/completed',
+    },
+    {
+      title: 'เริ่มประเมินโครงการของคุณ',
+      description: 'ส่งข้อมูลที่ดิน ฟังก์ชัน และงบประมาณ เพื่อพูดคุยแนวทางเบื้องต้นกับทีม Twentysix House',
       path: '/contact',
     },
   ],

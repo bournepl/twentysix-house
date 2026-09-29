@@ -16,6 +16,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SharedUiModule } from './shared/shared-ui.module';
 import { LegalComponent } from './legal/legal.component';
+import { CookieConsentComponent } from './shared/cookie-consent/cookie-consent.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { LegalComponent } from './legal/legal.component';
     NavbarComponent,
     FooterComponent,
     NotFoundComponent,
-    LegalComponent
+    LegalComponent,
+    CookieConsentComponent
   ],
   imports: [
     BrowserModule,

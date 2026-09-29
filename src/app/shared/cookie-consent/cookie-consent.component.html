@@ -1,0 +1,12 @@
+<aside class="cookie-consent" *ngIf="isOpen" aria-labelledby="cookie-consent-title" aria-live="polite">
+  <div class="cookie-consent-copy">
+    <p class="cookie-consent-eyebrow">PRIVACY SETTINGS</p>
+    <h2 id="cookie-consent-title">การตั้งค่าคุกกี้</h2>
+    <p>เราใช้คุกกี้ที่จำเป็นต่อการทำงานของเว็บไซต์ และขออนุญาตใช้ข้อมูลเชิงสถิติเพื่อปรับปรุงเนื้อหาและประสบการณ์ใช้งาน โดยไม่เปิดใช้คุกกี้โฆษณา</p>
+    <a routerLink="/privacy-policy">อ่านนโยบายความเป็นส่วนตัว</a>
+  </div>
+  <div class="cookie-consent-actions">
+    <button type="button" class="cookie-secondary" (click)="rejectAnalytics()">ใช้เฉพาะที่จำเป็น</button>
+    <button type="button" class="cookie-primary" (click)="acceptAnalytics()">ยอมรับการวิเคราะห์</button>
+  </div>
+</aside>
