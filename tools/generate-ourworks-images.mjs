@@ -7,6 +7,24 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const sourceRoot = path.join(root, 'source-media', 'ourworks');
 const outputRoot = path.join(root, 'src', 'assets', 'img', 'ourworks');
 
+const archivedDesignFiles = [
+  'TWS002.webp',
+  'TWS006.webp',
+  'TWS007.webp',
+  'TWS008.webp',
+  'TWS010.webp',
+  'TWS011.webp',
+  'TWS012.webp',
+  'TWS014.webp',
+  'TWS015.webp',
+  'TWS016.1.webp',
+  'TWS017.webp',
+  'TWS021.webp',
+  'TWS022.webp',
+  'TWS023.webp',
+  'TWS024.webp',
+];
+
 const projects = {
   design: [
     ['khun-jane-ban-dung-design', '01 Khun Jen บ้านดุง', ['3.webp', '1.webp', '3.webp', '6.webp', '10.webp', '14.webp']],
@@ -14,6 +32,11 @@ const projects = {
     ['khun-vijit-design', '03 Khun Vijit', ['ภาพย่อย - 1.webp', 'หน้าปก แนวนอน.webp', 'ภาพย่อย - 1.webp', 'ภาพย่อย - 2.webp', 'ภาพย่อย - 3.webp', 'Copy of หน้าปก แนวนอน - 2.webp']],
     ['khun-win-design', '04 Khun Win', ['final EX พี่วิน.webp', 'final EX พี่วิน.webp', '01.webp', '02.webp', '03.webp', '04.webp']],
     ['khun-fai-interior-design', '05 Khun fai', ['LINE_ALBUM_INTERIOR RERENDER_250602_1.webp', ...[1, 2, 3, 4, 5].map(number => `LINE_ALBUM_INTERIOR RERENDER_250602_${number}.webp`)]],
+    ['khun-taew-design', '06 Khun Taew', ['2.webp', '2.webp']],
+    ...archivedDesignFiles.map(file => {
+      const slug = path.parse(file).name.toLowerCase().replace('.', '-');
+      return [slug, 'แบบบ้านรวมอันเก่า', [file, file], false];
+    }),
   ],
   completed: [
     ['khun-aod-residence', '02 PIC Khun Aod', ['2.webp', '2.webp', '0.webp', '1.webp', '10.webp', '11.webp']],
@@ -23,6 +46,8 @@ const projects = {
     ['khun-looknam-residence', '10 PIC Khun looknam', ['0000.webp', '0000.webp', '01.webp', '02.webp', '03.webp', '04.webp']],
     ['khun-chart-residence', '12 PIC Khun Chart', ['Banner-3840x1920px-บ้านคุณชาร์ท-หนองหาน - Copy.webp', 'Banner-3840x1920px-บ้านคุณชาร์ท-หนองหาน - Copy.webp', '00.webp', '01.webp', '02.webp', '03.webp']],
     ['khun-pla-residence', '13 PIC Khun Pla', ['ภาพย่อย - 3.webp', 'ภาพย่อย - 3.webp', 'ภาพย่อย - 1.webp', 'ภาพย่อย - 2.webp', 'ภาพย่อย - 4.webp', 'ภาพย่อย - 5.webp']],
+    ['khun-add-residence', '14 PIC Khun Add', ['21.webp', '21.webp']],
+    ['khun-taew-residence', '15 PIC Khun Taew', ['Finish k.bird รวมทั้งหมด.zip - 10.webp', 'Finish k.bird รวมทั้งหมด.zip - 10.webp']],
   ],
 };
 
@@ -47,14 +72,16 @@ await rm(outputRoot, { recursive: true, force: true });
 
 let generated = 0;
 for (const [kind, entries] of Object.entries(projects)) {
-  for (const [slug, sourceFolder, files] of entries) {
+  for (const [slug, sourceFolder, files, includeAllImages = true] of entries) {
     const projectSource = path.join(sourceRoot, kind, sourceFolder);
     const projectOutput = path.join(outputRoot, kind, slug);
     const [cardSource, ...curatedGallerySources] = files;
-    const gallerySources = (await readdir(projectSource, { withFileTypes: true }))
-      .filter(entry => entry.isFile() && /\.(avif|jpe?g|png|webp)$/i.test(entry.name))
-      .map(entry => entry.name)
-      .sort(naturalFileOrder.compare);
+    const gallerySources = includeAllImages
+      ? (await readdir(projectSource, { withFileTypes: true }))
+        .filter(entry => entry.isFile() && /\.(avif|jpe?g|png|webp)$/i.test(entry.name))
+        .map(entry => entry.name)
+        .sort(naturalFileOrder.compare)
+      : curatedGallerySources;
 
     await render(path.join(projectSource, cardSource), path.join(projectOutput, 'card.webp'), sizes.card);
     await render(path.join(projectSource, curatedGallerySources[0]), path.join(projectOutput, 'hero.webp'), sizes.hero);

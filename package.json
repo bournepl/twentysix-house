@@ -10,6 +10,7 @@
     "dev:ssr": "ng serve",
     "watch": "ng run twentysix-house:build --watch --configuration development",
     "images:house-catalog": "node tools/generate-house-catalog-images.mjs",
+    "images:import-latest-ourworks": "node tools/import-latest-ourworks.mjs",
     "images:ourworks": "node tools/generate-ourworks-images.mjs",
     "images:seo": "node tools/generate-seo-images.mjs",
     "videos:probe": "node tools/probe-deployed-videos.mjs",

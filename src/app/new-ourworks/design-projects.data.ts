@@ -27,6 +27,41 @@ function designImages(slug: string, galleryCount: number): Pick<DesignProject, '
   };
 }
 
+const archivedDesignCodes = [
+  'TWS002',
+  'TWS006',
+  'TWS007',
+  'TWS008',
+  'TWS010',
+  'TWS011',
+  'TWS012',
+  'TWS014',
+  'TWS015',
+  'TWS016.1',
+  'TWS017',
+  'TWS021',
+  'TWS022',
+  'TWS023',
+  'TWS024',
+] as const;
+
+const archivedDesignProjects: DesignProject[] = archivedDesignCodes.map(code => {
+  const slug = code.toLowerCase().replace('.', '-');
+
+  return {
+    slug,
+    title: `แบบบ้าน ${code}`,
+    style: 'Residential Design',
+    scope: 'Architecture Design',
+    category: 'ออกแบบสถาปัตยกรรม',
+    location: 'อุดรธานี',
+    year: 'Design Archive',
+    description: `ผลงานแบบบ้าน ${code} จากคลังผลงานออกแบบของ Twentysix House ซึ่งถ่ายทอดแนวคิดของบ้านพักอาศัยผ่านรูปทรงและการจัดฟังก์ชันที่ชัดเจน`,
+    concept: 'เก็บรักษาผลงานออกแบบเดิมไว้เป็นแนวทางสำหรับผู้ที่กำลังมองหารูปแบบบ้าน และเป็นจุดเริ่มต้นสำหรับการนำไปพัฒนาให้เหมาะกับที่ดินและการใช้ชีวิตของแต่ละครอบครัว',
+    ...designImages(slug, 1),
+  };
+});
+
 export const DESIGN_PROJECTS: DesignProject[] = [
   {
     slug: 'khun-jane-ban-dung-design',
@@ -88,4 +123,17 @@ export const DESIGN_PROJECTS: DesignProject[] = [
     concept: 'วัสดุโทนอุ่นและเส้นสายเรียบถูกใช้สร้างบรรยากาศที่ผ่อนคลาย งานบิลต์อินทุกชิ้นจึงเป็นทั้งองค์ประกอบของพื้นที่และคำตอบของการใช้งานจริง',
     ...designImages('khun-fai-interior-design', 27),
   },
+  {
+    slug: 'khun-taew-design',
+    title: 'งานออกแบบบ้านคุณแต้ว',
+    style: 'Warm Contemporary Interior',
+    scope: 'Interior & Built-in Design',
+    category: 'ออกแบบภายในและบิลต์อิน',
+    location: 'อุดรธานี',
+    year: '2026',
+    description: 'งานออกแบบภายในที่วางพื้นที่ใช้สอยให้โปร่งและต่อเนื่อง ใช้โทนสีอ่อน งานไม้ และรายละเอียดบิลต์อินสร้างบ้านที่อบอุ่นและเป็นระเบียบ',
+    concept: 'แต่ละพื้นที่ถูกออกแบบให้ตอบโจทย์กิจวัตรของผู้อยู่อาศัย พร้อมควบคุมโทนวัสดุ แสง และเส้นสายให้เชื่อมต่อกันอย่างสงบตลอดทั้งบ้าน',
+    ...designImages('khun-taew-design', 38),
+  },
+  ...archivedDesignProjects,
 ];

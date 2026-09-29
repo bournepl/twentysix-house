@@ -46,20 +46,21 @@
       </div>
     </div>
 
-    <div class="project-specs" aria-label="ข้อมูลโครงการ">
-      <div>
+    <div class="project-specs" aria-label="ข้อมูลโครงการ"
+      *ngIf="home.area || home.bedrooms || home.bathrooms || home.parking">
+      <div *ngIf="home.area">
         <i class="now-ui-icons design-2_ruler-pencil" aria-hidden="true"></i>
         <small>USAGE AREA</small><strong>{{ home.area }}</strong><span>ตร.ม.</span>
       </div>
-      <div>
+      <div *ngIf="home.bedrooms">
         <i class="now-ui-icons users_single-02" aria-hidden="true"></i>
         <small>BEDROOM</small><strong>{{ home.bedrooms }}</strong><span>ห้องนอน</span>
       </div>
-      <div>
+      <div *ngIf="home.bathrooms">
         <i class="now-ui-icons objects_support-17" aria-hidden="true"></i>
         <small>BATHROOM</small><strong>{{ home.bathrooms }}</strong><span>ห้องน้ำ</span>
       </div>
-      <div>
+      <div *ngIf="home.parking">
         <i class="now-ui-icons transportation_bus-front-12" aria-hidden="true"></i>
         <small>CAR PARK</small><strong>{{ home.parking }}</strong><span>ที่จอดรถ</span>
       </div>

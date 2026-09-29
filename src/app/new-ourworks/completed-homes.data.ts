@@ -11,10 +11,10 @@ export interface CompletedHome {
   heroImage: string;
   socialImage?: string;
   gallery: string[];
-  area: number;
-  bedrooms: number;
-  bathrooms: number;
-  parking: number;
+  area?: number;
+  bedrooms?: number;
+  bathrooms?: number;
+  parking?: number;
 }
 
 const completedRoot = 'assets/img/ourworks/completed';
@@ -116,5 +116,27 @@ export const COMPLETED_HOMES: CompletedHome[] = [
     concept: 'พื้นที่ภายในและภายนอกถูกออกแบบให้ต่อเนื่องกัน เพื่อให้กิจกรรมของครอบครัวขยายออกสู่สวนได้ พร้อมรับลมและแสงอย่างพอดี',
     ...completedImages('khun-pla-residence', 25),
     area: 190, bedrooms: 3, bathrooms: 2, parking: 2,
+  },
+  {
+    slug: 'khun-add-residence',
+    title: 'บ้านคุณแอด',
+    style: 'Modern Luxury Interior',
+    type: 'ผลงานบ้านสร้างจริง',
+    year: '2026',
+    location: 'อุดรธานี',
+    description: 'ผลงานบ้านจริงที่ถ่ายทอดบรรยากาศเรียบหรูผ่านโทนสีเข้ม งานไม้ และรายละเอียดภายในที่จัดวางอย่างเป็นระเบียบสำหรับการใช้งานทุกวัน',
+    concept: 'ออกแบบพื้นที่ภายในให้มีความต่อเนื่องระหว่างการใช้งานและบรรยากาศ โดยเลือกวัสดุ แสง และงานบิลต์อินที่ช่วยสร้างความอบอุ่นพร้อมคงภาพลักษณ์ร่วมสมัย',
+    ...completedImages('khun-add-residence', 19),
+  },
+  {
+    slug: 'khun-taew-residence',
+    title: 'บ้านคุณแต้ว',
+    style: 'Warm Contemporary Interior',
+    type: 'ผลงานบ้านสร้างจริง',
+    year: '2026',
+    location: 'อุดรธานี',
+    description: 'บ้านที่เน้นพื้นที่ภายในสว่าง โปร่ง และใช้งานสะดวก เชื่อมรายละเอียดของห้องนั่งเล่น ครัว พื้นที่จัดเก็บ และมุมพักผ่อนให้อยู่ในบรรยากาศเดียวกัน',
+    concept: 'โทนสีอ่อนถูกผสานกับงานไม้และแสงธรรมชาติ เพื่อให้บ้านดูอบอุ่นและมีจังหวะที่ผ่อนคลาย พร้อมใส่ใจรายละเอียดของพื้นที่ใช้งานจริงในแต่ละมุม',
+    ...completedImages('khun-taew-residence', 35),
   },
 ];
