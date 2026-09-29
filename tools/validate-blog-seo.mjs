@@ -7,7 +7,7 @@ const blogs = JSON.parse(readFileSync(resolve('src/assets/json/blog.json'), 'utf
   .filter(blog => blog.status !== false);
 const errors = [];
 const slugs = new Set();
-const usefulDestinations = ['/services', '/house-catalog', '/ourworks/completed', '/ourworks/design', '/contact'];
+const usefulDestinations = ['/services', '/house-catalog', '/ourworks', '/contact'];
 
 for (const blog of blogs) {
   const id = blog._id?.$oid;

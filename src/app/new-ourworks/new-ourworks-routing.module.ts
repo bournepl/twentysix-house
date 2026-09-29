@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { NewOurworksComponent } from './new-ourworks.component';
-import { CompletedHomesListComponent } from './completed-homes-list/completed-homes-list.component';
-import { DesignPortfolioListComponent } from './design-portfolio-list/design-portfolio-list.component';
 import { CompletedHomeDetailComponent } from './completed-home-detail/completed-home-detail.component';
 import { DesignProjectDetailComponent } from './design-project-detail/design-project-detail.component';
 import { COMPLETED_HOMES } from './completed-homes.data';
@@ -23,9 +21,8 @@ const routes: Routes = [
   },
   {
     path: 'completed',
-    component: CompletedHomesListComponent,
-    title: 'ผลงานบ้านสร้างจริงในอุดรธานี | Twentysix House',
-    data: { seoManagedByComponent: true },
+    redirectTo: '',
+    pathMatch: 'full',
   },
   {
     path: 'design/:slug',
@@ -40,9 +37,8 @@ const routes: Routes = [
   },
   {
     path: 'design',
-    component: DesignPortfolioListComponent,
-    title: 'ผลงานออกแบบบ้านในอุดรธานี | Twentysix House',
-    data: { seoManagedByComponent: true },
+    redirectTo: '',
+    pathMatch: 'full',
   },
   {
     path: '',

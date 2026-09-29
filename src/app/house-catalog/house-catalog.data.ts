@@ -151,7 +151,7 @@ export const HOUSE_CATALOG_COLLECTIONS: readonly HouseCatalogCollection[] = [
     slug: 'pure-collection',
     name: 'Pure Collection',
     thaiName: '4 แบบบ้านเพื่อการอยู่อาศัยที่ลงตัว',
-    coverImage: `${pureCollectionRoot}/collection-card.webp`,
+    coverImage: `${yuPlearnRoot}/hero.webp`,
     heroImage: `${pureCollectionRoot}/collection-hero.webp`,
     route: '/house-catalog',
     items: HOUSE_CATALOG_ITEMS,

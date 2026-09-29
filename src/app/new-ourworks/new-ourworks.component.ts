@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { SeoService } from '../shared/seo.service';
+import { COMPLETED_HOMES } from './completed-homes.data';
+import { DESIGN_PROJECTS } from './design-projects.data';
 import {
   ORGANIZATION_ID,
   WEBSITE_ID,
@@ -26,8 +29,13 @@ interface WorkItem {
 })
 export class NewOurworksComponent {
   activeCategory: WorkCategory = 'built';
+  private readonly initialProjectCount = 4;
+  private readonly visibleProjectCounts: Record<WorkCategory, number> = {
+    built: this.initialProjectCount,
+    design: this.initialProjectCount,
+  };
 
-  readonly builtProjects: WorkItem[] = [
+  private readonly featuredBuiltProjects: WorkItem[] = [
     {
       slug: 'khun-aod-residence',
       title: 'บ้านคุณอ๊อด',
@@ -58,7 +66,7 @@ export class NewOurworksComponent {
     }
   ];
 
-  readonly designProjects: WorkItem[] = [
+  private readonly featuredDesignProjects: WorkItem[] = [
     {
       slug: 'khun-win-design',
       title: 'บ้านคุณวิน',
@@ -89,7 +97,41 @@ export class NewOurworksComponent {
     }
   ];
 
-  constructor(seo: SeoService) {
+  readonly builtProjects: WorkItem[] = [
+    ...this.featuredBuiltProjects,
+    ...COMPLETED_HOMES
+      .filter(project => !this.featuredBuiltProjects.some(featured => featured.slug === project.slug))
+      .map(project => ({
+        slug: project.slug,
+        title: project.title,
+        subtitle: project.description,
+        image: project.image,
+        label: project.style,
+      })),
+  ];
+
+  readonly designProjects: WorkItem[] = [
+    ...this.featuredDesignProjects.filter((project, index, projects) =>
+      projects.findIndex(item => item.slug === project.slug) === index
+    ),
+    ...DESIGN_PROJECTS
+      .filter(project => !this.featuredDesignProjects.some(featured => featured.slug === project.slug))
+      .map(project => ({
+        slug: project.slug,
+        title: project.title,
+        subtitle: project.description,
+        image: project.slug === 'khun-jane-ban-dung-design'
+          ? 'assets/img/ourworks/design/khun-jane-ban-dung-design/gallery-03.webp'
+          : project.image,
+        label: project.scope,
+      })),
+  ];
+
+  constructor(seo: SeoService, route: ActivatedRoute) {
+    if (route.snapshot.queryParamMap.get('category') === 'design') {
+      this.activeCategory = 'design';
+    }
+
     const hero = 'assets/img/ourworks/design/khun-win-design/gallery-03.webp';
     const url = 'https://twentysix.house/ourworks';
     const title = 'ผลงานรับสร้างบ้านและออกแบบบ้าน | Twentysix House';
@@ -130,11 +172,23 @@ export class NewOurworksComponent {
   }
 
   get visibleProjects(): WorkItem[] {
+    return this.activeProjects.slice(0, this.visibleProjectCounts[this.activeCategory]);
+  }
+
+  get hasMoreProjects(): boolean {
+    return this.visibleProjects.length < this.activeProjects.length;
+  }
+
+  get activeProjects(): WorkItem[] {
     return this.activeCategory === 'built' ? this.builtProjects : this.designProjects;
   }
 
   setCategory(category: WorkCategory): void {
     this.activeCategory = category;
+  }
+
+  showMoreProjects(): void {
+    this.visibleProjectCounts[this.activeCategory] = this.activeProjects.length;
   }
 
   onCategoryKeydown(event: KeyboardEvent): void {

@@ -31,13 +31,13 @@ export class NewHomeComponent implements AfterViewInit, OnDestroy {
   private portfolioResumeTimer?: ReturnType<typeof setTimeout>;
   private portfolioAutoScrollPaused = false;
   private portfolioHoverPaused = false;
-  private readonly portfolioAutoSpeed = 150;
+  private readonly portfolioAutoSpeed = 70;
   private houseDesignAutoScrollFrame?: number;
   private houseDesignLastFrameTime = 0;
   private houseDesignResumeTimer?: ReturnType<typeof setTimeout>;
   private houseDesignAutoScrollPaused = false;
   private houseDesignHoverPaused = false;
-  private readonly houseDesignAutoSpeed = 150;
+  private readonly houseDesignAutoSpeed = 70;
   activeCatalogIndex = 0;
 
   readonly heroSlides = [

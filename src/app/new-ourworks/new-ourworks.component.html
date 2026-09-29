@@ -77,11 +77,11 @@
       </a>
     </div>
 
-    <div class="projects-more">
-      <a [routerLink]="activeCategory === 'built' ? '/ourworks/completed' : '/ourworks/design'">
-        <span>{{ activeCategory === 'built' ? 'ดูบ้านสร้างจริงทั้งหมด' : 'ดูผลงานออกแบบทั้งหมด' }}</span>
+    <div class="projects-more" *ngIf="hasMoreProjects">
+      <button type="button" (click)="showMoreProjects()" aria-controls="works-project-panel">
+        <span>{{ activeCategory === 'built' ? 'ดูบ้านสร้างจริงเพิ่มเติม' : 'ดูผลงานออกแบบเพิ่มเติม' }}</span>
         <i aria-hidden="true"></i>
-      </a>
+      </button>
     </div>
   </section>
 

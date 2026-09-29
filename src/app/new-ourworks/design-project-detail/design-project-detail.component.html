@@ -20,7 +20,7 @@
       <div class="detail-breadcrumb">
         <a routerLink="/">หน้าแรก</a><span>/</span>
         <a routerLink="/ourworks">Our Works</a><span>/</span>
-        <a routerLink="/ourworks/design">Design Portfolio</a><span>/</span>
+        <a routerLink="/ourworks" [queryParams]="{ category: 'design' }">Design Portfolio</a><span>/</span>
         <strong>{{ design.title }}</strong>
       </div>
       <p class="font-rp">From Concept To Space</p>
@@ -55,61 +55,19 @@
   <section class="project-gallery-section">
     <div class="gold-section-divider" aria-hidden="true"></div>
     <header class="gallery-heading">
-      <p class="font-rp">Inside The Design</p>
+      <p class="font-rp">Design Gallery</p>
       <h2 class="font-kn">สำรวจแนวคิดผ่านภาพออกแบบ</h2>
       <span class="gallery-rule" aria-hidden="true"></span>
       <p>รายละเอียดของรูปทรง พื้นที่ วัสดุ และบรรยากาศที่ถูกพัฒนาขึ้นสำหรับโครงการนี้</p>
     </header>
 
-    <div class="editorial-lead">
-      <img [src]="design.gallery[0]" [alt]="design.title" width="1600" height="1000" loading="lazy" decoding="async">
-      <div class="editorial-lead-caption">
-        <small>DESIGN PORTFOLIO</small>
-        <strong class="font-le">{{ design.style }}</strong>
-        <span>{{ design.scope }} / {{ design.year }}</span>
-      </div>
+    <div class="house-gallery-grid design-gallery-grid">
+      <figure *ngFor="let image of design.gallery; let i = index" [class.house-gallery-featured]="i === 0">
+        <img [src]="image" [alt]="design.title + ' ภาพออกแบบที่ ' + (i + 1)" width="1600" height="1000"
+          loading="lazy" decoding="async">
+        <figcaption>{{ i + 1 | number:'2.0' }} / {{ design.gallery.length | number:'2.0' }}</figcaption>
+      </figure>
     </div>
-
-    <div class="editorial-story">
-      <article class="editorial-row" *ngFor="let item of editorialSections; let i = index">
-        <figure>
-          <img class="editorial-slide editorial-slide-current"
-            [class.slide-out-left]="editorialImageChanging[i] && editorialSlideDirections[i] === 'next'"
-            [class.slide-out-right]="editorialImageChanging[i] && editorialSlideDirections[i] === 'previous'"
-            [src]="design.gallery[editorialImageIndexes[i]]" [alt]="design.title + ' ' + item.title"
-            width="1600" height="1000" loading="lazy" decoding="async">
-          <img *ngIf="editorialPendingImageIndexes[i] !== null" class="editorial-slide editorial-slide-incoming"
-            [class.slide-in-from-right]="editorialSlideDirections[i] === 'next'"
-            [class.slide-in-from-left]="editorialSlideDirections[i] === 'previous'"
-            [src]="design.gallery[editorialPendingImageIndexes[i]!]" [alt]="design.title + ' ' + item.title"
-            width="1600" height="1000" loading="lazy" decoding="async">
-          <button class="editorial-image-nav editorial-image-prev" type="button" aria-label="ภาพก่อนหน้า"
-            (click)="changeEditorialImage(i, 'previous')"><span></span></button>
-          <button class="editorial-image-nav editorial-image-next" type="button" aria-label="ภาพถัดไป"
-            (click)="changeEditorialImage(i, 'next')"><span></span></button>
-          <figcaption>{{ editorialImageIndexes[i] + 1 | number:'2.0' }} / {{ design.gallery.length | number:'2.0' }} · {{ item.eyebrow }}</figcaption>
-        </figure>
-        <div class="editorial-copy">
-          <small>{{ item.eyebrow }}</small>
-          <h3 class="font-kn">{{ item.title }}</h3>
-          <span class="editorial-copy-rule" aria-hidden="true"></span>
-          <p>{{ item.description }}</p>
-          <dl *ngIf="i === 0">
-            <div><dt>ประเภทงาน</dt><dd>{{ design.category }}</dd></div>
-            <div><dt>ขอบเขตงาน</dt><dd>{{ design.scope }}</dd></div>
-            <div><dt>สไตล์</dt><dd>{{ design.style }}</dd></div>
-          </dl>
-        </div>
-      </article>
-    </div>
-
-    <figure class="editorial-closing">
-      <img [src]="design.gallery[4]" [alt]="design.title" width="1600" height="1000" loading="lazy" decoding="async">
-      <figcaption>
-        <span class="font-rp">Designed For Your Life</span>
-        <strong class="font-kn">แบบบ้านที่มีความหมาย<br>เพราะเริ่มจากชีวิตของผู้อยู่อาศัย</strong>
-      </figcaption>
-    </figure>
   </section>
 
   <section class="project-articles-section" *ngIf="helpfulArticles.length">
@@ -152,7 +110,7 @@
       </a>
     </div>
 
-    <a class="related-all-link" routerLink="/ourworks/design">ดูผลงานออกแบบทั้งหมด <span aria-hidden="true">›</span></a>
+    <a class="related-all-link" routerLink="/ourworks" [queryParams]="{ category: 'design' }">ดูผลงานออกแบบเพิ่มเติม <span aria-hidden="true">›</span></a>
   </section>
 
   <button class="scroll-top-button" type="button" aria-label="เลื่อนไปด้านบน" (click)="scrollToTop()"><span></span></button>
@@ -163,6 +121,6 @@
     <app-site-menu></app-site-menu>
     <p class="font-rp">Project Not Found</p>
     <h1 class="font-kn">ไม่พบข้อมูลผลงานออกแบบนี้</h1>
-    <a routerLink="/ourworks/design">ดูผลงานออกแบบทั้งหมด</a>
+    <a routerLink="/ourworks" [queryParams]="{ category: 'design' }">ดูผลงานออกแบบเพิ่มเติม</a>
   </main>
 </ng-template>

@@ -24,29 +24,6 @@ export class CompletedHomeDetailComponent implements OnDestroy {
   relatedProjects: CompletedHome[] = [];
   helpfulArticles: readonly HelpfulArticle[] = [];
   private readonly routeSubscription: Subscription;
-  editorialImageIndexes = [1, 2, 3];
-  editorialImageChanging = [false, false, false];
-  editorialPendingImageIndexes: Array<number | null> = [null, null, null];
-  editorialSlideDirections: Array<'previous' | 'next'> = ['next', 'next', 'next'];
-  private readonly editorialSlideTimers: Array<number | undefined> = [];
-
-  readonly editorialSections = [
-    {
-      eyebrow: 'ARCHITECTURE & CHARACTER',
-      title: 'รูปทรงที่สะท้อนตัวตนของบ้าน',
-      description: 'องค์ประกอบภายนอกถูกจัดวางให้มีจังหวะ เรียบชัด และสัมพันธ์กับบริบทของพื้นที่ เพื่อสร้างภาพจำโดยไม่ลดทอนการใช้งานจริง',
-    },
-    {
-      eyebrow: 'SPACE & NATURAL LIGHT',
-      title: 'พื้นที่ที่เปิดรับแสงและการใช้ชีวิต',
-      description: 'ช่องเปิดและพื้นที่ส่วนกลางช่วยเชื่อมกิจกรรมของสมาชิกในบ้าน พร้อมรับแสงธรรมชาติในปริมาณที่เหมาะสมตลอดวัน',
-    },
-    {
-      eyebrow: 'MATERIAL & CRAFT',
-      title: 'รายละเอียดที่เรียบหรูและดูแลได้',
-      description: 'วัสดุ สี และงานเก็บรายละเอียดถูกเลือกให้ทำงานร่วมกันอย่างสงบ เพื่อให้บ้านยังคงสวยและใช้งานได้ดีในระยะยาว',
-    },
-  ];
 
   constructor(private readonly route: ActivatedRoute, private readonly seo: SeoService) {
     this.routeSubscription = this.route.paramMap.subscribe(params => {
@@ -58,9 +35,6 @@ export class CompletedHomeDetailComponent implements OnDestroy {
       this.helpfulArticles = this.project
         ? getHelpfulArticles(this.project.style, { includeConstruction: true, limit: 2 })
         : [];
-      this.editorialImageIndexes = [1, 2, 3];
-      this.editorialImageChanging = [false, false, false];
-      this.editorialPendingImageIndexes = [null, null, null];
       if (this.project) {
         const url = `https://twentysix.house/ourworks/completed/${this.project.slug}`;
         const title = `${this.project.title} | ผลงานบ้านสร้างจริง | Twentysix House`;
@@ -75,7 +49,7 @@ export class CompletedHomeDetailComponent implements OnDestroy {
             breadcrumbSchema([
               { name: 'หน้าแรก', url: 'https://twentysix.house' },
               { name: 'ผลงานของเรา', url: 'https://twentysix.house/ourworks' },
-              { name: 'ผลงานบ้านสร้างจริง', url: 'https://twentysix.house/ourworks/completed' },
+              { name: 'ผลงานบ้านสร้างจริง', url: 'https://twentysix.house/ourworks' },
               { name: this.project.title, url },
             ]),
             {
@@ -121,37 +95,6 @@ export class CompletedHomeDetailComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this.routeSubscription.unsubscribe();
-    this.editorialSlideTimers.forEach(timer => {
-      if (timer) {
-        window.clearTimeout(timer);
-      }
-    });
-  }
-
-  changeEditorialImage(sectionIndex: number, direction: 'previous' | 'next'): void {
-    if (!this.project || this.editorialImageChanging[sectionIndex]) {
-      return;
-    }
-
-    const total = this.project.gallery.length;
-    const current = this.editorialImageIndexes[sectionIndex] ?? 0;
-    const offset = direction === 'next' ? 1 : -1;
-
-    this.editorialSlideDirections[sectionIndex] = direction;
-    this.editorialPendingImageIndexes[sectionIndex] = (current + offset + total) % total;
-    this.editorialImageChanging[sectionIndex] = true;
-
-    const transitionDuration = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 520;
-    this.editorialSlideTimers[sectionIndex] = window.setTimeout(() => {
-      const pendingIndex = this.editorialPendingImageIndexes[sectionIndex];
-      if (pendingIndex === null) {
-        return;
-      }
-
-      this.editorialImageIndexes[sectionIndex] = pendingIndex;
-      this.editorialPendingImageIndexes[sectionIndex] = null;
-      this.editorialImageChanging[sectionIndex] = false;
-    }, transitionDuration);
   }
 
   scrollToTop(): void {

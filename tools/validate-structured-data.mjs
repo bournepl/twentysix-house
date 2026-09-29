@@ -120,7 +120,7 @@ function expectedTypes(route) {
   if (route.startsWith('/blogs/')) return ['BlogPosting', 'BreadcrumbList'];
   if (route === '/house-catalog') return ['CollectionPage', 'ItemList', 'BreadcrumbList'];
   if (route.startsWith('/house-catalog/')) return ['Product', 'WebPage', 'BreadcrumbList'];
-  if (route === '/ourworks' || route === '/ourworks/completed' || route === '/ourworks/design') {
+  if (route === '/ourworks') {
     return ['CollectionPage', 'ItemList', 'BreadcrumbList'];
   }
   if (route.startsWith('/ourworks/completed/') || route.startsWith('/ourworks/design/')) {

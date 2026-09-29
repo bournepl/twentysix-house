@@ -84,7 +84,7 @@ const resourcesByTopic: Record<BlogTopic, readonly BlogResourceLink[]> = {
     {
       title: 'ชมผลงานออกแบบ',
       description: 'ดูวิธีที่ทีมพัฒนาแนวคิด รูปทรง พื้นที่ และวัสดุจากโจทย์ของเจ้าของบ้านจริง',
-      path: '/ourworks/design',
+      path: '/ourworks',
     },
     {
       title: 'ดูบริการออกแบบและก่อสร้าง',
@@ -106,7 +106,7 @@ const resourcesByTopic: Record<BlogTopic, readonly BlogResourceLink[]> = {
     {
       title: 'ชมผลงานบ้านสร้างจริง',
       description: 'ดูบ้านที่ก่อสร้างและส่งมอบแล้ว พร้อมข้อมูลพื้นที่ใช้สอยและฟังก์ชันหลัก',
-      path: '/ourworks/completed',
+      path: '/ourworks',
     },
     {
       title: 'เลือกแบบบ้านเพื่อเริ่มวางงบ',
@@ -133,7 +133,7 @@ const resourcesByTopic: Record<BlogTopic, readonly BlogResourceLink[]> = {
     {
       title: 'ตรวจสอบผลงานบ้านสร้างจริง',
       description: 'ชมบ้านที่ก่อสร้างและส่งมอบแล้ว พร้อมข้อมูลพื้นที่ใช้สอยและฟังก์ชันของแต่ละโครงการ',
-      path: '/ourworks/completed',
+      path: '/ourworks',
     },
     {
       title: 'เริ่มประเมินโครงการของคุณ',

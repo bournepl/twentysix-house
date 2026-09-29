@@ -2,7 +2,6 @@
 /about
 /services
 /ourworks
-/ourworks/completed
 /ourworks/completed/khun-aod-residence
 /ourworks/completed/khun-jane-ban-dung-residence
 /ourworks/completed/khun-pui-residence
@@ -10,7 +9,6 @@
 /ourworks/completed/khun-looknam-residence
 /ourworks/completed/khun-chart-residence
 /ourworks/completed/khun-pla-residence
-/ourworks/design
 /ourworks/design/khun-jane-ban-dung-design
 /ourworks/design/khun-preaw-design
 /ourworks/design/khun-vijit-design

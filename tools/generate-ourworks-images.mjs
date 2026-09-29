@@ -1,4 +1,4 @@
-import { mkdir, rm } from 'node:fs/promises';
+import { mkdir, readdir, rm } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
@@ -30,8 +30,9 @@ const sizes = {
   card: { width: 960, height: 600, quality: 78 },
   hero: { width: 1920, height: 1080, quality: 82 },
   gallery: { width: 1600, height: 1000, quality: 80 },
-  thumb: { width: 320, height: 200, quality: 72 },
 };
+
+const naturalFileOrder = new Intl.Collator('th', { numeric: true, sensitivity: 'base' });
 
 async function render(source, destination, preset) {
   await mkdir(path.dirname(destination), { recursive: true });
@@ -49,18 +50,21 @@ for (const [kind, entries] of Object.entries(projects)) {
   for (const [slug, sourceFolder, files] of entries) {
     const projectSource = path.join(sourceRoot, kind, sourceFolder);
     const projectOutput = path.join(outputRoot, kind, slug);
-    const [cardSource, ...gallerySources] = files;
+    const [cardSource, ...curatedGallerySources] = files;
+    const gallerySources = (await readdir(projectSource, { withFileTypes: true }))
+      .filter(entry => entry.isFile() && /\.(avif|jpe?g|png|webp)$/i.test(entry.name))
+      .map(entry => entry.name)
+      .sort(naturalFileOrder.compare);
 
     await render(path.join(projectSource, cardSource), path.join(projectOutput, 'card.webp'), sizes.card);
-    await render(path.join(projectSource, gallerySources[0]), path.join(projectOutput, 'hero.webp'), sizes.hero);
+    await render(path.join(projectSource, curatedGallerySources[0]), path.join(projectOutput, 'hero.webp'), sizes.hero);
     generated += 2;
 
     for (const [index, file] of gallerySources.entries()) {
       const number = String(index + 1).padStart(2, '0');
       const source = path.join(projectSource, file);
       await render(source, path.join(projectOutput, `gallery-${number}.webp`), sizes.gallery);
-      await render(source, path.join(projectOutput, `thumb-${number}.webp`), sizes.thumb);
-      generated += 2;
+      generated += 1;
     }
   }
 }
